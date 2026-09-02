@@ -11,6 +11,7 @@ class CatalogService {
     'http://100.84.133.101/installers/software_catalog.json',  // S1 (Tailscale)
     'http://100.104.81.102/installers/software_catalog.json',  // S2 (Tailscale)
     'http://192.168.100.166/installers/software_catalog.json', // S1 (Wi-Fi Escritório)
+    'https://github.com/oandrematos/NexusAppHub/releases/download/v0.3.1/software_catalog.json', // GitHub CDN Global
   ];
 
   Future<List<AppItem>> loadCatalog() async {

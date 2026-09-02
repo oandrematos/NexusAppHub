@@ -11,6 +11,7 @@ class DownloadService {
     'http://100.84.133.101/installers',  // S1 (Tailscale)
     'http://100.104.81.102/installers',  // S2 (Tailscale)
     'http://192.168.100.166/installers', // S1 (Wi-Fi Escritório)
+    'https://github.com/oandrematos/NexusAppHub/releases/download/v0.3.1', // GitHub CDN Global (Internet / 4G / 5G)
   ];
 
   Future<void> downloadAndInstall({
@@ -40,11 +41,20 @@ class DownloadService {
     for (final base in clusterEndpoints) {
       try {
         final uri = Uri.parse('$base/$safeUrlFilename');
-        onStatus('Conectando ao nó do cluster...');
+        onStatus('Conectando ao nó do cluster ($base)...');
 
         final client = http.Client();
         final request = http.Request('GET', uri);
-        final response = await client.send(request).timeout(const Duration(seconds: 4));
+        var response = await client.send(request).timeout(const Duration(seconds: 5));
+
+        // Suporte explícito a redirecionamentos (ex: GitHub Releases 302 para AWS S3)
+        if (response.statusCode == 301 || response.statusCode == 302) {
+          final loc = response.headers['location'];
+          if (loc != null) {
+            final redirectReq = http.Request('GET', Uri.parse(loc));
+            response = await client.send(redirectReq).timeout(const Duration(seconds: 5));
+          }
+        }
 
         if (response.statusCode == 200) {
           final totalBytes = response.contentLength ?? 0;
