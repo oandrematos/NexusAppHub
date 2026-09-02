@@ -1,316 +1,316 @@
 {
-    "store_name":  "Nexus App Hub",
-    "developer":  "AndrÃÂÃÂ© (Antigravity)",
-    "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-02T19:30:43Z",
-    "categories":  [
-                       {
-                           "id":  "games",
-                           "name":  "Jogos \u0026 Arcade"
-                       },
-                       {
-                           "id":  "system",
-                           "name":  "Sistema \u0026 UtilitÃÂÃÂ¡rios"
-                       },
-                       {
-                           "id":  "social",
-                           "name":  "ComunicaÃÂÃÂ§ÃÂÃÂ£o \u0026 Social"
-                       },
-                       {
-                           "id":  "productivity",
-                           "name":  "Produtividade \u0026 IA"
-                       },
-                       {
-                           "id":  "media",
-                           "name":  "MÃÂÃÂ­dia \u0026 Ferramentas"
-                       }
-                   ],
-    "apps":  [
-                 {
-                     "id":  "space_duel",
-                     "name":  "Space Duel",
-                     "title":  "Space Duel ÃÂ¢ÃÂÃÂ Shooter Espacial Arcade",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ",
-                     "badge":  "DESTAQUE",
-                     "featured":  true,
-                     "description":  "Shooter espacial clÃÂÃÂ¡ssico em alta velocidade com naves customizÃÂÃÂ¡veis, combate intenso e suporte total a controles no PC e toque a 120 FPS no Android.",
-                     "short_description":  "Shooter espacial de combate intenso com suporte a PC e celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Space Duel_v1.1.1_x64.exe",
-                                     "size_mb":  122.7,
-                                     "version":  "v1.1.1",
-                                     "executable":  "Space Duel.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Space Duel_Android_v1.1.0.apk",
-                                     "size_mb":  6.85,
-                                     "version":  "v1.1.0",
-                                     "package_name":  "com.antigravity.spaceduel"
-                                 },
-                     "version":  "v1.1.1",
-                     "latest_changelog":  [
-                                              "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
-                                              "Multiplayer P2P de alta fidelidade e baixa latencia via ENet LAN",
-                                              "Controles reativos e precisos com suporte a teclado, mouse e controles",
-                                              "Novos arsenais espaciais: Canhoes de Laser, Misseis Teleguiados e Escudos",
-                                              "Deploy automatizado integrado a Nexus App Hub"
-                                          ],
-                     "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_1.png",
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_2.png",
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_menu_3.png"
-                                     ]
-                 },
-                 {
-                     "id":  "super_pong",
-                     "name":  "Super Pong",
-                     "title":  "Super Pong ÃÂ¢ÃÂÃÂ Retro Arcade Arena",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ",
-                     "badge":  "ARCADE",
-                     "featured":  true,
-                     "description":  "ReinvenÃÂÃÂ§ÃÂÃÂ£o eletrizante do clÃÂÃÂ¡ssico Pong com power-ups dinÃÂÃÂ¢micos, efeitos de iluminaÃÂÃÂ§ÃÂÃÂ£o nÃÂÃÂ©on e modos solo contra IA ou multiplayer local.",
-                     "short_description":  "Retro arena de Pong com power-ups e tema nÃÂÃÂ©on futurista.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Super Pong_v2.0.0_x64.exe",
-                                     "size_mb":  176.9,
-                                     "version":  "v2.0.0",
-                                     "executable":  "Super Pong.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Super Pong_Android_v1.1.1.apk",
-                                     "size_mb":  7,
-                                     "version":  "v1.1.1",
-                                     "package_name":  "com.antigravity.superpong"
-                                 },
-                     "version":  "v2.0.0",
-                     "latest_changelog":  [
-                                              "MigraÃ§Ã£o completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
-                                              "FÃ­sica de rebote angular precisa e aceleraÃ§Ã£o dinÃ¢mica de velocidade.",
-                                              "Sistema de Power-Ups na arena: ExpansÃ£o de Raquete, Super Velocidade e Multi-Bola.",
-                                              "InteligÃªncia Artificial (CPU) adaptativa com tracking preditivo e balanÃ§o de reflexos.",
-                                              "Sintetizador procedural de efeitos sonoros retrÃ´ arcade em tempo real.",
-                                              "Interface arcade retrÃ´ com suporte nativo a Teclado (WASD/Setas) e Gamepads analÃ³gicos."
-                                          ]
-                 },
-                 {
-                     "id":  "snake_game",
-                     "name":  "Snake Game",
-                     "title":  "Snake Game ÃÂ¢ÃÂÃÂ Cobrinha ClÃÂÃÂ¡ssica Modern",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ",
-                     "badge":  "CLÃÂÃÂSSICO",
-                     "featured":  false,
-                     "description":  "O nostÃÂÃÂ¡lgico jogo da cobrinha totalmente modernizado com grÃÂÃÂ¡ficos fluidos, fÃÂÃÂ­sica aprimorada, rankings e suporte a mÃÂÃÂºltiplos modos de jogo.",
-                     "short_description":  "Jogo clÃÂÃÂ¡ssico da cobrinha modernizado com modos especiais.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Snake_Game_v1.0.5_x64_Installer.exe",
-                                     "size_mb":  8.59,
-                                     "version":  "v1.1.0",
-                                     "executable":  "Snake_Game.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Snake Game_Android_v0.3.2_alpha.apk",
-                                     "size_mb":  44.1,
-                                     "version":  "v1.1.0",
-                                     "package_name":  "com.antigravity.snakegame"
-                                 },
-                     "version":  "v1.1.0",
-                     "latest_changelog":  [
-                                              "Reescrita completa do motor do jogo para Godot 4 com C# (.NET 8.0).",
-                                              "Sistema de movimentacao em grade 25x25 (Grid-based) com framerate ultra-fluido.",
-                                              "Suporte nativo a controles universais: WASD e setas no Windows, Swipes touch no Android.",
-                                              "Spawn inteligente de comida garantindo zero sobreposicao no corpo da cobra.",
-                                              "Novo sistema de High Score persistente e aceleracao progressiva de velocidade."
-                                          ],
-                     "screenshots":  [
-                                         "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
-                                         "http://100.84.133.101/assets/screenshots/snake_screenshot_2.png"
-                                     ]
-                 },
-                 {
-                     "id":  "nexus_dashboard",
-                     "name":  "Nexus Dashboard",
-                     "title":  "Nexus Dashboard - Monitor de Cluster e Central HUD",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 UtilitÃÂÃÂ¡rios",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ",
-                     "badge":  "FLUTTER",
-                     "featured":  true,
-                     "description":  "Painel de controle central para monitoramento da malha de computadores da casa e escritorio. Mostra status em tempo real de S1 e S2, CPU, RAM, conexoes ZeroTier, CFTV e roteador.",
-                     "short_description":  "Painel central de monitoramento dos nÃÂÃÂ³s e servidores do cluster.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android",
-                                                 "web"
-                                             ],
-                     "windows":  {
-                                     "filename":  "NexusDashboard_v1.0.0_Installer.exe",
-                                     "size_mb":  10.79,
-                                     "version":  "v1.0.0",
-                                     "executable":  "nexus_dashboard.exe",
-                                     "latest_changelog":  [
-                                                              "Reescrita completa em Flutter (Dart) de alta performance",
-                                                              "Layout Cyberpunk com gauges em tempo real de S1 e S2",
-                                                              "Grid ao vivo das cameras CFTV e diagnostico de rede",
-                                                              "Instalador oficial standalone executavel de 1 clique",
-                                                              "Versao Web acessivel no navegador na porta 8080"
-                                                          ],
-                                     "screenshots":  [
-                                                         "http://192.168.196.101:8080/assets/dashboard_overview.png",
-                                                         "http://192.168.196.101:8080/assets/dashboard_cameras.png"
-                                                     ]
-                                 },
-                     "android":  {
-                                     "filename":  "NexusDashboard_Android_v1.0.0.apk",
-                                     "size_mb":  44.54,
-                                     "version":  "v1.0.0",
-                                     "package_name":  "com.antigravity.nexus_dashboard",
-                                     "latest_changelog":  [
-                                                              "Reescrita completa em Flutter (Dart) de alta performance",
-                                                              "Layout Cyberpunk com gauges em tempo real de S1 e S2",
-                                                              "Grid ao vivo das cameras CFTV e diagnostico de rede",
-                                                              "Instalador oficial standalone executavel de 1 clique",
-                                                              "Versao Web acessivel no navegador na porta 8080"
-                                                          ],
-                                     "screenshots":  [
-                                                         "http://192.168.196.101:8080/assets/dashboard_overview.png",
-                                                         "http://192.168.196.101:8080/assets/dashboard_cameras.png"
-                                                     ]
-                                 },
-                     "web":  {
-                                 "url":  "http://192.168.196.101:8080/",
-                                 "version":  "v1.0.0"
-                             }
-                 },
-                 {
-                     "id":  "wappchat",
-                     "name":  "WappChat",
-                     "title":  "WappChat ÃÂ¢ÃÂÃÂ WhatsApp Desktop Anti-Banner",
-                     "category":  "social",
-                     "category_name":  "ComunicaÃÂÃÂ§ÃÂÃÂ£o \u0026 Social",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ¬",
-                     "badge":  "MAIS USADO",
-                     "featured":  true,
-                     "description":  "WhatsApp Web Desktop corporativo ultra-rÃÂÃÂ¡pido com bloqueio nativo de anÃÂÃÂºncios, zoom total, atalhos produtivos e tema escuro Slate Blue sem banner verde.",
-                     "short_description":  "WhatsApp Web Desktop rÃÂÃÂ¡pido com bloqueio de anÃÂÃÂºncios e tema escuro.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "windows":  {
-                                     "filename":  "WappChat_v0.4.0_Installer.exe",
-                                     "size_mb":  18.1,
-                                     "version":  "v0.4.0",
-                                     "executable":  "WappChat.exe"
-                                 }
-                 },
-                 {
-                     "id":  "alfred_android",
-                     "name":  "AlfredApp",
-                     "title":  "AlfredApp ÃÂ¢ÃÂÃÂ Assistente AutÃÂÃÂ´nomo Mobile",
-                     "category":  "productivity",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ©",
-                     "badge":  "IA OFICIAL",
-                     "featured":  true,
-                     "description":  "Assistente de inteligÃÂÃÂªncia autÃÂÃÂ´noma mÃÂÃÂ³vel integrado ao cluster Antigravity. Executa scripts remotos, consulta mÃÂÃÂ©tricas, dispara alertas e gerencia automaÃÂÃÂ§ÃÂÃÂµes do ecossistema.",
-                     "short_description":  "Assistente inteligente conectado ao cluster para automaÃÂÃÂ§ÃÂÃÂµes mÃÂÃÂ³veis.",
-                     "platforms_supported":  [
-                                                 "android"
-                                             ],
-                     "android":  {
-                                     "filename":  "Alfred_Android_v0.10.10.apk",
-                                     "size_mb":  0.89,
-                                     "version":  "v0.10.10",
-                                     "package_name":  "com.antigravity.alfred"
-                                 },
-                     "screenshots":  [
-                                         "http://192.168.196.101:8080/assets/screenshots/alfred_screen_1.png",
-                                         "http://192.168.196.101:8080/assets/screenshots/alfred_screen_2.png"
-                                     ],
-                     "latest_changelog":  [
-                                              "Migracao completa da arquitetura do App para Kotlin 1.9.24 nativo.",
-                                              "Integracao e homologacao com o ecossistema Nexus App Hub.",
-                                              "Otimizacao de pipeline CI/CD com injecao dinamica de versao.",
-                                              "Melhorias no servico de push notification e TTS em segundo plano."
-                                          ]
-                 },
-                 {
-                     "id":  "threadsdl_android",
-                     "name":  "ThreadsDL",
-                     "title":  "ThreadsDL ÃÂ¢ÃÂÃÂ Downloader de MÃÂÃÂ­dia \u0026 VÃÂÃÂ­deos",
-                     "category":  "media",
-                     "category_name":  "MÃÂÃÂ­dia \u0026 Ferramentas",
-                     "icon":  "ÃÂ°ÃÂÃÂÃÂ¥",
-                     "badge":  "UTILITÃÂÃÂRIO",
-                     "featured":  false,
-                     "description":  "UtilitÃÂÃÂ¡rio mÃÂÃÂ³vel leve e veloz para download de fotos, vÃÂÃÂ­deos e ÃÂÃÂ¡udios em alta resoluÃÂÃÂ§ÃÂÃÂ£o diretamente do Threads no seu dispositivo Android.",
-                     "short_description":  "Downloader rÃÂÃÂ¡pido de mÃÂÃÂ­dias e postagens do Threads.",
-                     "platforms_supported":  [
-                                                 "android"
-                                             ],
-                     "android":  {
-                                     "filename":  "ThreadsDL_Android_v0.5.0.apk",
-                                     "size_mb":  50.9,
-                                     "version":  "v0.5.0",
-                                     "package_name":  "com.antigravity.threadsdl"
-                                 }
-                 },
-                 {
-                     "id":  "nexus_app_hub",
-                     "name":  "Nexus App Hub",
-                     "title":  "Nexus App Hub ÃÂ¢ÃÂÃÂ Central \u0026 Launcher Oficial",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 UtilitÃÂÃÂ¡rios",
-                     "icon":  "ÃÂ¢ÃÂÃÂ¡",
-                     "badge":  "OFICIAL",
-                     "featured":  true,
-                     "description":  "Loja oficial e launcher central de aplicativos e jogos do ecossistema Antigravity, unificado em Flutter nativo para Windows Desktop e Android Mobile.",
-                     "short_description":  "Loja e launcher unificado em Flutter para PC e Celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "executable":  "NexusAppHub.exe",
-                                     "version":  "v0.3.0",
-                                     "filename":  "NexusAppHub_v0.3.0_Installer.exe",
-                                     "size_mb":  12.1
-                                 },
-                     "android":  {
-                                     "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "v0.3.0",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.0.apk",
-                                     "size_mb":  49.22
-                                 },
-                     "version":  "v0.3.0",
-                     "latest_changelog":  [
-                                              "UnificaÃÂÃÂ§ÃÂÃÂ£o completa da loja e launcher em Flutter (Dart) com suporte a 120 FPS",
-                                              "Design adaptativo responsivo: Microsoft Store no Desktop e Google Play Store no Mobile",
-                                              "Instalador Windows nativo super compacto (reduÃÂÃÂ§ÃÂÃÂ£o drÃÂÃÂ¡stica para apenas 12.1 MB)",
-                                              "InteligÃÂÃÂªncia multiplataforma: bloqueio de pacotes incompatÃÂÃÂ­veis e tags de suporte",
-                                              "Download assÃÂÃÂ­ncrono com tolerÃÂÃÂ¢ncia a falhas, escape de URL e detecÃÂÃÂ§ÃÂÃÂ£o de nÃÂÃÂ³s do cluster"
-                                          ],
-                     "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_desktop.png",
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_mobile.png"
-                                     ]
-                 }
-             ]
+  "store_name": "Nexus App Hub",
+  "developer": "André (Antigravity)",
+  "schema_version": "3.0.0",
+  "updated_at": "2026-09-02T19:40:00Z",
+  "categories": [
+    {
+      "id": "games",
+      "name": "Jogos & Arcade"
+    },
+    {
+      "id": "system",
+      "name": "Sistema & Utilitários"
+    },
+    {
+      "id": "social",
+      "name": "Comunicação & Social"
+    },
+    {
+      "id": "productivity",
+      "name": "Produtividade & IA"
+    },
+    {
+      "id": "media",
+      "name": "Mídia & Ferramentas"
+    }
+  ],
+  "apps": [
+    {
+      "id": "space_duel",
+      "name": "Space Duel",
+      "title": "Space Duel — Shooter Espacial Arcade",
+      "category": "games",
+      "category_name": "Jogos & Arcade",
+      "icon": "🚀",
+      "badge": "DESTAQUE",
+      "featured": true,
+      "description": "Shooter espacial clássico em alta velocidade com naves customizáveis, combate intenso e suporte total a controles no PC e toque a 120 FPS no Android.",
+      "short_description": "Shooter espacial de combate intenso com suporte a PC e celular.",
+      "platforms_supported": [
+        "windows",
+        "android"
+      ],
+      "windows": {
+        "filename": "Space Duel_v1.1.1_x64.exe",
+        "size_mb": 122.7,
+        "version": "v1.1.1",
+        "executable": "Space Duel.exe"
+      },
+      "android": {
+        "filename": "Space Duel_Android_v1.1.0.apk",
+        "size_mb": 6.85,
+        "version": "v1.1.0",
+        "package_name": "com.antigravity.spaceduel"
+      },
+      "version": "v1.1.1",
+      "latest_changelog": [
+        "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
+        "Multiplayer P2P de alta fidelidade e baixa latência via ENet LAN",
+        "Controles reativos e precisos com suporte a teclado, mouse e controles",
+        "Novos arsenais espaciais: Canhões de Laser, Mísseis Teleguiados e Escudos",
+        "Deploy automatizado integrado à Nexus App Hub"
+      ],
+      "screenshots": [
+        "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_1.png",
+        "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_2.png",
+        "http://192.168.196.101/installers/assets/space_duel/space_duel_menu_3.png"
+      ]
+    },
+    {
+      "id": "super_pong",
+      "name": "Super Pong",
+      "title": "Super Pong — Retro Arcade Arena",
+      "category": "games",
+      "category_name": "Jogos & Arcade",
+      "icon": "🏓",
+      "badge": "ARCADE",
+      "featured": true,
+      "description": "Reinvenção eletrizante do clássico Pong com power-ups dinâmicos, efeitos de iluminação néon e modos solo contra IA ou multiplayer local.",
+      "short_description": "Retro arena de Pong com power-ups e tema néon futurista.",
+      "platforms_supported": [
+        "windows",
+        "android"
+      ],
+      "windows": {
+        "filename": "Super Pong_v2.0.0_x64.exe",
+        "size_mb": 176.9,
+        "version": "v2.0.0",
+        "executable": "Super Pong.exe"
+      },
+      "android": {
+        "filename": "Super Pong_Android_v1.1.1.apk",
+        "size_mb": 7.0,
+        "version": "v1.1.1",
+        "package_name": "com.antigravity.superpong"
+      },
+      "version": "v2.0.0",
+      "latest_changelog": [
+        "Migração completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
+        "Física de rebote angular precisa e aceleração dinâmica de velocidade.",
+        "Sistema de Power-Ups na arena: Expansão de Raquete, Super Velocidade e Multi-Bola.",
+        "Inteligência Artificial (CPU) adaptativa com tracking preditivo e balanço de reflexos.",
+        "Sintetizador procedural de efeitos sonoros retrô arcade em tempo real.",
+        "Interface arcade retrô com suporte nativo a Teclado (WASD/Setas) e Gamepads analógicos."
+      ]
+    },
+    {
+      "id": "snake_game",
+      "name": "Snake Game",
+      "title": "Snake Game — Cobrinha Clássica Moderna",
+      "category": "games",
+      "category_name": "Jogos & Arcade",
+      "icon": "🐍",
+      "badge": "CLÁSSICO",
+      "featured": false,
+      "description": "O nostálgico jogo da cobrinha totalmente modernizado com gráficos fluidos, física aprimorada, rankings e suporte a múltiplos modos de jogo.",
+      "short_description": "Jogo clássico da cobrinha modernizado com modos especiais.",
+      "platforms_supported": [
+        "windows",
+        "android"
+      ],
+      "windows": {
+        "filename": "Snake_Game_v1.0.5_x64_Installer.exe",
+        "size_mb": 8.59,
+        "version": "v1.0.5",
+        "executable": "Snake_Game.exe"
+      },
+      "android": {
+        "filename": "Snake Game_Android_v0.3.2_alpha.apk",
+        "size_mb": 44.1,
+        "version": "v0.3.2-alpha",
+        "package_name": "com.antigravity.snakegame"
+      },
+      "version": "v1.0.5",
+      "latest_changelog": [
+        "Reescrita completa do motor do jogo para Godot 4 com C# (.NET 8.0).",
+        "Sistema de movimentação em grade 25x25 (Grid-based) com framerate ultra-fluido.",
+        "Suporte nativo a controles universais: WASD e setas no Windows, Swipes touch no Android.",
+        "Spawn inteligente de comida garantindo zero sobreposição no corpo da cobra.",
+        "Novo sistema de High Score persistente e aceleração progressiva de velocidade."
+      ],
+      "screenshots": [
+        "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
+        "http://100.84.133.101/assets/screenshots/snake_screenshot_2.png"
+      ]
+    },
+    {
+      "id": "nexus_dashboard",
+      "name": "Nexus Dashboard",
+      "title": "Nexus Dashboard — Monitor de Cluster & Central HUD",
+      "category": "system",
+      "category_name": "Sistema & Utilitários",
+      "icon": "📊",
+      "badge": "FLUTTER",
+      "featured": true,
+      "description": "Painel de controle central para monitoramento da malha de computadores da casa e escritório. Mostra status em tempo real de S1 e S2, CPU, RAM, conexões ZeroTier, CFTV e roteador.",
+      "short_description": "Painel central de monitoramento dos nós e servidores do cluster.",
+      "platforms_supported": [
+        "windows",
+        "android",
+        "web"
+      ],
+      "windows": {
+        "filename": "NexusDashboard_v1.0.0_Installer.exe",
+        "size_mb": 10.79,
+        "version": "v1.0.0",
+        "executable": "nexus_dashboard.exe",
+        "latest_changelog": [
+          "Reescrita completa em Flutter (Dart) de alta performance",
+          "Layout Cyberpunk com gauges em tempo real de S1 e S2",
+          "Grid ao vivo das câmeras CFTV e diagnóstico de rede",
+          "Instalador oficial standalone executável de 1 clique",
+          "Versão Web acessível no navegador na porta 8080"
+        ],
+        "screenshots": [
+          "http://192.168.196.101:8080/assets/dashboard_overview.png",
+          "http://192.168.196.101:8080/assets/dashboard_cameras.png"
+        ]
+      },
+      "android": {
+        "filename": "NexusDashboard_Android_v1.0.0.apk",
+        "size_mb": 44.54,
+        "version": "v1.0.0",
+        "package_name": "com.antigravity.nexus_dashboard",
+        "latest_changelog": [
+          "Reescrita completa em Flutter (Dart) de alta performance",
+          "Layout Cyberpunk com gauges em tempo real de S1 e S2",
+          "Grid ao vivo das câmeras CFTV e diagnóstico de rede",
+          "Instalador oficial standalone executável de 1 clique",
+          "Versão Web acessível no navegador na porta 8080"
+        ],
+        "screenshots": [
+          "http://192.168.196.101:8080/assets/dashboard_overview.png",
+          "http://192.168.196.101:8080/assets/dashboard_cameras.png"
+        ]
+      },
+      "web": {
+        "url": "http://192.168.196.101:8080/",
+        "version": "v1.0.0"
+      }
+    },
+    {
+      "id": "wappchat",
+      "name": "WappChat",
+      "title": "WappChat — WhatsApp Desktop Anti-Banner",
+      "category": "social",
+      "category_name": "Comunicação & Social",
+      "icon": "💬",
+      "badge": "MAIS USADO",
+      "featured": true,
+      "description": "WhatsApp Web Desktop corporativo ultra-rápido com bloqueio nativo de anúncios, zoom total, atalhos produtivos e tema escuro Slate Blue sem banner verde.",
+      "short_description": "WhatsApp Web Desktop rápido com bloqueio de anúncios e tema escuro.",
+      "platforms_supported": [
+        "windows"
+      ],
+      "windows": {
+        "filename": "WappChat_v0.4.0_Installer.exe",
+        "size_mb": 18.1,
+        "version": "v0.4.0",
+        "executable": "WappChat.exe"
+      }
+    },
+    {
+      "id": "alfred_android",
+      "name": "AlfredApp",
+      "title": "AlfredApp — Assistente Autônomo Mobile",
+      "category": "productivity",
+      "category_name": "Produtividade & IA",
+      "icon": "🎩",
+      "badge": "IA OFICIAL",
+      "featured": true,
+      "description": "Assistente de inteligência autônoma móvel integrado ao cluster Antigravity. Executa scripts remotos, consulta métricas, dispara alertas e gerencia automações do ecossistema.",
+      "short_description": "Assistente inteligente conectado ao cluster para automações móveis.",
+      "platforms_supported": [
+        "android"
+      ],
+      "android": {
+        "filename": "Alfred_Android_v0.10.10.apk",
+        "size_mb": 0.89,
+        "version": "v0.10.10",
+        "package_name": "com.antigravity.alfred"
+      },
+      "screenshots": [
+        "http://192.168.196.101:8080/assets/screenshots/alfred_screen_1.png",
+        "http://192.168.196.101:8080/assets/screenshots/alfred_screen_2.png"
+      ],
+      "latest_changelog": [
+        "Migração completa da arquitetura do App para Kotlin 1.9.24 nativo.",
+        "Integração e homologação com o ecossistema Nexus App Hub.",
+        "Otimização de pipeline CI/CD com injeção dinâmica de versão.",
+        "Melhorias no serviço de push notification e TTS em segundo plano."
+      ]
+    },
+    {
+      "id": "threadsdl_android",
+      "name": "ThreadsDL",
+      "title": "ThreadsDL — Downloader de Mídia & Vídeos",
+      "category": "media",
+      "category_name": "Mídia & Ferramentas",
+      "icon": "📥",
+      "badge": "UTILITÁRIO",
+      "featured": false,
+      "description": "Utilitário móvel leve e veloz para download de fotos, vídeos e áudios em alta resolução diretamente do Threads no seu dispositivo Android.",
+      "short_description": "Downloader rápido de mídias e postagens do Threads.",
+      "platforms_supported": [
+        "android"
+      ],
+      "android": {
+        "filename": "ThreadsDL_Android_v0.5.0.apk",
+        "size_mb": 50.9,
+        "version": "v0.5.0",
+        "package_name": "com.antigravity.threadsdl"
+      }
+    },
+    {
+      "id": "nexus_app_hub",
+      "name": "Nexus App Hub",
+      "title": "Nexus App Hub — Central & Launcher Oficial",
+      "category": "system",
+      "category_name": "Sistema & Utilitários",
+      "icon": "⚡",
+      "badge": "OFICIAL",
+      "featured": true,
+      "description": "Loja oficial e launcher central de aplicativos e jogos do ecossistema Antigravity, unificado em Flutter nativo para Windows Desktop e Android Mobile.",
+      "short_description": "Loja e launcher unificado em Flutter para PC e Celular.",
+      "platforms_supported": [
+        "windows",
+        "android"
+      ],
+      "windows": {
+        "executable": "NexusAppHub.exe",
+        "version": "v0.3.1",
+        "filename": "NexusAppHub_v0.3.0_Installer.exe",
+        "size_mb": 12.1
+      },
+      "android": {
+        "package_name": "com.antigravity.nexus_app_hub",
+        "version": "v0.3.1",
+        "filename": "NexusAppHub_Flutter_Android_v0.3.0.apk",
+        "size_mb": 49.22
+      },
+      "version": "v0.3.1",
+      "latest_changelog": [
+        "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
+        "Correção do título da janela e identificação do sistema para Nexus App Hub",
+        "Padronização de ícones de alta resolução no Android e Windows Desktop",
+        "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
+        "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
+      ],
+      "screenshots": [
+        "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_desktop.png",
+        "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_mobile.png"
+      ]
+    }
+  ]
 }

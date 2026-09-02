@@ -13,7 +13,7 @@ class VersionInfo {
 
   factory VersionInfo.fromJson(Map<String, dynamic> json) {
     return VersionInfo(
-      currentVersion: json['version'] ?? '0.3.0',
+      currentVersion: json['version'] ?? '0.3.1',
       latestVersion: json['latest_version'],
       updateUrl: json['update_url'],
       changelog: json['changelog'] != null
