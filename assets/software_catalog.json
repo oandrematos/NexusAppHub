@@ -42,9 +42,9 @@
         "android"
       ],
       "windows": {
-        "filename": "Space Duel_v2.0.0_x64.exe",
-        "size_mb": 138.7,
-        "version": "v2.0.0",
+        "filename": "Space Duel_v1.1.1_x64.exe",
+        "size_mb": 122.7,
+        "version": "v1.1.1",
         "executable": "Space Duel.exe"
       },
       "android": {
@@ -53,7 +53,7 @@
         "version": "v1.1.0",
         "package_name": "com.antigravity.spaceduel"
       },
-      "version": "v2.0.0",
+      "version": "v1.1.1",
       "latest_changelog": [
         "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
         "Multiplayer P2P de alta fidelidade e baixa latencia via ENet LAN",
