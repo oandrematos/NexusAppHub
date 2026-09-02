@@ -1,0 +1,10 @@
+{
+  "version": "0.3.0",
+  "build_number": 3,
+  "release_channel": "stable",
+  "min_os_version": {
+    "windows": "10.0.19041",
+    "android": "8.0"
+  },
+  "update_url": "http://192.168.196.101/installers/software_catalog.json"
+}

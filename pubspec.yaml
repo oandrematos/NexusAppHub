@@ -1,0 +1,29 @@
+name: nexus_app_hub
+description: "Nexus App Hub — Central & Launcher Oficial do Ecossistema Antigravity."
+publish_to: 'none'
+version: 0.3.0+3
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.1
+  provider: ^6.1.2
+  open_filex: ^4.4.0
+  path_provider: ^2.1.2
+  url_launcher: ^6.2.6
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/screenshots/
