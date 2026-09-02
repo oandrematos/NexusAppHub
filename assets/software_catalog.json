@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-02T19:59:00Z",
+    "updated_at":  "2026-09-02T20:56:00Z",
     "categories":  [
                        {
                            "id":  "games",
@@ -235,9 +235,9 @@
                                                  "android"
                                              ],
                      "android":  {
-                                     "filename":  "Alfred_Android_v0.10.10.apk",
+                                     "filename":  "Alfred_Android_v0.10.11.apk",
                                      "size_mb":  0.89,
-                                     "version":  "v0.10.10",
+                                     "version":  "v0.10.11",
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "screenshots":  [
@@ -245,11 +245,13 @@
                                          "http://192.168.196.101:8080/assets/screenshots/alfred_screen_2.png"
                                      ],
                      "latest_changelog":  [
-                                              "Migração completa da arquitetura do App para Kotlin 1.9.24 nativo.",
-                                              "Integração e homologação com o ecossistema Nexus App Hub.",
-                                              "Otimização de pipeline CI/CD com injeção dinâmica de versão.",
-                                              "Melhorias no serviço de push notification e TTS em segundo plano."
-                                          ]
+                                              "Arquitetura Multi-Brain Router integrada (paridade total com Jarvis e Friday).",
+                                              "Suporte a mÃºltiplos motores de IA: Groq GPT-OSS 120B, Mistral Codestral, Groq Qwen 27B, Cohere Command-R+ 104B e Mistral Small.",
+                                              "Pesquisa web em tempo real via Tavily Search integrada nas respostas.",
+                                              "Seletor interativo de cÃ©rebros IA com feedback visual de badges no chat.",
+                                              "SanitizaÃ§Ã£o completa de manifesto Android e otimizaÃ§Ã£o de latÃªncia."
+                                          ],
+                     "version":  "v0.10.11"
                  },
                  {
                      "id":  "threadsdl_android",
