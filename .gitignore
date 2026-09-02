@@ -55,3 +55,6 @@ build/
 *.apk
 *.zip
 *.msix
+
+*.idsig
+celular_*.png

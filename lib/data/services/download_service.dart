@@ -5,9 +5,11 @@ import 'package:open_filex/open_filex.dart';
 
 class DownloadService {
   static const List<String> clusterEndpoints = [
+    'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real)
     'http://192.168.196.101/installers', // S1 (ZeroTier / Nuvem)
     'http://192.168.196.102/installers', // S2 (ZeroTier / Nuvem)
-    'http://192.168.0.205/installers',   // S2 (Wi-Fi Doméstico)
+    'http://100.84.133.101/installers',  // S1 (Tailscale)
+    'http://100.104.81.102/installers',  // S2 (Tailscale)
     'http://192.168.100.166/installers', // S1 (Wi-Fi Escritório)
   ];
 

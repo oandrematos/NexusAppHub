@@ -5,10 +5,12 @@ import '../models/app_item.dart';
 
 class CatalogService {
   static const List<String> clusterCatalogUrls = [
-    'http://192.168.196.101/installers/software_catalog.json',
-    'http://192.168.196.102/installers/software_catalog.json',
-    'http://192.168.0.205/installers/software_catalog.json',
-    'http://192.168.100.166/installers/software_catalog.json',
+    'http://192.168.0.246/installers/software_catalog.json',   // S2 (Wi-Fi Doméstico Casa Real)
+    'http://192.168.196.101/installers/software_catalog.json', // S1 (ZeroTier)
+    'http://192.168.196.102/installers/software_catalog.json', // S2 (ZeroTier)
+    'http://100.84.133.101/installers/software_catalog.json',  // S1 (Tailscale)
+    'http://100.104.81.102/installers/software_catalog.json',  // S2 (Tailscale)
+    'http://192.168.100.166/installers/software_catalog.json', // S1 (Wi-Fi Escritório)
   ];
 
   Future<List<AppItem>> loadCatalog() async {
