@@ -1,9 +1,9 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class AppVersionService {
-  static String currentVersion = '0.3.19';
-  static int currentBuild = 22;
+  static String currentVersion = '0.3.20';
+  static int currentBuild = 23;
 
   static Future<void> init() async {
     try {

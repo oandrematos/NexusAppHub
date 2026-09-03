@@ -1,14 +1,10 @@
-{
+﻿{
     "changelog":  [
-                      "Novo design de vitrine responsiva com prateleiras dinâmicas e Hero Showcase Carousel.",
-                      "Integração nativa com gerenciadores de pacotes universais Winget e Chocolatey estilo UniGetUI.",
-                      "Nova aba dedicada para pesquisa e instalação direta em milhares de softwares no Winget/Choco.",
-                      "Opção de ignorar/silenciar atualizações por aplicativo com persistência local.",
-                      "Seleção de fonte preferencial por aplicativo (Cluster Nexus, Winget ou Chocolatey).",
-                      "Correção do algoritmo de versão PE (normalização de vírgulas no VLC 3.0.23 vs 3.0.20).",
-                      "Desacoplamento do instalador no Windows para atualização suave em 1 clique pela própria loja."
+                      "Carregamento Instantâneo em 0ms: Renderização imediata da vitrine local sem travamento de rede.",
+                      "Detecção de Softwares Paralela e Otimizada: Execução concorrente com cache em memória, eliminando delays de inicialização.",
+                      "Sincronização Stale-While-Revalidate: O catálogo atualiza silenciosamente em background sem bloquear o usuário."
                   ],
-    "build":  22,
-    "version":  "0.3.19",
+    "build":  23,
+    "version":  "0.3.20",
     "release_date":  "2026-09-03"
 }

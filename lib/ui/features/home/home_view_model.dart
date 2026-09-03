@@ -51,21 +51,38 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> loadData() async {
-    _isLoading = true;
-    notifyListeners();
-
+    // 1. Carrega localmente e exibe a vitrine em ZERO MILISSEGUNDOS!
     try {
       await _prefs.init();
-      _allApps = await _catalogService.loadCatalog();
-      await _checkInstallations();
-      await _checkStoreSelfUpdate();
-      _applyFilters();
+      if (_allApps.isEmpty) {
+        _allApps = await _catalogService.loadLocalCatalog();
+        _applyFilters();
+      }
     } catch (e) {
-      debugPrint('Erro ao carregar catálogo: $e');
+      debugPrint('Erro ao carregar catálogo local: $e');
     } finally {
       _isLoading = false;
-      notifyListeners();
+      notifyListeners(); // Renderiza a loja IMEDIATAMENTE!
     }
+
+    // 2. Detecção de instalações em paralelo de forma não-bloqueante
+    _checkInstallations().then((_) {
+      _checkStoreSelfUpdate();
+      _applyFilters();
+      notifyListeners();
+    });
+
+    // 3. Sincronização remota de catálogo em background (sem travar a tela)
+    _catalogService.fetchRemoteCatalog().then((remoteApps) {
+      if (remoteApps != null && remoteApps.isNotEmpty) {
+        _allApps = remoteApps;
+        _checkInstallations().then((_) {
+          _checkStoreSelfUpdate();
+          _applyFilters();
+          notifyListeners();
+        });
+      }
+    });
   }
 
   Future<void> _checkStoreSelfUpdate() async {
@@ -153,14 +170,14 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> _checkInstallations() async {
     final isAndroid = Platform.isAndroid;
-    for (final app in _allApps) {
+    await Future.wait(_allApps.map((app) async {
       if (app.id == 'nexus_app_hub') {
         _installedStatus[app.id] = true;
         _installedVersions[app.id] = AppVersionService.currentVersion;
         final catVer = app.getVersion(isAndroid);
         final hasNewer = _isNewerVersion(AppVersionService.currentVersion, catVer);
         _hasUpdateStatus[app.id] = hasNewer && !_prefs.isUpdateIgnored(app.id);
-        continue;
+        return;
       }
 
       final installed = await AppDetector.isAppInstalled(
@@ -183,7 +200,7 @@ class HomeViewModel extends ChangeNotifier {
         _installedVersions[app.id] = null;
         _hasUpdateStatus[app.id] = false;
       }
-    }
+    }));
   }
 
   void search(String query) {

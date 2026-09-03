@@ -41,6 +41,16 @@ class AppDetector {
     return list;
   }
 
+  static final Map<String, String?> _pathCache = {};
+  static final Map<String, String?> _versionCache = {};
+  static final Map<String, String?> _fileVerCache = {};
+
+  static void clearCache() {
+    _pathCache.clear();
+    _versionCache.clear();
+    _fileVerCache.clear();
+  }
+
   static Future<bool> isAppInstalled(String? executableName, String? packageName) async {
     if (Platform.isAndroid) {
       if (packageName == null || packageName.isEmpty) return false;
@@ -57,7 +67,13 @@ class AppDetector {
       return false;
     }
 
+    if (executableName == null || executableName.isEmpty) return false;
+    if (_pathCache.containsKey(executableName)) {
+      return _pathCache[executableName] != null;
+    }
+
     final path = await getInstalledExecutablePath(executableName);
+    _pathCache[executableName] = path;
     return path != null;
   }
 
@@ -85,6 +101,10 @@ class AppDetector {
         return AppVersionService.currentVersion;
       }
 
+      if (_versionCache.containsKey(executableName)) {
+        return _versionCache[executableName];
+      }
+
       final execPath = await getInstalledExecutablePath(executableName);
       if (execPath != null) {
         final dir = File(execPath).parent;
@@ -93,19 +113,29 @@ class AppDetector {
           try {
             final content = vFile.readAsStringSync();
             final match = RegExp(r'"version"\s*:\s*"([^"]+)"').firstMatch(content);
-            if (match != null) return match.group(1);
+            if (match != null) {
+              _versionCache[executableName] = match.group(1);
+              return match.group(1);
+            }
           } catch (_) {}
         }
 
         final baseName = File(execPath).uri.pathSegments.last.replaceAll('.exe', '');
         final regVer = await _getWindowsRegistryVersion(baseName);
-        if (regVer != null) return regVer;
+        if (regVer != null) {
+          _versionCache[executableName] = regVer;
+          return regVer;
+        }
 
         final fileVer = await _getFileVersion(execPath);
-        if (fileVer != null) return fileVer;
+        if (fileVer != null) {
+          _versionCache[executableName] = fileVer;
+          return fileVer;
+        }
       }
     }
 
+    _versionCache[executableName ?? ''] = null;
     return null;
   }
 

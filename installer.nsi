@@ -1,15 +1,15 @@
-!include "MUI2.nsh"
+﻿!include "MUI2.nsh"
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.19_Installer.exe"
+OutFile "NexusAppHub_v0.3.20_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
 
 Function .onInit
-    ; Fechar instâncias ativas do Nexus App Hub (sem /T para não encerrar a árvore do próprio instalador)
+    ; Fechar instÃ¢ncias ativas do Nexus App Hub (sem /T para nÃ£o encerrar a Ã¡rvore do prÃ³prio instalador)
     nsExec::Exec 'taskkill /F /IM NexusAppHub.exe'
     nsExec::Exec 'taskkill /F /IM nexus_app_hub.exe'
     Sleep 1000
@@ -33,7 +33,7 @@ Section "Nexus App Hub"
     ; Uninstaller
     WriteUninstaller "$INSTDIR\Uninstall.exe"
     
-    ; Atalhos limpos para forçar renovação de ícone
+    ; Atalhos limpos para forÃ§ar renovaÃ§Ã£o de Ã­cone
     Delete "$DESKTOP\Nexus App Hub.lnk"
     Delete "$SMPROGRAMS\Nexus App Hub\Nexus App Hub.lnk"
     CreateDirectory "$SMPROGRAMS\Nexus App Hub"
@@ -41,12 +41,12 @@ Section "Nexus App Hub"
     CreateShortcut "$SMPROGRAMS\Nexus App Hub\Desinstalar.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
     CreateShortcut "$DESKTOP\Nexus App Hub.lnk" "$INSTDIR\NexusAppHub.exe" "" "$INSTDIR\app.ico" 0
     
-    ; Notificação ao Shell do Windows para recarregar o cache de ícones instantaneamente
+    ; NotificaÃ§Ã£o ao Shell do Windows para recarregar o cache de Ã­cones instantaneamente
     System::Call 'shell32.dll::SHChangeNotify(i 0x08000000, i 0, p 0, p 0)'
     
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.19"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.20"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'
