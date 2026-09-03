@@ -2,7 +2,7 @@
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.15_Installer.exe"
+OutFile "NexusAppHub_v0.3.16_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
@@ -30,15 +30,20 @@ Section "Nexus App Hub"
     ; Uninstaller
     WriteUninstaller "$INSTDIR\Uninstall.exe"
     
-    ; Atalhos
+    ; Atalhos limpos para forçar renovação de ícone
+    Delete "$DESKTOP\Nexus App Hub.lnk"
+    Delete "$SMPROGRAMS\Nexus App Hub\Nexus App Hub.lnk"
     CreateDirectory "$SMPROGRAMS\Nexus App Hub"
     CreateShortcut "$SMPROGRAMS\Nexus App Hub\Nexus App Hub.lnk" "$INSTDIR\NexusAppHub.exe" "" "$INSTDIR\app.ico" 0
     CreateShortcut "$SMPROGRAMS\Nexus App Hub\Desinstalar.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
     CreateShortcut "$DESKTOP\Nexus App Hub.lnk" "$INSTDIR\NexusAppHub.exe" "" "$INSTDIR\app.ico" 0
     
+    ; Notificação ao Shell do Windows para recarregar o cache de ícones instantaneamente
+    System::Call 'shell32.dll::SHChangeNotify(i 0x08000000, i 0, p 0, p 0)'
+    
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.15"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.16"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'
@@ -48,8 +53,9 @@ Section "Nexus App Hub"
     WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "NoRepair" 1
 
     ; Reinicia a loja atualizada se for silencioso (auto-update)
-     
+    ${If} ${Silent}
         Exec '"$INSTDIR\NexusAppHub.exe"'
+    ${EndIf}
     
 SectionEnd
 

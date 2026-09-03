@@ -1,11 +1,12 @@
 {
     "changelog":  [
-                      "Novo ícone oficial do Nexus App Hub no padrão Squircle M3E com cantos suavemente contínuos e transparentes para Desktop, Launcher e Android",
-                      "Substituição de ícones temporários de raio e emoji pela nova identidade visual oficial Squircle M3E na barra lateral e ajustes",
-                      "Leitor aprimorado de versões instaladas no Windows via Registro (DisplayVersion) garantindo detecção precisa de atualizações de todos os apps",
-                      "Mecanismo de autoatualização com fechamento seguro de instâncias ativas e reinicialização automática"
+                      "Novo ícone Squircle M3E oficial com aura neon ciano e violeta, cantos arredondados contínuos e transparência 100% no Desktop e Barra de Tarefas",
+                      "Remoção de textos inferiores do ícone para clareza e destaque total do emblema do Nexus App Hub",
+                      "Cache-buster dinâmico em tempo real para catálogo no cluster e GitHub, eliminando atrasos de CDN",
+                      "Notificação automática ao Shell do Windows para renovação instantânea do cache de ícones (SHChangeNotify)",
+                      "Autoatualização da loja com reinicialização automática suave"
                   ],
-    "build":  18,
-    "version":  "0.3.15",
+    "build":  19,
+    "version":  "0.3.16",
     "release_date":  "2026-09-03"
 }

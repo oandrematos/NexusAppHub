@@ -43,22 +43,23 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.15",
-                                     "filename":  "NexusAppHub_v0.3.15_Installer.exe",
+                                     "version":  "0.3.16",
+                                     "filename":  "NexusAppHub_v0.3.16_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.15",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.15.apk",
+                                     "version":  "0.3.16",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.16.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.15",
+                     "version":  "0.3.16",
                      "latest_changelog":  [
-                                              "Novo ícone oficial do Nexus App Hub no padrão Squircle M3E com cantos suavemente contínuos e transparentes para Desktop, Launcher e Android.",
-                                              "Substituição de ícones temporários de raio e emoji pela nova identidade visual oficial Squircle M3E na barra lateral e ajustes.",
-                                              "Leitor aprimorado de versões instaladas no Windows via Registro (DisplayVersion) garantindo detecção precisa de atualizações de todos os apps.",
-                                              "Mecanismo de autoatualização com fechamento seguro de instâncias ativas e reinicialização automática."
+                                              "Novo ícone Squircle M3E oficial com aura neon ciano e violeta, cantos arredondados contínuos e transparência 100% no Desktop e Barra de Tarefas.",
+                                              "Remoção de textos inferiores do ícone para clareza e destaque total do emblema do Nexus App Hub.",
+                                              "Cache-buster dinâmico em tempo real para catálogo no cluster e GitHub, eliminando atrasos de CDN.",
+                                              "Notificação automática ao Shell do Windows para renovação instantânea do cache de ícones (SHChangeNotify).",
+                                              "Autoatualização da loja com reinicialização automática suave."
                                           ],
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",

@@ -14,7 +14,11 @@ class CatalogService {
   Future<List<AppItem>> loadCatalog() async {
     for (final url in clusterCatalogUrls) {
       try {
-        final resp = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 3));
+        final cacheBusterUrl = '$url?t=${DateTime.now().millisecondsSinceEpoch}';
+        final resp = await http.get(
+          Uri.parse(cacheBusterUrl),
+          headers: {'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
+        ).timeout(const Duration(seconds: 3));
         if (resp.statusCode == 200) {
           final data = json.decode(utf8.decode(resp.bodyBytes));
           if (data['apps'] != null) {
