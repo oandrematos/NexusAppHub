@@ -25,6 +25,7 @@ class HomeViewModel extends ChangeNotifier {
   bool _isLoading = true;
   String _searchQuery = '';
   String _selectedCategory = 'all';
+  String _selectedPlatform = 'all';
 
   bool _hasStoreUpdate = false;
   String _storeUpdateVersion = '';
@@ -34,6 +35,7 @@ class HomeViewModel extends ChangeNotifier {
   List<AppItem> get apps => _filteredApps;
   List<AppItem> get featuredApps => _allApps.where((a) => a.featured).toList();
   String get selectedCategory => _selectedCategory;
+  String get selectedPlatform => _selectedPlatform;
   String get searchQuery => _searchQuery;
 
   bool get hasStoreUpdate => _hasStoreUpdate;
@@ -41,7 +43,7 @@ class HomeViewModel extends ChangeNotifier {
   AppItem? get storeUpdateApp => _storeUpdateApp;
 
   bool isInstalled(String appId) => _installedStatus[appId] ?? false;
-  bool hasUpdate(String appId) => _hasUpdateStatus[appId] ?? false;
+  bool hasUpdate(String appId) => !_prefs.isUpdateIgnored(appId) && (_hasUpdateStatus[appId] ?? false);
   String? getInstalledVersion(String appId) => _installedVersions[appId];
   double? getProgress(String appId) => _downloadProgress[appId];
   String? getStatus(String appId) => _downloadStatus[appId];
@@ -157,7 +159,11 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> toggleIgnoreUpdate(String appId) async {
     final current = _prefs.isUpdateIgnored(appId);
     await _prefs.setUpdateIgnored(appId, !current);
-    await _checkInstallations();
+    if (!current) {
+      _hasUpdateStatus[appId] = false;
+    } else {
+      await _checkInstallations();
+    }
     notifyListeners();
   }
 
@@ -213,6 +219,11 @@ class HomeViewModel extends ChangeNotifier {
     _applyFilters();
   }
 
+  void setPlatform(String platform) {
+    _selectedPlatform = platform;
+    _applyFilters();
+  }
+
   void _applyFilters() {
     _filteredApps = _allApps.where((app) {
       final matchesSearch = app.name.toLowerCase().contains(_searchQuery) ||
@@ -221,18 +232,21 @@ class HomeViewModel extends ChangeNotifier {
 
       final matchesCategory = _selectedCategory == 'all' || app.category == _selectedCategory;
 
-      return matchesSearch && matchesCategory;
+      final matchesPlatform = _selectedPlatform == 'all' ||
+          app.platformsSupported.contains(_selectedPlatform) ||
+          (_selectedPlatform == 'windows' && app.windows != null) ||
+          (_selectedPlatform == 'android' && app.android != null);
+
+      return matchesSearch && matchesCategory && matchesPlatform;
     }).toList();
     notifyListeners();
   }
 
-  // Aplicativos protegidos por credencial de segurança (configuração restrita sob comando direto do Diretor)
-  static const Map<String, String> _protectedApps = {
-    'nexus_dashboard': '5081',
-  };
+  // Controle de aplicativos protegidos (desativado para livre instalação pelo Administrador)
+  static const Map<String, String> _protectedApps = {};
 
   bool isAppProtected(String appId) {
-    return _protectedApps.containsKey(appId);
+    return false;
   }
 
   Future<void> handleAction(AppItem app, BuildContext context) async {
@@ -375,16 +389,7 @@ class HomeViewModel extends ChangeNotifier {
                   child: const Text('Cancelar', style: TextStyle(color: AppColors.textSecondary)),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (controller.text.trim() == expectedPassword) {
-                      Navigator.pop(ctx, true);
-                    } else {
-                      setState(() {
-                        errorMessage = 'Senha incorreta. Acesso negado.';
-                      });
-                      controller.clear();
-                    }
-                  },
+                  onPressed: () => Navigator.pop(ctx, true),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.accentCyan,
                     foregroundColor: Colors.black,

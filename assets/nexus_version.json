@@ -1,10 +1,11 @@
 ﻿{
     "changelog":  [
-                      "Carregamento Instantâneo em 0ms: Renderização imediata da vitrine local sem travamento de rede.",
-                      "Detecção de Softwares Paralela e Otimizada: Execução concorrente com cache em memória, eliminando delays de inicialização.",
-                      "Sincronização Stale-While-Revalidate: O catálogo atualiza silenciosamente em background sem bloquear o usuário."
+                      "Remoção da barreira de senha: O botão de autorização do Nexus Dashboard agora autoriza diretamente sem bloqueio.",
+                      "Filtro de Plataforma (Todas, Windows e Android) em tempo real na vitrine principal.",
+                      "AnyDesk oficial v6.0.6 sincronizado e correção de parser de versão.",
+                      "Modo de ignorar atualizações estrito sem badges ou notificações."
                   ],
-    "build":  23,
-    "version":  "0.3.20",
+    "build":  25,
+    "version":  "0.3.22",
     "release_date":  "2026-09-03"
 }

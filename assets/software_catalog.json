@@ -43,24 +43,21 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.20",
-                                     "filename":  "NexusAppHub_v0.3.20_Installer.exe",
+                                     "version":  "0.3.22",
+                                     "filename":  "NexusAppHub_v0.3.22_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.20",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.20.apk",
+                                     "version":  "0.3.22",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.22.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.20",
+                     "version":  "0.3.22",
                      "latest_changelog":  [
-                                              "Novo design de vitrine responsiva com prateleiras dinâmicas e Hero Showcase Carousel.",
-                                              "Integração nativa com gerenciadores de pacotes universais Winget e Chocolatey estilo UniGetUI.",
-                                              "Nova aba dedicada para pesquisa e instalação direta em milhares de softwares no Winget/Choco.",
-                                              "Opção de ignorar/silenciar atualizações por aplicativo com persistência local.",
-                                              "Seleção de fonte preferencial por aplicativo (Cluster Nexus, Winget ou Chocolatey).",
-                                              "Correção do algoritmo de versão PE (normalização de vírgulas no VLC 3.0.23 vs 3.0.20)."
+                                              "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2).",
+                                              "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2).",
+                                              "Mensagens detalhadas de diagnóstico em falhas de rede."
                                           ],
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
@@ -320,11 +317,11 @@
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "latest_changelog":  [
-                                              "Interface Telegram Nativa: visual premium idêntico ao Telegram com balões curvos, duplo check azul (✓✓), botão de chamada, menu de ações rápidas e barra de busca integrada.",
-                                              "Suíte de 8 Temas Personalizáveis: Telegram Dark Slate, Night AMOLED, Arctic Blue, Emerald Forest, Wayne Tech, Cyberpunk Neon, Amber Matrix e WhatsApp Dark.",
-                                              "Voz Neural Autêntica HD com Edge-TTS AntonioNeural e transcrição Whisper Large V3 Turbo.",
-                                              "Multi-Brain Router IA (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
-                                              "Otimizado para Android 15 e 16 com zipalign em 4 bytes e esquemas de assinatura v2/v3."
+                                              "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
+                                              "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
+                                              "TranscriÃ§Ã£o ultrarrÃ¡pida de comandos de voz com Whisper Large V3 Turbo na nuvem.",
+                                              "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
+                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
                                           ],
                      "version":  "v0.11.0",
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner.png",
@@ -433,9 +430,7 @@
                                      "filename":  "WinRAR_v7.23_Installer.exe",
                                      "size_mb":  5.63,
                                      "version":  "7.23.0",
-                                     "executable":  "WinRAR.exe",
-                                     "winget_id":  "RARLab.WinRAR",
-                                     "choco_id":  "winrar"
+                                     "executable":  "WinRAR.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner_card.png",
@@ -468,9 +463,7 @@
                                      "filename":  "npp.8.6.9.Installer.x64.exe",
                                      "size_mb":  6.24,
                                      "version":  "8.6.9",
-                                     "executable":  "notepad++.exe",
-                                     "winget_id":  "Notepad++.Notepad++",
-                                     "choco_id":  "notepadplusplus"
+                                     "executable":  "notepad++.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner_card.png",
@@ -503,9 +496,7 @@
                                      "filename":  "vlc-3.0.20-win64.exe",
                                      "size_mb":  42.36,
                                      "version":  "3.0.20",
-                                     "executable":  "vlc.exe",
-                                     "winget_id":  "VideoLAN.VLC",
-                                     "choco_id":  "vlc"
+                                     "executable":  "vlc.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner_card.png",
@@ -538,9 +529,7 @@
                                      "filename":  "ShareX-20.0.4-setup-x64.exe",
                                      "size_mb":  115.89,
                                      "version":  "20.0.4",
-                                     "executable":  "ShareX.exe",
-                                     "winget_id":  "ShareX.ShareX",
-                                     "choco_id":  "sharex"
+                                     "executable":  "ShareX.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner_card.png",
@@ -572,9 +561,7 @@
                                      "filename":  "ChromeSetup.exe",
                                      "size_mb":  11.16,
                                      "version":  "Latest",
-                                     "executable":  "chrome.exe",
-                                     "winget_id":  "Google.Chrome",
-                                     "choco_id":  "googlechrome"
+                                     "executable":  "chrome.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner_card.png",
@@ -606,9 +593,7 @@
                                      "filename":  "Firefox Installer.exe",
                                      "size_mb":  0.48,
                                      "version":  "Latest",
-                                     "executable":  "firefox.exe",
-                                     "winget_id":  "Mozilla.Firefox",
-                                     "choco_id":  "firefox"
+                                     "executable":  "firefox.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner_card.png",
@@ -640,9 +625,7 @@
                                      "filename":  "tailscale-setup-latest.exe",
                                      "size_mb":  1.33,
                                      "version":  "Latest",
-                                     "executable":  "tailscale-ipn.exe",
-                                     "winget_id":  "Tailscale.Tailscale",
-                                     "choco_id":  "tailscale"
+                                     "executable":  "tailscale-ipn.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner_card.png",
@@ -674,9 +657,7 @@
                                      "filename":  "ZeroTierOne.msi",
                                      "size_mb":  11.45,
                                      "version":  "1.16.2",
-                                     "executable":  "zerotier_desktop_ui.exe",
-                                     "winget_id":  "ZeroTier.ZeroTierOne",
-                                     "choco_id":  "zerotier-one"
+                                     "executable":  "zerotier_desktop_ui.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner_card.png",
@@ -708,9 +689,7 @@
                                      "filename":  "parsec-windows.exe",
                                      "size_mb":  4.2,
                                      "version":  "Latest",
-                                     "executable":  "parsecd.exe",
-                                     "winget_id":  "Parsec.Parsec",
-                                     "choco_id":  "parsec"
+                                     "executable":  "parsecd.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner_card.png",
@@ -742,9 +721,7 @@
                                      "filename":  "anydesk-7-0-14.exe",
                                      "size_mb":  3.67,
                                      "version":  "7.0.14",
-                                     "executable":  "AnyDesk.exe",
-                                     "winget_id":  "AnyDeskSoftwareGmbH.AnyDesk",
-                                     "choco_id":  "anydesk"
+                                     "executable":  "AnyDesk.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner_card.png",
@@ -776,9 +753,7 @@
                                      "filename":  "7tt_setup.exe",
                                      "size_mb":  1.77,
                                      "version":  "5.15.4",
-                                     "executable":  "7+ Taskbar Tweaker.exe",
-                                     "winget_id":  "RaMMMi.7+TaskbarTweaker",
-                                     "choco_id":  "7-taskbar-tweaker"
+                                     "executable":  "7+ Taskbar Tweaker.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner_card.png",
@@ -810,9 +785,7 @@
                                      "filename":  "ep_setup.exe",
                                      "size_mb":  11.67,
                                      "version":  "26100.8457",
-                                     "executable":  "ep_setup.exe",
-                                     "winget_id":  "VALINET.ExplorerPatcher",
-                                     "choco_id":  "explorerpatcher"
+                                     "executable":  "ep_setup.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner_card.png",
@@ -844,9 +817,7 @@
                                      "filename":  "VisualStudioSetup.exe",
                                      "size_mb":  4.27,
                                      "version":  "Community",
-                                     "executable":  "devenv.exe",
-                                     "winget_id":  "Microsoft.VisualStudio.2022.Community",
-                                     "choco_id":  "visualstudio2022community"
+                                     "executable":  "devenv.exe"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner_card.png",
@@ -854,77 +825,6 @@
                      "screenshots":  [
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_1.png",
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "STORE HUB",
-                     "id":  "unigetui",
-                     "category":  "system",
-                     "short_description":  "Gerenciador universal de pacotes com interface gráfica para Windows.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "UniGetUI — Gerenciador Gráfico Multi-Package (Winget/Scoop/Choco)",
-                     "name":  "UniGetUI",
-                     "featured":  true,
-                     "description":  "Interface gráfica moderna e intuitiva para gerenciar os gerenciadores de pacotes mais populares do Windows (Winget, Scoop, Chocolatey, Pip, Npm, Cargo e .NET Tool). Permite instalar, atualizar e desinstalar milhares de softwares em lote.",
-                     "version":  "2026.2.7",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Suporte multi-gerenciador: Winget, Scoop, Chocolatey, Pip, Npm e .NET.",
-                                              "Instalação silenciosa Inno Setup em 1 clique pela Nexus App Hub.",
-                                              "Backup e restauração de listas de aplicativos instalados."
-                                          ],
-                     "icon":  "📦",
-                     "windows":  {
-                                     "filename":  "UniGetUI.Installer.x64.exe",
-                                     "size_mb":  28.68,
-                                     "version":  "2026.2.7",
-                                     "executable":  "UniGetUI.exe",
-                                     "winget_id":  "SomePythonThings.WingetUIStore",
-                                     "choco_id":  "wingetui"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "STORE HUB",
-                     "id":  "chocolateygui",
-                     "category":  "system",
-                     "short_description":  "Interface gráfica oficial para a biblioteca de softwares Chocolatey.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Chocolatey GUI — Interface Oficial do Chocolatey",
-                     "name":  "Chocolatey GUI",
-                     "featured":  true,
-                     "description":  "Interface gráfica oficial para o gerenciador de pacotes Chocolatey no Windows. Permite navegar, pesquisar e instalar pacotes da comunidade do Chocolatey com visualização rica de metadados e dependências.",
-                     "version":  "3.2.0",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Navegação e busca visual em milhares de pacotes da galeria Chocolatey.",
-                                              "Instalador oficial MSI com suporte a instalação limpa e silenciosa em 1 clique."
-                                          ],
-                     "icon":  "🍫",
-                     "windows":  {
-                                     "filename":  "ChocolateyGUI.msi",
-                                     "size_mb":  20.69,
-                                     "version":  "3.2.0",
-                                     "executable":  "ChocolateyGUI.exe",
-                                     "winget_id":  "Chocolatey.ChocolateyGUI",
-                                     "choco_id":  "chocolateygui"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/screenshots/screen_2.png"
                                      ]
                  }
              ]

@@ -16,8 +16,10 @@ class AppDetailView extends StatelessWidget {
 
   String _formatVersion(String? v) {
     if (v == null || v.isEmpty) return 'v1.0.0';
-    final clean = v.trim();
-    return clean.startsWith('v') || clean.startsWith('V') ? clean : 'v$clean';
+    String clean = v.trim();
+    clean = clean.replaceAll(RegExp(r'^[a-zA-Z\s]+'), '');
+    if (clean.isEmpty) return 'v1.0.0';
+    return 'v$clean';
   }
 
   @override
@@ -350,27 +352,42 @@ class AppDetailView extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            vm.isUpdateIgnored(app.id) ? Icons.notifications_off_outlined : Icons.notifications_active_outlined,
-                                            size: 20,
-                                            color: vm.isUpdateIgnored(app.id) ? Colors.orangeAccent : AppColors.textSecondary,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Text(
-                                            vm.isUpdateIgnored(app.id) ? 'Atualizações silenciadas' : 'Notificar atualizações',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: vm.isUpdateIgnored(app.id) ? Colors.orangeAccent : AppColors.textSecondary,
-                                              fontWeight: vm.isUpdateIgnored(app.id) ? FontWeight.bold : FontWeight.normal,
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              vm.isUpdateIgnored(app.id) ? Icons.do_not_disturb_on_rounded : Icons.system_update_alt_rounded,
+                                              size: 20,
+                                              color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textSecondary,
                                             ),
-                                          ),
-                                        ],
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Ignorar atualizações deste app',
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textPrimary,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    vm.isUpdateIgnored(app.id)
+                                                        ? 'Atualizações estão ignoradas (não serão mostradas)'
+                                                        : 'Exibir avisos quando houver nova versão',
+                                                    style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Switch.adaptive(
                                         value: vm.isUpdateIgnored(app.id),
-                                        activeThumbColor: Colors.orangeAccent,
+                                        activeThumbColor: AppColors.accentCyan,
                                         onChanged: (_) => vm.toggleIgnoreUpdate(app.id),
                                       ),
                                     ],

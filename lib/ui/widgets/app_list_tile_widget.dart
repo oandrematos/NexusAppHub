@@ -36,8 +36,10 @@ class AppListTileWidget extends StatelessWidget {
 
   String _formatVersion(String? v) {
     if (v == null || v.isEmpty) return '';
-    final clean = v.trim();
-    return clean.startsWith('v') || clean.startsWith('V') ? clean : 'v$clean';
+    String clean = v.trim();
+    clean = clean.replaceAll(RegExp(r'^[a-zA-Z\s]+'), '');
+    if (clean.isEmpty) return '';
+    return 'v$clean';
   }
 
   @override
@@ -125,24 +127,6 @@ class AppListTileWidget extends StatelessWidget {
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.orangeAccent,
-                              ),
-                            ),
-                          ),
-                        ] else if (isUpdateIgnored) ...[
-                          const SizedBox(width: 6),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(6),
-                              border: Border.all(color: Colors.grey, width: 0.8),
-                            ),
-                            child: const Text(
-                              'SILENCIADO',
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white70,
                               ),
                             ),
                           ),

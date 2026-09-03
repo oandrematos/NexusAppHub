@@ -251,7 +251,7 @@ class AppDetector {
         '-NoProfile',
         '-NonInteractive',
         '-Command',
-        "(Get-Item -LiteralPath '$path').VersionInfo.ProductVersion",
+        "\$item = Get-Item -LiteralPath '$path'; \$v = \$item.VersionInfo.FileVersion; if (!\$v) { \$v = \$item.VersionInfo.ProductVersion }; \$v",
       ]);
       if (res.exitCode == 0) {
         final out = res.stdout.toString().trim();
@@ -283,8 +283,12 @@ class AppDetector {
           );
           if (result.exitCode == 0) {
             final stdout = result.stdout.toString();
-            final match = RegExp(r'DisplayVersion\s+REG_SZ\s+(\S+)').firstMatch(stdout);
-            if (match != null) return match.group(1);
+            final match = RegExp(r'DisplayVersion\s+REG_SZ\s+(.+)$', multiLine: true).firstMatch(stdout);
+            if (match != null) {
+              String raw = match.group(1)!.trim();
+              raw = raw.replaceAll(RegExp(r'^[a-zA-Z\s]+'), '').trim();
+              if (raw.isNotEmpty) return raw;
+            }
           }
         } catch (_) {}
       }

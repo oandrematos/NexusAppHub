@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final vm = context.watch<HomeViewModel>();
-    final isSearching = vm.searchQuery.isNotEmpty || vm.selectedCategory != 'all';
+    final isSearching = vm.searchQuery.isNotEmpty || vm.selectedCategory != 'all' || vm.selectedPlatform != 'all';
     final isDesktop = MediaQuery.of(context).size.width >= 800 && !Platform.isAndroid;
 
     return Scaffold(
@@ -127,6 +127,21 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                         ),
                       ),
                     ],
+
+                    // Seletor de Plataforma
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          _buildPlatformChip(vm, 'all', 'Todas as Plataformas', Icons.devices_rounded),
+                          const SizedBox(width: 8),
+                          _buildPlatformChip(vm, 'windows', 'Windows (PC)', Icons.desktop_windows_rounded),
+                          const SizedBox(width: 8),
+                          _buildPlatformChip(vm, 'android', 'Android (Celular)', Icons.phone_android_rounded),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
 
                     // Chips de Categoria Deslizantes
                     SizedBox(
@@ -407,6 +422,45 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
       onUninstall: () => vm.uninstallApp(app, context),
       onToggleIgnoreUpdate: () => vm.toggleIgnoreUpdate(app.id),
       onSourceChanged: (src) => vm.setAppSource(app.id, src),
+    );
+  }
+
+  Widget _buildPlatformChip(HomeViewModel vm, String id, String label, IconData icon) {
+    final isSelected = vm.selectedPlatform == id;
+    return InkWell(
+      onTap: () => vm.setPlatform(id),
+      borderRadius: BorderRadius.circular(10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.accentCyan.withValues(alpha: 0.18) : AppColors.surface,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isSelected ? AppColors.accentCyan : AppColors.border,
+            width: isSelected ? 1.2 : 1,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 14,
+              color: isSelected ? AppColors.accentCyan : AppColors.textSecondary,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                color: isSelected ? AppColors.accentCyan : AppColors.textPrimary,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
