@@ -1,4 +1,4 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -221,7 +221,7 @@
                                                      ]
                                  },
                      "android":  {
-                                     "filename":  "NexusDashboard_Android_v1.0.0.apk",
+                                     "filename":  "NexusDashboard_Android_v1.0.1.apk",
                                      "size_mb":  44.54,
                                      "version":  "v1.0.0",
                                      "package_name":  "com.antigravity.nexus_dashboard",
@@ -319,3 +319,4 @@
                  }
              ]
 }
+
