@@ -17,6 +17,9 @@ FunctionEnd
 
 ; Interface Minimalista
 !insertmacro MUI_PAGE_INSTFILES
+!define MUI_FINISHPAGE_RUN "$INSTDIR\NexusAppHub.exe"
+!define MUI_FINISHPAGE_RUN_TEXT "Executar o Nexus App Hub"
+!insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_LANGUAGE "Portuguese"
 

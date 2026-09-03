@@ -126,14 +126,14 @@ class DownloadService {
           final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
 
           if (isSelfUpdate) {
-            // Atualização da própria loja: inicia o instalador desanexado em modo silencioso
-            // e encerra a loja para liberar o NexusAppHub.exe para escrita!
+            // Atualização da própria loja: abre a interface visual do instalador
+            // e encerra a loja para liberar os arquivos para a nova instalação.
             await Process.start(
               targetFile.path,
-              ['/S'],
+              [],
               mode: ProcessStartMode.detached,
             );
-            await Future.delayed(const Duration(milliseconds: 600));
+            await Future.delayed(const Duration(milliseconds: 500));
             exit(0);
           } else {
             final proc = await Process.start(
