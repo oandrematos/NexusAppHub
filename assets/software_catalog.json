@@ -1,4 +1,4 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -302,20 +302,20 @@
                                              ],
                      "android":  {
                                      "filename":  "Alfred_Android_v0.11.0.apk",
-                                     "size_mb":  0.89,
+                                     "size_mb":  0.85,
                                      "version":  "v0.11.0",
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "screenshots":  [
-                                         "http://192.168.196.101:8080/assets/screenshots/alfred_screen_1.png",
-                                         "http://192.168.196.101:8080/assets/screenshots/alfred_screen_2.png"
+                                         "http://192.168.196.101/installers/assets/alfred_screen_1.png",
+                                         "http://192.168.196.101/installers/assets/alfred_screen_2.png"
                                      ],
                      "latest_changelog":  [
-                                              "Voz Neural Autêntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
-                                              "Transcrição instantânea de comandos de voz com Whisper Large V3 Turbo na nuvem.",
+                                              "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
+                                              "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
+                                              "TranscriÃ§Ã£o ultrarrÃ¡pida de comandos de voz com Whisper Large V3 Turbo na nuvem.",
                                               "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
-                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3.",
-                                              "Correção de versionamento binário interno sincronizado com o Nexus App Hub."
+                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
                                           ],
                      "version":  "v0.11.0"
                  },
