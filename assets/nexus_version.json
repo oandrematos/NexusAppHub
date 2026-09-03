@@ -1,12 +1,12 @@
 {
     "changelog":  [
+                      "Auto-atualização nativa da própria loja (Self-Updater) com banner em destaque no topo",
                       "Detecção nativa de aplicativos instalados no celular Android via PackageManager",
                       "Detecção automática de atualizações pendentes com botão \u0027Atualizar\u0027 e badge de destaque",
                       "Exibição de badge \u0027INSTALADO\u0027 em aplicativos já presentes no dispositivo",
-                      "Suporte completo a desinstalação nativa em 1 clique (Android e Windows)",
-                      "Permissão QUERY_ALL_PACKAGES e declarações de pacotes no AndroidManifest"
+                      "Suporte completo a desinstalação nativa em 1 clique (Android e Windows)"
                   ],
-    "build":  6,
-    "version":  "0.3.3",
+    "build":  7,
+    "version":  "0.3.4",
     "release_date":  "2026-09-02"
 }

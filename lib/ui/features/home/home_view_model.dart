@@ -21,10 +21,18 @@ class HomeViewModel extends ChangeNotifier {
   String _searchQuery = '';
   String _selectedCategory = 'all';
 
+  bool _hasStoreUpdate = false;
+  String _storeUpdateVersion = '';
+  AppItem? _storeUpdateApp;
+
   bool get isLoading => _isLoading;
   List<AppItem> get apps => _filteredApps;
   List<AppItem> get featuredApps => _allApps.where((a) => a.featured).toList();
   String get selectedCategory => _selectedCategory;
+
+  bool get hasStoreUpdate => _hasStoreUpdate;
+  String get storeUpdateVersion => _storeUpdateVersion;
+  AppItem? get storeUpdateApp => _storeUpdateApp;
 
   bool isInstalled(String appId) => _installedStatus[appId] ?? false;
   bool hasUpdate(String appId) => _hasUpdateStatus[appId] ?? false;
@@ -43,6 +51,7 @@ class HomeViewModel extends ChangeNotifier {
     try {
       _allApps = await _catalogService.loadCatalog();
       await _checkInstallations();
+      await _checkStoreSelfUpdate();
       _applyFilters();
     } catch (e) {
       debugPrint('Erro ao carregar catálogo: $e');
@@ -50,6 +59,36 @@ class HomeViewModel extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> _checkStoreSelfUpdate() async {
+    final isAndroid = Platform.isAndroid;
+    try {
+      final hubApp = _allApps.firstWhere((a) => a.id == 'nexus_app_hub');
+      final serverVer = hubApp.getVersion(isAndroid);
+      if (serverVer == null) return;
+
+      String? currentVer;
+      if (isAndroid) {
+        currentVer = await AppDetector.getInstalledVersion(
+          null,
+          'com.antigravity.nexus_app_hub',
+        );
+      } else {
+        currentVer = '0.3.3';
+      }
+
+      if (currentVer != null && _isNewerVersion(currentVer, serverVer)) {
+        _hasStoreUpdate = true;
+        _storeUpdateVersion = serverVer;
+        _storeUpdateApp = hubApp;
+      }
+    } catch (_) {}
+  }
+
+  Future<void> updateStore(BuildContext context) async {
+    if (_storeUpdateApp == null) return;
+    await installApp(_storeUpdateApp!, context);
   }
 
   bool _isNewerVersion(String? installed, String? catalog) {
