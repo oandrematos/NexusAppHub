@@ -272,8 +272,8 @@
                                              ],
                      "windows":  {
                                      "filename":  "WappChat_v0.4.1_Installer.exe",
-                                     "size_mb":  13.48,
-                                     "version":  "v0.4.1",
+                                     "size_mb":  13.75,
+                                     "version":  "0.4.1",
                                      "executable":  "WappChat.exe"
                                  },
                      "latest_changelog":  [
@@ -288,7 +288,8 @@
                      "screenshots":  [
                                          "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_1.png",
                                          "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_2.png"
-                                     ]
+                                     ],
+                     "version":  "0.4.1"
                  },
                  {
                      "id":  "alfred_android",
