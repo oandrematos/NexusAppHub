@@ -51,7 +51,7 @@
                                      "filename":  "Space Duel_Android_v1.1.0.apk",
                                      "size_mb":  6.85,
                                      "version":  "v1.1.0",
-                                     "package_name":  "com.antigravity.spaceduel"
+                                     "package_name":  "com.andre.spaceduel"
                                  },
                      "version":  "v2.0.0",
                      "latest_changelog":  [
@@ -91,10 +91,10 @@
                      "android":  {
                                      "filename":  "Super Pong_Android_v1.1.1.apk",
                                      "size_mb":  7.0,
-                                     "version":  "v1.1.1",
+                                     "version":  "1.0",
                                      "package_name":  "com.antigravity.superpong"
                                  },
-                     "version":  "v2.0.0",
+                     "version":  "1.0",
                      "latest_changelog":  [
                                               "Migração completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
                                               "Física de rebote angular precisa e aceleração dinâmica de velocidade.",
@@ -128,8 +128,8 @@
                      "android":  {
                                      "filename":  "Snake Game_Android_v0.3.2_alpha.apk",
                                      "size_mb":  44.1,
-                                     "version":  "v0.3.2-alpha",
-                                     "package_name":  "com.antigravity.snakegame"
+                                     "version":  "1.0.0",
+                                     "package_name":  "com.example.snake_game"
                                  },
                      "version":  "v1.0.5",
                      "latest_changelog":  [
@@ -291,17 +291,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.4",
-                                     "filename":  "NexusAppHub_v0.3.4_Installer.exe",
+                                     "version":  "0.3.5",
+                                     "filename":  "NexusAppHub_v0.3.5_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.4",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.4.apk",
+                                     "version":  "0.3.5",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.5.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.4",
+                     "version":  "0.3.5",
                      "latest_changelog":  [
                                               "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
                                               "Correção do título da janela e identificação do sistema para Nexus App Hub",

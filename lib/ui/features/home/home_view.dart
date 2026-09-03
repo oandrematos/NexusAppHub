@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   final TextEditingController _searchCtrl = TextEditingController();
 
   final List<Map<String, String>> _categories = [
@@ -27,7 +27,23 @@ class _HomeViewState extends State<HomeView> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      if (mounted) {
+        context.read<HomeViewModel>().loadData();
+      }
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _searchCtrl.dispose();
     super.dispose();
   }
@@ -37,12 +53,15 @@ class _HomeViewState extends State<HomeView> {
     final vm = context.watch<HomeViewModel>();
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
+      body: RefreshIndicator(
+        onRefresh: () => vm.loadData(),
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SearchBarWidget(
@@ -199,8 +218,9 @@ class _HomeViewState extends State<HomeView> {
             ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   void _openDetails(BuildContext context, dynamic app, HomeViewModel vm) {
     showModalBottomSheet(

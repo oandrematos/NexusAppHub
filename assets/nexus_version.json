@@ -1,12 +1,12 @@
 {
     "changelog":  [
-                      "Auto-atualização nativa da própria loja (Self-Updater) com banner em destaque no topo",
-                      "Detecção nativa de aplicativos instalados no celular Android via PackageManager",
-                      "Detecção automática de atualizações pendentes com botão \u0027Atualizar\u0027 e badge de destaque",
-                      "Exibição de badge \u0027INSTALADO\u0027 em aplicativos já presentes no dispositivo",
-                      "Suporte completo a desinstalação nativa em 1 clique (Android e Windows)"
+                      "Correção do ciclo de vida (WidgetsBindingObserver) para atualização instantânea ao retornar do instalador Android",
+                      "Sincronização dos package_names reais dos apps no catálogo (Space Duel, Snake Game, ThreadsDL, Super Pong)",
+                      "Compilação do instalador Windows via NSIS oficial (makensis.exe) com suporte nativo a /S e desinstalação limpa",
+                      "Pull-to-refresh nativo na tela principal",
+                      "Auto-atualização da própria loja (Self-Updater)"
                   ],
-    "build":  7,
-    "version":  "0.3.4",
+    "build":  8,
+    "version":  "0.3.5",
     "release_date":  "2026-09-02"
 }

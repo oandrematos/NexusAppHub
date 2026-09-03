@@ -10,10 +10,13 @@
         <package android:name="com.antigravity.alfred" />
         <package android:name="com.antigravity.nexus_app_hub" />
         <package android:name="com.antigravity.spaceduel" />
+        <package android:name="com.andre.spaceduel" />
         <package android:name="com.antigravity.superpong" />
         <package android:name="com.antigravity.snakegame" />
+        <package android:name="com.example.snake_game" />
         <package android:name="com.antigravity.nexus_dashboard" />
         <package android:name="com.antigravity.threadsdl" />
+        <package android:name="com.andre.threadsdl" />
         <intent>
             <action android:name="android.intent.action.MAIN" />
         </intent>
