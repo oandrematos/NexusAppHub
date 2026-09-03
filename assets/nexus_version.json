@@ -1,10 +1,10 @@
 {
     "changelog":  [
-                      "Página de detalhes em tela cheia dedicada para cada aplicativo (AppDetailView) com banner cinematográfico, especificações técnicas, changelog e galeria de screenshots",
-                      "Integração de navegação em tela cheia tanto na vitrine principal quanto na Biblioteca de Aplicativos",
-                      "Suporte completo aos novos campos de mídia (banner, banner_card, icon_url) do ecossistema visual da loja"
+                      "Sistema de proteção por credencial de segurança (PIN/Senha) para download de aplicativos restritos (Nexus Dashboard bloqueado com credencial 5081 no Windows e Android)",
+                      "Segurança estrita em código sem interface de configuração, gerenciável exclusivamente sob comando direto",
+                      "Suíte visual de alto nível com ícones de proteção e diálogos futuristas em conformidade com o ecossistema Nexus"
                   ],
-    "build":  14,
-    "version":  "0.3.11",
+    "build":  15,
+    "version":  "0.3.12",
     "release_date":  "2026-09-02"
 }

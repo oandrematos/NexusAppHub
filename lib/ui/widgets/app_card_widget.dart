@@ -258,11 +258,20 @@ class AppCardWidget extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         ),
-                        child: Text(
-                          isDownloading
-                              ? '${((downloadProgress ?? 0) * 100).toInt()}%'
-                              : app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (app.id == 'nexus_dashboard' && !isInstalled && !isDownloading) ...[
+                              const Icon(Icons.lock_outline, size: 13),
+                              const SizedBox(width: 4),
+                            ],
+                            Text(
+                              isDownloading
+                                  ? '${((downloadProgress ?? 0) * 100).toInt()}%'
+                                  : app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ],
                         ),
                       ),
                     ],

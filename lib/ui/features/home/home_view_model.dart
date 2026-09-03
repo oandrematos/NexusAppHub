@@ -5,6 +5,7 @@ import 'package:nexus_app_hub/data/services/catalog_service.dart';
 import 'package:nexus_app_hub/data/services/app_detector.dart';
 import 'package:nexus_app_hub/data/services/download_service.dart';
 import 'package:nexus_app_hub/data/services/app_version_service.dart';
+import '../../core/app_colors.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final CatalogService _catalogService = CatalogService();
@@ -176,10 +177,20 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Aplicativos protegidos por credencial de segurança (configuração restrita sob comando direto do Diretor)
+  static const Map<String, String> _protectedApps = {
+    'nexus_dashboard': '5081',
+  };
+
+  bool isAppProtected(String appId) {
+    return _protectedApps.containsKey(appId);
+  }
+
   Future<void> handleAction(AppItem app, BuildContext context) async {
     if (isInstalled(app.id) && !hasUpdate(app.id)) {
       final launched = await AppDetector.launchApp(app);
       if (!launched) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Não foi possível iniciar ${app.name}.'),
@@ -189,7 +200,157 @@ class HomeViewModel extends ChangeNotifier {
       }
       return;
     }
+
+    // Checagem de proteção por credencial antes do download / instalação
+    if (isAppProtected(app.id)) {
+      final authorized = await _requestAppPassword(context, app);
+      if (!authorized) return;
+    }
+
+    if (!context.mounted) return;
     await installApp(app, context);
+  }
+
+  Future<bool> _requestAppPassword(BuildContext context, AppItem app) async {
+    final expectedPassword = _protectedApps[app.id];
+    if (expectedPassword == null) return true;
+
+    final controller = TextEditingController();
+    String? errorMessage;
+
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: AppColors.cardBg,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: const BorderSide(color: AppColors.accentCyan, width: 1.5),
+              ),
+              title: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.border),
+                    ),
+                    child: const Icon(Icons.lock_outline, color: AppColors.accentCyan, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      'Acesso Restrito',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'O download de ${app.name} requer autorização de segurança.',
+                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.4),
+                  ),
+                  const SizedBox(height: 18),
+                  TextField(
+                    controller: controller,
+                    obscureText: true,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 18,
+                      letterSpacing: 4,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Digite a senha',
+                      hintStyle: TextStyle(
+                        color: AppColors.textSecondary.withValues(alpha: 0.5),
+                        fontSize: 14,
+                        letterSpacing: 1,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.surface,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: AppColors.border),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: AppColors.accentCyan, width: 2),
+                      ),
+                      prefixIcon: const Icon(Icons.key, color: AppColors.accentCyan, size: 20),
+                    ),
+                    onSubmitted: (val) {
+                      if (val.trim() == expectedPassword) {
+                        Navigator.pop(ctx, true);
+                      } else {
+                        setState(() {
+                          errorMessage = 'Senha incorreta. Acesso negado.';
+                        });
+                        controller.clear();
+                      }
+                    },
+                  ),
+                  if (errorMessage != null) ...[
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        const Icon(Icons.error_outline, color: Colors.redAccent, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          errorMessage!,
+                          style: const TextStyle(color: Colors.redAccent, fontSize: 12, fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  child: const Text('Cancelar', style: TextStyle(color: AppColors.textSecondary)),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (controller.text.trim() == expectedPassword) {
+                      Navigator.pop(ctx, true);
+                    } else {
+                      setState(() {
+                        errorMessage = 'Senha incorreta. Acesso negado.';
+                      });
+                      controller.clear();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.accentCyan,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child: const Text('Autorizar', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    return result ?? false;
   }
 
   Future<void> uninstallApp(AppItem app, BuildContext context) async {

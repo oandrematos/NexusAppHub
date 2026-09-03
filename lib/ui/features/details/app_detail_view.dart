@@ -247,7 +247,7 @@ class AppDetailView extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        '${(downloadProgress! * 100).toInt()}%',
+                                        '${(downloadProgress * 100).toInt()}%',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.accentCyan,
@@ -277,7 +277,7 @@ class AppDetailView extends StatelessWidget {
                               icon: Icon(
                                 isInstalled
                                     ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
-                                    : Icons.download_rounded,
+                                    : (app.id == 'nexus_dashboard' ? Icons.lock_outline : Icons.download_rounded),
                                 size: 24,
                               ),
                               label: Text(
