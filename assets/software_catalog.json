@@ -1,4 +1,4 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -221,9 +221,9 @@
                                                      ]
                                  },
                      "android":  {
-                                     "filename":  "NexusDashboard_Android_v1.0.1.apk",
+                                     "filename":  "NexusDashboard_Android_v1.0.2.apk",
                                      "size_mb":  42.82,
-                                     "version":  "v1.0.1",
+                                     "version":  "v1.0.2",
                                      "package_name":  "com.antigravity.nexus_dashboard",
                                      "latest_changelog":  [
                                                               "Reescrita completa em Flutter (Dart) de alta performance",
