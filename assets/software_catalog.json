@@ -277,18 +277,19 @@
                                                  "windows"
                                              ],
                      "windows":  {
-                                     "filename":  "WappChat_v0.5.1_Installer.exe",
-                                     "size_mb":  14.43,
-                                     "version":  "0.5.1",
+                                     "filename":  "WappChat_v0.5.2_Installer.exe",
+                                     "size_mb":  14.42,
+                                     "version":  "0.5.2",
                                      "executable":  "WappChat.exe"
                                  },
                      "latest_changelog":  [
-                                              "Correção total de layout: expansão responsiva 100% de tela sem barras pretas ou espaços vazios laterais tanto no Modo Dividido quanto no Modo 1 Coluna.",
-                                              "Supressão definitiva e radical de todos os banners e cards da Meta para Baixar o WhatsApp para Windows.",
-                                              "Correção forçada do ícone na Área de Trabalho com wappchat_v5.ico e notificação instantânea do Shell do Windows.",
-                                              "Manutenção integral de todos os recursos da Suíte Stealth (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio, Office Blur)."
+                                              "Novo ícone oficial com cantos suavemente arredondados no padrão Squircle M3E (forjado pelo Agente Pixel).",
+                                              "Sanitização de segurança: remoção de chamadas ocultas que acionavam o falso positivo de heurística no Windows Defender.",
+                                              "Correção definitiva do layout de 2 colunas: expansão contínua em 100% de largura e altura sem barras pretas laterais ou inferiores.",
+                                              "Erradicação total do card promocional \u0027Baixar o WhatsApp para Windows\u0027 da tela inicial.",
+                                              "Suíte Stealth completa ativa (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio e Office Blur)."
                                           ],
-                     "version":  "0.5.1",
+                     "version":  "0.5.2",
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner_card.png",
                      "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/icon.png",
