@@ -275,9 +275,9 @@
                                                  "android"
                                              ],
                      "android":  {
-                                     "filename":  "Alfred_Android_v0.10.11.apk",
+                                     "filename":  "Alfred_Android_v0.11.0.apk",
                                      "size_mb":  0.89,
-                                     "version":  "0.10.8",
+                                     "version":  "v0.11.0",
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "screenshots":  [
@@ -285,13 +285,13 @@
                                          "http://192.168.196.101:8080/assets/screenshots/alfred_screen_2.png"
                                      ],
                      "latest_changelog":  [
-                                              "Arquitetura Multi-Brain Router integrada (paridade total com Jarvis e Friday).",
-                                              "Suporte a mÃºltiplos motores de IA: Groq GPT-OSS 120B, Mistral Codestral, Groq Qwen 27B, Cohere Command-R+ 104B e Mistral Small.",
-                                              "Pesquisa web em tempo real via Tavily Search integrada nas respostas.",
-                                              "Seletor interativo de cÃ©rebros IA com feedback visual de badges no chat.",
-                                              "SanitizaÃ§Ã£o completa de manifesto Android e otimizaÃ§Ã£o de latÃªncia."
+                                              "Voz Neural Autêntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
+                                              "Transcrição instantânea de comandos de voz com Whisper Large V3 Turbo na nuvem.",
+                                              "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
+                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3.",
+                                              "Correção de versionamento binário interno sincronizado com o Nexus App Hub."
                                           ],
-                     "version":  "0.10.8"
+                     "version":  "v0.11.0"
                  },
                  {
                      "id":  "threadsdl_android",
