@@ -69,7 +69,17 @@ class AppDetector {
 
     if (executableName == null || executableName.isEmpty) return false;
     if (_pathCache.containsKey(executableName)) {
-      return _pathCache[executableName] != null;
+      final cached = _pathCache[executableName];
+      if (cached != null) {
+        if (File(cached).existsSync()) {
+          return true;
+        } else {
+          _pathCache[executableName] = null;
+          _versionCache[executableName] = null;
+          return false;
+        }
+      }
+      return false;
     }
 
     final path = await getInstalledExecutablePath(executableName);

@@ -53,15 +53,7 @@ class AppDetailView extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   tooltip: 'Voltar',
                 ),
-                actions: [
-                  if (isInstalled && !app.id.contains('nexus_app_hub'))
-                    IconButton(
-                      icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
-                      tooltip: 'Desinstalar aplicativo',
-                      onPressed: () => _confirmUninstall(context, vm),
-                    ),
-                  const SizedBox(width: 8),
-                ],
+
                 flexibleSpace: FlexibleSpaceBar(
                   background: Stack(
                     fit: StackFit.expand,
@@ -279,7 +271,7 @@ class AppDetailView extends StatelessWidget {
                                     icon: Icon(
                                       isInstalled
                                           ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
-                                          : Icons.download_rounded,
+                                          : (vm.isAppProtected(app.id) ? Icons.lock_outline : Icons.download_rounded),
                                       size: 24,
                                     ),
                                     label: Text(

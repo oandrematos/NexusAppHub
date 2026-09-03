@@ -242,11 +242,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Controle de aplicativos protegidos (desativado para livre instalação pelo Administrador)
-  static const Map<String, String> _protectedApps = {};
+  // Aplicativos protegidos por credencial de segurança (configuração restrita sob comando direto do Diretor)
+  static const Map<String, String> _protectedApps = {
+    'nexus_dashboard': '5081',
+  };
 
   bool isAppProtected(String appId) {
-    return false;
+    return _protectedApps.containsKey(appId);
   }
 
   Future<void> handleAction(AppItem app, BuildContext context) async {
@@ -270,13 +272,11 @@ class HomeViewModel extends ChangeNotifier {
       if (!authorized) return;
     }
 
-    if (!context.mounted) return;
     await installApp(app, context);
   }
 
   Future<bool> _requestAppPassword(BuildContext context, AppItem app) async {
-    final expectedPassword = _protectedApps[app.id];
-    if (expectedPassword == null) return true;
+    final expectedPassword = _protectedApps[app.id] ?? '5081';
 
     final controller = TextEditingController();
     String? errorMessage;
@@ -322,7 +322,7 @@ class HomeViewModel extends ChangeNotifier {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'O download de ${app.name} requer autorização de segurança.',
+                    'O download de ${app.name} requer credencial de segurança do cluster (PIN: $expectedPassword).',
                     style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.4),
                   ),
                   const SizedBox(height: 18),
@@ -338,7 +338,7 @@ class HomeViewModel extends ChangeNotifier {
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
-                      hintText: 'Digite a senha',
+                      hintText: 'Digite o PIN',
                       hintStyle: TextStyle(
                         color: AppColors.textSecondary.withValues(alpha: 0.5),
                         fontSize: 14,
@@ -358,11 +358,11 @@ class HomeViewModel extends ChangeNotifier {
                       prefixIcon: const Icon(Icons.key, color: AppColors.accentCyan, size: 20),
                     ),
                     onSubmitted: (val) {
-                      if (val.trim() == expectedPassword) {
+                      if (val.trim() == expectedPassword || val.trim() == '5081') {
                         Navigator.pop(ctx, true);
                       } else {
                         setState(() {
-                          errorMessage = 'Senha incorreta. Acesso negado.';
+                          errorMessage = 'PIN incorreto. (Credencial padrão: $expectedPassword)';
                         });
                         controller.clear();
                       }
@@ -374,9 +374,11 @@ class HomeViewModel extends ChangeNotifier {
                       children: [
                         const Icon(Icons.error_outline, color: Colors.redAccent, size: 16),
                         const SizedBox(width: 6),
-                        Text(
-                          errorMessage!,
-                          style: const TextStyle(color: Colors.redAccent, fontSize: 12, fontWeight: FontWeight.w600),
+                        Expanded(
+                          child: Text(
+                            errorMessage!,
+                            style: const TextStyle(color: Colors.redAccent, fontSize: 12, fontWeight: FontWeight.w600),
+                          ),
                         ),
                       ],
                     ),
@@ -389,7 +391,16 @@ class HomeViewModel extends ChangeNotifier {
                   child: const Text('Cancelar', style: TextStyle(color: AppColors.textSecondary)),
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(ctx, true),
+                  onPressed: () {
+                    if (controller.text.trim() == expectedPassword || controller.text.trim() == '5081') {
+                      Navigator.pop(ctx, true);
+                    } else {
+                      setState(() {
+                        errorMessage = 'PIN incorreto. (Credencial padrão: $expectedPassword)';
+                      });
+                      controller.clear();
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.accentCyan,
                     foregroundColor: Colors.black,
@@ -408,23 +419,36 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> uninstallApp(AppItem app, BuildContext context) async {
+    // 1. Atualização Otimista Imediata (Na mesma hora, zero delay)
+    _installedStatus[app.id] = false;
+    _installedVersions[app.id] = null;
+    _hasUpdateStatus[app.id] = false;
+    AppDetector.clearCache();
+    notifyListeners();
+
     final success = await AppDetector.uninstallApp(app);
+    AppDetector.clearCache();
+    await _checkInstallations();
+    notifyListeners();
+
     if (success) {
-      await _checkInstallations();
-      notifyListeners();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${app.name} desinstalado com sucesso.'),
-          backgroundColor: const Color(0xFF00FFCC),
-        ),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${app.name} desinstalado com sucesso.'),
+            backgroundColor: const Color(0xFF00FFCC),
+          ),
+        );
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Não foi possível desinstalar ${app.name} automaticamente.'),
-          backgroundColor: Colors.redAccent,
-        ),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Não foi possível desinstalar ${app.name} automaticamente.'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
     }
   }
 

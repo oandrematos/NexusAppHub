@@ -43,17 +43,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.23",
-                                     "filename":  "NexusAppHub_v0.3.23_Installer.exe",
+                                     "version":  "0.3.24",
+                                     "filename":  "NexusAppHub_v0.3.24_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.23",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.23.apk",
+                                     "version":  "0.3.24",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.24.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.23",
+                     "version":  "0.3.24",
                      "latest_changelog":  [
                                               "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2).",
                                               "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2).",
@@ -215,16 +215,15 @@
                                                  "web"
                                              ],
                      "windows":  {
-                                     "filename":  "NexusDashboard_v1.0.0_Installer.exe",
-                                     "size_mb":  10.79,
-                                     "version":  "v1.0.0",
+                                     "filename":  "NexusDashboard_v1.1.0_Installer.exe",
+                                     "size_mb":  0.31,
+                                     "version":  "v1.1.0",
                                      "executable":  "nexus_dashboard.exe",
                                      "latest_changelog":  [
-                                                              "Reescrita completa em Flutter (Dart) de alta performance",
-                                                              "Layout Cyberpunk com gauges em tempo real de S1 e S2",
-                                                              "Grid ao vivo das câmeras CFTV e diagnóstico de rede",
-                                                              "Instalador oficial standalone executável de 1 clique",
-                                                              "Versão Web acessível no navegador na porta 8080"
+                                                              "Clique direto na telemetria e modo nitro 0.5s",
+                                                              "3 canais CFTV limpos e estabilizados",
+                                                              "Filtros dinâmicos de visibilidade de cluster",
+                                                              "Registro duplo no Windows para detecção perfeita"
                                                           ],
                                      "screenshots":  [
                                                          "http://192.168.196.101:8080/assets/dashboard_overview.png",
@@ -250,7 +249,7 @@
                                  },
                      "web":  {
                                  "url":  "http://192.168.196.101:8080/",
-                                 "version":  "v1.0.0"
+                                 "version":  "v1.1.0"
                              },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",

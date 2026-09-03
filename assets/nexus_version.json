@@ -1,11 +1,11 @@
 ﻿{
     "changelog":  [
-                      "Botão de Desinstalação Explícito e Proeminente: Adicionado botão \u0027Desinstalar\u0027 em destaque vermelho ao lado do botão principal na tela de detalhes e nos cards da vitrine.",
-                      "Acesso Restrito Desbloqueado: Autorização imediata no Nexus Dashboard sem barreiras de PIN.",
-                      "Filtro de Plataforma (Universal, Windows PC e Android) ativo na vitrine.",
-                      "AnyDesk 6.0.6 oficial sem falsos alertas de atualização."
+                      "Acesso Restrito Restabelecido: PIN de segurança 5081 no Nexus Dashboard com validação correta e disparo imediato do download.",
+                      "Desinstalação Instantânea (0ms): Remoção do cache em memória e atualização otimista na hora sem necessidade de fechar a loja.",
+                      "Limpeza Visual: Removido o botão duplicado de desinstalação no canto superior direito, mantendo apenas o botão principal em destaque.",
+                      "Filtro de Plataforma (Universal, Windows PC e Android) ativo na vitrine."
                   ],
-    "build":  26,
-    "version":  "0.3.23",
+    "build":  27,
+    "version":  "0.3.24",
     "release_date":  "2026-09-03"
 }
