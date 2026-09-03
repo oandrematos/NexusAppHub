@@ -6,6 +6,7 @@ import '../../core/app_colors.dart';
 class DetailSheet extends StatelessWidget {
   final AppItem app;
   final bool isInstalled;
+  final bool hasUpdate;
   final double? downloadProgress;
   final VoidCallback onAction;
   final VoidCallback? onUninstall;
@@ -14,6 +15,7 @@ class DetailSheet extends StatelessWidget {
     super.key,
     required this.app,
     required this.isInstalled,
+    this.hasUpdate = false,
     this.downloadProgress,
     required this.onAction,
     this.onUninstall,
@@ -126,7 +128,7 @@ class DetailSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          if (isInstalled && !isAndroid && onUninstall != null) ...[
+          if (isInstalled && onUninstall != null) ...[
             Row(
               children: [
                 Expanded(
@@ -136,13 +138,13 @@ class DetailSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: onAction,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.accentCyan,
+                        backgroundColor: hasUpdate ? Colors.orangeAccent : AppColors.accentCyan,
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      child: const Text(
-                        'ABRIR',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      child: Text(
+                        hasUpdate ? 'ATUALIZAR' : 'ABRIR',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                   ),
@@ -175,12 +177,14 @@ class DetailSheet extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: isAvailable ? onAction : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
-                  foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
+                  backgroundColor: hasUpdate
+                      ? Colors.orangeAccent
+                      : (isInstalled ? AppColors.surface : AppColors.accentCyan),
+                  foregroundColor: (hasUpdate || !isInstalled) ? Colors.black : AppColors.textPrimary,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 child: Text(
-                  app.getActionText(isAndroid, isInstalled),
+                  app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),

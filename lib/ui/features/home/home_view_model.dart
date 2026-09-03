@@ -12,6 +12,8 @@ class HomeViewModel extends ChangeNotifier {
   List<AppItem> _allApps = [];
   List<AppItem> _filteredApps = [];
   final Map<String, bool> _installedStatus = {};
+  final Map<String, String?> _installedVersions = {};
+  final Map<String, bool> _hasUpdateStatus = {};
   final Map<String, double> _downloadProgress = {};
   final Map<String, String> _downloadStatus = {};
 
@@ -25,6 +27,8 @@ class HomeViewModel extends ChangeNotifier {
   String get selectedCategory => _selectedCategory;
 
   bool isInstalled(String appId) => _installedStatus[appId] ?? false;
+  bool hasUpdate(String appId) => _hasUpdateStatus[appId] ?? false;
+  String? getInstalledVersion(String appId) => _installedVersions[appId];
   double? getProgress(String appId) => _downloadProgress[appId];
   String? getStatus(String appId) => _downloadStatus[appId];
 
@@ -48,13 +52,57 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
+  bool _isNewerVersion(String? installed, String? catalog) {
+    if (installed == null || catalog == null) return false;
+    final cleanInstalled = installed
+        .replaceAll('v', '')
+        .replaceAll('-alpha', '')
+        .replaceAll('-beta', '')
+        .trim();
+    final cleanCatalog = catalog
+        .replaceAll('v', '')
+        .replaceAll('-alpha', '')
+        .replaceAll('-beta', '')
+        .trim();
+
+    if (cleanInstalled.isEmpty || cleanCatalog.isEmpty) return false;
+    if (cleanInstalled == cleanCatalog) return false;
+
+    final instParts = cleanInstalled.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+    final catParts = cleanCatalog.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+
+    for (int i = 0; i < catParts.length; i++) {
+      final catNum = catParts[i];
+      final instNum = i < instParts.length ? instParts[i] : 0;
+      if (catNum > instNum) return true;
+      if (catNum < instNum) return false;
+    }
+
+    return false;
+  }
+
   Future<void> _checkInstallations() async {
+    final isAndroid = Platform.isAndroid;
     for (final app in _allApps) {
       final installed = await AppDetector.isAppInstalled(
         app.windows?.executable,
         app.android?.packageName,
       );
       _installedStatus[app.id] = installed;
+
+      if (installed) {
+        final instVer = await AppDetector.getInstalledVersion(
+          app.windows?.executable,
+          app.android?.packageName,
+        );
+        _installedVersions[app.id] = instVer;
+
+        final catVer = app.getVersion(isAndroid);
+        _hasUpdateStatus[app.id] = _isNewerVersion(instVer, catVer);
+      } else {
+        _installedVersions[app.id] = null;
+        _hasUpdateStatus[app.id] = false;
+      }
     }
   }
 
@@ -82,12 +130,12 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> handleAction(AppItem app, BuildContext context) async {
-    if (isInstalled(app.id)) {
+    if (isInstalled(app.id) && !hasUpdate(app.id)) {
       final launched = await AppDetector.launchApp(app);
       if (!launched) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Executável de ${app.name} não encontrado para inicialização.'),
+            content: Text('Não foi possível iniciar ${app.name}.'),
             backgroundColor: Colors.orangeAccent,
           ),
         );

@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import '../models/app_item.dart';
 
 class AppDetector {
+  static const MethodChannel _androidChannel =
+      MethodChannel('com.antigravity.nexus_app_hub/app_manager');
+
   static final List<String> _baseDirs = [
     if (Platform.environment['LOCALAPPDATA'] != null)
       '${Platform.environment['LOCALAPPDATA']}/Programs',
@@ -14,9 +18,38 @@ class AppDetector {
   ];
 
   static Future<bool> isAppInstalled(String? executableName, String? packageName) async {
-    if (Platform.isAndroid) return false;
+    if (Platform.isAndroid) {
+      if (packageName == null || packageName.isEmpty) return false;
+      try {
+        final res = await _androidChannel.invokeMethod<bool>(
+          'isAppInstalled',
+          {'packageName': packageName},
+        );
+        return res ?? false;
+      } catch (_) {
+        return false;
+      }
+    }
+
     final path = await getInstalledExecutablePath(executableName);
     return path != null;
+  }
+
+  static Future<String?> getInstalledVersion(String? executableName, String? packageName) async {
+    if (Platform.isAndroid) {
+      if (packageName == null || packageName.isEmpty) return null;
+      try {
+        final version = await _androidChannel.invokeMethod<String>(
+          'getAppVersion',
+          {'packageName': packageName},
+        );
+        return version;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    return null;
   }
 
   static Future<String?> getInstalledExecutablePath(String? executableName) async {
@@ -42,6 +75,20 @@ class AppDetector {
   }
 
   static Future<bool> launchApp(AppItem app) async {
+    if (Platform.isAndroid) {
+      final pkg = app.android?.packageName;
+      if (pkg == null || pkg.isEmpty) return false;
+      try {
+        final res = await _androidChannel.invokeMethod<bool>(
+          'launchApp',
+          {'packageName': pkg},
+        );
+        return res ?? false;
+      } catch (_) {
+        return false;
+      }
+    }
+
     final exec = app.windows?.executable;
     final path = await getInstalledExecutablePath(exec);
     if (path != null) {
@@ -53,7 +100,19 @@ class AppDetector {
   }
 
   static Future<bool> uninstallApp(AppItem app) async {
-    if (Platform.isAndroid) return false;
+    if (Platform.isAndroid) {
+      final pkg = app.android?.packageName;
+      if (pkg == null || pkg.isEmpty) return false;
+      try {
+        final res = await _androidChannel.invokeMethod<bool>(
+          'uninstallApp',
+          {'packageName': pkg},
+        );
+        return res ?? false;
+      } catch (_) {
+        return false;
+      }
+    }
 
     final exec = app.windows?.executable;
     final path = await getInstalledExecutablePath(exec);

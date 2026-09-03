@@ -6,6 +6,7 @@ import '../core/app_colors.dart';
 class AppCardWidget extends StatelessWidget {
   final AppItem app;
   final bool isInstalled;
+  final bool hasUpdate;
   final double? downloadProgress;
   final VoidCallback onTap;
   final VoidCallback onAction;
@@ -15,6 +16,7 @@ class AppCardWidget extends StatelessWidget {
     super.key,
     required this.app,
     required this.isInstalled,
+    this.hasUpdate = false,
     this.downloadProgress,
     required this.onTap,
     required this.onAction,
@@ -81,13 +83,47 @@ class AppCardWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (app.badge.isNotEmpty)
+                  if (hasUpdate)
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: AppColors.accentCyan.withOpacity(0.15),
+                        color: Colors.orangeAccent.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: AppColors.accentCyan.withOpacity(0.3)),
+                        border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.5)),
+                      ),
+                      child: const Text(
+                        'ATUALIZAÇÃO',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                    )
+                  else if (isInstalled)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: AppColors.accentCyan.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.3)),
+                      ),
+                      child: const Text(
+                        'INSTALADO',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.accentCyan,
+                        ),
+                      ),
+                    )
+                  else if (app.badge.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: AppColors.accentCyan.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.3)),
                       ),
                       child: Text(
                         app.badge,
@@ -137,10 +173,10 @@ class AppCardWidget extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (isInstalled && !isAndroid && onUninstall != null && !isDownloading) ...[
+                      if (isInstalled && onUninstall != null && !isDownloading) ...[
                         IconButton(
                           icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
-                          tooltip: 'Desinstalar silenciosamente',
+                          tooltip: 'Desinstalar',
                           onPressed: onUninstall,
                           padding: const EdgeInsets.all(4),
                           constraints: const BoxConstraints(),
@@ -150,10 +186,14 @@ class AppCardWidget extends StatelessWidget {
                       ElevatedButton(
                         onPressed: isAvailable && !isDownloading ? onAction : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
-                          foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
-                          disabledBackgroundColor: AppColors.surface.withOpacity(0.5),
-                          disabledForegroundColor: AppColors.textSecondary.withOpacity(0.5),
+                          backgroundColor: hasUpdate
+                              ? Colors.orangeAccent
+                              : (isInstalled ? AppColors.surface : AppColors.accentCyan),
+                          foregroundColor: hasUpdate
+                              ? Colors.black
+                              : (isInstalled ? AppColors.textPrimary : Colors.black),
+                          disabledBackgroundColor: AppColors.surface.withValues(alpha: 0.5),
+                          disabledForegroundColor: AppColors.textSecondary.withValues(alpha: 0.5),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -162,7 +202,7 @@ class AppCardWidget extends StatelessWidget {
                         child: Text(
                           isDownloading
                               ? '${((downloadProgress ?? 0) * 100).toInt()}%'
-                              : app.getActionText(isAndroid, isInstalled),
+                              : app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                         ),
                       ),

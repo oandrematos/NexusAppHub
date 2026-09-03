@@ -5,12 +5,16 @@ import '../core/app_colors.dart';
 
 class HeroSpotlight extends StatelessWidget {
   final AppItem app;
+  final bool isInstalled;
+  final bool hasUpdate;
   final VoidCallback onTap;
   final VoidCallback onInstall;
 
   const HeroSpotlight({
     super.key,
     required this.app,
+    this.isInstalled = false,
+    this.hasUpdate = false,
     required this.onTap,
     required this.onInstall,
   });
@@ -87,11 +91,18 @@ class HeroSpotlight extends StatelessWidget {
             children: [
               ElevatedButton.icon(
                 onPressed: isAvailable ? onInstall : null,
-                icon: const Icon(Icons.download, size: 18),
-                label: Text(app.getActionText(isAndroid, false)),
+                icon: Icon(
+                  hasUpdate
+                      ? Icons.system_update
+                      : (isInstalled ? Icons.play_arrow : Icons.download),
+                  size: 18,
+                ),
+                label: Text(app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.accentCyan,
-                  foregroundColor: Colors.black,
+                  backgroundColor: hasUpdate
+                      ? Colors.orangeAccent
+                      : (isInstalled ? AppColors.surface : AppColors.accentCyan),
+                  foregroundColor: (hasUpdate || !isInstalled) ? Colors.black : AppColors.textPrimary,
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

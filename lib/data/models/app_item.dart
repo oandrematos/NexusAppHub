@@ -54,11 +54,13 @@ class AppItem {
     return isAndroid ? android?.version : windows?.version;
   }
 
-  String getActionText(bool isAndroid, bool isInstalled) {
+  String getActionText(bool isAndroid, bool isInstalled, {bool hasUpdate = false}) {
     if (!isAvailableOn(isAndroid)) {
       return isAndroid ? 'Indisponível no Celular' : 'Apenas para Celular';
     }
-    return isInstalled ? 'Abrir' : 'Instalar';
+    if (!isInstalled) return 'Instalar';
+    if (hasUpdate) return 'Atualizar';
+    return 'Abrir';
   }
 
   factory AppItem.fromJson(Map<String, dynamic> json) {

@@ -53,6 +53,8 @@ class _HomeViewState extends State<HomeView> {
                   if (vm.featuredApps.isNotEmpty)
                     HeroSpotlight(
                       app: vm.featuredApps.first,
+                      isInstalled: vm.isInstalled(vm.featuredApps.first.id),
+                      hasUpdate: vm.hasUpdate(vm.featuredApps.first.id),
                       onTap: () => _openDetails(context, vm.featuredApps.first, vm),
                       onInstall: () => vm.handleAction(vm.featuredApps.first, context),
                     ),
@@ -133,6 +135,7 @@ class _HomeViewState extends State<HomeView> {
                         return AppCardWidget(
                           app: app,
                           isInstalled: vm.isInstalled(app.id),
+                          hasUpdate: vm.hasUpdate(app.id),
                           downloadProgress: vm.getProgress(app.id),
                           onTap: () => _openDetails(context, app, vm),
                           onAction: () => vm.handleAction(app, context),
@@ -158,6 +161,7 @@ class _HomeViewState extends State<HomeView> {
       builder: (_) => DetailSheet(
         app: app,
         isInstalled: vm.isInstalled(app.id),
+        hasUpdate: vm.hasUpdate(app.id),
         downloadProgress: vm.getProgress(app.id),
         onAction: () {
           Navigator.pop(context);

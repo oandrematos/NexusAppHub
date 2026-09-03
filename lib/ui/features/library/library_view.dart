@@ -49,6 +49,7 @@ class LibraryView extends StatelessWidget {
                   return AppCardWidget(
                     app: app,
                     isInstalled: true,
+                    hasUpdate: vm.hasUpdate(app.id),
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
@@ -56,6 +57,7 @@ class LibraryView extends StatelessWidget {
                         builder: (_) => DetailSheet(
                           app: app,
                           isInstalled: true,
+                          hasUpdate: vm.hasUpdate(app.id),
                           onAction: () {
                             Navigator.pop(context);
                             vm.handleAction(app, context);
