@@ -1,4 +1,4 @@
-﻿{
+{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -61,9 +61,12 @@
                                               "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
                                               "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
                                           ],
+                     "banner":  "http://100.84.133.101/installers/assets/nexus_app_hub/banner.png",
+                     "banner_card":  "http://100.84.133.101/installers/assets/nexus_app_hub/banner_card.png",
+                     "icon_url":  "http://100.84.133.101/installers/assets/nexus_app_hub/icon.png",
                      "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_desktop.png",
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_mobile.png"
+                                         "http://100.84.133.101/installers/assets/nexus_app_hub/screenshots/apphub_screen_1.png",
+                                         "http://100.84.133.101/installers/assets/nexus_app_hub/screenshots/apphub_screen_2.png"
                                      ]
                  },
                  {
