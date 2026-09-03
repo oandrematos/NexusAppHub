@@ -62,12 +62,7 @@ class _SettingsViewState extends State<SettingsView> {
                   width: 72,
                   height: 72,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    gradient: const LinearGradient(
-                      colors: [AppColors.accentCyan, AppColors.accentPurple],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
                         color: AppColors.accentCyan.withValues(alpha: 0.3),
@@ -76,8 +71,9 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                     ],
                   ),
-                  child: const Center(
-                    child: Text('⚡', style: TextStyle(fontSize: 36)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset('assets/icon.png', fit: BoxFit.cover),
                   ),
                 ),
                 const SizedBox(height: 16),

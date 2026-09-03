@@ -43,23 +43,22 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.14",
-                                     "filename":  "NexusAppHub_v0.3.14_Installer.exe",
+                                     "version":  "0.3.15",
+                                     "filename":  "NexusAppHub_v0.3.15_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.14",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.14.apk",
+                                     "version":  "0.3.15",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.15.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.14",
+                     "version":  "0.3.15",
                      "latest_changelog":  [
-                                              "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
-                                              "Correção do título da janela e identificação do sistema para Nexus App Hub",
-                                              "Padronização de ícones de alta resolução no Android e Windows Desktop",
-                                              "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
-                                              "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
+                                              "Novo ícone oficial do Nexus App Hub no padrão Squircle M3E com cantos suavemente contínuos e transparentes para Desktop, Launcher e Android.",
+                                              "Substituição de ícones temporários de raio e emoji pela nova identidade visual oficial Squircle M3E na barra lateral e ajustes.",
+                                              "Leitor aprimorado de versões instaladas no Windows via Registro (DisplayVersion) garantindo detecção precisa de atualizações de todos os apps.",
+                                              "Mecanismo de autoatualização com fechamento seguro de instâncias ativas e reinicialização automática."
                                           ],
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",

@@ -1,11 +1,11 @@
 {
     "changelog":  [
-                      "Resolução definitiva para exibição de ícones e banners no aplicativo móvel Android (URLs HTTPS universais do GitHub Raw CDN e widget ClusterImage com resolução inteligente de fallback)",
-                      "Correção e resiliência na detecção do ThreadsDL no Android (suporte automático a aliases de pacote com.andre.threadsdl e com.antigravity.threadsdl)",
-                      "Incorporação do WappChat v0.5.1 com correção de layout responsivo e expansão total 100% de tela",
-                      "Empacotamento de toda a suíte visual showcase no repositório oficial"
+                      "Novo ícone oficial do Nexus App Hub no padrão Squircle M3E com cantos suavemente contínuos e transparentes para Desktop, Launcher e Android",
+                      "Substituição de ícones temporários de raio e emoji pela nova identidade visual oficial Squircle M3E na barra lateral e ajustes",
+                      "Leitor aprimorado de versões instaladas no Windows via Registro (DisplayVersion) garantindo detecção precisa de atualizações de todos os apps",
+                      "Mecanismo de autoatualização com fechamento seguro de instâncias ativas e reinicialização automática"
                   ],
-    "build":  17,
-    "version":  "0.3.14",
+    "build":  18,
+    "version":  "0.3.15",
     "release_date":  "2026-09-03"
 }

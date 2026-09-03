@@ -96,9 +96,36 @@ class AppDetector {
             if (match != null) return match.group(1);
           } catch (_) {}
         }
+
+        final baseName = File(execPath).uri.pathSegments.last.replaceAll('.exe', '');
+        final regVer = await _getWindowsRegistryVersion(baseName);
+        if (regVer != null) return regVer;
       }
     }
 
+    return null;
+  }
+
+  static Future<String?> _getWindowsRegistryVersion(String appName) async {
+    final candidates = [
+      appName,
+      appName.replaceAll(' ', ''),
+      appName.replaceAll('_', ''),
+      appName.replaceAll(' ', '_'),
+    ];
+    for (final key in candidates) {
+      try {
+        final result = await Process.run(
+          'reg',
+          ['query', 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\$key', '/v', 'DisplayVersion'],
+        );
+        if (result.exitCode == 0) {
+          final stdout = result.stdout.toString();
+          final match = RegExp(r'DisplayVersion\s+REG_SZ\s+(\S+)').firstMatch(stdout);
+          if (match != null) return match.group(1);
+        }
+      } catch (_) {}
+    }
     return null;
   }
 
