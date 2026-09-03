@@ -261,7 +261,13 @@
                                      "size_mb":  13.48,
                                      "version":  "v0.4.1",
                                      "executable":  "WappChat.exe"
-                                 }
+                                 },
+                     "latest_changelog":  [
+                                              "Nova tela de carregamento executiva centralizada sem corte lateral.",
+                                              "Reengenharia total do modo dividido com 100% de preenchimento de tela.",
+                                              "Rail de ícones a 60px e remoção das barras pretas laterais.",
+                                              "Instalação e atualização silenciosa 100% compatível com a loja Nexus App Hub."
+                                          ]
                  },
                  {
                      "id":  "alfred_android",
