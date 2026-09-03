@@ -259,28 +259,31 @@
                  {
                      "id":  "wappchat",
                      "name":  "WappChat",
-                     "title":  "WappChat — WhatsApp Desktop Anti-Banner",
+                     "title":  "WappChat — WhatsApp Desktop Anti-Banner \u0026 Stealth",
                      "category":  "social",
                      "category_name":  "Comunicação \u0026 Social",
                      "icon":  "💬",
                      "badge":  "MAIS USADO",
                      "featured":  true,
-                     "description":  "WhatsApp Web Desktop corporativo ultra-rápido com bloqueio nativo de anúncios, zoom total, atalhos produtivos e tema escuro Slate Blue sem banner verde.",
-                     "short_description":  "WhatsApp Web Desktop rápido com bloqueio de anúncios e tema escuro.",
+                     "description":  "WhatsApp Web Desktop corporativo ultra-rápido com Suíte Stealth integrada: Anti-Revoke (mensagens apagadas), Ghost Read (sem ticks azuis), Ghost Typing/Audio, Modo Escritório (blur), bloqueio nativo de anúncios e tema escuro.",
+                     "short_description":  "WhatsApp Desktop rápido com bloqueio de anúncios e Suíte Stealth.",
                      "platforms_supported":  [
                                                  "windows"
                                              ],
                      "windows":  {
-                                     "filename":  "WappChat_v0.4.1_Installer.exe",
-                                     "size_mb":  13.75,
-                                     "version":  "0.4.1",
+                                     "filename":  "WappChat_v0.5.0_Installer.exe",
+                                     "size_mb":  14.42,
+                                     "version":  "0.5.0",
                                      "executable":  "WappChat.exe"
                                  },
                      "latest_changelog":  [
-                                              "Nova tela de carregamento executiva centralizada sem corte lateral.",
-                                              "Reengenharia total do modo dividido com 100% de preenchimento de tela.",
-                                              "Rail de ícones a 60px e remoção das barras pretas laterais.",
-                                              "Instalação e atualização silenciosa 100% compatível com a loja Nexus App Hub."
+                                              "Suíte Stealth completa de alta privacidade integrada nativamente.",
+                                              "Anti-Revoke: ver mensagens que foram apagadas pelo remetente com badge elegante.",
+                                              "Ghost Read: ler conversas sem acender os ticks azuis de confirmação de leitura.",
+                                              "Ghost Presence: ocultar o aviso de digitando... e gravando áudio...",
+                                              "Ghost Audio: ouvir mensagens de voz sem marcar confirmação de reprodução.",
+                                              "Modo Escritório: desfoque de privacidade (blur) para proteger fotos e nomes contra olhares curiosos.",
+                                              "Painel Flutuante Stealth no TopBar com interruptores independentes e proteção de RAM (FIFO)."
                                           ],
                      "banner":  "http://100.84.133.101/installers/assets/wappchat/banner.png",
                      "banner_card":  "http://100.84.133.101/installers/assets/wappchat/banner_card.png",
@@ -289,7 +292,7 @@
                                          "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_1.png",
                                          "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_2.png"
                                      ],
-                     "version":  "0.4.1"
+                     "version":  "0.5.0"
                  },
                  {
                      "id":  "alfred_android",
