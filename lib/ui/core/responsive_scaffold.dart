@@ -67,6 +67,11 @@ class ResponsiveScaffold extends StatelessWidget {
                       selectedIcon: Icon(Icons.apps, color: AppColors.accentCyan),
                       label: Text('Biblioteca'),
                     ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.settings_outlined),
+                      selectedIcon: Icon(Icons.settings, color: AppColors.accentCyan),
+                      label: Text('Ajustes'),
+                    ),
                   ],
                 ),
                 const VerticalDivider(thickness: 1, width: 1, color: AppColors.border),
@@ -80,7 +85,7 @@ class ResponsiveScaffold extends StatelessWidget {
           body: SafeArea(child: body),
           bottomNavigationBar: NavigationBar(
             backgroundColor: AppColors.cardBg,
-            indicatorColor: AppColors.accentCyan.withOpacity(0.2),
+            indicatorColor: AppColors.accentCyan.withValues(alpha: 0.2),
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
             destinations: const [
@@ -93,6 +98,11 @@ class ResponsiveScaffold extends StatelessWidget {
                 icon: Icon(Icons.apps_outlined),
                 selectedIcon: Icon(Icons.apps, color: AppColors.accentCyan),
                 label: 'Meus Apps',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.settings_outlined),
+                selectedIcon: Icon(Icons.settings, color: AppColors.accentCyan),
+                label: 'Ajustes',
               ),
             ],
           ),

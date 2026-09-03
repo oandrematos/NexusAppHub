@@ -5,6 +5,7 @@ import 'ui/core/responsive_scaffold.dart';
 import 'ui/features/home/home_view.dart';
 import 'ui/features/home/home_view_model.dart';
 import 'ui/features/library/library_view.dart';
+import 'ui/features/settings/settings_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,7 @@ class _MainNavigationHostState extends State<MainNavigationHost> {
   final List<Widget> _views = const [
     HomeView(),
     LibraryView(),
+    SettingsView(),
   ];
 
   @override

@@ -1,13 +1,12 @@
 {
     "changelog":  [
-                      "Priorização do CDN Global raw.githubusercontent para entrega instantânea do catálogo em 4G/5G/Wi-Fi",
-                      "Endpoints dinâmicos de download apontando para a release mais recente (/latest/download)",
-                      "Destaque do Nexus App Hub no topo do catálogo",
-                      "Banner nativo de Auto-Atualização da própria loja",
-                      "WidgetsBindingObserver para detecção instantânea após instalação no Android",
-                      "Sincronização dos package names de todos os apps do ecossistema"
+                      "Nova tela dedicada de Configurações (Ajustes) com exibição destacada da versão atual e build",
+                      "Botão de verificação manual de atualizações em tempo real com indicador de status",
+                      "Diagnóstico de conectividade dos servidores do cluster e CDN global",
+                      "Informações técnicas da plataforma e identificador do pacote",
+                      "Navegação atualizada com aba Ajustes no celular e na barra lateral do desktop"
                   ],
-    "build":  9,
-    "version":  "0.3.6",
+    "build":  10,
+    "version":  "0.3.7",
     "release_date":  "2026-09-02"
 }
