@@ -100,9 +100,134 @@ class AppDetector {
         final baseName = File(execPath).uri.pathSegments.last.replaceAll('.exe', '');
         final regVer = await _getWindowsRegistryVersion(baseName);
         if (regVer != null) return regVer;
+
+        final fileVer = await _getFileVersion(execPath);
+        if (fileVer != null) return fileVer;
       }
     }
 
+    return null;
+  }
+
+  static final Map<String, List<String>> _knownApplicationPaths = {
+    'chrome.exe': [
+      r'C:\Program Files\Google\Chrome\Application\chrome.exe',
+      r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Google\\Chrome\\Application\\chrome.exe',
+    ],
+    'firefox.exe': [
+      r'C:\Program Files\Mozilla Firefox\firefox.exe',
+      r'C:\Program Files (x86)\Mozilla Firefox\firefox.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Mozilla Firefox\\firefox.exe',
+    ],
+    'tailscale-ipn.exe': [
+      r'C:\Program Files\Tailscale\tailscale-ipn.exe',
+      r'C:\Program Files\Tailscale\tailscale.exe',
+      r'C:\Program Files (x86)\Tailscale IPN\tailscale-ipn.exe',
+    ],
+    'tailscale.exe': [
+      r'C:\Program Files\Tailscale\tailscale.exe',
+      r'C:\Program Files\Tailscale\tailscale-ipn.exe',
+    ],
+    'zerotier_desktop_ui.exe': [
+      r'C:\Program Files (x86)\ZeroTier\One\zerotier_desktop_ui.exe',
+      r'C:\Program Files\ZeroTier\One\zerotier_desktop_ui.exe',
+    ],
+    'parsecd.exe': [
+      r'C:\Program Files\Parsec\parsecd.exe',
+      r'C:\Program Files\Parsec\parsec.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Parsec\\parsecd.exe',
+    ],
+    'ep_setup.exe': [
+      r'C:\Program Files\ExplorerPatcher\ep_setup.exe',
+    ],
+    'devenv.exe': [
+      r'C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\devenv.exe',
+      r'C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe',
+      r'C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe',
+      r'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe',
+      r'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe',
+    ],
+    'anydesk.exe': [
+      r'C:\Program Files (x86)\AnyDesk\AnyDesk.exe',
+      r'C:\Program Files\AnyDesk\AnyDesk.exe',
+      if (Platform.environment['APPDATA'] != null)
+        '${Platform.environment['APPDATA']}\\AnyDesk\\AnyDesk.exe',
+    ],
+    '7+ taskbar tweaker.exe': [
+      r'C:\Program Files\7+ Taskbar Tweaker\7+ Taskbar Tweaker.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\7+ Taskbar Tweaker\\7+ Taskbar Tweaker.exe',
+    ],
+    'sharex.exe': [
+      r'C:\Program Files\ShareX\ShareX.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\ShareX\\ShareX.exe',
+    ],
+    'vlc.exe': [
+      r'C:\Program Files\VideoLAN\VLC\vlc.exe',
+      r'C:\Program Files (x86)\VideoLAN\VLC\vlc.exe',
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\VLC\\vlc.exe',
+    ],
+    'notepad++.exe': [
+      r'C:\Program Files\Notepad++\notepad++.exe',
+      r'C:\Program Files (x86)\Notepad++\notepad++.exe',
+    ],
+    'winrar.exe': [
+      r'C:\Program Files\WinRAR\WinRAR.exe',
+      r'C:\Program Files (x86)\WinRAR\WinRAR.exe',
+    ],
+    'threadsdl.exe': [
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\ThreadsDL\\ThreadsDL.exe',
+    ],
+    'smirror.exe': [
+      if (Platform.environment['LOCALAPPDATA'] != null)
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\Smirror\\Smirror.exe',
+    ],
+  };
+
+  static Future<String?> _queryAppPathRegistry(String executableName) async {
+    final hives = [
+      'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$executableName',
+      'HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$executableName',
+    ];
+    for (final hive in hives) {
+      try {
+        final res = await Process.run('reg', ['query', hive, '/ve']);
+        if (res.exitCode == 0) {
+          final stdout = res.stdout.toString();
+          final match = RegExp(r'REG_SZ\s+(.+)$', multiLine: true).firstMatch(stdout);
+          if (match != null) {
+            String path = match.group(1)!.trim();
+            if (path.startsWith('"') && path.endsWith('"')) {
+              path = path.substring(1, path.length - 1);
+            }
+            if (File(path).existsSync()) return path;
+          }
+        }
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  static Future<String?> _getFileVersion(String path) async {
+    try {
+      final res = await Process.run('powershell', [
+        '-NoProfile',
+        '-NonInteractive',
+        '-Command',
+        "(Get-Item -LiteralPath '$path').VersionInfo.ProductVersion",
+      ]);
+      if (res.exitCode == 0) {
+        final out = res.stdout.toString().trim();
+        if (out.isNotEmpty) return out;
+      }
+    } catch (_) {}
     return null;
   }
 
@@ -113,24 +238,45 @@ class AppDetector {
       appName.replaceAll('_', ''),
       appName.replaceAll(' ', '_'),
     ];
-    for (final key in candidates) {
-      try {
-        final result = await Process.run(
-          'reg',
-          ['query', 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\$key', '/v', 'DisplayVersion'],
-        );
-        if (result.exitCode == 0) {
-          final stdout = result.stdout.toString();
-          final match = RegExp(r'DisplayVersion\s+REG_SZ\s+(\S+)').firstMatch(stdout);
-          if (match != null) return match.group(1);
-        }
-      } catch (_) {}
+    final hives = [
+      'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall',
+      'HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall',
+      'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall',
+    ];
+
+    for (final hive in hives) {
+      for (final key in candidates) {
+        try {
+          final result = await Process.run(
+            'reg',
+            ['query', '$hive\\$key', '/v', 'DisplayVersion'],
+          );
+          if (result.exitCode == 0) {
+            final stdout = result.stdout.toString();
+            final match = RegExp(r'DisplayVersion\s+REG_SZ\s+(\S+)').firstMatch(stdout);
+            if (match != null) return match.group(1);
+          }
+        } catch (_) {}
+      }
     }
     return null;
   }
 
   static Future<String?> getInstalledExecutablePath(String? executableName) async {
     if (executableName == null || executableName.isEmpty) return null;
+
+    final lowerExe = executableName.toLowerCase();
+
+    // 1. Verificação em caminhos conhecidos de softwares corporativos e padrões de mercado
+    if (_knownApplicationPaths.containsKey(lowerExe)) {
+      for (final p in _knownApplicationPaths[lowerExe]!) {
+        if (File(p).existsSync()) return p;
+      }
+    }
+
+    // 2. Consulta direta à tabela de App Paths do Registro do Windows
+    final appPath = await _queryAppPathRegistry(executableName);
+    if (appPath != null) return appPath;
 
     final sanitizedBase = executableName.replaceAll('.exe', '').trim();
     final noSepBase = sanitizedBase.replaceAll('_', '').replaceAll(' ', '').toLowerCase();

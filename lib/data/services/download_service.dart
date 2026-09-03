@@ -5,10 +5,10 @@ import 'package:open_filex/open_filex.dart';
 
 class DownloadService {
   static const List<String> clusterEndpoints = [
-    'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global (Sempre a release mais recente)
-    'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real)
+    'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real - Menor Latência)
     'http://192.168.196.101/installers', // S1 (ZeroTier / Nuvem)
     'http://100.84.133.101/installers',  // S1 (Tailscale)
+    'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global
   ];
 
   Future<void> downloadAndInstall({
@@ -32,62 +32,80 @@ class DownloadService {
     }
 
     bool success = false;
-    // Codificar URL para suportar nomes com espaços (ex: "Space Duel_Android_v1.1.0.apk")
-    final safeUrlFilename = Uri.encodeComponent(filename).replaceAll('+', '%20');
 
-    for (final base in clusterEndpoints) {
-      try {
-        final uri = Uri.parse('$base/$safeUrlFilename');
-        onStatus('Conectando ao nó do cluster ($base)...');
-
-        final client = http.Client();
-        final request = http.Request('GET', uri);
-        var response = await client.send(request).timeout(const Duration(seconds: 5));
-
-        // Suporte explícito a redirecionamentos (ex: GitHub Releases 302 para AWS S3)
-        if (response.statusCode == 301 || response.statusCode == 302) {
-          final loc = response.headers['location'];
-          if (loc != null) {
-            final redirectReq = http.Request('GET', Uri.parse(loc));
-            response = await client.send(redirectReq).timeout(const Duration(seconds: 5));
-          }
-        }
-
-        if (response.statusCode == 200) {
-          final totalBytes = response.contentLength ?? 0;
-          int receivedBytes = 0;
-          final sink = targetFile.openWrite();
-
-          await for (final chunk in response.stream) {
-            sink.add(chunk);
-            receivedBytes += chunk.length;
-            if (totalBytes > 0) {
-              final prog = receivedBytes / totalBytes;
-              onProgress(prog);
-              final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
-              final mbTot = (totalBytes / (1024 * 1024)).toStringAsFixed(1);
-              onStatus('Baixando: $mbRec MB / $mbTot MB (${(prog * 100).toInt()}%)');
-            } else {
-              final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
-              onStatus('Baixando: $mbRec MB...');
-            }
-          }
-
-          await sink.flush();
-          await sink.close();
-          client.close();
+    // 1. PRIORIDADE ZERO-LATÊNCIA NO DESKTOP: Repositório Local de Instaladores
+    if (!isAndroid) {
+      final localInstallersDir = Directory(r'D:\OneDrive\Antigravity Projects\Installers');
+      final localFile = File('${localInstallersDir.path}/$filename');
+      if (localFile.existsSync() && localFile.lengthSync() > 0) {
+        onStatus('Obtendo do repositório local de instaladores...');
+        onProgress(0.5);
+        try {
+          await localFile.copy(targetFile.path);
+          onProgress(1.0);
           success = true;
-          break;
-        } else {
-          client.close();
-        }
-      } catch (e) {
-        // Tenta o próximo endpoint silenciosamente
+        } catch (_) {}
       }
     }
 
     if (!success) {
-      onError('Falha no download dos servidores do cluster.');
+      // Codificar URL para suportar nomes com espaços (ex: "Space Duel_Android_v1.1.0.apk")
+      final safeUrlFilename = Uri.encodeComponent(filename).replaceAll('+', '%20');
+
+      for (final base in clusterEndpoints) {
+        try {
+          final uri = Uri.parse('$base/$safeUrlFilename');
+          onStatus('Conectando ao nó do cluster ($base)...');
+
+          final client = http.Client();
+          final request = http.Request('GET', uri);
+          var response = await client.send(request).timeout(const Duration(seconds: 5));
+
+          // Suporte explícito a redirecionamentos (ex: GitHub Releases 302 para AWS S3)
+          if (response.statusCode == 301 || response.statusCode == 302) {
+            final loc = response.headers['location'];
+            if (loc != null) {
+              final redirectReq = http.Request('GET', Uri.parse(loc));
+              response = await client.send(redirectReq).timeout(const Duration(seconds: 5));
+            }
+          }
+
+          if (response.statusCode == 200) {
+            final totalBytes = response.contentLength ?? 0;
+            int receivedBytes = 0;
+            final sink = targetFile.openWrite();
+
+            await for (final chunk in response.stream) {
+              sink.add(chunk);
+              receivedBytes += chunk.length;
+              if (totalBytes > 0) {
+                final prog = receivedBytes / totalBytes;
+                onProgress(prog);
+                final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
+                final mbTot = (totalBytes / (1024 * 1024)).toStringAsFixed(1);
+                onStatus('Baixando: $mbRec MB / $mbTot MB (${(prog * 100).toInt()}%)');
+              } else {
+                final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
+                onStatus('Baixando: $mbRec MB...');
+              }
+            }
+
+            await sink.flush();
+            await sink.close();
+            client.close();
+            success = true;
+            break;
+          } else {
+            client.close();
+          }
+        } catch (e) {
+          // Tenta o próximo endpoint silenciosamente
+        }
+      }
+    }
+
+    if (!success) {
+      onError('Falha ao obter $filename dos servidores do cluster.');
       return;
     }
 

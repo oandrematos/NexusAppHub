@@ -1,12 +1,10 @@
 {
     "changelog":  [
-                      "Carregamento ultra-rápido de 0ms para todos os banners, cards e ícones via assets locais embutidos (41 pastas mapeadas)",
-                      "Correção crítica de resolução de URL de imagens no ClusterUrlService",
-                      "Cache persistente em disco (nexus_img_cache) para qualquer imagem remota obtida via rede",
-                      "Showcase AAA com banners 1080p e screenshots dos 13 novos softwares integrados na vitrine",
-                      "Fluxo de autoatualização da loja com abertura visual do instalador e recarga do cache de ícones do Shell"
+                      "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2)",
+                      "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2)",
+                      "Mensagens detalhadas de diagnóstico em falhas de rede"
                   ],
-    "build":  20,
-    "version":  "0.3.17",
+    "build":  21,
+    "version":  "0.3.18",
     "release_date":  "2026-09-03"
 }
