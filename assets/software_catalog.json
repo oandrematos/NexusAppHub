@@ -1,4 +1,4 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -343,20 +343,34 @@
                      "icon":  "📥",
                      "badge":  "UTILITÁRIO",
                      "featured":  false,
-                     "description":  "Utilitário móvel leve e veloz para download de fotos, vídeos e áudios em alta resolução diretamente do Threads no seu dispositivo Android.",
+                     "description":  "Utilitário multiplataforma leve e veloz para download de fotos, vídeos e áudios em alta resolução diretamente do Threads no seu dispositivo Android e computador Windows.",
                      "short_description":  "Downloader rápido de mídias e postagens do Threads.",
                      "platforms_supported":  [
-                                                 "android"
+                                                 "android",
+                                                 "windows"
                                              ],
                      "android":  {
-                                     "filename":  "ThreadsDL_Android_v0.5.0.apk",
-                                     "size_mb":  50.9,
-                                     "version":  "v0.5.0",
+                                     "filename":  "ThreadsDL_Android_v0.6.0.apk",
+                                     "size_mb":  50.5,
+                                     "version":  "v0.6.0",
                                      "package_name":  "com.andre.threadsdl"
                                  },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/icon.png"
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/icon.png",
+                     "windows":  {
+                                     "filename":  "ThreadsDL_v0.6.0_Installer.exe",
+                                     "size_mb":  9.3,
+                                     "version":  "v0.6.0",
+                                     "executable":  "threadsdl.exe"
+                                 },
+                     "latest_changelog":  [
+                                              "Motor Duplo de Extração: scraping direto Meta/Threads + fallback resiliente via threadsdownloader.com",
+                                              "Lançamento oficial da versão nativa para Windows Desktop com instalador leve NSIS (9.3 MB)",
+                                              "Novo pacote visual AAA Squircle com identidade neon escura desenhado pelo Agente Pixel",
+                                              "Suporte a compartilhamento instantâneo via menu Share (ACTION_SEND) no Android",
+                                              "Histórico local de downloads com re-download e abertura direta da mídia"
+                                          ]
                  },
                  {
                      "id":  "smirror",
