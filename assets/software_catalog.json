@@ -417,7 +417,6 @@
                                                  "windows"
                                              ],
                      "title":  "WinRAR — Compactador \u0026 Descompactador Oficial",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/icon.png",
                      "name":  "WinRAR",
                      "featured":  true,
                      "description":  "Poderoso compactador e descompactador compatível com RAR, ZIP, 7Z, ISO e dezenas de formatos. Já inclui ativação corporativa oficial zero-touch sem telas de aviso.",
@@ -434,7 +433,14 @@
                                      "size_mb":  5.63,
                                      "version":  "7.23.0",
                                      "executable":  "WinRAR.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "OPEN SOURCE",
@@ -445,7 +451,6 @@
                                                  "windows"
                                              ],
                      "title":  "Notepad++ — Editor de Texto \u0026 Código-Fonte",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/icon.png",
                      "name":  "Notepad++",
                      "featured":  true,
                      "description":  "Editor de código-fonte e substituto avançado do Bloco de Notas, rápido, leve e com suporte a sintaxe de dezenas de linguagens de programação.",
@@ -461,7 +466,14 @@
                                      "size_mb":  6.24,
                                      "version":  "8.6.9",
                                      "executable":  "notepad++.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "OPEN SOURCE",
@@ -472,7 +484,6 @@
                                                  "windows"
                                              ],
                      "title":  "VLC Media Player — Player Multimídia Universal",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/icon.png",
                      "name":  "VLC Media Player",
                      "featured":  true,
                      "description":  "Reprodutor multimídia livre e de código aberto capaz de reproduzir a grande maioria dos arquivos de áudio e vídeo, DVDs e fluxos de rede sem necessidade de codecs extras.",
@@ -488,7 +499,14 @@
                                      "size_mb":  42.36,
                                      "version":  "3.0.20",
                                      "executable":  "vlc.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "PRODUTIVIDADE",
@@ -499,7 +517,6 @@
                                                  "windows"
                                              ],
                      "title":  "ShareX — Captura de Tela, Gravação \u0026 OCR",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/icon.png",
                      "name":  "ShareX",
                      "featured":  true,
                      "description":  "Ferramenta definitiva de código aberto para captura de tela, gravação de tela em GIF/MP4, reconhecimento de texto OCR e anotações rápidas.",
@@ -515,7 +532,14 @@
                                      "size_mb":  115.89,
                                      "version":  "20.0.4",
                                      "executable":  "ShareX.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "WEB",
@@ -526,7 +550,6 @@
                                                  "windows"
                                              ],
                      "title":  "Google Chrome — Navegador Web Rápido \u0026 Seguro",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/icon.png",
                      "name":  "Google Chrome",
                      "featured":  false,
                      "description":  "O navegador web mais popular do mundo, com sincronização em nuvem, aceleração gráfica e suporte integral às ferramentas web mais modernas.",
@@ -541,7 +564,14 @@
                                      "size_mb":  11.16,
                                      "version":  "Latest",
                                      "executable":  "chrome.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "PRIVACIDADE",
@@ -552,7 +582,6 @@
                                                  "windows"
                                              ],
                      "title":  "Mozilla Firefox — Navegador Focado em Privacidade",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/icon.png",
                      "name":  "Mozilla Firefox",
                      "featured":  false,
                      "description":  "Navegador web independente e de código aberto dedicado à privacidade e proteção contra rastreadores.",
@@ -567,7 +596,14 @@
                                      "size_mb":  0.48,
                                      "version":  "Latest",
                                      "executable":  "firefox.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "VPN MESH",
@@ -578,7 +614,6 @@
                                                  "windows"
                                              ],
                      "title":  "Tailscale — Rede Privada Mesh WireGuard",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/icon.png",
                      "name":  "Tailscale",
                      "featured":  false,
                      "description":  "Conecta computadores e servidores em uma rede WireGuard peer-to-peer criptografada de altíssima velocidade. Integração com os nós do cluster Nexus.",
@@ -593,7 +628,14 @@
                                      "size_mb":  1.33,
                                      "version":  "Latest",
                                      "executable":  "tailscale-ipn.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "REDE PRIVADA",
@@ -604,7 +646,6 @@
                                                  "windows"
                                              ],
                      "title":  "ZeroTier One — SDN Virtual Network",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/icon.png",
                      "name":  "ZeroTier One",
                      "featured":  false,
                      "description":  "Cria redes Ethernet virtuais seguras entre seus dispositivos. Canal primário de comunicação entre o Andre-PC e os nós S1 e S2.",
@@ -619,7 +660,14 @@
                                      "size_mb":  11.45,
                                      "version":  "1.16.2",
                                      "executable":  "zerotier_desktop_ui.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "STREAMING",
@@ -630,7 +678,6 @@
                                                  "windows"
                                              ],
                      "title":  "Parsec — Conexão Remota de Ultra-Baixa Latência",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/icon.png",
                      "name":  "Parsec",
                      "featured":  false,
                      "description":  "Streaming e controle remoto a 60 FPS com latência mínima, permitindo acesso fluido a desktops e jogos remotamente.",
@@ -645,7 +692,14 @@
                                      "size_mb":  4.2,
                                      "version":  "Latest",
                                      "executable":  "parsecd.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "SUPORTE",
@@ -656,7 +710,6 @@
                                                  "windows"
                                              ],
                      "title":  "AnyDesk — Acesso \u0026 Suporte Remoto Rápido",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/icon.png",
                      "name":  "AnyDesk",
                      "featured":  false,
                      "description":  "Aplicação leve e confiável para conexão rápida de assistência técnica e controle remoto entre dispositivos.",
@@ -671,7 +724,14 @@
                                      "size_mb":  3.67,
                                      "version":  "7.0.14",
                                      "executable":  "AnyDesk.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "SISTEMA",
@@ -682,7 +742,6 @@
                                                  "windows"
                                              ],
                      "title":  "7+ Taskbar Tweaker — Customização da Barra de Tarefas",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/icon.png",
                      "name":  "7+ Taskbar Tweaker",
                      "featured":  false,
                      "description":  "Permite configurar e customizar aspectos avançados da barra de tarefas do Windows, como desagrupamento e clique do botão do mouse.",
@@ -697,7 +756,14 @@
                                      "size_mb":  1.77,
                                      "version":  "5.15.4",
                                      "executable":  "7+ Taskbar Tweaker.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "SISTEMA",
@@ -708,7 +774,6 @@
                                                  "windows"
                                              ],
                      "title":  "ExplorerPatcher — Barra de Tarefas Clássica do Windows",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/icon.png",
                      "name":  "ExplorerPatcher",
                      "featured":  false,
                      "description":  "Restaura o ambiente clássico e produtivo no Windows 11 com barra de tarefas rica e menus sem lentidão.",
@@ -723,7 +788,14 @@
                                      "size_mb":  11.67,
                                      "version":  "26100.8457",
                                      "executable":  "ep_setup.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_2.png"
+                                     ]
                  },
                  {
                      "badge":  "DESENVOLVIMENTO",
@@ -734,7 +806,6 @@
                                                  "windows"
                                              ],
                      "title":  "Visual Studio Community — IDE \u0026 Ferramentas de Build C++/.NET",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/icon.png",
                      "name":  "Visual Studio Community",
                      "featured":  false,
                      "description":  "Ambiente de desenvolvimento integrado completo da Microsoft. Permite selecionar cargas de trabalho para C++, C#, .NET, Python e ferramentas de compilação.",
@@ -749,7 +820,14 @@
                                      "size_mb":  4.27,
                                      "version":  "Community",
                                      "executable":  "devenv.exe"
-                                 }
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_2.png"
+                                     ]
                  }
              ]
 }
