@@ -204,6 +204,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                           app: app,
                           isInstalled: vm.isInstalled(app.id),
                           hasUpdate: vm.hasUpdate(app.id),
+                          installedVersion: vm.getInstalledVersion(app.id),
                           downloadProgress: vm.getProgress(app.id),
                           onTap: () => _openDetails(context, app, vm),
                           onAction: () => vm.handleAction(app, context),
@@ -231,6 +232,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
         app: app,
         isInstalled: vm.isInstalled(app.id),
         hasUpdate: vm.hasUpdate(app.id),
+        installedVersion: vm.getInstalledVersion(app.id),
         downloadProgress: vm.getProgress(app.id),
         onAction: () {
           Navigator.pop(context);

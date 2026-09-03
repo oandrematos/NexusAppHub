@@ -7,6 +7,7 @@ class AppCardWidget extends StatelessWidget {
   final AppItem app;
   final bool isInstalled;
   final bool hasUpdate;
+  final String? installedVersion;
   final double? downloadProgress;
   final VoidCallback onTap;
   final VoidCallback onAction;
@@ -17,6 +18,7 @@ class AppCardWidget extends StatelessWidget {
     required this.app,
     required this.isInstalled,
     this.hasUpdate = false,
+    this.installedVersion,
     this.downloadProgress,
     required this.onTap,
     required this.onAction,
@@ -162,13 +164,64 @@ class AppCardWidget extends StatelessWidget {
               ],
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    isAvailable && sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : '',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.textSecondary,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (hasUpdate) ...[
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              installedVersion != null ? 'v$installedVersion' : '',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                color: AppColors.textSecondary,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            const Icon(Icons.arrow_forward, size: 10, color: Colors.orangeAccent),
+                            const SizedBox(width: 4),
+                            Text(
+                              'v${app.getVersion(isAndroid) ?? ""}',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orangeAccent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ] else if (isInstalled) ...[
+                        Text(
+                          'v${installedVersion ?? app.getVersion(isAndroid) ?? ""}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppColors.accentCyan,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ] else ...[
+                        Text(
+                          'v${app.getVersion(isAndroid) ?? ""}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 2),
+                      Text(
+                        isAvailable && sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : '',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,

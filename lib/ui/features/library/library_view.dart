@@ -50,6 +50,7 @@ class LibraryView extends StatelessWidget {
                     app: app,
                     isInstalled: true,
                     hasUpdate: vm.hasUpdate(app.id),
+                    installedVersion: vm.getInstalledVersion(app.id),
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
@@ -58,6 +59,7 @@ class LibraryView extends StatelessWidget {
                           app: app,
                           isInstalled: true,
                           hasUpdate: vm.hasUpdate(app.id),
+                          installedVersion: vm.getInstalledVersion(app.id),
                           onAction: () {
                             Navigator.pop(context);
                             vm.handleAction(app, context);

@@ -43,17 +43,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.7",
-                                     "filename":  "NexusAppHub_v0.3.7_Installer.exe",
+                                     "version":  "0.3.8",
+                                     "filename":  "NexusAppHub_v0.3.8_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.7",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.7.apk",
+                                     "version":  "0.3.8",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.8.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.7",
+                     "version":  "0.3.8",
                      "latest_changelog":  [
                                               "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
                                               "Correção do título da janela e identificação do sistema para Nexus App Hub",
@@ -277,7 +277,7 @@
                      "android":  {
                                      "filename":  "Alfred_Android_v0.10.11.apk",
                                      "size_mb":  0.89,
-                                     "version":  "v0.10.11",
+                                     "version":  "0.10.8",
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "screenshots":  [
@@ -291,7 +291,7 @@
                                               "Seletor interativo de cÃ©rebros IA com feedback visual de badges no chat.",
                                               "SanitizaÃ§Ã£o completa de manifesto Android e otimizaÃ§Ã£o de latÃªncia."
                                           ],
-                     "version":  "v0.10.11"
+                     "version":  "0.10.8"
                  },
                  {
                      "id":  "threadsdl_android",

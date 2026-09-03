@@ -7,6 +7,7 @@ class DetailSheet extends StatelessWidget {
   final AppItem app;
   final bool isInstalled;
   final bool hasUpdate;
+  final String? installedVersion;
   final double? downloadProgress;
   final VoidCallback onAction;
   final VoidCallback? onUninstall;
@@ -16,6 +17,7 @@ class DetailSheet extends StatelessWidget {
     required this.app,
     required this.isInstalled,
     this.hasUpdate = false,
+    this.installedVersion,
     this.downloadProgress,
     required this.onAction,
     this.onUninstall,
@@ -108,10 +110,38 @@ class DetailSheet extends StatelessWidget {
                   children: [
                     const Text('VERSÃO', style: TextStyle(fontSize: 10, color: AppColors.textSecondary)),
                     const SizedBox(height: 4),
-                    Text(
-                      version ?? 'v1.0.0',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    if (hasUpdate && installedVersion != null) ...[
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'v$installedVersion',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          const Icon(Icons.arrow_forward, size: 10, color: Colors.orangeAccent),
+                          const SizedBox(width: 4),
+                          Text(
+                            version ?? 'v1.0.0',
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent),
+                          ),
+                        ],
+                      ),
+                    ] else if (isInstalled && installedVersion != null) ...[
+                      Text(
+                        'v$installedVersion',
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.accentCyan),
+                      ),
+                    ] else ...[
+                      Text(
+                        version ?? 'v1.0.0',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ],
                 ),
                 Column(
