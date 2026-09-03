@@ -43,17 +43,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.13",
-                                     "filename":  "NexusAppHub_v0.3.13_Installer.exe",
+                                     "version":  "0.3.14",
+                                     "filename":  "NexusAppHub_v0.3.14_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.13",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.13.apk",
+                                     "version":  "0.3.14",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.14.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.13",
+                     "version":  "0.3.14",
                      "latest_changelog":  [
                                               "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
                                               "Correção do título da janela e identificação do sistema para Nexus App Hub",
@@ -61,12 +61,12 @@
                                               "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
                                               "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
                                           ],
-                     "banner":  "http://100.84.133.101/installers/assets/nexus_app_hub/banner.png",
-                     "banner_card":  "http://100.84.133.101/installers/assets/nexus_app_hub/banner_card.png",
-                     "icon_url":  "http://100.84.133.101/installers/assets/nexus_app_hub/icon.png",
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/icon.png",
                      "screenshots":  [
-                                         "http://100.84.133.101/installers/assets/nexus_app_hub/screenshots/apphub_screen_1.png",
-                                         "http://100.84.133.101/installers/assets/nexus_app_hub/screenshots/apphub_screen_2.png"
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_2.png"
                                      ]
                  },
                  {
@@ -104,14 +104,14 @@
                                               "Novos arsenais espaciais: Canhões de Laser, Mísseis Teleguiados e Escudos",
                                               "Deploy automatizado integrado à Nexus App Hub"
                                           ],
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/icon.png",
                      "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_1.png",
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_2.png",
-                                         "http://192.168.196.101/installers/assets/space_duel/space_duel_menu_3.png"
-                                     ],
-                     "banner":  "http://192.168.196.101/installers/assets/space_duel/banner.png",
-                     "banner_card":  "http://192.168.196.101/installers/assets/space_duel/banner_card.png",
-                     "icon_url":  "http://192.168.196.101/installers/assets/space_duel/icon.png"
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_2.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_menu_3.png"
+                                     ]
                  },
                  {
                      "id":  "super_pong",
@@ -149,12 +149,12 @@
                                               "Sintetizador procedural de efeitos sonoros retrô arcade em tempo real.",
                                               "Interface arcade retrô com suporte nativo a Teclado (WASD/Setas) e Gamepads analógicos."
                                           ],
-                     "banner":  "http://192.168.196.101/installers/assets/super_pong/banner.png",
-                     "banner_card":  "http://192.168.196.101/installers/assets/super_pong/banner_card.png",
-                     "icon_url":  "http://192.168.196.101/installers/assets/super_pong/icon.png",
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/icon.png",
                      "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/super_pong/super_pong_1.png",
-                                         "http://192.168.196.101/installers/assets/super_pong/super_pong_2.png"
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_2.png"
                                      ]
                  },
                  {
@@ -196,9 +196,9 @@
                                          "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
                                          "http://100.84.133.101/assets/screenshots/snake_screenshot_2.png"
                                      ],
-                     "banner":  "http://100.84.133.101/assets/snake_banner.png",
-                     "banner_card":  "http://100.84.133.101/assets/snake_banner_card.png",
-                     "icon_url":  "http://100.84.133.101/assets/snake_icon.png"
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/icon.png"
                  },
                  {
                      "id":  "nexus_dashboard",
@@ -254,7 +254,13 @@
                                  "url":  "http://192.168.196.101:8080/",
                                  "version":  "v1.0.0"
                              },
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/nexus_dashboard_icon.png"
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_overview.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_cameras.png"
+                                     ]
                  },
                  {
                      "id":  "wappchat",
@@ -271,28 +277,25 @@
                                                  "windows"
                                              ],
                      "windows":  {
-                                     "filename":  "WappChat_v0.5.0_Installer.exe",
-                                     "size_mb":  14.42,
-                                     "version":  "0.5.0",
+                                     "filename":  "WappChat_v0.5.1_Installer.exe",
+                                     "size_mb":  14.43,
+                                     "version":  "0.5.1",
                                      "executable":  "WappChat.exe"
                                  },
                      "latest_changelog":  [
-                                              "Suíte Stealth completa de alta privacidade integrada nativamente.",
-                                              "Anti-Revoke: ver mensagens que foram apagadas pelo remetente com badge elegante.",
-                                              "Ghost Read: ler conversas sem acender os ticks azuis de confirmação de leitura.",
-                                              "Ghost Presence: ocultar o aviso de digitando... e gravando áudio...",
-                                              "Ghost Audio: ouvir mensagens de voz sem marcar confirmação de reprodução.",
-                                              "Modo Escritório: desfoque de privacidade (blur) para proteger fotos e nomes contra olhares curiosos.",
-                                              "Painel Flutuante Stealth no TopBar com interruptores independentes e proteção de RAM (FIFO)."
+                                              "Correção total de layout: expansão responsiva 100% de tela sem barras pretas ou espaços vazios laterais tanto no Modo Dividido quanto no Modo 1 Coluna.",
+                                              "Supressão definitiva e radical de todos os banners e cards da Meta para Baixar o WhatsApp para Windows.",
+                                              "Correção forçada do ícone na Área de Trabalho com wappchat_v5.ico e notificação instantânea do Shell do Windows.",
+                                              "Manutenção integral de todos os recursos da Suíte Stealth (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio, Office Blur)."
                                           ],
-                     "banner":  "http://100.84.133.101/installers/assets/wappchat/banner.png",
-                     "banner_card":  "http://100.84.133.101/installers/assets/wappchat/banner_card.png",
-                     "icon_url":  "http://100.84.133.101/installers/assets/wappchat/icon.png",
+                     "version":  "0.5.1",
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/icon.png",
                      "screenshots":  [
-                                         "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_1.png",
-                                         "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_2.png"
-                                     ],
-                     "version":  "0.5.0"
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_2.png"
+                                     ]
                  },
                  {
                      "id":  "alfred_android",
@@ -314,10 +317,6 @@
                                      "version":  "v0.11.0",
                                      "package_name":  "com.antigravity.alfred"
                                  },
-                     "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/alfred_screen_1.png",
-                                         "http://192.168.196.101/installers/assets/alfred_screen_2.png"
-                                     ],
                      "latest_changelog":  [
                                               "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
                                               "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
@@ -326,7 +325,13 @@
                                               "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
                                           ],
                      "version":  "v0.11.0",
-                     "icon_url":  "http://100.84.133.101/installers/assets/icon.png"
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/alfred_screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/alfred_screen_2.png"
+                                     ]
                  },
                  {
                      "id":  "threadsdl_android",
@@ -346,8 +351,11 @@
                                      "filename":  "ThreadsDL_Android_v0.5.0.apk",
                                      "size_mb":  50.9,
                                      "version":  "v0.5.0",
-                                     "package_name":  "com.antigravity.threadsdl"
-                                 }
+                                     "package_name":  "com.andre.threadsdl"
+                                 },
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/icon.png"
                  },
                  {
                      "id":  "smirror",
@@ -377,12 +385,12 @@
                                               "Preservacao Inteligente: Configuracoes, aparelhos pareados e resolucoes mantidos durante upgrades",
                                               "Identidade Visual AAA: Novos icones de prisma inteligente forjados pelo Agente Pixel"
                                           ],
-                     "banner":  "http://100.84.133.101/installers/assets/smirror/banner.png",
-                     "banner_card":  "http://100.84.133.101/installers/assets/smirror/banner_card.png",
-                     "icon_url":  "http://100.84.133.101/installers/assets/smirror/icon.png",
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/icon.png",
                      "screenshots":  [
-                                         "http://100.84.133.101/installers/assets/smirror/screenshots/smirror_screen_1.png",
-                                         "http://100.84.133.101/installers/assets/smirror/screenshots/smirror_screen_2.png"
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_2.png"
                                      ]
                  }
              ]

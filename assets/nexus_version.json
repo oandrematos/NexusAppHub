@@ -1,11 +1,11 @@
 {
     "changelog":  [
-                      "Operação Identidade Total: Unificação visual absoluta dos ícones oficiais em toda a loja (AppCardWidget, HeroSpotlight e AppDetailView usando o mesmo ícone HD em vez de emojis)",
-                      "Ícone do executável Windows e instalador NSIS compilados com o diamante hiperdimensional oficial",
-                      "Ícones adaptativos Android (ic_launcher) gerados a partir do ícone oficial HD para consistência na tela de início móvel",
-                      "Catálogo oficial atualizado com URLs de ícones HD para todos os aplicativos do ecossistema"
+                      "Resolução definitiva para exibição de ícones e banners no aplicativo móvel Android (URLs HTTPS universais do GitHub Raw CDN e widget ClusterImage com resolução inteligente de fallback)",
+                      "Correção e resiliência na detecção do ThreadsDL no Android (suporte automático a aliases de pacote com.andre.threadsdl e com.antigravity.threadsdl)",
+                      "Incorporação do WappChat v0.5.1 com correção de layout responsivo e expansão total 100% de tela",
+                      "Empacotamento de toda a suíte visual showcase no repositório oficial"
                   ],
-    "build":  16,
-    "version":  "0.3.13",
+    "build":  17,
+    "version":  "0.3.14",
     "release_date":  "2026-09-03"
 }

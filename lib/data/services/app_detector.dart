@@ -18,18 +18,43 @@ class AppDetector {
     'D:/Games',
   ];
 
+  static List<String> _getPackageCandidates(String packageName) {
+    final list = <String>[packageName];
+    if (packageName == 'com.antigravity.threadsdl') {
+      list.add('com.andre.threadsdl');
+    } else if (packageName == 'com.andre.threadsdl') {
+      list.add('com.antigravity.threadsdl');
+    }
+
+    if (packageName == 'com.antigravity.spaceduel') {
+      list.add('com.andre.spaceduel');
+    } else if (packageName == 'com.andre.spaceduel') {
+      list.add('com.antigravity.spaceduel');
+    }
+
+    if (packageName == 'com.antigravity.snakegame') {
+      list.add('com.example.snake_game');
+    } else if (packageName == 'com.example.snake_game') {
+      list.add('com.antigravity.snakegame');
+    }
+
+    return list;
+  }
+
   static Future<bool> isAppInstalled(String? executableName, String? packageName) async {
     if (Platform.isAndroid) {
       if (packageName == null || packageName.isEmpty) return false;
-      try {
-        final res = await _androidChannel.invokeMethod<bool>(
-          'isAppInstalled',
-          {'packageName': packageName},
-        );
-        return res ?? false;
-      } catch (_) {
-        return false;
+      final candidates = _getPackageCandidates(packageName);
+      for (final candidate in candidates) {
+        try {
+          final res = await _androidChannel.invokeMethod<bool>(
+            'isAppInstalled',
+            {'packageName': candidate},
+          );
+          if (res == true) return true;
+        } catch (_) {}
       }
+      return false;
     }
 
     final path = await getInstalledExecutablePath(executableName);
@@ -39,15 +64,17 @@ class AppDetector {
   static Future<String?> getInstalledVersion(String? executableName, String? packageName) async {
     if (Platform.isAndroid) {
       if (packageName == null || packageName.isEmpty) return null;
-      try {
-        final version = await _androidChannel.invokeMethod<String>(
-          'getAppVersion',
-          {'packageName': packageName},
-        );
-        return version;
-      } catch (_) {
-        return null;
+      final candidates = _getPackageCandidates(packageName);
+      for (final candidate in candidates) {
+        try {
+          final version = await _androidChannel.invokeMethod<String>(
+            'getAppVersion',
+            {'packageName': candidate},
+          );
+          if (version != null && version.isNotEmpty) return version;
+        } catch (_) {}
       }
+      return null;
     }
 
     if (Platform.isWindows) {
@@ -152,15 +179,17 @@ class AppDetector {
     if (Platform.isAndroid) {
       final pkg = app.android?.packageName;
       if (pkg == null || pkg.isEmpty) return false;
-      try {
-        final res = await _androidChannel.invokeMethod<bool>(
-          'launchApp',
-          {'packageName': pkg},
-        );
-        return res ?? false;
-      } catch (_) {
-        return false;
+      final candidates = _getPackageCandidates(pkg);
+      for (final candidate in candidates) {
+        try {
+          final res = await _androidChannel.invokeMethod<bool>(
+            'launchApp',
+            {'packageName': candidate},
+          );
+          if (res == true) return true;
+        } catch (_) {}
       }
+      return false;
     }
 
     final exec = app.windows?.executable;
@@ -177,15 +206,20 @@ class AppDetector {
     if (Platform.isAndroid) {
       final pkg = app.android?.packageName;
       if (pkg == null || pkg.isEmpty) return false;
-      try {
-        final res = await _androidChannel.invokeMethod<bool>(
-          'uninstallApp',
-          {'packageName': pkg},
-        );
-        return res ?? false;
-      } catch (_) {
-        return false;
+      final candidates = _getPackageCandidates(pkg);
+      for (final candidate in candidates) {
+        try {
+          final installed = await isAppInstalled(null, candidate);
+          if (installed) {
+            final res = await _androidChannel.invokeMethod<bool>(
+              'uninstallApp',
+              {'packageName': candidate},
+            );
+            return res ?? false;
+          }
+        } catch (_) {}
       }
+      return false;
     }
 
     final exec = app.windows?.executable;

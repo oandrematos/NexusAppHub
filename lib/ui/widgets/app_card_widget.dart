@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
+import 'cluster_image.dart';
 
 class AppCardWidget extends StatelessWidget {
   final AppItem app;
@@ -60,17 +61,13 @@ class AppCardWidget extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(11),
-                      child: app.iconUrl != null && app.iconUrl!.isNotEmpty
-                          ? Image.network(
-                              app.iconUrl!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) => Center(
-                                child: Text(app.icon, style: const TextStyle(fontSize: 26)),
-                              ),
-                            )
-                          : Center(
-                              child: Text(app.icon, style: const TextStyle(fontSize: 26)),
-                            ),
+                      child: ClusterImage(
+                        url: app.iconUrl,
+                        fit: BoxFit.cover,
+                        fallback: Center(
+                          child: Text(app.icon, style: const TextStyle(fontSize: 26)),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),

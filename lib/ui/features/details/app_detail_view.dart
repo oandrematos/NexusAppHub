@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../data/models/app_item.dart';
 import '../../core/app_colors.dart';
 import '../home/home_view_model.dart';
+import '../../widgets/cluster_image.dart';
 
 class AppDetailView extends StatelessWidget {
   final AppItem app;
@@ -64,10 +65,10 @@ class AppDetailView extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       if (hasBanner)
-                        Image.network(
-                          app.banner!,
+                        ClusterImage(
+                          url: app.banner,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => _buildFallbackHeader(),
+                          fallback: _buildFallbackHeader(),
                         )
                       else
                         _buildFallbackHeader(),
@@ -118,17 +119,13 @@ class AppDetailView extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(18),
-                                  child: app.iconUrl != null && app.iconUrl!.isNotEmpty
-                                      ? Image.network(
-                                          app.iconUrl!,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (_, __, ___) => Center(
-                                            child: Text(app.icon, style: const TextStyle(fontSize: 40)),
-                                          ),
-                                        )
-                                      : Center(
-                                          child: Text(app.icon, style: const TextStyle(fontSize: 40)),
-                                        ),
+                                  child: ClusterImage(
+                                    url: app.iconUrl,
+                                    fit: BoxFit.cover,
+                                    fallback: Center(
+                                      child: Text(app.icon, style: const TextStyle(fontSize: 40)),
+                                    ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 20),
@@ -443,10 +440,10 @@ class AppDetailView extends StatelessWidget {
                                         border: Border.all(color: AppColors.border),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-                                      child: Image.network(
-                                        imgUrl,
+                                      child: ClusterImage(
+                                        url: imgUrl,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) => Container(
+                                        fallback: Container(
                                           width: 320,
                                           color: AppColors.surface,
                                           child: const Center(
