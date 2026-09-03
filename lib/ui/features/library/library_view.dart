@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../home/home_view_model.dart';
 import '../../core/app_colors.dart';
 import '../../widgets/app_card_widget.dart';
-import '../details/detail_sheet.dart';
+import '../details/app_detail_view.dart';
 
 class LibraryView extends StatelessWidget {
   const LibraryView({super.key});
@@ -21,10 +21,10 @@ class LibraryView extends StatelessWidget {
         ),
       ),
       body: installedApps.isEmpty
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(Icons.inbox_outlined, size: 64, color: AppColors.textSecondary),
                   SizedBox(height: 16),
                   Text(
@@ -52,22 +52,10 @@ class LibraryView extends StatelessWidget {
                     hasUpdate: vm.hasUpdate(app.id),
                     installedVersion: vm.getInstalledVersion(app.id),
                     onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => DetailSheet(
-                          app: app,
-                          isInstalled: true,
-                          hasUpdate: vm.hasUpdate(app.id),
-                          installedVersion: vm.getInstalledVersion(app.id),
-                          onAction: () {
-                            Navigator.pop(context);
-                            vm.handleAction(app, context);
-                          },
-                          onUninstall: () {
-                            Navigator.pop(context);
-                            vm.uninstallApp(app, context);
-                          },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AppDetailView(app: app),
                         ),
                       );
                     },

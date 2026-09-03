@@ -15,6 +15,9 @@ class AppItem {
   final PlatformConfig? android;
   final List<String>? latestChangelog;
   final List<String>? screenshots;
+  final String? banner;
+  final String? bannerCard;
+  final String? iconUrl;
 
   AppItem({
     required this.id,
@@ -32,6 +35,9 @@ class AppItem {
     this.android,
     this.latestChangelog,
     this.screenshots,
+    this.banner,
+    this.bannerCard,
+    this.iconUrl,
   });
 
   bool isAvailableOn(bool isAndroid) {
@@ -93,6 +99,9 @@ class AppItem {
       screenshots: json['screenshots'] != null
           ? List<String>.from(json['screenshots'])
           : null,
+      banner: json['banner'],
+      bannerCard: json['banner_card'],
+      iconUrl: json['icon_url'],
     );
   }
 }

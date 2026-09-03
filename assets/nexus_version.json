@@ -1,10 +1,10 @@
 {
     "changelog":  [
-                      "Suporte completo a instaladores executáveis no Windows via detecção de assinatura binária (Nullsoft/Inno) e palavras-chave (correção da instalação do Space Duel)",
-                      "Detecção aprimorada de executáveis e pastas no Windows (suporte a pastas PascalCase e legadas, corrigindo a detecção do Nexus Dashboard)",
-                      "Formatação limpa de versões eliminando o prefixo duplo \u0027vv\u0027 nos cards e no painel de detalhes"
+                      "Página de detalhes em tela cheia dedicada para cada aplicativo (AppDetailView) com banner cinematográfico, especificações técnicas, changelog e galeria de screenshots",
+                      "Integração de navegação em tela cheia tanto na vitrine principal quanto na Biblioteca de Aplicativos",
+                      "Suporte completo aos novos campos de mídia (banner, banner_card, icon_url) do ecossistema visual da loja"
                   ],
-    "build":  13,
-    "version":  "0.3.10",
+    "build":  14,
+    "version":  "0.3.11",
     "release_date":  "2026-09-02"
 }

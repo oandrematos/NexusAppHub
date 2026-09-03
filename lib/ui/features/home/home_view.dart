@@ -5,7 +5,7 @@ import '../../core/app_colors.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../../widgets/app_card_widget.dart';
 import '../../widgets/hero_spotlight.dart';
-import '../details/detail_sheet.dart';
+import '../details/app_detail_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -224,24 +224,10 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 }
 
   void _openDetails(BuildContext context, dynamic app, HomeViewModel vm) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => DetailSheet(
-        app: app,
-        isInstalled: vm.isInstalled(app.id),
-        hasUpdate: vm.hasUpdate(app.id),
-        installedVersion: vm.getInstalledVersion(app.id),
-        downloadProgress: vm.getProgress(app.id),
-        onAction: () {
-          Navigator.pop(context);
-          vm.handleAction(app, context);
-        },
-        onUninstall: () {
-          Navigator.pop(context);
-          vm.uninstallApp(app, context);
-        },
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AppDetailView(app: app),
       ),
     );
   }
