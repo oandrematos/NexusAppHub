@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-02T23:48:58Z",
+    "updated_at":  "2026-09-03T09:16:30-03:00",
     "categories":  [
                        {
                            "id":  "games",
@@ -344,6 +344,42 @@
                                      "version":  "v0.5.0",
                                      "package_name":  "com.antigravity.threadsdl"
                                  }
+                 },
+                 {
+                     "id":  "smirror",
+                     "name":  "Smirror",
+                     "title":  "Smirror - Smart Mirror \u0026 Display Engine",
+                     "category":  "system",
+                     "category_name":  "Sistema \u0026 Utilitarios",
+                     "icon":  "🪞",
+                     "badge":  "NOVO",
+                     "featured":  true,
+                     "description":  "Espelhamento inteligente e motor de displays virtuais para Android (Galaxy S25 FE e outros). Conexao agil USB/Wi-Fi, displays virtuais independentes por aplicativo e launcher integrado com extracao de icones da Play Store.",
+                     "short_description":  "Espelhamento avancado de tela, displays virtuais e launcher Android no Windows.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "windows":  {
+                                     "executable":  "Smirror.exe",
+                                     "version":  "1.3.0",
+                                     "filename":  "Smirror_v1.3.0_Installer.exe",
+                                     "size_mb":  21.33
+                                 },
+                     "version":  "1.3.0",
+                     "latest_changelog":  [
+                                              "Novo Launcher de Apps: Multi-display virtual independente por aplicativo Android com scrcpy",
+                                              "Scraper Inteligente: Identificacao de icones e nomes oficiais da Google Play Store com caching local",
+                                              "Instalador NSIS Silencioso (/S): Instalacao e desinstalacao limpas com suporte nativo a atualizacoes",
+                                              "Preservacao Inteligente: Configuracoes, aparelhos pareados e resolucoes mantidos durante upgrades",
+                                              "Identidade Visual AAA: Novos icones de prisma inteligente forjados pelo Agente Pixel"
+                                          ],
+                     "banner":  "http://100.84.133.101/installers/assets/smirror/banner.png",
+                     "banner_card":  "http://100.84.133.101/installers/assets/smirror/banner_card.png",
+                     "icon_url":  "http://100.84.133.101/installers/assets/smirror/icon.png",
+                     "screenshots":  [
+                                         "http://100.84.133.101/installers/assets/smirror/screenshots/smirror_screen_1.png",
+                                         "http://100.84.133.101/installers/assets/smirror/screenshots/smirror_screen_2.png"
+                                     ]
                  }
              ]
 }
