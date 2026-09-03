@@ -122,12 +122,27 @@ class DownloadService {
         }
 
         if (isInstaller) {
-          final proc = await Process.start(
-            targetFile.path,
-            ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-', '/SILENT', '/S', '/qn', '/quiet'],
-            mode: ProcessStartMode.normal,
-          );
-          await proc.exitCode;
+          final lowerF = filename.toLowerCase();
+          final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
+
+          if (isSelfUpdate) {
+            // Atualização da própria loja: inicia o instalador desanexado em modo silencioso
+            // e encerra a loja para liberar o NexusAppHub.exe para escrita!
+            await Process.start(
+              targetFile.path,
+              ['/S'],
+              mode: ProcessStartMode.detached,
+            );
+            await Future.delayed(const Duration(milliseconds: 600));
+            exit(0);
+          } else {
+            final proc = await Process.start(
+              targetFile.path,
+              ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-', '/SILENT', '/S', '/qn', '/quiet'],
+              mode: ProcessStartMode.normal,
+            );
+            await proc.exitCode;
+          }
         } else {
           final localAppData = Platform.environment['LOCALAPPDATA'] ?? 'C:/Users/Andre/AppData/Local';
           final appBaseName = filename.replaceAll('.exe', '').split('_')[0].trim();

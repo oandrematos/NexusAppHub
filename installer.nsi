@@ -1,4 +1,5 @@
 !include "MUI2.nsh"
+!include "LogicLib.nsh"
 
 Name "Nexus App Hub"
 OutFile "NexusAppHub_v0.3.14_Installer.exe"
@@ -6,6 +7,13 @@ InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
+
+Function .onInit
+    ; Fechar instâncias ativas do Nexus App Hub para evitar erro de arquivo bloqueado para escrita
+    nsExec::Exec 'taskkill /F /IM NexusAppHub.exe /T'
+    nsExec::Exec 'taskkill /F /IM nexus_app_hub.exe /T'
+    Sleep 1000
+FunctionEnd
 
 ; Interface Minimalista
 !insertmacro MUI_PAGE_INSTFILES
@@ -38,6 +46,11 @@ Section "Nexus App Hub"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "InstallLocation" "$INSTDIR"
     WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "NoModify" 1
     WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "NoRepair" 1
+
+    ; Reinicia a loja atualizada se for silencioso (auto-update)
+     
+        Exec '"$INSTDIR\NexusAppHub.exe"'
+    
 SectionEnd
 
 Section "Uninstall"
