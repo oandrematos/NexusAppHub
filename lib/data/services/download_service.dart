@@ -5,13 +5,10 @@ import 'package:open_filex/open_filex.dart';
 
 class DownloadService {
   static const List<String> clusterEndpoints = [
+    'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global (Sempre a release mais recente)
     'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real)
     'http://192.168.196.101/installers', // S1 (ZeroTier / Nuvem)
-    'http://192.168.196.102/installers', // S2 (ZeroTier / Nuvem)
     'http://100.84.133.101/installers',  // S1 (Tailscale)
-    'http://100.104.81.102/installers',  // S2 (Tailscale)
-    'http://192.168.100.166/installers', // S1 (Wi-Fi Escritório)
-    'https://github.com/oandrematos/NexusAppHub/releases/download/v0.3.1', // GitHub CDN Global (Internet / 4G / 5G)
   ];
 
   Future<void> downloadAndInstall({

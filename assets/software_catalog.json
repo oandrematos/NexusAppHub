@@ -27,6 +27,46 @@
                    ],
     "apps":  [
                  {
+                     "id":  "nexus_app_hub",
+                     "name":  "Nexus App Hub",
+                     "title":  "Nexus App Hub — Central \u0026 Launcher Oficial",
+                     "category":  "system",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "icon":  "⚡",
+                     "badge":  "OFICIAL",
+                     "featured":  true,
+                     "description":  "Central \u0026 Launcher Oficial do Ecossistema Antigravity. Auto-atualização nativa, detecção de apps e launcher unificado.",
+                     "short_description":  "Loja e launcher unificado em Flutter para PC e Celular.",
+                     "platforms_supported":  [
+                                                 "windows",
+                                                 "android"
+                                             ],
+                     "windows":  {
+                                     "executable":  "NexusAppHub.exe",
+                                     "version":  "0.3.6",
+                                     "filename":  "NexusAppHub_v0.3.6_Installer.exe",
+                                     "size_mb":  11.96
+                                 },
+                     "android":  {
+                                     "package_name":  "com.antigravity.nexus_app_hub",
+                                     "version":  "0.3.6",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.6.apk",
+                                     "size_mb":  22.62
+                                 },
+                     "version":  "0.3.6",
+                     "latest_changelog":  [
+                                              "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
+                                              "Correção do título da janela e identificação do sistema para Nexus App Hub",
+                                              "Padronização de ícones de alta resolução no Android e Windows Desktop",
+                                              "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
+                                              "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
+                                          ],
+                     "screenshots":  [
+                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_desktop.png",
+                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_mobile.png"
+                                     ]
+                 },
+                 {
                      "id":  "space_duel",
                      "name":  "Space Duel",
                      "title":  "Space Duel — Shooter Espacial Arcade",
@@ -273,46 +313,6 @@
                                      "version":  "v0.5.0",
                                      "package_name":  "com.antigravity.threadsdl"
                                  }
-                 },
-                 {
-                     "id":  "nexus_app_hub",
-                     "name":  "Nexus App Hub",
-                     "title":  "Nexus App Hub — Central \u0026 Launcher Oficial",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "icon":  "⚡",
-                     "badge":  "OFICIAL",
-                     "featured":  true,
-                     "description":  "Central \u0026 Launcher Oficial do Ecossistema Antigravity. Auto-atualização nativa, detecção de apps e launcher unificado.",
-                     "short_description":  "Loja e launcher unificado em Flutter para PC e Celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.5",
-                                     "filename":  "NexusAppHub_v0.3.5_Installer.exe",
-                                     "size_mb":  11.96
-                                 },
-                     "android":  {
-                                     "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.5",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.5.apk",
-                                     "size_mb":  22.62
-                                 },
-                     "version":  "0.3.5",
-                     "latest_changelog":  [
-                                              "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
-                                              "Correção do título da janela e identificação do sistema para Nexus App Hub",
-                                              "Padronização de ícones de alta resolução no Android e Windows Desktop",
-                                              "Unificação completa da loja e launcher em Flutter com suporte a 120 FPS",
-                                              "Download assíncrono com tolerância a falhas e detecção de nós do cluster"
-                                          ],
-                     "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_desktop.png",
-                                         "http://192.168.196.101/installers/assets/screenshots/nexus_app_hub_mobile.png"
-                                     ]
                  }
              ]
 }

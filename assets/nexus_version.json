@@ -1,12 +1,13 @@
 {
     "changelog":  [
-                      "Correção do ciclo de vida (WidgetsBindingObserver) para atualização instantânea ao retornar do instalador Android",
-                      "Sincronização dos package_names reais dos apps no catálogo (Space Duel, Snake Game, ThreadsDL, Super Pong)",
-                      "Compilação do instalador Windows via NSIS oficial (makensis.exe) com suporte nativo a /S e desinstalação limpa",
-                      "Pull-to-refresh nativo na tela principal",
-                      "Auto-atualização da própria loja (Self-Updater)"
+                      "Priorização do CDN Global raw.githubusercontent para entrega instantânea do catálogo em 4G/5G/Wi-Fi",
+                      "Endpoints dinâmicos de download apontando para a release mais recente (/latest/download)",
+                      "Destaque do Nexus App Hub no topo do catálogo",
+                      "Banner nativo de Auto-Atualização da própria loja",
+                      "WidgetsBindingObserver para detecção instantânea após instalação no Android",
+                      "Sincronização dos package names de todos os apps do ecossistema"
                   ],
-    "build":  8,
-    "version":  "0.3.5",
+    "build":  9,
+    "version":  "0.3.6",
     "release_date":  "2026-09-02"
 }
