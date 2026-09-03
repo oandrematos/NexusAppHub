@@ -1,4 +1,4 @@
-﻿{
+{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -407,6 +407,349 @@
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_1.png",
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_2.png"
                                      ]
+                 },
+                 {
+                     "badge":  "ATIVADO",
+                     "id":  "winrar",
+                     "category":  "system",
+                     "short_description":  "Compactador universal de alta performance pré-ativado.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "WinRAR — Compactador \u0026 Descompactador Oficial",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/icon.png",
+                     "name":  "WinRAR",
+                     "featured":  true,
+                     "description":  "Poderoso compactador e descompactador compatível com RAR, ZIP, 7Z, ISO e dezenas de formatos. Já inclui ativação corporativa oficial zero-touch sem telas de aviso.",
+                     "version":  "7.23.0",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Versão 7.23 PT-BR com engine x64 otimizada.",
+                                              "Ativação corporativa oficial integrada automaticamente durante a instalação silenciosa.",
+                                              "Menu de contexto do Windows Explorer integrado com 1 clique."
+                                          ],
+                     "icon":  "📦",
+                     "windows":  {
+                                     "filename":  "WinRAR_v7.23_Installer.exe",
+                                     "size_mb":  5.63,
+                                     "version":  "7.23.0",
+                                     "executable":  "WinRAR.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "OPEN SOURCE",
+                     "id":  "notepadpp",
+                     "category":  "productivity",
+                     "short_description":  "Editor leve e rápido para texto, scripts e programação.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Notepad++ — Editor de Texto \u0026 Código-Fonte",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/icon.png",
+                     "name":  "Notepad++",
+                     "featured":  true,
+                     "description":  "Editor de código-fonte e substituto avançado do Bloco de Notas, rápido, leve e com suporte a sintaxe de dezenas de linguagens de programação.",
+                     "version":  "8.6.9",
+                     "category_name":  "Produtividade \u0026 IA",
+                     "latest_changelog":  [
+                                              "Release oficial x64 com alta estabilidade e renderização rápida de texto.",
+                                              "Instalação 100% silenciosa sem telemetria ou popups."
+                                          ],
+                     "icon":  "📝",
+                     "windows":  {
+                                     "filename":  "npp.8.6.9.Installer.x64.exe",
+                                     "size_mb":  6.24,
+                                     "version":  "8.6.9",
+                                     "executable":  "notepad++.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "OPEN SOURCE",
+                     "id":  "vlc",
+                     "category":  "media",
+                     "short_description":  "O mais famoso reprodutor universal de áudio e vídeo.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "VLC Media Player — Player Multimídia Universal",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/icon.png",
+                     "name":  "VLC Media Player",
+                     "featured":  true,
+                     "description":  "Reprodutor multimídia livre e de código aberto capaz de reproduzir a grande maioria dos arquivos de áudio e vídeo, DVDs e fluxos de rede sem necessidade de codecs extras.",
+                     "version":  "3.0.20",
+                     "category_name":  "Mídia \u0026 Ferramentas",
+                     "latest_changelog":  [
+                                              "Versão x64 com suporte total a decodificação por hardware.",
+                                              "Sem anúncios, sem spyware e compatibilidade universal."
+                                          ],
+                     "icon":  "🎬",
+                     "windows":  {
+                                     "filename":  "vlc-3.0.20-win64.exe",
+                                     "size_mb":  42.36,
+                                     "version":  "3.0.20",
+                                     "executable":  "vlc.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "PRODUTIVIDADE",
+                     "id":  "sharex",
+                     "category":  "media",
+                     "short_description":  "Captura de tela, gravação e OCR sem anúncios.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "ShareX — Captura de Tela, Gravação \u0026 OCR",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/icon.png",
+                     "name":  "ShareX",
+                     "featured":  true,
+                     "description":  "Ferramenta definitiva de código aberto para captura de tela, gravação de tela em GIF/MP4, reconhecimento de texto OCR e anotações rápidas.",
+                     "version":  "20.0.4",
+                     "category_name":  "Mídia \u0026 Ferramentas",
+                     "latest_changelog":  [
+                                              "Suporte a atalhos globais, captura de região e exportação instantânea.",
+                                              "Instalação silenciosa Inno Setup."
+                                          ],
+                     "icon":  "📸",
+                     "windows":  {
+                                     "filename":  "ShareX-20.0.4-setup-x64.exe",
+                                     "size_mb":  115.89,
+                                     "version":  "20.0.4",
+                                     "executable":  "ShareX.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "WEB",
+                     "id":  "chrome",
+                     "category":  "productivity",
+                     "short_description":  "Navegador web do Google rápido e seguro.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Google Chrome — Navegador Web Rápido \u0026 Seguro",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/icon.png",
+                     "name":  "Google Chrome",
+                     "featured":  false,
+                     "description":  "O navegador web mais popular do mundo, com sincronização em nuvem, aceleração gráfica e suporte integral às ferramentas web mais modernas.",
+                     "version":  "Latest",
+                     "category_name":  "Produtividade \u0026 IA",
+                     "latest_changelog":  [
+                                              "Instalador oficial leve com atualização contínua."
+                                          ],
+                     "icon":  "🌐",
+                     "windows":  {
+                                     "filename":  "ChromeSetup.exe",
+                                     "size_mb":  11.16,
+                                     "version":  "Latest",
+                                     "executable":  "chrome.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "PRIVACIDADE",
+                     "id":  "firefox",
+                     "category":  "productivity",
+                     "short_description":  "Navegador web open-source privativo e flexível.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Mozilla Firefox — Navegador Focado em Privacidade",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/icon.png",
+                     "name":  "Mozilla Firefox",
+                     "featured":  false,
+                     "description":  "Navegador web independente e de código aberto dedicado à privacidade e proteção contra rastreadores.",
+                     "version":  "Latest",
+                     "category_name":  "Produtividade \u0026 IA",
+                     "latest_changelog":  [
+                                              "Instalador web leve com motor de download rápido da Mozilla."
+                                          ],
+                     "icon":  "🦊",
+                     "windows":  {
+                                     "filename":  "Firefox Installer.exe",
+                                     "size_mb":  0.48,
+                                     "version":  "Latest",
+                                     "executable":  "firefox.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "VPN MESH",
+                     "id":  "tailscale",
+                     "category":  "system",
+                     "short_description":  "VPN mesh WireGuard ponto-a-ponto para nós Nexus.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Tailscale — Rede Privada Mesh WireGuard",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/icon.png",
+                     "name":  "Tailscale",
+                     "featured":  false,
+                     "description":  "Conecta computadores e servidores em uma rede WireGuard peer-to-peer criptografada de altíssima velocidade. Integração com os nós do cluster Nexus.",
+                     "version":  "Latest",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Conexão mesh criptografada com suporte a IPs 100.x e tráfego LAN direto."
+                                          ],
+                     "icon":  "🔒",
+                     "windows":  {
+                                     "filename":  "tailscale-setup-latest.exe",
+                                     "size_mb":  1.33,
+                                     "version":  "Latest",
+                                     "executable":  "tailscale-ipn.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "REDE PRIVADA",
+                     "id":  "zerotier",
+                     "category":  "system",
+                     "short_description":  "Rede Ethernet virtual privada para clusters.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "ZeroTier One — SDN Virtual Network",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/icon.png",
+                     "name":  "ZeroTier One",
+                     "featured":  false,
+                     "description":  "Cria redes Ethernet virtuais seguras entre seus dispositivos. Canal primário de comunicação entre o Andre-PC e os nós S1 e S2.",
+                     "version":  "1.16.2",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Instalador MSI com suporte a instalação limpa e reconexão autônoma."
+                                          ],
+                     "icon":  "🌐",
+                     "windows":  {
+                                     "filename":  "ZeroTierOne.msi",
+                                     "size_mb":  11.45,
+                                     "version":  "1.16.2",
+                                     "executable":  "zerotier_desktop_ui.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "STREAMING",
+                     "id":  "parsec",
+                     "category":  "system",
+                     "short_description":  "Acesso remoto ultra-rápido para desktop e jogos.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Parsec — Conexão Remota de Ultra-Baixa Latência",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/icon.png",
+                     "name":  "Parsec",
+                     "featured":  false,
+                     "description":  "Streaming e controle remoto a 60 FPS com latência mínima, permitindo acesso fluido a desktops e jogos remotamente.",
+                     "version":  "Latest",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Executável leve para setup rápido de desktop remoto."
+                                          ],
+                     "icon":  "🎮",
+                     "windows":  {
+                                     "filename":  "parsec-windows.exe",
+                                     "size_mb":  4.2,
+                                     "version":  "Latest",
+                                     "executable":  "parsecd.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "SUPORTE",
+                     "id":  "anydesk",
+                     "category":  "system",
+                     "short_description":  "Suporte remoto rápido e leve.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "AnyDesk — Acesso \u0026 Suporte Remoto Rápido",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/icon.png",
+                     "name":  "AnyDesk",
+                     "featured":  false,
+                     "description":  "Aplicação leve e confiável para conexão rápida de assistência técnica e controle remoto entre dispositivos.",
+                     "version":  "7.0.14",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Binário standalone oficial com suporte a instalação em 1 clique."
+                                          ],
+                     "icon":  "📡",
+                     "windows":  {
+                                     "filename":  "anydesk-7-0-14.exe",
+                                     "size_mb":  3.67,
+                                     "version":  "7.0.14",
+                                     "executable":  "AnyDesk.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "SISTEMA",
+                     "id":  "tweaker",
+                     "category":  "system",
+                     "short_description":  "Personalização profunda da barra de tarefas.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "7+ Taskbar Tweaker — Customização da Barra de Tarefas",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/icon.png",
+                     "name":  "7+ Taskbar Tweaker",
+                     "featured":  false,
+                     "description":  "Permite configurar e customizar aspectos avançados da barra de tarefas do Windows, como desagrupamento e clique do botão do mouse.",
+                     "version":  "5.15.4",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Instalador silencioso NSIS sem propagandas."
+                                          ],
+                     "icon":  "⚙️",
+                     "windows":  {
+                                     "filename":  "7tt_setup.exe",
+                                     "size_mb":  1.77,
+                                     "version":  "5.15.4",
+                                     "executable":  "7+ Taskbar Tweaker.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "SISTEMA",
+                     "id":  "explorerpatcher",
+                     "category":  "system",
+                     "short_description":  "Restaura menus clássicos e barra de tarefas ágil.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "ExplorerPatcher — Barra de Tarefas Clássica do Windows",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/icon.png",
+                     "name":  "ExplorerPatcher",
+                     "featured":  false,
+                     "description":  "Restaura o ambiente clássico e produtivo no Windows 11 com barra de tarefas rica e menus sem lentidão.",
+                     "version":  "26100.8457",
+                     "category_name":  "Sistema \u0026 Utilitários",
+                     "latest_changelog":  [
+                                              "Compatibilidade total com as compilações recentes do Windows 11."
+                                          ],
+                     "icon":  "🪟",
+                     "windows":  {
+                                     "filename":  "ep_setup.exe",
+                                     "size_mb":  11.67,
+                                     "version":  "26100.8457",
+                                     "executable":  "ep_setup.exe"
+                                 }
+                 },
+                 {
+                     "badge":  "DESENVOLVIMENTO",
+                     "id":  "visualstudio",
+                     "category":  "productivity",
+                     "short_description":  "Instalador oficial da IDE e compiladores C++/.NET.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "title":  "Visual Studio Community — IDE \u0026 Ferramentas de Build C++/.NET",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/icon.png",
+                     "name":  "Visual Studio Community",
+                     "featured":  false,
+                     "description":  "Ambiente de desenvolvimento integrado completo da Microsoft. Permite selecionar cargas de trabalho para C++, C#, .NET, Python e ferramentas de compilação.",
+                     "version":  "Community",
+                     "category_name":  "Produtividade \u0026 IA",
+                     "latest_changelog":  [
+                                              "Web-installer oficial leve com abertura da interface interativa da Microsoft."
+                                          ],
+                     "icon":  "💻",
+                     "windows":  {
+                                     "filename":  "VisualStudioSetup.exe",
+                                     "size_mb":  4.27,
+                                     "version":  "Community",
+                                     "executable":  "devenv.exe"
+                                 }
                  }
              ]
 }
