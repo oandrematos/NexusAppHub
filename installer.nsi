@@ -2,7 +2,7 @@
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.22_Installer.exe"
+OutFile "NexusAppHub_v0.3.23_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
@@ -46,7 +46,7 @@ Section "Nexus App Hub"
     
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.22"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.23"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'
@@ -75,5 +75,6 @@ Section "Uninstall"
     DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub"
     DeleteRegKey HKCU "Software\NexusAppHub"
 SectionEnd
+
 
 

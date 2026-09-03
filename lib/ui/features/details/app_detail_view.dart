@@ -268,35 +268,65 @@ class AppDetailView extends StatelessWidget {
                             const SizedBox(height: 20),
                           ],
 
-                          SizedBox(
-                            width: double.infinity,
-                            height: 52,
-                            child: ElevatedButton.icon(
-                              onPressed: (isAvailable && !isDownloading) ? () => vm.handleAction(app, context) : null,
-                              icon: Icon(
-                                isInstalled
-                                    ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
-                                    : (app.id == 'nexus_dashboard' ? Icons.lock_outline : Icons.download_rounded),
-                                size: 24,
-                              ),
-                              label: Text(
-                                app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 0.5),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: hasUpdate
-                                    ? Colors.orangeAccent
-                                    : (isInstalled ? AppColors.surface : AppColors.accentCyan),
-                                foregroundColor: (hasUpdate || !isInstalled) ? Colors.black : AppColors.textPrimary,
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(14),
-                                  side: isInstalled && !hasUpdate
-                                      ? const BorderSide(color: AppColors.border)
-                                      : BorderSide.none,
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: isInstalled && !app.id.contains('nexus_app_hub') ? 3 : 1,
+                                child: SizedBox(
+                                  height: 52,
+                                  child: ElevatedButton.icon(
+                                    onPressed: (isAvailable && !isDownloading) ? () => vm.handleAction(app, context) : null,
+                                    icon: Icon(
+                                      isInstalled
+                                          ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
+                                          : Icons.download_rounded,
+                                      size: 24,
+                                    ),
+                                    label: Text(
+                                      app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
+                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: hasUpdate
+                                          ? Colors.orangeAccent
+                                          : (isInstalled ? AppColors.surface : AppColors.accentCyan),
+                                      foregroundColor: (hasUpdate || !isInstalled) ? Colors.black : AppColors.textPrimary,
+                                      elevation: 4,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(14),
+                                        side: isInstalled && !hasUpdate
+                                            ? const BorderSide(color: AppColors.border)
+                                            : BorderSide.none,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              if (isInstalled && !app.id.contains('nexus_app_hub')) ...[
+                                const SizedBox(width: 12),
+                                SizedBox(
+                                  height: 52,
+                                  child: OutlinedButton.icon(
+                                    onPressed: isDownloading ? null : () => _confirmUninstall(context, vm),
+                                    icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 22),
+                                    label: const Text(
+                                      'Desinstalar',
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      side: const BorderSide(color: Colors.redAccent, width: 1.2),
+                                      backgroundColor: Colors.redAccent.withValues(alpha: 0.08),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ],
                           ),
                           const SizedBox(height: 16),
 

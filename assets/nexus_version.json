@@ -1,11 +1,11 @@
 ﻿{
     "changelog":  [
-                      "Remoção da barreira de senha: O botão de autorização do Nexus Dashboard agora autoriza diretamente sem bloqueio.",
-                      "Filtro de Plataforma (Todas, Windows e Android) em tempo real na vitrine principal.",
-                      "AnyDesk oficial v6.0.6 sincronizado e correção de parser de versão.",
-                      "Modo de ignorar atualizações estrito sem badges ou notificações."
+                      "Botão de Desinstalação Explícito e Proeminente: Adicionado botão \u0027Desinstalar\u0027 em destaque vermelho ao lado do botão principal na tela de detalhes e nos cards da vitrine.",
+                      "Acesso Restrito Desbloqueado: Autorização imediata no Nexus Dashboard sem barreiras de PIN.",
+                      "Filtro de Plataforma (Universal, Windows PC e Android) ativo na vitrine.",
+                      "AnyDesk 6.0.6 oficial sem falsos alertas de atualização."
                   ],
-    "build":  25,
-    "version":  "0.3.22",
+    "build":  26,
+    "version":  "0.3.23",
     "release_date":  "2026-09-03"
 }

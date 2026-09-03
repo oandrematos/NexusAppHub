@@ -225,6 +225,18 @@ class AppListTileWidget extends StatelessWidget {
                   ),
                 ),
 
+              // Botão Desinstalar rápido quando instalado
+              if (isInstalled && onUninstall != null && !isDownloading && !app.id.contains('nexus_app_hub')) ...[
+                const SizedBox(width: 4),
+                IconButton(
+                  icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
+                  tooltip: 'Desinstalar',
+                  onPressed: onUninstall,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
+                ),
+              ],
+
               // Menu de Opções Rápido (Ignorar atualizações / Trocar Fonte)
               if (!isAndroid)
                 PopupMenuButton<String>(
