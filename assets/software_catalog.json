@@ -318,19 +318,19 @@
                                      "package_name":  "com.antigravity.alfred"
                                  },
                      "latest_changelog":  [
-                                              "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
-                                              "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
-                                              "TranscriÃ§Ã£o ultrarrÃ¡pida de comandos de voz com Whisper Large V3 Turbo na nuvem.",
-                                              "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
-                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
+                                              "Interface Telegram Nativa: visual premium idêntico ao Telegram com balões curvos, duplo check azul (✓✓), botão de chamada, menu de ações rápidas e barra de busca integrada.",
+                                              "Suíte de 8 Temas Personalizáveis: Telegram Dark Slate, Night AMOLED, Arctic Blue, Emerald Forest, Wayne Tech, Cyberpunk Neon, Amber Matrix e WhatsApp Dark.",
+                                              "Voz Neural Autêntica HD com Edge-TTS AntonioNeural e transcrição Whisper Large V3 Turbo.",
+                                              "Multi-Brain Router IA (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
+                                              "Otimizado para Android 15 e 16 com zipalign em 4 bytes e esquemas de assinatura v2/v3."
                                           ],
                      "version":  "v0.11.0",
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner_card.png",
                      "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/icon.png",
                      "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/alfred_screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/alfred_screen_2.png"
+                                         "http://192.168.196.101/installers/assets/alfred_screen_1.png",
+                                         "http://192.168.196.101/installers/assets/alfred_screen_2.png"
                                      ]
                  },
                  {
