@@ -1,12 +1,12 @@
 {
     "changelog":  [
-                      "Novo ícone Squircle M3E oficial com aura neon ciano e violeta, cantos arredondados contínuos e transparência 100% no Desktop e Barra de Tarefas",
-                      "Remoção de textos inferiores do ícone para clareza e destaque total do emblema do Nexus App Hub",
-                      "Cache-buster dinâmico em tempo real para catálogo no cluster e GitHub, eliminando atrasos de CDN",
-                      "Notificação automática ao Shell do Windows para renovação instantânea do cache de ícones (SHChangeNotify)",
-                      "Autoatualização da loja com reinicialização automática suave"
+                      "Carregamento ultra-rápido de 0ms para todos os banners, cards e ícones via assets locais embutidos (41 pastas mapeadas)",
+                      "Correção crítica de resolução de URL de imagens no ClusterUrlService",
+                      "Cache persistente em disco (nexus_img_cache) para qualquer imagem remota obtida via rede",
+                      "Showcase AAA com banners 1080p e screenshots dos 13 novos softwares integrados na vitrine",
+                      "Fluxo de autoatualização da loja com abertura visual do instalador e recarga do cache de ícones do Shell"
                   ],
-    "build":  19,
-    "version":  "0.3.16",
+    "build":  20,
+    "version":  "0.3.17",
     "release_date":  "2026-09-03"
 }

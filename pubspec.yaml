@@ -1,7 +1,7 @@
 name: nexus_app_hub
 description: "Nexus App Hub — Central & Launcher Oficial do Ecossistema Antigravity."
 publish_to: 'none'
-version: 0.3.16+19
+version: 0.3.17+20
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -27,3 +27,42 @@ flutter:
   assets:
     - assets/
     - assets/screenshots/
+    - assets/showcase/alfred/
+    - assets/showcase/anydesk/
+    - assets/showcase/anydesk/screenshots/
+    - assets/showcase/chrome/
+    - assets/showcase/chrome/screenshots/
+    - assets/showcase/explorerpatcher/
+    - assets/showcase/explorerpatcher/screenshots/
+    - assets/showcase/firefox/
+    - assets/showcase/firefox/screenshots/
+    - assets/showcase/nexus_app_hub/
+    - assets/showcase/nexus_app_hub/screenshots/
+    - assets/showcase/nexus_dashboard/
+    - assets/showcase/notepadpp/
+    - assets/showcase/notepadpp/screenshots/
+    - assets/showcase/parsec/
+    - assets/showcase/parsec/screenshots/
+    - assets/showcase/screenshots/
+    - assets/showcase/sharex/
+    - assets/showcase/sharex/screenshots/
+    - assets/showcase/smirror/
+    - assets/showcase/smirror/screenshots/
+    - assets/showcase/snake_game/
+    - assets/showcase/space_duel/
+    - assets/showcase/super_pong/
+    - assets/showcase/tailscale/
+    - assets/showcase/tailscale/screenshots/
+    - assets/showcase/threadsdl/
+    - assets/showcase/tweaker/
+    - assets/showcase/tweaker/screenshots/
+    - assets/showcase/visualstudio/
+    - assets/showcase/visualstudio/screenshots/
+    - assets/showcase/vlc/
+    - assets/showcase/vlc/screenshots/
+    - assets/showcase/wappchat/
+    - assets/showcase/wappchat/screenshots/
+    - assets/showcase/winrar/
+    - assets/showcase/winrar/screenshots/
+    - assets/showcase/zerotier/
+    - assets/showcase/zerotier/screenshots/
