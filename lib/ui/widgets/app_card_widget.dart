@@ -25,6 +25,12 @@ class AppCardWidget extends StatelessWidget {
     this.onUninstall,
   });
 
+  String _formatVersion(String? v) {
+    if (v == null || v.isEmpty) return '';
+    final clean = v.trim();
+    return clean.startsWith('v') || clean.startsWith('V') ? clean : 'v$clean';
+  }
+
   @override
   Widget build(BuildContext context) {
     final isAndroid = Platform.isAndroid;
@@ -175,7 +181,7 @@ class AppCardWidget extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              installedVersion != null ? 'v$installedVersion' : '',
+                              _formatVersion(installedVersion),
                               style: const TextStyle(
                                 fontSize: 11,
                                 color: AppColors.textSecondary,
@@ -186,7 +192,7 @@ class AppCardWidget extends StatelessWidget {
                             const Icon(Icons.arrow_forward, size: 10, color: Colors.orangeAccent),
                             const SizedBox(width: 4),
                             Text(
-                              'v${app.getVersion(isAndroid) ?? ""}',
+                              _formatVersion(app.getVersion(isAndroid)),
                               style: const TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
@@ -197,7 +203,7 @@ class AppCardWidget extends StatelessWidget {
                         ),
                       ] else if (isInstalled) ...[
                         Text(
-                          'v${installedVersion ?? app.getVersion(isAndroid) ?? ""}',
+                          _formatVersion(installedVersion ?? app.getVersion(isAndroid)),
                           style: const TextStyle(
                             fontSize: 11,
                             color: AppColors.accentCyan,
@@ -206,7 +212,7 @@ class AppCardWidget extends StatelessWidget {
                         ),
                       ] else ...[
                         Text(
-                          'v${app.getVersion(isAndroid) ?? ""}',
+                          _formatVersion(app.getVersion(isAndroid)),
                           style: const TextStyle(
                             fontSize: 11,
                             color: AppColors.textSecondary,

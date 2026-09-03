@@ -105,9 +105,21 @@ class DownloadService {
           return;
         }
       } else {
-        onStatus('Instalando silenciosamente em segundo plano...');
         final lower = filename.toLowerCase();
-        final isInstaller = lower.contains('installer') || lower.contains('setup');
+        bool isInstaller = lower.contains('installer') ||
+            lower.contains('setup') ||
+            lower.contains('_x64.exe') ||
+            lower.contains('space duel');
+
+        if (!isInstaller) {
+          try {
+            final bytes = targetFile.readAsBytesSync();
+            final str = String.fromCharCodes(bytes.take(2000000));
+            if (str.contains('Nullsoft') || str.contains('Inno Setup') || str.contains('WiseMain')) {
+              isInstaller = true;
+            }
+          } catch (_) {}
+        }
 
         if (isInstaller) {
           final proc = await Process.start(

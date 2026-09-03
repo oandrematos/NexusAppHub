@@ -79,6 +79,7 @@ class AppDetector {
     if (executableName == null || executableName.isEmpty) return null;
 
     final sanitizedBase = executableName.replaceAll('.exe', '').trim();
+    final noSepBase = sanitizedBase.replaceAll('_', '').replaceAll(' ', '').toLowerCase();
 
     for (final base in _baseDirs) {
       final directPath = '$base/$executableName';
@@ -92,6 +93,56 @@ class AppDetector {
 
       final underscoreSub = '$base/${sanitizedBase.replaceAll(' ', '_')}/$executableName';
       if (File(underscoreSub).existsSync()) return underscoreSub;
+
+      final noSepSub = '$base/${sanitizedBase.replaceAll('_', '').replaceAll(' ', '')}/$executableName';
+      if (File(noSepSub).existsSync()) return noSepSub;
+
+      if (noSepBase.contains('dashboard')) {
+        final legacyPaths = [
+          '$base/NexusDashboard/nexus_dashboard.exe',
+          '$base/Nexus Dashboard/nexus_dashboard.exe',
+          '$base/Nexus Dashboard/AntigravityDashboard.exe',
+          '$base/NexusDashboard/AntigravityDashboard.exe',
+        ];
+        for (final p in legacyPaths) {
+          if (File(p).existsSync()) return p;
+        }
+      }
+
+      if (noSepBase.contains('spaceduel')) {
+        final sdPaths = [
+          '$base/Space Duel/Space Duel.exe',
+          '$base/SpaceDuel/Space Duel.exe',
+          '$base/Space_Duel/Space Duel.exe',
+        ];
+        for (final p in sdPaths) {
+          if (File(p).existsSync()) return p;
+        }
+      }
+
+      try {
+        final dir = Directory(base);
+        if (dir.existsSync()) {
+          for (final entity in dir.listSync(followLinks: false)) {
+            if (entity is Directory) {
+              final folderName = entity.uri.pathSegments.reversed.skip(1).first.toLowerCase();
+              final cleanFolder = folderName.replaceAll('_', '').replaceAll(' ', '');
+              if (cleanFolder == noSepBase) {
+                final cand = '${entity.path}/$executableName';
+                if (File(cand).existsSync()) return cand;
+                for (final sub in entity.listSync()) {
+                  if (sub is File && sub.path.toLowerCase().endsWith('.exe')) {
+                    final subName = sub.uri.pathSegments.last.toLowerCase();
+                    if (!subName.contains('unins')) {
+                      return sub.path;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      } catch (_) {}
     }
 
     return null;

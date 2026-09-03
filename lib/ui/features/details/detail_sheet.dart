@@ -23,6 +23,12 @@ class DetailSheet extends StatelessWidget {
     this.onUninstall,
   });
 
+  String _formatVersion(String? v) {
+    if (v == null || v.isEmpty) return 'v1.0.0';
+    final clean = v.trim();
+    return clean.startsWith('v') || clean.startsWith('V') ? clean : 'v$clean';
+  }
+
   @override
   Widget build(BuildContext context) {
     final isAndroid = Platform.isAndroid;
@@ -31,11 +37,11 @@ class DetailSheet extends StatelessWidget {
     final version = app.getVersion(isAndroid);
 
     return Container(
-      padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
         color: AppColors.cardBg,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
+      padding: const EdgeInsets.all(24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +57,10 @@ class DetailSheet extends StatelessWidget {
                   border: Border.all(color: AppColors.border),
                 ),
                 child: Center(
-                  child: Text(app.icon, style: const TextStyle(fontSize: 32)),
+                  child: Text(
+                    app.icon,
+                    style: const TextStyle(fontSize: 32),
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
@@ -60,7 +69,7 @@ class DetailSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      app.name,
+                      app.title,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -70,7 +79,11 @@ class DetailSheet extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       app.categoryName,
-                      style: const TextStyle(color: AppColors.accentCyan),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.accentCyan,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
@@ -88,10 +101,11 @@ class DetailSheet extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.border),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -101,7 +115,7 @@ class DetailSheet extends StatelessWidget {
                     const Text('TAMANHO', style: TextStyle(fontSize: 10, color: AppColors.textSecondary)),
                     const SizedBox(height: 4),
                     Text(
-                      sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'N/A',
+                      isAvailable && sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'N/A',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -115,7 +129,7 @@ class DetailSheet extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'v$installedVersion',
+                            _formatVersion(installedVersion),
                             style: const TextStyle(
                               fontSize: 12,
                               color: AppColors.textSecondary,
@@ -126,19 +140,19 @@ class DetailSheet extends StatelessWidget {
                           const Icon(Icons.arrow_forward, size: 10, color: Colors.orangeAccent),
                           const SizedBox(width: 4),
                           Text(
-                            version ?? 'v1.0.0',
+                            _formatVersion(version),
                             style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orangeAccent),
                           ),
                         ],
                       ),
                     ] else if (isInstalled && installedVersion != null) ...[
                       Text(
-                        'v$installedVersion',
+                        _formatVersion(installedVersion),
                         style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.accentCyan),
                       ),
                     ] else ...[
                       Text(
-                        version ?? 'v1.0.0',
+                        _formatVersion(version),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
