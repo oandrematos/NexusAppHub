@@ -1,4 +1,4 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -253,7 +253,8 @@
                      "web":  {
                                  "url":  "http://192.168.196.101:8080/",
                                  "version":  "v1.0.0"
-                             }
+                             },
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/nexus_dashboard_icon.png"
                  },
                  {
                      "id":  "wappchat",
@@ -320,7 +321,8 @@
                                               "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
                                               "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
                                           ],
-                     "version":  "v0.11.0"
+                     "version":  "v0.11.0",
+                     "icon_url":  "http://100.84.133.101/installers/assets/icon.png"
                  },
                  {
                      "id":  "threadsdl_android",
