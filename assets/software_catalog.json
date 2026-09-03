@@ -83,7 +83,7 @@
                                              ],
                      "windows":  {
                                      "filename":  "Space Duel_v2.0.0_x64.exe",
-                                     "size_mb":  92.2,
+                                     "size_mb":  92.5,
                                      "version":  "v2.0.0",
                                      "executable":  "Space Duel.exe"
                                  },
@@ -105,7 +105,10 @@
                                          "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_1.png",
                                          "http://192.168.196.101/installers/assets/space_duel/space_duel_gameplay_2.png",
                                          "http://192.168.196.101/installers/assets/space_duel/space_duel_menu_3.png"
-                                     ]
+                                     ],
+                     "banner":  "http://192.168.196.101/installers/assets/space_duel/banner.png",
+                     "banner_card":  "http://192.168.196.101/installers/assets/space_duel/banner_card.png",
+                     "icon_url":  "http://192.168.196.101/installers/assets/space_duel/icon.png"
                  },
                  {
                      "id":  "super_pong",
