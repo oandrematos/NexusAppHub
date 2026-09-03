@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
                     HeroSpotlight(
                       app: vm.featuredApps.first,
                       onTap: () => _openDetails(context, vm.featuredApps.first, vm),
-                      onInstall: () => vm.installApp(vm.featuredApps.first, context),
+                      onInstall: () => vm.handleAction(vm.featuredApps.first, context),
                     ),
                   const SizedBox(height: 24),
                   SizedBox(
@@ -135,7 +135,8 @@ class _HomeViewState extends State<HomeView> {
                           isInstalled: vm.isInstalled(app.id),
                           downloadProgress: vm.getProgress(app.id),
                           onTap: () => _openDetails(context, app, vm),
-                          onAction: () => vm.installApp(app, context),
+                          onAction: () => vm.handleAction(app, context),
+                          onUninstall: () => vm.uninstallApp(app, context),
                         );
                       },
                       childCount: vm.apps.length,
@@ -160,7 +161,11 @@ class _HomeViewState extends State<HomeView> {
         downloadProgress: vm.getProgress(app.id),
         onAction: () {
           Navigator.pop(context);
-          vm.installApp(app, context);
+          vm.handleAction(app, context);
+        },
+        onUninstall: () {
+          Navigator.pop(context);
+          vm.uninstallApp(app, context);
         },
       ),
     );

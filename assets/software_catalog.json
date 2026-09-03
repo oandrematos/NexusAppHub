@@ -43,7 +43,7 @@
                                              ],
                      "windows":  {
                                      "filename":  "Space Duel_v2.0.0_x64.exe",
-                                     "size_mb":  173.4,
+                                     "size_mb":  92.2,
                                      "version":  "v2.0.0",
                                      "executable":  "Space Duel.exe"
                                  },
@@ -283,7 +283,7 @@
                      "icon":  "⚡",
                      "badge":  "OFICIAL",
                      "featured":  true,
-                     "description":  "Loja oficial e launcher central de aplicativos e jogos do ecossistema Antigravity, unificado em Flutter nativo para Windows Desktop e Android Mobile.",
+                     "description":  "Central \u0026 Launcher Oficial do Ecossistema Antigravity. Instalação e desinstalação silenciosa em 1 clique estilo Microsoft Store / MSIX.",
                      "short_description":  "Loja e launcher unificado em Flutter para PC e Celular.",
                      "platforms_supported":  [
                                                  "windows",
@@ -291,17 +291,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "v0.3.1",
-                                     "filename":  "NexusAppHub_v0.3.1_Installer.exe",
+                                     "version":  "0.3.2",
+                                     "filename":  "NexusAppHub_v0.3.2_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "v0.3.1",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.1.apk",
+                                     "version":  "0.3.2",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.2.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "v0.3.1",
+                     "version":  "0.3.2",
                      "latest_changelog":  [
                                               "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
                                               "Correção do título da janela e identificação do sistema para Nexus App Hub",

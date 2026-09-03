@@ -108,11 +108,29 @@ class DownloadService {
           return;
         }
       } else {
-        await Process.start(targetFile.path, [], mode: ProcessStartMode.detached);
+        onStatus('Instalando silenciosamente em segundo plano...');
+        final lower = filename.toLowerCase();
+        final isInstaller = lower.contains('installer') || lower.contains('setup');
+
+        if (isInstaller) {
+          final proc = await Process.start(
+            targetFile.path,
+            ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-', '/SILENT', '/S', '/qn', '/quiet'],
+            mode: ProcessStartMode.normal,
+          );
+          await proc.exitCode;
+        } else {
+          final localAppData = Platform.environment['LOCALAPPDATA'] ?? 'C:/Users/Andre/AppData/Local';
+          final appBaseName = filename.replaceAll('.exe', '').split('_')[0].trim();
+          final installDir = Directory('$localAppData/Programs/$appBaseName');
+          if (!installDir.existsSync()) installDir.createSync(recursive: true);
+          final targetDest = File('${installDir.path}/$filename');
+          targetFile.copySync(targetDest.path);
+        }
       }
       onCompleted();
     } catch (e) {
-      onError('Erro ao executar o instalador: $e');
+      onError('Erro ao executar a instalação: $e');
     }
   }
 }

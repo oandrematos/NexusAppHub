@@ -56,11 +56,19 @@ class LibraryView extends StatelessWidget {
                         builder: (_) => DetailSheet(
                           app: app,
                           isInstalled: true,
-                          onAction: () => Navigator.pop(context),
+                          onAction: () {
+                            Navigator.pop(context);
+                            vm.handleAction(app, context);
+                          },
+                          onUninstall: () {
+                            Navigator.pop(context);
+                            vm.uninstallApp(app, context);
+                          },
                         ),
                       );
                     },
-                    onAction: () {},
+                    onAction: () => vm.handleAction(app, context),
+                    onUninstall: () => vm.uninstallApp(app, context),
                   );
                 },
               ),

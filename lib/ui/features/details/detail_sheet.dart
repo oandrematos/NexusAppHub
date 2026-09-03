@@ -8,6 +8,7 @@ class DetailSheet extends StatelessWidget {
   final bool isInstalled;
   final double? downloadProgress;
   final VoidCallback onAction;
+  final VoidCallback? onUninstall;
 
   const DetailSheet({
     super.key,
@@ -15,6 +16,7 @@ class DetailSheet extends StatelessWidget {
     required this.isInstalled,
     this.downloadProgress,
     required this.onAction,
+    this.onUninstall,
   });
 
   @override
@@ -124,22 +126,66 @@ class DetailSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: isAvailable ? onAction : null,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
-                foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              child: Text(
-                app.getActionText(isAndroid, isInstalled),
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          if (isInstalled && !isAndroid && onUninstall != null) ...[
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: onAction,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.accentCyan,
+                        foregroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      child: const Text(
+                        'ABRIR',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    height: 48,
+                    child: OutlinedButton(
+                      onPressed: onUninstall,
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.redAccent),
+                        foregroundColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      child: const Text(
+                        'DESINSTALAR',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ] else ...[
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: isAvailable ? onAction : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
+                  foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: Text(
+                  app.getActionText(isAndroid, isInstalled),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               ),
             ),
-          ),
+          ],
         ],
       ),
     );

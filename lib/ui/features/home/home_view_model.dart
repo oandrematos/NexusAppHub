@@ -49,7 +49,6 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> _checkInstallations() async {
-    final isAndroid = Platform.isAndroid;
     for (final app in _allApps) {
       final installed = await AppDetector.isAppInstalled(
         app.windows?.executable,
@@ -80,6 +79,43 @@ class HomeViewModel extends ChangeNotifier {
       return matchesSearch && matchesCategory;
     }).toList();
     notifyListeners();
+  }
+
+  Future<void> handleAction(AppItem app, BuildContext context) async {
+    if (isInstalled(app.id)) {
+      final launched = await AppDetector.launchApp(app);
+      if (!launched) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Executável de ${app.name} não encontrado para inicialização.'),
+            backgroundColor: Colors.orangeAccent,
+          ),
+        );
+      }
+      return;
+    }
+    await installApp(app, context);
+  }
+
+  Future<void> uninstallApp(AppItem app, BuildContext context) async {
+    final success = await AppDetector.uninstallApp(app);
+    if (success) {
+      await _checkInstallations();
+      notifyListeners();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${app.name} desinstalado com sucesso.'),
+          backgroundColor: const Color(0xFF00FFCC),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Não foi possível desinstalar ${app.name} automaticamente.'),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
   }
 
   Future<void> installApp(AppItem app, BuildContext context) async {

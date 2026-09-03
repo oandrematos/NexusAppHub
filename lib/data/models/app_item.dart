@@ -1,4 +1,3 @@
-import 'dart:io';
 
 class AppItem {
   final String id;

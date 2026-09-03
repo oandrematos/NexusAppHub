@@ -1,10 +1,11 @@
 {
-  "version": "0.3.1",
-  "build_number": 4,
-  "release_channel": "stable",
-  "min_os_version": {
-    "windows": "10.0.19041",
-    "android": "8.0"
-  },
-  "update_url": "http://192.168.196.101/installers/software_catalog.json"
+    "changelog":  [
+                      "Instalação 100% silenciosa estilo Microsoft Store / MSIX",
+                      "Opção de desinstalação nativa direta na loja (cards e detalhes)",
+                      "Execução direta de aplicativos instalados sem reabrir instalador",
+                      "Detecção aprimorada de executáveis e atalhos na Área de Trabalho"
+                  ],
+    "build":  5,
+    "version":  "0.3.2",
+    "release_date":  "2026-09-02"
 }

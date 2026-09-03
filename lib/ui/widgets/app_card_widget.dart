@@ -9,6 +9,7 @@ class AppCardWidget extends StatelessWidget {
   final double? downloadProgress;
   final VoidCallback onTap;
   final VoidCallback onAction;
+  final VoidCallback? onUninstall;
 
   const AppCardWidget({
     super.key,
@@ -17,6 +18,7 @@ class AppCardWidget extends StatelessWidget {
     this.downloadProgress,
     required this.onTap,
     required this.onAction,
+    this.onUninstall,
   });
 
   @override
@@ -132,24 +134,39 @@ class AppCardWidget extends StatelessWidget {
                       color: AppColors.textSecondary,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: isAvailable && !isDownloading ? onAction : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
-                      foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
-                      disabledBackgroundColor: AppColors.surface.withOpacity(0.5),
-                      disabledForegroundColor: AppColors.textSecondary.withOpacity(0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (isInstalled && !isAndroid && onUninstall != null && !isDownloading) ...[
+                        IconButton(
+                          icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
+                          tooltip: 'Desinstalar silenciosamente',
+                          onPressed: onUninstall,
+                          padding: const EdgeInsets.all(4),
+                          constraints: const BoxConstraints(),
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                      ElevatedButton(
+                        onPressed: isAvailable && !isDownloading ? onAction : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isInstalled ? AppColors.surface : AppColors.accentCyan,
+                          foregroundColor: isInstalled ? AppColors.textPrimary : Colors.black,
+                          disabledBackgroundColor: AppColors.surface.withOpacity(0.5),
+                          disabledForegroundColor: AppColors.textSecondary.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
+                        child: Text(
+                          isDownloading
+                              ? '${((downloadProgress ?? 0) * 100).toInt()}%'
+                              : app.getActionText(isAndroid, isInstalled),
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    ),
-                    child: Text(
-                      isDownloading
-                          ? '${((downloadProgress ?? 0) * 100).toInt()}%'
-                          : app.getActionText(isAndroid, isInstalled),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                    ),
+                    ],
                   ),
                 ],
               ),
