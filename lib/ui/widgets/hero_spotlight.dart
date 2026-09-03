@@ -60,9 +60,28 @@ class HeroSpotlight extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Text(
-                app.icon,
-                style: const TextStyle(fontSize: 32),
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(9),
+                  child: app.iconUrl != null && app.iconUrl!.isNotEmpty
+                      ? Image.network(
+                          app.iconUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Center(
+                            child: Text(app.icon, style: const TextStyle(fontSize: 24)),
+                          ),
+                        )
+                      : Center(
+                          child: Text(app.icon, style: const TextStyle(fontSize: 24)),
+                        ),
+                ),
               ),
             ],
           ),

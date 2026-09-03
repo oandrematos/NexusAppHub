@@ -58,11 +58,19 @@ class AppCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: AppColors.border),
                     ),
-                    child: Center(
-                      child: Text(
-                        app.icon,
-                        style: const TextStyle(fontSize: 26),
-                      ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(11),
+                      child: app.iconUrl != null && app.iconUrl!.isNotEmpty
+                          ? Image.network(
+                              app.iconUrl!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => Center(
+                                child: Text(app.icon, style: const TextStyle(fontSize: 26)),
+                              ),
+                            )
+                          : Center(
+                              child: Text(app.icon, style: const TextStyle(fontSize: 26)),
+                            ),
                     ),
                   ),
                   const SizedBox(width: 12),

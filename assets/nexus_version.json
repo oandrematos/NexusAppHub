@@ -1,10 +1,11 @@
 {
     "changelog":  [
-                      "Sistema de proteção por credencial de segurança (PIN/Senha) para download de aplicativos restritos (Nexus Dashboard bloqueado com credencial 5081 no Windows e Android)",
-                      "Segurança estrita em código sem interface de configuração, gerenciável exclusivamente sob comando direto",
-                      "Suíte visual de alto nível com ícones de proteção e diálogos futuristas em conformidade com o ecossistema Nexus"
+                      "Operação Identidade Total: Unificação visual absoluta dos ícones oficiais em toda a loja (AppCardWidget, HeroSpotlight e AppDetailView usando o mesmo ícone HD em vez de emojis)",
+                      "Ícone do executável Windows e instalador NSIS compilados com o diamante hiperdimensional oficial",
+                      "Ícones adaptativos Android (ic_launcher) gerados a partir do ícone oficial HD para consistência na tela de início móvel",
+                      "Catálogo oficial atualizado com URLs de ícones HD para todos os aplicativos do ecossistema"
                   ],
-    "build":  15,
-    "version":  "0.3.12",
-    "release_date":  "2026-09-02"
+    "build":  16,
+    "version":  "0.3.13",
+    "release_date":  "2026-09-03"
 }
