@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-02T20:56:00Z",
+    "updated_at":  "2026-09-02T23:48:58Z",
     "categories":  [
                        {
                            "id":  "games",
@@ -145,7 +145,14 @@
                                               "Inteligência Artificial (CPU) adaptativa com tracking preditivo e balanço de reflexos.",
                                               "Sintetizador procedural de efeitos sonoros retrô arcade em tempo real.",
                                               "Interface arcade retrô com suporte nativo a Teclado (WASD/Setas) e Gamepads analógicos."
-                                          ]
+                                          ],
+                     "banner":  "http://192.168.196.101/installers/assets/super_pong/banner.png",
+                     "banner_card":  "http://192.168.196.101/installers/assets/super_pong/banner_card.png",
+                     "icon_url":  "http://192.168.196.101/installers/assets/super_pong/icon.png",
+                     "screenshots":  [
+                                         "http://192.168.196.101/installers/assets/super_pong/super_pong_1.png",
+                                         "http://192.168.196.101/installers/assets/super_pong/super_pong_2.png"
+                                     ]
                  },
                  {
                      "id":  "snake_game",
@@ -270,7 +277,14 @@
                                               "Reengenharia total do modo dividido com 100% de preenchimento de tela.",
                                               "Rail de ícones a 60px e remoção das barras pretas laterais.",
                                               "Instalação e atualização silenciosa 100% compatível com a loja Nexus App Hub."
-                                          ]
+                                          ],
+                     "banner":  "http://100.84.133.101/installers/assets/wappchat/banner.png",
+                     "banner_card":  "http://100.84.133.101/installers/assets/wappchat/banner_card.png",
+                     "icon_url":  "http://100.84.133.101/installers/assets/wappchat/icon.png",
+                     "screenshots":  [
+                                         "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_1.png",
+                                         "http://100.84.133.101/installers/assets/wappchat/screenshots/wappchat_screen_2.png"
+                                     ]
                  },
                  {
                      "id":  "alfred_android",
