@@ -144,14 +144,14 @@ class DownloadService {
           final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
 
           if (isSelfUpdate) {
-            // Atualização da própria loja: abre a interface visual do instalador
-            // e encerra a loja para liberar os arquivos para a nova instalação.
+            // Atualização da própria loja: dispara o instalador desacoplado no Shell do Windows
+            // através do comando "start" e encerra a loja para liberar os arquivos para escrita.
             await Process.start(
-              targetFile.path,
-              [],
+              'cmd.exe',
+              ['/c', 'start', '""', targetFile.path],
               mode: ProcessStartMode.detached,
             );
-            await Future.delayed(const Duration(milliseconds: 500));
+            await Future.delayed(const Duration(milliseconds: 600));
             exit(0);
           } else {
             final proc = await Process.start(

@@ -6,6 +6,7 @@ import 'ui/core/responsive_scaffold.dart';
 import 'ui/features/home/home_view.dart';
 import 'ui/features/home/home_view_model.dart';
 import 'ui/features/library/library_view.dart';
+import 'ui/features/package_managers/package_managers_view.dart';
 import 'ui/features/settings/settings_view.dart';
 
 Future<void> main() async {
@@ -46,6 +47,7 @@ class _MainNavigationHostState extends State<MainNavigationHost> {
   final List<Widget> _views = const [
     HomeView(),
     LibraryView(),
+    PackageManagersView(),
     SettingsView(),
   ];
 

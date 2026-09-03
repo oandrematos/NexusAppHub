@@ -76,6 +76,11 @@ class ResponsiveScaffold extends StatelessWidget {
                       label: Text('Biblioteca'),
                     ),
                     NavigationRailDestination(
+                      icon: Icon(Icons.source_outlined),
+                      selectedIcon: Icon(Icons.source_rounded, color: AppColors.accentCyan),
+                      label: Text('Gerenciadores'),
+                    ),
+                    NavigationRailDestination(
                       icon: Icon(Icons.settings_outlined),
                       selectedIcon: Icon(Icons.settings, color: AppColors.accentCyan),
                       label: Text('Ajustes'),
@@ -106,6 +111,11 @@ class ResponsiveScaffold extends StatelessWidget {
                 icon: Icon(Icons.apps_outlined),
                 selectedIcon: Icon(Icons.apps, color: AppColors.accentCyan),
                 label: 'Meus Apps',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.source_outlined),
+                selectedIcon: Icon(Icons.source_rounded, color: AppColors.accentCyan),
+                label: 'Pacotes',
               ),
               NavigationDestination(
                 icon: Icon(Icons.settings_outlined),

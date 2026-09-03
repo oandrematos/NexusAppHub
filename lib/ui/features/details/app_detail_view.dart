@@ -296,7 +296,90 @@ class AppDetailView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 16),
+
+                          // Gestão de Fonte de Instalação e Atualizações
+                          if (!isAndroid && app.windows != null) ...[
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              decoration: BoxDecoration(
+                                color: AppColors.surface,
+                                borderRadius: BorderRadius.circular(14),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.source_outlined, size: 20, color: AppColors.accentCyan),
+                                      const SizedBox(width: 10),
+                                      const Expanded(
+                                        child: Text(
+                                          'Fonte de Instalação:',
+                                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                                        ),
+                                      ),
+                                      DropdownButton<String>(
+                                        value: vm.getAppSource(app.id),
+                                        dropdownColor: AppColors.surface,
+                                        underline: const SizedBox(),
+                                        style: const TextStyle(fontSize: 12, color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+                                        items: [
+                                          const DropdownMenuItem(
+                                            value: 'nexus',
+                                            child: Text('Cluster Nexus (Oficial)'),
+                                          ),
+                                          if (app.windows?.wingetId != null)
+                                            DropdownMenuItem(
+                                              value: 'winget',
+                                              child: Text('Winget (${app.windows!.wingetId})'),
+                                            ),
+                                          if (app.windows?.chocoId != null)
+                                            DropdownMenuItem(
+                                              value: 'choco',
+                                              child: Text('Chocolatey (${app.windows!.chocoId})'),
+                                            ),
+                                        ],
+                                        onChanged: (val) {
+                                          if (val != null) vm.setAppSource(app.id, val);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(height: 16, color: AppColors.border),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            vm.isUpdateIgnored(app.id) ? Icons.notifications_off_outlined : Icons.notifications_active_outlined,
+                                            size: 20,
+                                            color: vm.isUpdateIgnored(app.id) ? Colors.orangeAccent : AppColors.textSecondary,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            vm.isUpdateIgnored(app.id) ? 'Atualizações silenciadas' : 'Notificar atualizações',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              color: vm.isUpdateIgnored(app.id) ? Colors.orangeAccent : AppColors.textSecondary,
+                                              fontWeight: vm.isUpdateIgnored(app.id) ? FontWeight.bold : FontWeight.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Switch.adaptive(
+                                        value: vm.isUpdateIgnored(app.id),
+                                        activeThumbColor: Colors.orangeAccent,
+                                        onChanged: (_) => vm.toggleIgnoreUpdate(app.id),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                          ],
 
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),

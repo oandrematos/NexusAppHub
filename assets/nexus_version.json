@@ -1,10 +1,14 @@
 {
     "changelog":  [
-                      "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2)",
-                      "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2)",
-                      "Mensagens detalhadas de diagnóstico em falhas de rede"
+                      "Novo design de vitrine responsiva com prateleiras dinâmicas e Hero Showcase Carousel.",
+                      "Integração nativa com gerenciadores de pacotes universais Winget e Chocolatey estilo UniGetUI.",
+                      "Nova aba dedicada para pesquisa e instalação direta em milhares de softwares no Winget/Choco.",
+                      "Opção de ignorar/silenciar atualizações por aplicativo com persistência local.",
+                      "Seleção de fonte preferencial por aplicativo (Cluster Nexus, Winget ou Chocolatey).",
+                      "Correção do algoritmo de versão PE (normalização de vírgulas no VLC 3.0.23 vs 3.0.20).",
+                      "Desacoplamento do instalador no Windows para atualização suave em 1 clique pela própria loja."
                   ],
-    "build":  21,
-    "version":  "0.3.18",
+    "build":  22,
+    "version":  "0.3.19",
     "release_date":  "2026-09-03"
 }

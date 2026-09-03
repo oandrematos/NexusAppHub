@@ -112,6 +112,8 @@ class PlatformConfig {
   final String version;
   final String? executable;
   final String? packageName;
+  final String? wingetId;
+  final String? chocoId;
 
   PlatformConfig({
     required this.filename,
@@ -119,6 +121,8 @@ class PlatformConfig {
     required this.version,
     this.executable,
     this.packageName,
+    this.wingetId,
+    this.chocoId,
   });
 
   factory PlatformConfig.fromJson(Map<String, dynamic> json) {
@@ -128,6 +132,8 @@ class PlatformConfig {
       version: json['version'] ?? '',
       executable: json['executable'],
       packageName: json['package_name'],
+      wingetId: json['winget_id'],
+      chocoId: json['choco_id'],
     );
   }
 }

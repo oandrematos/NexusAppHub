@@ -2,16 +2,16 @@
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.18_Installer.exe"
+OutFile "NexusAppHub_v0.3.19_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
 
 Function .onInit
-    ; Fechar instâncias ativas do Nexus App Hub para evitar erro de arquivo bloqueado para escrita
-    nsExec::Exec 'taskkill /F /IM NexusAppHub.exe /T'
-    nsExec::Exec 'taskkill /F /IM nexus_app_hub.exe /T'
+    ; Fechar instâncias ativas do Nexus App Hub (sem /T para não encerrar a árvore do próprio instalador)
+    nsExec::Exec 'taskkill /F /IM NexusAppHub.exe'
+    nsExec::Exec 'taskkill /F /IM nexus_app_hub.exe'
     Sleep 1000
 FunctionEnd
 
@@ -46,7 +46,7 @@ Section "Nexus App Hub"
     
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.18"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.19"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'

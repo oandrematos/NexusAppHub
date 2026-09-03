@@ -5,11 +5,14 @@ import 'package:nexus_app_hub/data/services/catalog_service.dart';
 import 'package:nexus_app_hub/data/services/app_detector.dart';
 import 'package:nexus_app_hub/data/services/download_service.dart';
 import 'package:nexus_app_hub/data/services/app_version_service.dart';
+import 'package:nexus_app_hub/data/services/app_preferences_service.dart';
+import 'package:nexus_app_hub/data/services/package_manager_service.dart';
 import '../../core/app_colors.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final CatalogService _catalogService = CatalogService();
   final DownloadService _downloadService = DownloadService();
+  final AppPreferencesService _prefs = AppPreferencesService();
 
   List<AppItem> _allApps = [];
   List<AppItem> _filteredApps = [];
@@ -31,6 +34,7 @@ class HomeViewModel extends ChangeNotifier {
   List<AppItem> get apps => _filteredApps;
   List<AppItem> get featuredApps => _allApps.where((a) => a.featured).toList();
   String get selectedCategory => _selectedCategory;
+  String get searchQuery => _searchQuery;
 
   bool get hasStoreUpdate => _hasStoreUpdate;
   String get storeUpdateVersion => _storeUpdateVersion;
@@ -51,6 +55,7 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
+      await _prefs.init();
       _allApps = await _catalogService.loadCatalog();
       await _checkInstallations();
       await _checkStoreSelfUpdate();
@@ -96,13 +101,21 @@ class HomeViewModel extends ChangeNotifier {
     if (installed == null || catalog == null) return false;
     final cleanInstalled = installed
         .replaceAll('v', '')
+        .replaceAll('V', '')
         .replaceAll('-alpha', '')
         .replaceAll('-beta', '')
+        .replaceAll(',', '.')
+        .replaceAll('_', '.')
+        .replaceAll(' ', '')
         .trim();
     final cleanCatalog = catalog
         .replaceAll('v', '')
+        .replaceAll('V', '')
         .replaceAll('-alpha', '')
         .replaceAll('-beta', '')
+        .replaceAll(',', '.')
+        .replaceAll('_', '.')
+        .replaceAll(' ', '')
         .trim();
 
     if (cleanInstalled.isEmpty || cleanCatalog.isEmpty) return false;
@@ -111,14 +124,31 @@ class HomeViewModel extends ChangeNotifier {
     final instParts = cleanInstalled.split('.').map((e) => int.tryParse(e) ?? 0).toList();
     final catParts = cleanCatalog.split('.').map((e) => int.tryParse(e) ?? 0).toList();
 
-    for (int i = 0; i < catParts.length; i++) {
-      final catNum = catParts[i];
+    final maxLen = instParts.length > catParts.length ? instParts.length : catParts.length;
+    for (int i = 0; i < maxLen; i++) {
+      final catNum = i < catParts.length ? catParts[i] : 0;
       final instNum = i < instParts.length ? instParts[i] : 0;
       if (catNum > instNum) return true;
       if (catNum < instNum) return false;
     }
 
     return false;
+  }
+
+  bool isUpdateIgnored(String appId) => _prefs.isUpdateIgnored(appId);
+
+  Future<void> toggleIgnoreUpdate(String appId) async {
+    final current = _prefs.isUpdateIgnored(appId);
+    await _prefs.setUpdateIgnored(appId, !current);
+    await _checkInstallations();
+    notifyListeners();
+  }
+
+  String getAppSource(String appId) => _prefs.getAppSource(appId);
+
+  Future<void> setAppSource(String appId, String source) async {
+    await _prefs.setAppSource(appId, source);
+    notifyListeners();
   }
 
   Future<void> _checkInstallations() async {
@@ -128,7 +158,8 @@ class HomeViewModel extends ChangeNotifier {
         _installedStatus[app.id] = true;
         _installedVersions[app.id] = AppVersionService.currentVersion;
         final catVer = app.getVersion(isAndroid);
-        _hasUpdateStatus[app.id] = _isNewerVersion(AppVersionService.currentVersion, catVer);
+        final hasNewer = _isNewerVersion(AppVersionService.currentVersion, catVer);
+        _hasUpdateStatus[app.id] = hasNewer && !_prefs.isUpdateIgnored(app.id);
         continue;
       }
 
@@ -146,7 +177,8 @@ class HomeViewModel extends ChangeNotifier {
         _installedVersions[app.id] = instVer;
 
         final catVer = app.getVersion(isAndroid);
-        _hasUpdateStatus[app.id] = _isNewerVersion(instVer, catVer);
+        final hasNewer = _isNewerVersion(instVer, catVer);
+        _hasUpdateStatus[app.id] = hasNewer && !_prefs.isUpdateIgnored(app.id);
       } else {
         _installedVersions[app.id] = null;
         _hasUpdateStatus[app.id] = false;
@@ -376,6 +408,88 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> installApp(AppItem app, BuildContext context) async {
     final isAndroid = Platform.isAndroid;
+    final source = !isAndroid ? getAppSource(app.id) : 'nexus';
+
+    if (source == 'winget' && app.windows?.wingetId != null) {
+      _downloadProgress[app.id] = 0.5;
+      _downloadStatus[app.id] = 'Instalando via Winget...';
+      notifyListeners();
+
+      final success = await PackageManagerService.installPackage(
+        packageId: app.windows!.wingetId!,
+        source: 'winget',
+        onStatus: (st) {
+          _downloadStatus[app.id] = st;
+          notifyListeners();
+        },
+      );
+
+      _downloadProgress.remove(app.id);
+      _downloadStatus.remove(app.id);
+      if (success) {
+        await _checkInstallations();
+        notifyListeners();
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${app.name} instalado com sucesso via Winget!'),
+              backgroundColor: const Color(0xFF00FFCC),
+            ),
+          );
+        }
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Falha na instalação de ${app.name} via Winget.'),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+        }
+      }
+      return;
+    }
+
+    if (source == 'choco' && app.windows?.chocoId != null) {
+      _downloadProgress[app.id] = 0.5;
+      _downloadStatus[app.id] = 'Instalando via Chocolatey...';
+      notifyListeners();
+
+      final success = await PackageManagerService.installPackage(
+        packageId: app.windows!.chocoId!,
+        source: 'chocolatey',
+        onStatus: (st) {
+          _downloadStatus[app.id] = st;
+          notifyListeners();
+        },
+      );
+
+      _downloadProgress.remove(app.id);
+      _downloadStatus.remove(app.id);
+      if (success) {
+        await _checkInstallations();
+        notifyListeners();
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${app.name} instalado com sucesso via Chocolatey!'),
+              backgroundColor: const Color(0xFF00FFCC),
+            ),
+          );
+        }
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Falha na instalação de ${app.name} via Chocolatey.'),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+        }
+      }
+      return;
+    }
+
     final filename = app.getFilename(isAndroid);
     if (filename == null) return;
 
