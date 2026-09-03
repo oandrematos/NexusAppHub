@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'data/services/app_version_service.dart';
 import 'ui/core/app_theme.dart';
 import 'ui/core/responsive_scaffold.dart';
 import 'ui/features/home/home_view.dart';
@@ -7,8 +8,9 @@ import 'ui/features/home/home_view_model.dart';
 import 'ui/features/library/library_view.dart';
 import 'ui/features/settings/settings_view.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AppVersionService.init();
   runApp(const NexusAppHubApp());
 }
 

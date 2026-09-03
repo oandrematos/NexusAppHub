@@ -1,12 +1,11 @@
 {
     "changelog":  [
-                      "Exibição da versão instalada e mais recente diretamente nos cards da tela inicial",
-                      "Indicador visual de atualização (vInstalada ➔ vNova) nos cards e na folha de detalhes",
-                      "Ajuste da versão do AlfredApp no catálogo para 0.10.8 (sanitização de falsos positivos de atualização)",
-                      "Nova tela dedicada de Ajustes com diagnóstico de conectividade do cluster",
-                      "Priorização do CDN Global raw.githubusercontent para entrega instantânea"
+                      "Eliminação definitiva do falso positivo de atualização da loja no Windows (remoção de versão hardcoded legada)",
+                      "Implementação do AppVersionService centralizado e dinâmico via assets/nexus_version.json",
+                      "Sincronização do status da loja em tempo real para Desktop e Mobile",
+                      "Integração do storefront oficial do Space Duel com banners e cards em alta resolução"
                   ],
-    "build":  11,
-    "version":  "0.3.8",
+    "build":  12,
+    "version":  "0.3.9",
     "release_date":  "2026-09-02"
 }

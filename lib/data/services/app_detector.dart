@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'app_version_service.dart';
 import '../models/app_item.dart';
 
 class AppDetector {
@@ -46,6 +47,28 @@ class AppDetector {
         return version;
       } catch (_) {
         return null;
+      }
+    }
+
+    if (Platform.isWindows) {
+      if (executableName == null || executableName.isEmpty) return null;
+
+      if (executableName.toLowerCase().contains('nexusapphub') ||
+          executableName.toLowerCase().contains('nexus_app_hub')) {
+        return AppVersionService.currentVersion;
+      }
+
+      final execPath = await getInstalledExecutablePath(executableName);
+      if (execPath != null) {
+        final dir = File(execPath).parent;
+        final vFile = File('${dir.path}/version.json');
+        if (vFile.existsSync()) {
+          try {
+            final content = vFile.readAsStringSync();
+            final match = RegExp(r'"version"\s*:\s*"([^"]+)"').firstMatch(content);
+            if (match != null) return match.group(1);
+          } catch (_) {}
+        }
       }
     }
 

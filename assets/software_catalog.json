@@ -43,17 +43,17 @@
                                              ],
                      "windows":  {
                                      "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.8",
-                                     "filename":  "NexusAppHub_v0.3.8_Installer.exe",
+                                     "version":  "0.3.9",
+                                     "filename":  "NexusAppHub_v0.3.9_Installer.exe",
                                      "size_mb":  11.96
                                  },
                      "android":  {
                                      "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.8",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.8.apk",
+                                     "version":  "0.3.9",
+                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.9.apk",
                                      "size_mb":  22.62
                                  },
-                     "version":  "0.3.8",
+                     "version":  "0.3.9",
                      "latest_changelog":  [
                                               "Sanitização completa de codificação UTF-8 em todo o catálogo (emojis nítidos e acentos perfeitos)",
                                               "Correção do título da janela e identificação do sistema para Nexus App Hub",

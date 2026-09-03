@@ -4,6 +4,7 @@ import 'package:nexus_app_hub/data/models/app_item.dart';
 import 'package:nexus_app_hub/data/services/catalog_service.dart';
 import 'package:nexus_app_hub/data/services/app_detector.dart';
 import 'package:nexus_app_hub/data/services/download_service.dart';
+import 'package:nexus_app_hub/data/services/app_version_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final CatalogService _catalogService = CatalogService();
@@ -74,11 +75,10 @@ class HomeViewModel extends ChangeNotifier {
           null,
           'com.antigravity.nexus_app_hub',
         );
-      } else {
-        currentVer = '0.3.3';
       }
+      currentVer ??= AppVersionService.currentVersion;
 
-      if (currentVer != null && _isNewerVersion(currentVer, serverVer)) {
+      if (_isNewerVersion(currentVer, serverVer)) {
         _hasStoreUpdate = true;
         _storeUpdateVersion = serverVer;
         _storeUpdateApp = hubApp;
@@ -123,6 +123,14 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> _checkInstallations() async {
     final isAndroid = Platform.isAndroid;
     for (final app in _allApps) {
+      if (app.id == 'nexus_app_hub') {
+        _installedStatus[app.id] = true;
+        _installedVersions[app.id] = AppVersionService.currentVersion;
+        final catVer = app.getVersion(isAndroid);
+        _hasUpdateStatus[app.id] = _isNewerVersion(AppVersionService.currentVersion, catVer);
+        continue;
+      }
+
       final installed = await AppDetector.isAppInstalled(
         app.windows?.executable,
         app.android?.packageName,
