@@ -1,11 +1,11 @@
 ﻿{
     "changelog":  [
-                      "Acesso Restrito Restabelecido: PIN de segurança 5081 no Nexus Dashboard com validação correta e disparo imediato do download.",
-                      "Desinstalação Instantânea (0ms): Remoção do cache em memória e atualização otimista na hora sem necessidade de fechar a loja.",
-                      "Limpeza Visual: Removido o botão duplicado de desinstalação no canto superior direito, mantendo apenas o botão principal em destaque.",
-                      "Filtro de Plataforma (Universal, Windows PC e Android) ativo na vitrine."
+                      "Correção na Instalação do Smirror e Instaladores do Ecossistema: Corrigida a invalidação de cache em memória que impedia que aplicativos recém-instalados fossem detectados como instalados.",
+                      "Parâmetros de Instalação Seguros: Limpeza de flags conflitantes que quebravam instaladores NSIS silenciosos, com fallback automático para execução interativa via Windows Shell em caso de erro.",
+                      "Detecção Imediata e em Duas Etapas: Reavaliação imediata e verificação confirmatória em 1.5s após a conclusão do instalador.",
+                      "Catálogo Completo Restaurado: Todos os 23 aplicativos preservados com o novo Neo-Blocks v0.1.0 e Dashboard v1.1.0."
                   ],
-    "build":  27,
-    "version":  "0.3.24",
+    "build":  28,
+    "version":  "0.3.25",
     "release_date":  "2026-09-03"
 }

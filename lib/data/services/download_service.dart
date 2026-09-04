@@ -154,12 +154,37 @@ class DownloadService {
             await Future.delayed(const Duration(milliseconds: 600));
             exit(0);
           } else {
-            final proc = await Process.start(
-              targetFile.path,
-              ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-', '/SILENT', '/S', '/qn', '/quiet'],
-              mode: ProcessStartMode.normal,
-            );
-            await proc.exitCode;
+            // Flags otimizadas e limpas para cada tipo de instalador
+            List<String> silentArgs = ['/S'];
+            try {
+              final bytes = targetFile.readAsBytesSync();
+              final header = String.fromCharCodes(bytes.take(1000000));
+              if (header.contains('Inno Setup')) {
+                silentArgs = ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-'];
+              } else if (header.contains('Nullsoft')) {
+                silentArgs = ['/S'];
+              }
+            } catch (_) {}
+
+            int exitCode = -1;
+            try {
+              final proc = await Process.start(
+                targetFile.path,
+                silentArgs,
+                workingDirectory: targetFile.parent.path,
+                mode: ProcessStartMode.normal,
+              );
+              exitCode = await proc.exitCode;
+            } catch (_) {}
+
+            // Se o instalador silencioso falhar ou retornar código de erro, dispara interativo via Shell do Windows
+            if (exitCode != 0) {
+              await Process.start(
+                'cmd.exe',
+                ['/c', 'start', '""', targetFile.path],
+                mode: ProcessStartMode.detached,
+              );
+            }
           }
         } else {
           final localAppData = Platform.environment['LOCALAPPDATA'] ?? 'C:/Users/Andre/AppData/Local';

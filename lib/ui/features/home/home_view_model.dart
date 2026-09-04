@@ -566,8 +566,16 @@ class HomeViewModel extends ChangeNotifier {
       onCompleted: () async {
         _downloadProgress.remove(app.id);
         _downloadStatus.remove(app.id);
+        AppDetector.clearCache();
         await _checkInstallations();
         notifyListeners();
+
+        // Segunda verificação após 1.5s para garantir que os arquivos e registros terminaram de ser escritos
+        Future.delayed(const Duration(milliseconds: 1500), () async {
+          AppDetector.clearCache();
+          await _checkInstallations();
+          notifyListeners();
+        });
       },
     );
   }

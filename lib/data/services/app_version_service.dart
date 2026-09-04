@@ -2,8 +2,8 @@
 import 'package:flutter/services.dart';
 
 class AppVersionService {
-  static String currentVersion = '0.3.24';
-  static int currentBuild = 27;
+  static String currentVersion = '0.3.25';
+  static int currentBuild = 28;
 
   static Future<void> init() async {
     try {
@@ -18,6 +18,7 @@ class AppVersionService {
     } catch (_) {}
   }
 }
+
 
 
 
