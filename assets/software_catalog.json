@@ -1,867 +1,867 @@
 {
-    "store_name":  "Nexus App Hub",
-    "developer":  "André (Antigravity)",
-    "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-03T23:02:30-03:00",
-    "categories":  [
-                       {
-                           "id":  "games",
-                           "name":  "Jogos \u0026 Arcade"
-                       },
-                       {
-                           "id":  "system",
-                           "name":  "Sistema \u0026 Utilitários"
-                       },
-                       {
-                           "id":  "social",
-                           "name":  "Comunicação \u0026 Social"
-                       },
-                       {
-                           "id":  "productivity",
-                           "name":  "Produtividade \u0026 IA"
-                       },
-                       {
-                           "id":  "media",
-                           "name":  "Mídia \u0026 Ferramentas"
-                       }
-                   ],
-    "apps":  [
-                 {
-                     "id":  "neo_blocks",
-                     "name":  "Neo-Blocks",
-                     "title":  "Neo-Blocks — Cyberpunk Tetris Arcade",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "🧱",
-                     "badge":  "NOVO",
-                     "featured":  true,
-                     "description":  "O clássico arcade de blocos em queda livre reinventado com visual Neon Cyberpunk, Super Rotation System (SRS) canônico, 7-Bag balanceado, Hold queue, Ghost piece de projeção e controles táteis adaptáveis a 60 FPS cravados.",
-                     "short_description":  "O clássico arcade de blocos em versão neon cyberpunk com suporte a PC e celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "NeoBlocks_v0.1.0_alpha_Installer.exe",
-                                     "size_mb":  71.99,
-                                     "version":  "v0.1.0-alpha",
-                                     "executable":  "NeoBlocks.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "NeoBlocks_Android_v0.1.0_alpha.apk",
-                                     "size_mb":  5.97,
-                                     "version":  "v0.1.0-alpha",
-                                     "package_name":  "com.antigravity.neoblocks"
-                                 },
-                     "version":  "v0.1.0-alpha",
-                     "latest_changelog":  [
-                                              "Lançamento oficial da versão Alpha v0.1.0 na divisão Nexus Arcade em Godot 4.",
-                                              "Super Rotation System (SRS) oficial com wall-kicks e floor-kicks matemáticos.",
-                                              "Gerador aleatório 7-Bag balanceado, Hold queue e Ghost piece com wireframe neon.",
-                                              "Controles universais: Teclado/Gamepad no Windows e botões táteis virtuais no Android.",
-                                              "Instalador oficial silencioso (/S) para Windows e pacote APK assinado para Android."
-                                          ],
-                     "screenshots":  [
-                                         "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
-                                         "http://192.168.196.101/assets/screenshots/neoblocks_screen_2.png"
-                                     ],
-                     "banner":  "http://192.168.196.101/assets/screenshots/neoblocks_banner.png",
-                     "banner_card":  "http://192.168.196.101/assets/screenshots/neoblocks_banner_card.png",
-                     "icon_url":  "http://192.168.196.101/assets/screenshots/neoblocks_icon.png"
-                 },
-                 {
-                     "id":  "nexus_app_hub",
-                     "name":  "Nexus App Hub",
-                     "title":  "Nexus App Hub — Central \u0026 Launcher Oficial",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "icon":  "⚡",
-                     "badge":  "OFICIAL",
-                     "featured":  true,
-                     "description":  "Central \u0026 Launcher Oficial do Ecossistema Antigravity. Auto-atualização nativa, detecção de apps e launcher unificado.",
-                     "short_description":  "Loja e launcher unificado em Flutter para PC e Celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "executable":  "NexusAppHub.exe",
-                                     "version":  "0.3.25",
-                                     "filename":  "NexusAppHub_v0.3.25_Installer.exe",
-                                     "size_mb":  11.96
-                                 },
-                     "android":  {
-                                     "package_name":  "com.antigravity.nexus_app_hub",
-                                     "version":  "0.3.25",
-                                     "filename":  "NexusAppHub_Flutter_Android_v0.3.25.apk",
-                                     "size_mb":  22.62
-                                 },
-                     "version":  "0.3.25",
-                     "latest_changelog":  [
-                                              "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2).",
-                                              "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2).",
-                                              "Mensagens detalhadas de diagnóstico em falhas de rede."
-                                          ],
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_2.png"
-                                     ]
-                 },
-                 {
-                     "id":  "space_duel",
-                     "name":  "Space Duel",
-                     "title":  "Space Duel — Shooter Espacial Arcade",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "🚀",
-                     "badge":  "DESTAQUE",
-                     "featured":  true,
-                     "description":  "Shooter espacial clássico em alta velocidade com naves customizáveis, combate intenso e suporte total a controles no PC e toque a 120 FPS no Android.",
-                     "short_description":  "Shooter espacial de combate intenso com suporte a PC e celular.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Space Duel_v2.0.0_x64.exe",
-                                     "size_mb":  92.5,
-                                     "version":  "v2.0.0",
-                                     "executable":  "Space Duel.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Space Duel_Android_v1.1.0.apk",
-                                     "size_mb":  6.85,
-                                     "version":  "v1.1.0",
-                                     "package_name":  "com.andre.spaceduel"
-                                 },
-                     "version":  "v2.0.0",
-                     "latest_changelog":  [
-                                              "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
-                                              "Multiplayer P2P de alta fidelidade e baixa latência via ENet LAN",
-                                              "Controles reativos e precisos com suporte a teclado, mouse e controles",
-                                              "Novos arsenais espaciais: Canhões de Laser, Mísseis Teleguiados e Escudos",
-                                              "Deploy automatizado integrado à Nexus App Hub"
-                                          ],
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_2.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_menu_3.png"
-                                     ]
-                 },
-                 {
-                     "id":  "super_pong",
-                     "name":  "Super Pong",
-                     "title":  "Super Pong — Retro Arcade Arena",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "🏓",
-                     "badge":  "ARCADE",
-                     "featured":  true,
-                     "description":  "Reinvenção eletrizante do clássico Pong com power-ups dinâmicos, efeitos de iluminação néon e modos solo contra IA ou multiplayer local.",
-                     "short_description":  "Retro arena de Pong com power-ups e tema néon futurista.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Super Pong_v2.0.0_x64.exe",
-                                     "size_mb":  176.9,
-                                     "version":  "v2.0.0",
-                                     "executable":  "Super Pong.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Super Pong_Android_v1.1.1.apk",
-                                     "size_mb":  7.0,
-                                     "version":  "1.0",
-                                     "package_name":  "com.antigravity.superpong"
-                                 },
-                     "version":  "1.0",
-                     "latest_changelog":  [
-                                              "Migração completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
-                                              "Física de rebote angular precisa e aceleração dinâmica de velocidade.",
-                                              "Sistema de Power-Ups na arena: Expansão de Raquete, Super Velocidade e Multi-Bola.",
-                                              "Inteligência Artificial (CPU) adaptativa com tracking preditivo e balanço de reflexos.",
-                                              "Sintetizador procedural de efeitos sonoros retrô arcade em tempo real.",
-                                              "Interface arcade retrô com suporte nativo a Teclado (WASD/Setas) e Gamepads analógicos."
-                                          ],
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_2.png"
-                                     ]
-                 },
-                 {
-                     "id":  "snake_game",
-                     "name":  "Snake Game",
-                     "title":  "Snake Game — Cobrinha Clássica Moderna",
-                     "category":  "games",
-                     "category_name":  "Jogos \u0026 Arcade",
-                     "icon":  "🐍",
-                     "badge":  "CLÁSSICO",
-                     "featured":  false,
-                     "description":  "O nostálgico jogo da cobrinha totalmente modernizado com gráficos fluidos, física aprimorada, rankings e suporte a múltiplos modos de jogo.",
-                     "short_description":  "Jogo clássico da cobrinha modernizado com modos especiais.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android"
-                                             ],
-                     "windows":  {
-                                     "filename":  "Snake_Game_v1.0.5_x64_Installer.exe",
-                                     "size_mb":  8.59,
-                                     "version":  "v1.0.5",
-                                     "executable":  "Snake_Game.exe"
-                                 },
-                     "android":  {
-                                     "filename":  "Snake Game_Android_v0.3.2_alpha.apk",
-                                     "size_mb":  44.1,
-                                     "version":  "1.0.0",
-                                     "package_name":  "com.example.snake_game"
-                                 },
-                     "version":  "v1.0.5",
-                     "latest_changelog":  [
-                                              "Reescrita completa do motor do jogo para Godot 4 com C# (.NET 8.0).",
-                                              "Sistema de movimentação em grade 25x25 (Grid-based) com framerate ultra-fluido.",
-                                              "Suporte nativo a controles universais: WASD e setas no Windows, Swipes touch no Android.",
-                                              "Spawn inteligente de comida garantindo zero sobreposição no corpo da cobra.",
-                                              "Novo sistema de High Score persistente e aceleração progressiva de velocidade."
-                                          ],
-                     "screenshots":  [
-                                         "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
-                                         "http://100.84.133.101/assets/screenshots/snake_screenshot_2.png"
-                                     ],
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/icon.png"
-                 },
-                 {
-                     "id":  "nexus_dashboard",
-                     "name":  "Nexus Dashboard",
-                     "title":  "Nexus Dashboard — Monitor de Cluster \u0026 Central HUD",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "icon":  "📊",
-                     "badge":  "FLUTTER",
-                     "featured":  true,
-                     "description":  "Painel de controle central para monitoramento da malha de computadores da casa e escritório. Mostra status em tempo real de S1 e S2, CPU, RAM, conexões ZeroTier, CFTV e roteador.",
-                     "short_description":  "Painel central de monitoramento dos nós e servidores do cluster.",
-                     "platforms_supported":  [
-                                                 "windows",
-                                                 "android",
-                                                 "web"
-                                             ],
-                     "windows":  {
-                                     "filename":  "NexusDashboard_v1.1.1_Installer.exe",
-                                     "size_mb":  0.31,
-                                     "version":  "v1.1.1",
-                                     "executable":  "nexus_dashboard.exe",
-                                     "latest_changelog":  [
-                                                              "Clique direto na telemetria e modo nitro 0.5s",
-                                                              "3 canais CFTV limpos e estabilizados",
-                                                              "Filtros dinâmicos de visibilidade de cluster",
-                                                              "Registro duplo no Windows para detecção perfeita"
-                                                          ],
-                                     "screenshots":  [
-                                                         "http://192.168.196.101:8080/assets/dashboard_overview.png",
-                                                         "http://192.168.196.101:8080/assets/dashboard_cameras.png"
-                                                     ]
-                                 },
-                     "android":  {
-                                     "filename":  "NexusDashboard_Android_v1.0.2.apk",
-                                     "size_mb":  42.82,
-                                     "version":  "v1.0.2",
-                                     "package_name":  "com.antigravity.nexus_dashboard",
-                                     "latest_changelog":  [
-                                                              "Reescrita completa em Flutter (Dart) de alta performance",
-                                                              "Layout Cyberpunk com gauges em tempo real de S1 e S2",
-                                                              "Grid ao vivo das câmeras CFTV e diagnóstico de rede",
-                                                              "Instalador oficial standalone executável de 1 clique",
-                                                              "Versão Web acessível no navegador na porta 8080"
-                                                          ],
-                                     "screenshots":  [
-                                                         "http://192.168.196.101:8080/assets/dashboard_overview.png",
-                                                         "http://192.168.196.101:8080/assets/dashboard_cameras.png"
-                                                     ]
-                                 },
-                     "web":  {
-                                 "url":  "http://192.168.196.101:8080/",
-                                 "version":  "v1.1.1"
-                             },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_overview.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_cameras.png"
-                                     ]
-                 },
-                 {
-                     "id":  "wappchat",
-                     "name":  "WappChat",
-                     "title":  "WappChat — WhatsApp Desktop Anti-Banner \u0026 Stealth",
-                     "category":  "social",
-                     "category_name":  "Comunicação \u0026 Social",
-                     "icon":  "💬",
-                     "badge":  "MAIS USADO",
-                     "featured":  true,
-                     "description":  "WhatsApp Web Desktop corporativo ultra-rápido com Suíte Stealth integrada: Anti-Revoke (mensagens apagadas), Ghost Read (sem ticks azuis), Ghost Typing/Audio, Modo Escritório (blur), bloqueio nativo de anúncios e tema escuro.",
-                     "short_description":  "WhatsApp Desktop rápido com bloqueio de anúncios e Suíte Stealth.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "windows":  {
-                                     "filename":  "WappChat_v0.5.2_Installer.exe",
-                                     "size_mb":  14.42,
-                                     "version":  "0.5.2",
-                                     "executable":  "WappChat.exe"
-                                 },
-                     "latest_changelog":  [
-                                              "Novo ícone oficial com cantos suavemente arredondados no padrão Squircle M3E (forjado pelo Agente Pixel).",
-                                              "Sanitização de segurança: remoção de chamadas ocultas que acionavam o falso positivo de heurística no Windows Defender.",
-                                              "Correção definitiva do layout de 2 colunas: expansão contínua em 100% de largura e altura sem barras pretas laterais ou inferiores.",
-                                              "Erradicação total do card promocional \u0027Baixar o WhatsApp para Windows\u0027 da tela inicial.",
-                                              "Suíte Stealth completa ativa (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio e Office Blur)."
-                                          ],
-                     "version":  "0.5.2",
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_2.png"
-                                     ]
-                 },
-                 {
-                     "id":  "alfred_android",
-                     "name":  "AlfredApp",
-                     "title":  "AlfredApp — Assistente Autônomo Mobile",
-                     "category":  "productivity",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "icon":  "🎩",
-                     "badge":  "IA OFICIAL",
-                     "featured":  true,
-                     "description":  "Assistente de inteligência autônoma móvel integrado ao cluster Antigravity. Executa scripts remotos, consulta métricas, dispara alertas e gerencia automações do ecossistema.",
-                     "short_description":  "Assistente inteligente conectado ao cluster para automações móveis.",
-                     "platforms_supported":  [
-                                                 "android"
-                                             ],
-                     "android":  {
-                                     "filename":  "Alfred_Android_v0.11.0.apk",
-                                     "size_mb":  0.85,
-                                     "version":  "v0.11.0",
-                                     "package_name":  "com.antigravity.alfred"
-                                 },
-                     "latest_changelog":  [
-                                              "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
-                                              "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
-                                              "TranscriÃ§Ã£o ultrarrÃ¡pida de comandos de voz com Whisper Large V3 Turbo na nuvem.",
-                                              "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
-                                              "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
-                                          ],
-                     "version":  "v0.11.0",
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/icon.png",
-                     "screenshots":  [
-                                         "http://192.168.196.101/installers/assets/alfred_screen_1.png",
-                                         "http://192.168.196.101/installers/assets/alfred_screen_2.png"
-                                     ]
-                 },
-                 {
-                     "id":  "threadsdl_android",
-                     "name":  "ThreadsDL",
-                     "title":  "ThreadsDL — Downloader de Mídia \u0026 Vídeos",
-                     "category":  "media",
-                     "category_name":  "Mídia \u0026 Ferramentas",
-                     "icon":  "📥",
-                     "badge":  "UTILITÁRIO",
-                     "featured":  false,
-                     "description":  "Utilitário multiplataforma leve e veloz para download de fotos, vídeos e áudios em alta resolução diretamente do Threads no seu dispositivo Android e computador Windows.",
-                     "short_description":  "Downloader rápido de mídias e postagens do Threads.",
-                     "platforms_supported":  [
-                                                 "android",
-                                                 "windows"
-                                             ],
-                     "android":  {
-                                     "filename":  "ThreadsDL_Android_v0.6.0.apk",
-                                     "size_mb":  50.5,
-                                     "version":  "v0.6.0",
-                                     "package_name":  "com.andre.threadsdl"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/icon.png",
-                     "windows":  {
-                                     "filename":  "ThreadsDL_v0.6.0_Installer.exe",
-                                     "size_mb":  9.3,
-                                     "version":  "v0.6.0",
-                                     "executable":  "threadsdl.exe"
-                                 },
-                     "latest_changelog":  [
-                                              "Motor Duplo de Extração: scraping direto Meta/Threads + fallback resiliente via threadsdownloader.com",
-                                              "Lançamento oficial da versão nativa para Windows Desktop com instalador leve NSIS (9.3 MB)",
-                                              "Novo pacote visual AAA Squircle com identidade neon escura desenhado pelo Agente Pixel",
-                                              "Suporte a compartilhamento instantâneo via menu Share (ACTION_SEND) no Android",
-                                              "Histórico local de downloads com re-download e abertura direta da mídia"
-                                          ]
-                 },
-                 {
-                     "id":  "smirror",
-                     "name":  "Smirror",
-                     "title":  "Smirror - Smart Mirror \u0026 Display Engine",
-                     "category":  "system",
-                     "category_name":  "Sistema \u0026 Utilitarios",
-                     "icon":  "🪞",
-                     "badge":  "NOVO",
-                     "featured":  true,
-                     "description":  "Espelhamento inteligente e motor de displays virtuais para Android (Galaxy S25 FE e outros). Conexao agil USB/Wi-Fi, displays virtuais independentes por aplicativo e launcher integrado com extracao de icones da Play Store.",
-                     "short_description":  "Espelhamento avancado de tela, displays virtuais e launcher Android no Windows.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "windows":  {
-                                     "executable":  "Smirror.exe",
-                                     "version":  "2.0.1",
-                                     "filename":  "Smirror_v2.0.1_Installer.exe",
-                                     "size_mb":  71.7
-                                 },
-                     "version":  "2.0.1",
-                     "latest_changelog":  null,
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "ATIVADO",
-                     "id":  "winrar",
-                     "category":  "system",
-                     "short_description":  "Compactador universal de alta performance pré-ativado.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "WinRAR — Compactador \u0026 Descompactador Oficial",
-                     "name":  "WinRAR",
-                     "featured":  true,
-                     "description":  "Poderoso compactador e descompactador compatível com RAR, ZIP, 7Z, ISO e dezenas de formatos. Já inclui ativação corporativa oficial zero-touch sem telas de aviso.",
-                     "version":  "7.23.0",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Versão 7.23 PT-BR com engine x64 otimizada.",
-                                              "Ativação corporativa oficial integrada automaticamente durante a instalação silenciosa.",
-                                              "Menu de contexto do Windows Explorer integrado com 1 clique."
-                                          ],
-                     "icon":  "📦",
-                     "windows":  {
-                                     "filename":  "WinRAR_v7.23_Installer.exe",
-                                     "size_mb":  5.63,
-                                     "version":  "7.23.0",
-                                     "executable":  "WinRAR.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "OPEN SOURCE",
-                     "id":  "notepadpp",
-                     "category":  "productivity",
-                     "short_description":  "Editor leve e rápido para texto, scripts e programação.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Notepad++ — Editor de Texto \u0026 Código-Fonte",
-                     "name":  "Notepad++",
-                     "featured":  true,
-                     "description":  "Editor de código-fonte e substituto avançado do Bloco de Notas, rápido, leve e com suporte a sintaxe de dezenas de linguagens de programação.",
-                     "version":  "8.6.9",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "latest_changelog":  [
-                                              "Release oficial x64 com alta estabilidade e renderização rápida de texto.",
-                                              "Instalação 100% silenciosa sem telemetria ou popups."
-                                          ],
-                     "icon":  "📝",
-                     "windows":  {
-                                     "filename":  "npp.8.6.9.Installer.x64.exe",
-                                     "size_mb":  6.24,
-                                     "version":  "8.6.9",
-                                     "executable":  "notepad++.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "OPEN SOURCE",
-                     "id":  "vlc",
-                     "category":  "media",
-                     "short_description":  "O mais famoso reprodutor universal de áudio e vídeo.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "VLC Media Player — Player Multimídia Universal",
-                     "name":  "VLC Media Player",
-                     "featured":  true,
-                     "description":  "Reprodutor multimídia livre e de código aberto capaz de reproduzir a grande maioria dos arquivos de áudio e vídeo, DVDs e fluxos de rede sem necessidade de codecs extras.",
-                     "version":  "3.0.20",
-                     "category_name":  "Mídia \u0026 Ferramentas",
-                     "latest_changelog":  [
-                                              "Versão x64 com suporte total a decodificação por hardware.",
-                                              "Sem anúncios, sem spyware e compatibilidade universal."
-                                          ],
-                     "icon":  "🎬",
-                     "windows":  {
-                                     "filename":  "vlc-3.0.20-win64.exe",
-                                     "size_mb":  42.36,
-                                     "version":  "3.0.20",
-                                     "executable":  "vlc.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "PRODUTIVIDADE",
-                     "id":  "sharex",
-                     "category":  "media",
-                     "short_description":  "Captura de tela, gravação e OCR sem anúncios.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "ShareX — Captura de Tela, Gravação \u0026 OCR",
-                     "name":  "ShareX",
-                     "featured":  true,
-                     "description":  "Ferramenta definitiva de código aberto para captura de tela, gravação de tela em GIF/MP4, reconhecimento de texto OCR e anotações rápidas.",
-                     "version":  "20.0.4",
-                     "category_name":  "Mídia \u0026 Ferramentas",
-                     "latest_changelog":  [
-                                              "Suporte a atalhos globais, captura de região e exportação instantânea.",
-                                              "Instalação silenciosa Inno Setup."
-                                          ],
-                     "icon":  "📸",
-                     "windows":  {
-                                     "filename":  "ShareX-20.0.4-setup-x64.exe",
-                                     "size_mb":  115.89,
-                                     "version":  "20.0.4",
-                                     "executable":  "ShareX.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "WEB",
-                     "id":  "chrome",
-                     "category":  "productivity",
-                     "short_description":  "Navegador web do Google rápido e seguro.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Google Chrome — Navegador Web Rápido \u0026 Seguro",
-                     "name":  "Google Chrome",
-                     "featured":  false,
-                     "description":  "O navegador web mais popular do mundo, com sincronização em nuvem, aceleração gráfica e suporte integral às ferramentas web mais modernas.",
-                     "version":  "Latest",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "latest_changelog":  [
-                                              "Instalador oficial leve com atualização contínua."
-                                          ],
-                     "icon":  "🌐",
-                     "windows":  {
-                                     "filename":  "ChromeSetup.exe",
-                                     "size_mb":  11.16,
-                                     "version":  "Latest",
-                                     "executable":  "chrome.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "PRIVACIDADE",
-                     "id":  "firefox",
-                     "category":  "productivity",
-                     "short_description":  "Navegador web open-source privativo e flexível.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Mozilla Firefox — Navegador Focado em Privacidade",
-                     "name":  "Mozilla Firefox",
-                     "featured":  false,
-                     "description":  "Navegador web independente e de código aberto dedicado à privacidade e proteção contra rastreadores.",
-                     "version":  "Latest",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "latest_changelog":  [
-                                              "Instalador web leve com motor de download rápido da Mozilla."
-                                          ],
-                     "icon":  "🦊",
-                     "windows":  {
-                                     "filename":  "Firefox Installer.exe",
-                                     "size_mb":  0.48,
-                                     "version":  "Latest",
-                                     "executable":  "firefox.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "VPN MESH",
-                     "id":  "tailscale",
-                     "category":  "system",
-                     "short_description":  "VPN mesh WireGuard ponto-a-ponto para nós Nexus.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Tailscale — Rede Privada Mesh WireGuard",
-                     "name":  "Tailscale",
-                     "featured":  false,
-                     "description":  "Conecta computadores e servidores em uma rede WireGuard peer-to-peer criptografada de altíssima velocidade. Integração com os nós do cluster Nexus.",
-                     "version":  "Latest",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Conexão mesh criptografada com suporte a IPs 100.x e tráfego LAN direto."
-                                          ],
-                     "icon":  "🔒",
-                     "windows":  {
-                                     "filename":  "tailscale-setup-latest.exe",
-                                     "size_mb":  1.33,
-                                     "version":  "Latest",
-                                     "executable":  "tailscale-ipn.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "REDE PRIVADA",
-                     "id":  "zerotier",
-                     "category":  "system",
-                     "short_description":  "Rede Ethernet virtual privada para clusters.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "ZeroTier One — SDN Virtual Network",
-                     "name":  "ZeroTier One",
-                     "featured":  false,
-                     "description":  "Cria redes Ethernet virtuais seguras entre seus dispositivos. Canal primário de comunicação entre o Andre-PC e os nós S1 e S2.",
-                     "version":  "1.16.2",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Instalador MSI com suporte a instalação limpa e reconexão autônoma."
-                                          ],
-                     "icon":  "🌐",
-                     "windows":  {
-                                     "filename":  "ZeroTierOne.msi",
-                                     "size_mb":  11.45,
-                                     "version":  "1.16.2",
-                                     "executable":  "zerotier_desktop_ui.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "STREAMING",
-                     "id":  "parsec",
-                     "category":  "system",
-                     "short_description":  "Acesso remoto ultra-rápido para desktop e jogos.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Parsec — Conexão Remota de Ultra-Baixa Latência",
-                     "name":  "Parsec",
-                     "featured":  false,
-                     "description":  "Streaming e controle remoto a 60 FPS com latência mínima, permitindo acesso fluido a desktops e jogos remotamente.",
-                     "version":  "Latest",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Executável leve para setup rápido de desktop remoto."
-                                          ],
-                     "icon":  "🎮",
-                     "windows":  {
-                                     "filename":  "parsec-windows.exe",
-                                     "size_mb":  4.2,
-                                     "version":  "Latest",
-                                     "executable":  "parsecd.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "SUPORTE",
-                     "id":  "anydesk",
-                     "category":  "system",
-                     "short_description":  "Suporte remoto rápido e leve.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "AnyDesk — Acesso \u0026 Suporte Remoto Rápido",
-                     "name":  "AnyDesk",
-                     "featured":  false,
-                     "description":  "Aplicação leve e confiável para conexão rápida de assistência técnica e controle remoto entre dispositivos.",
-                     "version":  "7.0.14",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Binário standalone oficial com suporte a instalação em 1 clique."
-                                          ],
-                     "icon":  "📡",
-                     "windows":  {
-                                     "filename":  "anydesk-7-0-14.exe",
-                                     "size_mb":  3.67,
-                                     "version":  "7.0.14",
-                                     "executable":  "AnyDesk.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "SISTEMA",
-                     "id":  "tweaker",
-                     "category":  "system",
-                     "short_description":  "Personalização profunda da barra de tarefas.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "7+ Taskbar Tweaker — Customização da Barra de Tarefas",
-                     "name":  "7+ Taskbar Tweaker",
-                     "featured":  false,
-                     "description":  "Permite configurar e customizar aspectos avançados da barra de tarefas do Windows, como desagrupamento e clique do botão do mouse.",
-                     "version":  "5.15.4",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Instalador silencioso NSIS sem propagandas."
-                                          ],
-                     "icon":  "⚙️",
-                     "windows":  {
-                                     "filename":  "7tt_setup.exe",
-                                     "size_mb":  1.77,
-                                     "version":  "5.15.4",
-                                     "executable":  "7+ Taskbar Tweaker.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "SISTEMA",
-                     "id":  "explorerpatcher",
-                     "category":  "system",
-                     "short_description":  "Restaura menus clássicos e barra de tarefas ágil.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "ExplorerPatcher — Barra de Tarefas Clássica do Windows",
-                     "name":  "ExplorerPatcher",
-                     "featured":  false,
-                     "description":  "Restaura o ambiente clássico e produtivo no Windows 11 com barra de tarefas rica e menus sem lentidão.",
-                     "version":  "26100.8457",
-                     "category_name":  "Sistema \u0026 Utilitários",
-                     "latest_changelog":  [
-                                              "Compatibilidade total com as compilações recentes do Windows 11."
-                                          ],
-                     "icon":  "🪟",
-                     "windows":  {
-                                     "filename":  "ep_setup.exe",
-                                     "size_mb":  11.67,
-                                     "version":  "26100.8457",
-                                     "executable":  "ep_setup.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_2.png"
-                                     ]
-                 },
-                 {
-                     "badge":  "DESENVOLVIMENTO",
-                     "id":  "visualstudio",
-                     "category":  "productivity",
-                     "short_description":  "Instalador oficial da IDE e compiladores C++/.NET.",
-                     "platforms_supported":  [
-                                                 "windows"
-                                             ],
-                     "title":  "Visual Studio Community — IDE \u0026 Ferramentas de Build C++/.NET",
-                     "name":  "Visual Studio Community",
-                     "featured":  false,
-                     "description":  "Ambiente de desenvolvimento integrado completo da Microsoft. Permite selecionar cargas de trabalho para C++, C#, .NET, Python e ferramentas de compilação.",
-                     "version":  "Community",
-                     "category_name":  "Produtividade \u0026 IA",
-                     "latest_changelog":  [
-                                              "Web-installer oficial leve com abertura da interface interativa da Microsoft."
-                                          ],
-                     "icon":  "💻",
-                     "windows":  {
-                                     "filename":  "VisualStudioSetup.exe",
-                                     "size_mb":  4.27,
-                                     "version":  "Community",
-                                     "executable":  "devenv.exe"
-                                 },
-                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner.png",
-                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner_card.png",
-                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/icon.png",
-                     "screenshots":  [
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_1.png",
-                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_2.png"
-                                     ]
-                 }
-             ]
+    "store_name": "Nexus App Hub",
+    "developer": "André (Antigravity)",
+    "schema_version": "3.0.0",
+    "updated_at": "2026-09-03T23:02:30-03:00",
+    "categories": [
+        {
+            "id": "games",
+            "name": "Jogos & Arcade"
+        },
+        {
+            "id": "system",
+            "name": "Sistema & Utilitários"
+        },
+        {
+            "id": "social",
+            "name": "Comunicação & Social"
+        },
+        {
+            "id": "productivity",
+            "name": "Produtividade & IA"
+        },
+        {
+            "id": "media",
+            "name": "Mídia & Ferramentas"
+        }
+    ],
+    "apps": [
+        {
+            "id": "neo_blocks",
+            "name": "Neo-Blocks",
+            "title": "Neo-Blocks — Cyberpunk Tetris Arcade",
+            "category": "games",
+            "category_name": "Jogos & Arcade",
+            "icon": "🧱",
+            "badge": "NOVO",
+            "featured": true,
+            "description": "O clássico arcade de blocos em queda livre reinventado com visual Neon Cyberpunk, Super Rotation System (SRS) canônico, 7-Bag balanceado, Hold queue, Ghost piece de projeção e controles táteis adaptáveis a 60 FPS cravados.",
+            "short_description": "O clássico arcade de blocos em versão neon cyberpunk com suporte a PC e celular.",
+            "platforms_supported": [
+                "windows",
+                "android"
+            ],
+            "windows": {
+                "filename": "NeoBlocks_v0.1.0_alpha_Installer.exe",
+                "size_mb": 71.99,
+                "version": "v0.1.0-alpha",
+                "executable": "NeoBlocks.exe"
+            },
+            "android": {
+                "filename": "NeoBlocks_Android_v0.1.0_alpha.apk",
+                "size_mb": 5.97,
+                "version": "v0.1.0-alpha",
+                "package_name": "com.antigravity.neoblocks"
+            },
+            "version": "v0.1.0-alpha",
+            "latest_changelog": [
+                "Lançamento oficial da versão Alpha v0.1.0 na divisão Nexus Arcade em Godot 4.",
+                "Super Rotation System (SRS) oficial com wall-kicks e floor-kicks matemáticos.",
+                "Gerador aleatório 7-Bag balanceado, Hold queue e Ghost piece com wireframe neon.",
+                "Controles universais: Teclado/Gamepad no Windows e botões táteis virtuais no Android.",
+                "Instalador oficial silencioso (/S) para Windows e pacote APK assinado para Android."
+            ],
+            "screenshots": [
+                "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
+                "http://192.168.196.101/assets/screenshots/neoblocks_screen_2.png"
+            ],
+            "banner": "http://192.168.196.101/assets/screenshots/neoblocks_banner.png",
+            "banner_card": "http://192.168.196.101/assets/screenshots/neoblocks_banner_card.png",
+            "icon_url": "http://192.168.196.101/assets/screenshots/neoblocks_icon.png"
+        },
+        {
+            "id": "nexus_app_hub",
+            "name": "Nexus App Hub",
+            "title": "Nexus App Hub — Central & Launcher Oficial",
+            "category": "system",
+            "category_name": "Sistema & Utilitários",
+            "icon": "⚡",
+            "badge": "OFICIAL",
+            "featured": true,
+            "description": "Central & Launcher Oficial do Ecossistema Antigravity. Auto-atualização nativa, detecção de apps e launcher unificado.",
+            "short_description": "Loja e launcher unificado em Flutter para PC e Celular.",
+            "platforms_supported": [
+                "windows",
+                "android"
+            ],
+            "windows": {
+                "executable": "NexusAppHub.exe",
+                "version": "0.3.25",
+                "filename": "NexusAppHub_v0.3.25_Installer.exe",
+                "size_mb": 11.96
+            },
+            "android": {
+                "package_name": "com.antigravity.nexus_app_hub",
+                "version": "0.3.25",
+                "filename": "NexusAppHub_Flutter_Android_v0.3.25.apk",
+                "size_mb": 22.62
+            },
+            "version": "0.3.25",
+            "latest_changelog": [
+                "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2).",
+                "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2).",
+                "Mensagens detalhadas de diagnóstico em falhas de rede."
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/screenshots/apphub_screen_2.png"
+            ]
+        },
+        {
+            "id": "space_duel",
+            "name": "Space Duel",
+            "title": "Space Duel — Shooter Espacial Arcade",
+            "category": "games",
+            "category_name": "Jogos & Arcade",
+            "icon": "🚀",
+            "badge": "DESTAQUE",
+            "featured": true,
+            "description": "Shooter espacial clássico em alta velocidade com naves customizáveis, combate intenso e suporte total a controles no PC e toque a 120 FPS no Android.",
+            "short_description": "Shooter espacial de combate intenso com suporte a PC e celular.",
+            "platforms_supported": [
+                "windows",
+                "android"
+            ],
+            "windows": {
+                "filename": "Space Duel_v2.0.0_x64.exe",
+                "size_mb": 92.5,
+                "version": "v2.0.0",
+                "executable": "Space Duel.exe"
+            },
+            "android": {
+                "filename": "Space Duel_Android_v1.1.0.apk",
+                "size_mb": 6.85,
+                "version": "v1.1.0",
+                "package_name": "com.andre.spaceduel"
+            },
+            "version": "v2.0.0",
+            "latest_changelog": [
+                "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
+                "Multiplayer P2P de alta fidelidade e baixa latência via ENet LAN",
+                "Controles reativos e precisos com suporte a teclado, mouse e controles",
+                "Novos arsenais espaciais: Canhões de Laser, Mísseis Teleguiados e Escudos",
+                "Deploy automatizado integrado à Nexus App Hub"
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_gameplay_2.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/space_duel/space_duel_menu_3.png"
+            ]
+        },
+        {
+            "id": "super_pong",
+            "name": "Super Pong",
+            "title": "Super Pong — Retro Arcade Arena",
+            "category": "games",
+            "category_name": "Jogos & Arcade",
+            "icon": "🏓",
+            "badge": "ARCADE",
+            "featured": true,
+            "description": "Reinvenção eletrizante do clássico Pong com power-ups dinâmicos, efeitos de iluminação néon e modos solo contra IA ou multiplayer local.",
+            "short_description": "Retro arena de Pong com power-ups e tema néon futurista.",
+            "platforms_supported": [
+                "windows",
+                "android"
+            ],
+            "windows": {
+                "filename": "Super Pong_v2.0.0_x64.exe",
+                "size_mb": 176.9,
+                "version": "v2.0.0",
+                "executable": "Super Pong.exe"
+            },
+            "android": {
+                "filename": "Super Pong_Android_v1.1.1.apk",
+                "size_mb": 7.0,
+                "version": "1.0",
+                "package_name": "com.antigravity.superpong"
+            },
+            "version": "1.0",
+            "latest_changelog": [
+                "Migração completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
+                "Física de rebote angular precisa e aceleração dinâmica de velocidade.",
+                "Sistema de Power-Ups na arena: Expansão de Raquete, Super Velocidade e Multi-Bola.",
+                "Inteligência Artificial (CPU) adaptativa com tracking preditivo e balanço de reflexos.",
+                "Sintetizador procedural de efeitos sonoros retrô arcade em tempo real.",
+                "Interface arcade retrô com suporte nativo a Teclado (WASD/Setas) e Gamepads analógicos."
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_2.png"
+            ]
+        },
+        {
+            "id": "snake_game",
+            "name": "Snake Game",
+            "title": "Snake Game — Cobrinha Clássica Moderna",
+            "category": "games",
+            "category_name": "Jogos & Arcade",
+            "icon": "🐍",
+            "badge": "CLÁSSICO",
+            "featured": false,
+            "description": "O nostálgico jogo da cobrinha totalmente modernizado com gráficos fluidos, física aprimorada, rankings e suporte a múltiplos modos de jogo.",
+            "short_description": "Jogo clássico da cobrinha modernizado com modos especiais.",
+            "platforms_supported": [
+                "windows",
+                "android"
+            ],
+            "windows": {
+                "filename": "Snake_Game_v1.0.5_x64_Installer.exe",
+                "size_mb": 8.59,
+                "version": "v1.0.5",
+                "executable": "Snake_Game.exe"
+            },
+            "android": {
+                "filename": "Snake Game_Android_v0.3.2_alpha.apk",
+                "size_mb": 44.1,
+                "version": "1.0.0",
+                "package_name": "com.example.snake_game"
+            },
+            "version": "v1.0.5",
+            "latest_changelog": [
+                "Reescrita completa do motor do jogo para Godot 4 com C# (.NET 8.0).",
+                "Sistema de movimentação em grade 25x25 (Grid-based) com framerate ultra-fluido.",
+                "Suporte nativo a controles universais: WASD e setas no Windows, Swipes touch no Android.",
+                "Spawn inteligente de comida garantindo zero sobreposição no corpo da cobra.",
+                "Novo sistema de High Score persistente e aceleração progressiva de velocidade."
+            ],
+            "screenshots": [
+                "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
+                "http://100.84.133.101/assets/screenshots/snake_screenshot_2.png"
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/icon.png"
+        },
+        {
+            "id": "nexus_dashboard",
+            "name": "Nexus Dashboard",
+            "title": "Nexus Dashboard — Monitor de Cluster & Central HUD",
+            "category": "system",
+            "category_name": "Sistema & Utilitários",
+            "icon": "📊",
+            "badge": "FLUTTER",
+            "featured": true,
+            "description": "Painel de controle central para monitoramento da malha de computadores da casa e escritório. Mostra status em tempo real de S1 e S2, CPU, RAM, conexões ZeroTier, CFTV e roteador.",
+            "short_description": "Painel central de monitoramento dos nós e servidores do cluster.",
+            "platforms_supported": [
+                "windows",
+                "android",
+                "web"
+            ],
+            "windows": {
+                "filename": "NexusDashboard_v1.2.0_Installer.exe",
+                "size_mb": 0.69,
+                "version": "v1.2.0",
+                "executable": "nexus_dashboard.exe",
+                "latest_changelog": [
+                    "Aplicação desktop 100% nativa Windows (.NET / WinForms / WebView2) - sem processo msedge.exe avulso",
+                    "Bloqueio estrito de múltiplas instâncias (Single-Instance Mutex) trazendo a janela existente ao topo",
+                    "Remoção total de menus de contexto do navegador e atalhos de browser para experiência nativa pura",
+                    "Gerenciamento dinâmico de novos computadores e nós na malha via Hub (botão Novo Dispositivo)"
+                ],
+                "screenshots": [
+                    "http://192.168.196.101:8080/assets/dashboard_overview.png",
+                    "http://192.168.196.101:8080/assets/dashboard_cameras.png"
+                ]
+            },
+            "android": {
+                "filename": "NexusDashboard_Android_v1.0.2.apk",
+                "size_mb": 42.82,
+                "version": "v1.0.2",
+                "package_name": "com.antigravity.nexus_dashboard",
+                "latest_changelog": [
+                    "Reescrita completa em Flutter (Dart) de alta performance",
+                    "Layout Cyberpunk com gauges em tempo real de S1 e S2",
+                    "Grid ao vivo das câmeras CFTV e diagnóstico de rede",
+                    "Instalador oficial standalone executável de 1 clique",
+                    "Versão Web acessível no navegador na porta 8080"
+                ],
+                "screenshots": [
+                    "http://192.168.196.101:8080/assets/dashboard_overview.png",
+                    "http://192.168.196.101:8080/assets/dashboard_cameras.png"
+                ]
+            },
+            "web": {
+                "url": "http://192.168.196.101:8080/",
+                "version": "v1.2.0"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_overview.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_cameras.png"
+            ]
+        },
+        {
+            "id": "wappchat",
+            "name": "WappChat",
+            "title": "WappChat — WhatsApp Desktop Anti-Banner & Stealth",
+            "category": "social",
+            "category_name": "Comunicação & Social",
+            "icon": "💬",
+            "badge": "MAIS USADO",
+            "featured": true,
+            "description": "WhatsApp Web Desktop corporativo ultra-rápido com Suíte Stealth integrada: Anti-Revoke (mensagens apagadas), Ghost Read (sem ticks azuis), Ghost Typing/Audio, Modo Escritório (blur), bloqueio nativo de anúncios e tema escuro.",
+            "short_description": "WhatsApp Desktop rápido com bloqueio de anúncios e Suíte Stealth.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "windows": {
+                "filename": "WappChat_v0.5.2_Installer.exe",
+                "size_mb": 14.42,
+                "version": "0.5.2",
+                "executable": "WappChat.exe"
+            },
+            "latest_changelog": [
+                "Novo ícone oficial com cantos suavemente arredondados no padrão Squircle M3E (forjado pelo Agente Pixel).",
+                "Sanitização de segurança: remoção de chamadas ocultas que acionavam o falso positivo de heurística no Windows Defender.",
+                "Correção definitiva do layout de 2 colunas: expansão contínua em 100% de largura e altura sem barras pretas laterais ou inferiores.",
+                "Erradicação total do card promocional 'Baixar o WhatsApp para Windows' da tela inicial.",
+                "Suíte Stealth completa ativa (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio e Office Blur)."
+            ],
+            "version": "0.5.2",
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/screenshots/wappchat_screen_2.png"
+            ]
+        },
+        {
+            "id": "alfred_android",
+            "name": "AlfredApp",
+            "title": "AlfredApp — Assistente Autônomo Mobile",
+            "category": "productivity",
+            "category_name": "Produtividade & IA",
+            "icon": "🎩",
+            "badge": "IA OFICIAL",
+            "featured": true,
+            "description": "Assistente de inteligência autônoma móvel integrado ao cluster Antigravity. Executa scripts remotos, consulta métricas, dispara alertas e gerencia automações do ecossistema.",
+            "short_description": "Assistente inteligente conectado ao cluster para automações móveis.",
+            "platforms_supported": [
+                "android"
+            ],
+            "android": {
+                "filename": "Alfred_Android_v0.11.0.apk",
+                "size_mb": 0.85,
+                "version": "v0.11.0",
+                "package_name": "com.antigravity.alfred"
+            },
+            "latest_changelog": [
+                "Nova Identidade Visual da OperaÃ§Ã£o Showcase Total pelo Agente Pixel (mipmaps adaptativos em alta resoluÃ§Ã£o).",
+                "Voz Neural AutÃªntica HD com Edge-TTS AntonioNeural (mesmo motor de alta fidelidade do Jarvis).",
+                "TranscriÃ§Ã£o ultrarrÃ¡pida de comandos de voz com Whisper Large V3 Turbo na nuvem.",
+                "Arquitetura Multi-Brain Router (Groq 120B, Codestral, Qwen 27B, Cohere 104B e Tavily Web Search).",
+                "Suporte nativo ao Android 15 e Android 16 (Samsung Galaxy S25 FE) com esquemas de assinatura v2 e v3."
+            ],
+            "version": "v0.11.0",
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/alfred/icon.png",
+            "screenshots": [
+                "http://192.168.196.101/installers/assets/alfred_screen_1.png",
+                "http://192.168.196.101/installers/assets/alfred_screen_2.png"
+            ]
+        },
+        {
+            "id": "threadsdl_android",
+            "name": "ThreadsDL",
+            "title": "ThreadsDL — Downloader de Mídia & Vídeos",
+            "category": "media",
+            "category_name": "Mídia & Ferramentas",
+            "icon": "📥",
+            "badge": "UTILITÁRIO",
+            "featured": false,
+            "description": "Utilitário multiplataforma leve e veloz para download de fotos, vídeos e áudios em alta resolução diretamente do Threads no seu dispositivo Android e computador Windows.",
+            "short_description": "Downloader rápido de mídias e postagens do Threads.",
+            "platforms_supported": [
+                "android",
+                "windows"
+            ],
+            "android": {
+                "filename": "ThreadsDL_Android_v0.6.0.apk",
+                "size_mb": 50.5,
+                "version": "v0.6.0",
+                "package_name": "com.andre.threadsdl"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/threadsdl/icon.png",
+            "windows": {
+                "filename": "ThreadsDL_v0.6.0_Installer.exe",
+                "size_mb": 9.3,
+                "version": "v0.6.0",
+                "executable": "threadsdl.exe"
+            },
+            "latest_changelog": [
+                "Motor Duplo de Extração: scraping direto Meta/Threads + fallback resiliente via threadsdownloader.com",
+                "Lançamento oficial da versão nativa para Windows Desktop com instalador leve NSIS (9.3 MB)",
+                "Novo pacote visual AAA Squircle com identidade neon escura desenhado pelo Agente Pixel",
+                "Suporte a compartilhamento instantâneo via menu Share (ACTION_SEND) no Android",
+                "Histórico local de downloads com re-download e abertura direta da mídia"
+            ]
+        },
+        {
+            "id": "smirror",
+            "name": "Smirror",
+            "title": "Smirror - Smart Mirror & Display Engine",
+            "category": "system",
+            "category_name": "Sistema & Utilitarios",
+            "icon": "🪞",
+            "badge": "NOVO",
+            "featured": true,
+            "description": "Espelhamento inteligente e motor de displays virtuais para Android (Galaxy S25 FE e outros). Conexao agil USB/Wi-Fi, displays virtuais independentes por aplicativo e launcher integrado com extracao de icones da Play Store.",
+            "short_description": "Espelhamento avancado de tela, displays virtuais e launcher Android no Windows.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "windows": {
+                "executable": "Smirror.exe",
+                "version": "2.0.1",
+                "filename": "Smirror_v2.0.1_Installer.exe",
+                "size_mb": 71.7
+            },
+            "version": "2.0.1",
+            "latest_changelog": null,
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/screenshots/smirror_screen_2.png"
+            ]
+        },
+        {
+            "badge": "ATIVADO",
+            "id": "winrar",
+            "category": "system",
+            "short_description": "Compactador universal de alta performance pré-ativado.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "WinRAR — Compactador & Descompactador Oficial",
+            "name": "WinRAR",
+            "featured": true,
+            "description": "Poderoso compactador e descompactador compatível com RAR, ZIP, 7Z, ISO e dezenas de formatos. Já inclui ativação corporativa oficial zero-touch sem telas de aviso.",
+            "version": "7.23.0",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Versão 7.23 PT-BR com engine x64 otimizada.",
+                "Ativação corporativa oficial integrada automaticamente durante a instalação silenciosa.",
+                "Menu de contexto do Windows Explorer integrado com 1 clique."
+            ],
+            "icon": "📦",
+            "windows": {
+                "filename": "WinRAR_v7.23_Installer.exe",
+                "size_mb": 5.63,
+                "version": "7.23.0",
+                "executable": "WinRAR.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/winrar/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "OPEN SOURCE",
+            "id": "notepadpp",
+            "category": "productivity",
+            "short_description": "Editor leve e rápido para texto, scripts e programação.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Notepad++ — Editor de Texto & Código-Fonte",
+            "name": "Notepad++",
+            "featured": true,
+            "description": "Editor de código-fonte e substituto avançado do Bloco de Notas, rápido, leve e com suporte a sintaxe de dezenas de linguagens de programação.",
+            "version": "8.6.9",
+            "category_name": "Produtividade & IA",
+            "latest_changelog": [
+                "Release oficial x64 com alta estabilidade e renderização rápida de texto.",
+                "Instalação 100% silenciosa sem telemetria ou popups."
+            ],
+            "icon": "📝",
+            "windows": {
+                "filename": "npp.8.6.9.Installer.x64.exe",
+                "size_mb": 6.24,
+                "version": "8.6.9",
+                "executable": "notepad++.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/notepadpp/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "OPEN SOURCE",
+            "id": "vlc",
+            "category": "media",
+            "short_description": "O mais famoso reprodutor universal de áudio e vídeo.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "VLC Media Player — Player Multimídia Universal",
+            "name": "VLC Media Player",
+            "featured": true,
+            "description": "Reprodutor multimídia livre e de código aberto capaz de reproduzir a grande maioria dos arquivos de áudio e vídeo, DVDs e fluxos de rede sem necessidade de codecs extras.",
+            "version": "3.0.20",
+            "category_name": "Mídia & Ferramentas",
+            "latest_changelog": [
+                "Versão x64 com suporte total a decodificação por hardware.",
+                "Sem anúncios, sem spyware e compatibilidade universal."
+            ],
+            "icon": "🎬",
+            "windows": {
+                "filename": "vlc-3.0.20-win64.exe",
+                "size_mb": 42.36,
+                "version": "3.0.20",
+                "executable": "vlc.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/vlc/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "PRODUTIVIDADE",
+            "id": "sharex",
+            "category": "media",
+            "short_description": "Captura de tela, gravação e OCR sem anúncios.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "ShareX — Captura de Tela, Gravação & OCR",
+            "name": "ShareX",
+            "featured": true,
+            "description": "Ferramenta definitiva de código aberto para captura de tela, gravação de tela em GIF/MP4, reconhecimento de texto OCR e anotações rápidas.",
+            "version": "20.0.4",
+            "category_name": "Mídia & Ferramentas",
+            "latest_changelog": [
+                "Suporte a atalhos globais, captura de região e exportação instantânea.",
+                "Instalação silenciosa Inno Setup."
+            ],
+            "icon": "📸",
+            "windows": {
+                "filename": "ShareX-20.0.4-setup-x64.exe",
+                "size_mb": 115.89,
+                "version": "20.0.4",
+                "executable": "ShareX.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/sharex/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "WEB",
+            "id": "chrome",
+            "category": "productivity",
+            "short_description": "Navegador web do Google rápido e seguro.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Google Chrome — Navegador Web Rápido & Seguro",
+            "name": "Google Chrome",
+            "featured": false,
+            "description": "O navegador web mais popular do mundo, com sincronização em nuvem, aceleração gráfica e suporte integral às ferramentas web mais modernas.",
+            "version": "Latest",
+            "category_name": "Produtividade & IA",
+            "latest_changelog": [
+                "Instalador oficial leve com atualização contínua."
+            ],
+            "icon": "🌐",
+            "windows": {
+                "filename": "ChromeSetup.exe",
+                "size_mb": 11.16,
+                "version": "Latest",
+                "executable": "chrome.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chrome/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "PRIVACIDADE",
+            "id": "firefox",
+            "category": "productivity",
+            "short_description": "Navegador web open-source privativo e flexível.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Mozilla Firefox — Navegador Focado em Privacidade",
+            "name": "Mozilla Firefox",
+            "featured": false,
+            "description": "Navegador web independente e de código aberto dedicado à privacidade e proteção contra rastreadores.",
+            "version": "Latest",
+            "category_name": "Produtividade & IA",
+            "latest_changelog": [
+                "Instalador web leve com motor de download rápido da Mozilla."
+            ],
+            "icon": "🦊",
+            "windows": {
+                "filename": "Firefox Installer.exe",
+                "size_mb": 0.48,
+                "version": "Latest",
+                "executable": "firefox.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/firefox/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "VPN MESH",
+            "id": "tailscale",
+            "category": "system",
+            "short_description": "VPN mesh WireGuard ponto-a-ponto para nós Nexus.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Tailscale — Rede Privada Mesh WireGuard",
+            "name": "Tailscale",
+            "featured": false,
+            "description": "Conecta computadores e servidores em uma rede WireGuard peer-to-peer criptografada de altíssima velocidade. Integração com os nós do cluster Nexus.",
+            "version": "Latest",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Conexão mesh criptografada com suporte a IPs 100.x e tráfego LAN direto."
+            ],
+            "icon": "🔒",
+            "windows": {
+                "filename": "tailscale-setup-latest.exe",
+                "size_mb": 1.33,
+                "version": "Latest",
+                "executable": "tailscale-ipn.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tailscale/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "REDE PRIVADA",
+            "id": "zerotier",
+            "category": "system",
+            "short_description": "Rede Ethernet virtual privada para clusters.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "ZeroTier One — SDN Virtual Network",
+            "name": "ZeroTier One",
+            "featured": false,
+            "description": "Cria redes Ethernet virtuais seguras entre seus dispositivos. Canal primário de comunicação entre o Andre-PC e os nós S1 e S2.",
+            "version": "1.16.2",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Instalador MSI com suporte a instalação limpa e reconexão autônoma."
+            ],
+            "icon": "🌐",
+            "windows": {
+                "filename": "ZeroTierOne.msi",
+                "size_mb": 11.45,
+                "version": "1.16.2",
+                "executable": "zerotier_desktop_ui.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/zerotier/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "STREAMING",
+            "id": "parsec",
+            "category": "system",
+            "short_description": "Acesso remoto ultra-rápido para desktop e jogos.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Parsec — Conexão Remota de Ultra-Baixa Latência",
+            "name": "Parsec",
+            "featured": false,
+            "description": "Streaming e controle remoto a 60 FPS com latência mínima, permitindo acesso fluido a desktops e jogos remotamente.",
+            "version": "Latest",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Executável leve para setup rápido de desktop remoto."
+            ],
+            "icon": "🎮",
+            "windows": {
+                "filename": "parsec-windows.exe",
+                "size_mb": 4.2,
+                "version": "Latest",
+                "executable": "parsecd.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/parsec/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "SUPORTE",
+            "id": "anydesk",
+            "category": "system",
+            "short_description": "Suporte remoto rápido e leve.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "AnyDesk — Acesso & Suporte Remoto Rápido",
+            "name": "AnyDesk",
+            "featured": false,
+            "description": "Aplicação leve e confiável para conexão rápida de assistência técnica e controle remoto entre dispositivos.",
+            "version": "7.0.14",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Binário standalone oficial com suporte a instalação em 1 clique."
+            ],
+            "icon": "📡",
+            "windows": {
+                "filename": "anydesk-7-0-14.exe",
+                "size_mb": 3.67,
+                "version": "7.0.14",
+                "executable": "AnyDesk.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/anydesk/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "SISTEMA",
+            "id": "tweaker",
+            "category": "system",
+            "short_description": "Personalização profunda da barra de tarefas.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "7+ Taskbar Tweaker — Customização da Barra de Tarefas",
+            "name": "7+ Taskbar Tweaker",
+            "featured": false,
+            "description": "Permite configurar e customizar aspectos avançados da barra de tarefas do Windows, como desagrupamento e clique do botão do mouse.",
+            "version": "5.15.4",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Instalador silencioso NSIS sem propagandas."
+            ],
+            "icon": "⚙️",
+            "windows": {
+                "filename": "7tt_setup.exe",
+                "size_mb": 1.77,
+                "version": "5.15.4",
+                "executable": "7+ Taskbar Tweaker.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/tweaker/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "SISTEMA",
+            "id": "explorerpatcher",
+            "category": "system",
+            "short_description": "Restaura menus clássicos e barra de tarefas ágil.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "ExplorerPatcher — Barra de Tarefas Clássica do Windows",
+            "name": "ExplorerPatcher",
+            "featured": false,
+            "description": "Restaura o ambiente clássico e produtivo no Windows 11 com barra de tarefas rica e menus sem lentidão.",
+            "version": "26100.8457",
+            "category_name": "Sistema & Utilitários",
+            "latest_changelog": [
+                "Compatibilidade total com as compilações recentes do Windows 11."
+            ],
+            "icon": "🪟",
+            "windows": {
+                "filename": "ep_setup.exe",
+                "size_mb": 11.67,
+                "version": "26100.8457",
+                "executable": "ep_setup.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/explorerpatcher/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "badge": "DESENVOLVIMENTO",
+            "id": "visualstudio",
+            "category": "productivity",
+            "short_description": "Instalador oficial da IDE e compiladores C++/.NET.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "title": "Visual Studio Community — IDE & Ferramentas de Build C++/.NET",
+            "name": "Visual Studio Community",
+            "featured": false,
+            "description": "Ambiente de desenvolvimento integrado completo da Microsoft. Permite selecionar cargas de trabalho para C++, C#, .NET, Python e ferramentas de compilação.",
+            "version": "Community",
+            "category_name": "Produtividade & IA",
+            "latest_changelog": [
+                "Web-installer oficial leve com abertura da interface interativa da Microsoft."
+            ],
+            "icon": "💻",
+            "windows": {
+                "filename": "VisualStudioSetup.exe",
+                "size_mb": 4.27,
+                "version": "Community",
+                "executable": "devenv.exe"
+            },
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_2.png"
+            ]
+        }
+    ]
 }
