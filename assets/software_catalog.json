@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-03T22:55:41-03:00",
+    "updated_at":  "2026-09-03T23:02:30-03:00",
     "categories":  [
                        {
                            "id":  "games",
@@ -258,9 +258,9 @@
                                                  "web"
                                              ],
                      "windows":  {
-                                     "filename":  "NexusDashboard_v1.1.0_Installer.exe",
+                                     "filename":  "NexusDashboard_v1.1.1_Installer.exe",
                                      "size_mb":  0.31,
-                                     "version":  "v1.1.0",
+                                     "version":  "v1.1.1",
                                      "executable":  "nexus_dashboard.exe",
                                      "latest_changelog":  [
                                                               "Clique direto na telemetria e modo nitro 0.5s",
@@ -292,7 +292,7 @@
                                  },
                      "web":  {
                                  "url":  "http://192.168.196.101:8080/",
-                                 "version":  "v1.1.0"
+                                 "version":  "v1.1.1"
                              },
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",
