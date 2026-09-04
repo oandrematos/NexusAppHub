@@ -193,18 +193,39 @@ class AppListTileWidget extends StatelessWidget {
                   ),
                 )
               else if (!isAvailable)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: AppColors.border),
-                  ),
-                  child: Text(
-                    isAndroid ? 'Apenas PC' : 'Apenas Celular',
-                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
-                  ),
-                )
+                if (app.platformsSupported.contains('linux') && !app.platformsSupported.contains(isAndroid ? 'android' : 'windows'))
+                  FilledButton.tonal(
+                    onPressed: onTap,
+                    style: FilledButton.styleFrom(
+                      backgroundColor: const Color(0xFF0F172A),
+                      foregroundColor: AppColors.accentCyan,
+                      side: const BorderSide(color: AppColors.accentCyan, width: 0.8),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      minimumSize: const Size(68, 34),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.terminal_rounded, size: 14, color: AppColors.accentCyan),
+                        SizedBox(width: 4),
+                        Text('Linux', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  )
+                else
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.border),
+                    ),
+                    child: Text(
+                      isAndroid ? 'Apenas PC' : 'Apenas Celular',
+                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                    ),
+                  )
               else
                 FilledButton.tonal(
                   onPressed: onAction,

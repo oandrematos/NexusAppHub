@@ -235,7 +235,8 @@ class HomeViewModel extends ChangeNotifier {
       final matchesPlatform = _selectedPlatform == 'all' ||
           app.platformsSupported.contains(_selectedPlatform) ||
           (_selectedPlatform == 'windows' && app.windows != null) ||
-          (_selectedPlatform == 'android' && app.android != null);
+          (_selectedPlatform == 'android' && app.android != null) ||
+          (_selectedPlatform == 'linux' && (app.platformsSupported.contains('linux') || app.linux != null));
 
       return matchesSearch && matchesCategory && matchesPlatform;
     }).toList();
@@ -270,6 +271,7 @@ class HomeViewModel extends ChangeNotifier {
     if (isAppProtected(app.id)) {
       final authorized = await _requestAppPassword(context, app);
       if (!authorized) return;
+      if (!context.mounted) return;
     }
 
     await installApp(app, context);

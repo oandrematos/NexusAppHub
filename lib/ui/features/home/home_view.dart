@@ -138,6 +138,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                           _buildPlatformChip(vm, 'windows', 'Windows (PC)', Icons.desktop_windows_rounded),
                           const SizedBox(width: 8),
                           _buildPlatformChip(vm, 'android', 'Android (Celular)', Icons.phone_android_rounded),
+                          const SizedBox(width: 8),
+                          _buildPlatformChip(vm, 'linux', 'Linux (Nós & HUD)', Icons.terminal_rounded),
                         ],
                       ),
                     ),
@@ -210,6 +212,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
     final gameApps = all.where((a) => a.category == 'games').toList();
     final toolApps = all.where((a) => a.category == 'productivity' || a.category == 'media' || a.category == 'system').toList();
+    final linuxApps = all.where((a) => a.platformsSupported.contains('linux') || a.linux != null).toList();
     final featuredForCarousel = vm.featuredApps.isNotEmpty ? vm.featuredApps : all.take(5).toList();
 
     return SliverList(
@@ -337,6 +340,66 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
                     return Column(
                       children: toolApps.map((app) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: _buildTile(vm, app),
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+
+        // 5. Seção "Cluster Linux & Telemetria"
+        if (linuxApps.isNotEmpty) ...[
+          const SizedBox(height: 28),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.terminal_rounded, color: AppColors.accentCyan, size: 22),
+                    SizedBox(width: 8),
+                    Text(
+                      'Cluster Linux & Telemetria',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.3,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                const Text(
+                  'HUDs de terminal AMOLED, TUIs e ferramentas de monitoramento para nós de rede',
+                  style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                ),
+                const SizedBox(height: 14),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final useTwoCols = constraints.maxWidth >= 700;
+                    if (useTwoCols) {
+                      return Wrap(
+                        spacing: 12,
+                        runSpacing: 10,
+                        children: linuxApps.map((app) {
+                          return SizedBox(
+                            width: (constraints.maxWidth - 12) / 2,
+                            child: _buildTile(vm, app),
+                          );
+                        }).toList(),
+                      );
+                    }
+
+                    return Column(
+                      children: linuxApps.map((app) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: _buildTile(vm, app),

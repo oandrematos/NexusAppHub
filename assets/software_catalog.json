@@ -2,7 +2,7 @@
     "store_name": "Nexus App Hub",
     "developer": "André (Antigravity)",
     "schema_version": "3.0.0",
-    "updated_at": "2026-09-03T23:02:30-03:00",
+    "updated_at": "2026-09-04T13:52:00-03:00",
     "categories": [
         {
             "id": "games",
@@ -861,6 +861,82 @@
             "screenshots": [
                 "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_1.png",
                 "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/visualstudio/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "id": "nexus_kitty_hud",
+            "name": "Nexus Kitty HUD",
+            "title": "Nexus Kitty HUD — Cluster Telemetry & TUI Engine",
+            "category": "system",
+            "category_name": "Telemetria & Monitoramento",
+            "icon": "🛰️",
+            "badge": "OFICIAL",
+            "featured": true,
+            "description": "Painel de telemetria unificado para Kitty Terminal com alinhamento laser vertical milimétrico, visual AMOLED puro sem bordas, 8 processos do sistema monitorados em tempo real, velocidade de rede e barra de progresso global na 9ª linha.",
+            "short_description": "HUD de telemetria de cluster AMOLED para Kitty Terminal exclusivo para Linux.",
+            "platforms_supported": [
+                "linux"
+            ],
+            "linux": {
+                "filename": "install_kitty_hud.sh",
+                "package_deb": "nexus-kitty-hud_1.0.0_all.deb",
+                "bundle_run": "nexus-kitty-hud-installer.run",
+                "tarball": "nexus-kitty-hud_1.0.0.tar.gz",
+                "size_mb": 0.03,
+                "version": "1.0.0",
+                "executable": "/opt/antigravity_hud.py",
+                "systemd_service": "antigravity-hud.service",
+                "terminal": "kitty"
+            },
+            "version": "1.0.0",
+            "latest_changelog": [
+                "Lançamento oficial v1.0.0 empacotado para o Nexus App Hub.",
+                "Alinhamento vertical milimétrico das barras de progresso (Laser Alignment v10).",
+                "8 processos reais dinâmicos sem espaço ocioso e barra de progresso global na 9ª linha.",
+                "Suporte a inicialização automática via systemd (antigravity-hud.service).",
+                "Calibração de 36 linhas rígidas sem scroll no Kitty Terminal com tema AMOLED puro."
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_kitty_hud/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_kitty_hud/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_kitty_hud/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_kitty_hud/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_kitty_hud/screenshots/screen_2.png"
+            ]
+        },
+        {
+            "id": "gping",
+            "name": "gping (Ping Gráfico)",
+            "title": "gping — Ping Gráfico em Tempo Real para Terminal",
+            "category": "system",
+            "category_name": "Telemetria & Monitoramento",
+            "icon": "📈",
+            "badge": "NOVO",
+            "featured": false,
+            "description": "Utilitário TUI ultraleve escrito em Rust que plota gráficos de latência e tempo de resposta de múltiplos hosts simultaneamente no próprio terminal, com consumo mínimo de CPU e RAM.",
+            "short_description": "Ping interativo com gráfico de latência em tempo real para terminal Linux.",
+            "platforms_supported": [
+                "linux"
+            ],
+            "linux": {
+                "filename": "install_gping.sh",
+                "version": "1.17.3",
+                "executable": "/usr/local/bin/gping",
+                "size_mb": 4.8
+            },
+            "version": "1.17.3",
+            "latest_changelog": [
+                "Inclusão oficial na Nexus App Hub sob curadoria do Agente Triton.",
+                "Compilação estática (musl) compatível com x86_64, ARM64 e ARMhf sem dependências externas.",
+                "Suporte a comparação de múltiplos hosts na mesma tela com cores distintas.",
+                "Overhead irrisório (<10MB RAM), homologado para nós modestos AMD E-350 e Celeron 847."
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/screenshots/screen_2.png"
             ]
         }
     ]

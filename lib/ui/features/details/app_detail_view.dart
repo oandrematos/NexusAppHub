@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../data/models/app_item.dart';
 import '../../core/app_colors.dart';
@@ -13,6 +14,30 @@ class AppDetailView extends StatelessWidget {
     super.key,
     required this.app,
   });
+
+  void _copyLinuxCommand(BuildContext context, AppItem app) {
+    final scriptName = app.linux?.filename ?? 'install_${app.id}.sh';
+    final cmd = 'curl -sSL http://192.168.0.246/installers/$scriptName | bash';
+    Clipboard.setData(ClipboardData(text: cmd));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.check_circle_outline, color: Colors.black, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                'Comando copiado: $cmd',
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: AppColors.accentCyan,
+        duration: const Duration(seconds: 4),
+      ),
+    );
+  }
 
   String _formatVersion(String? v) {
     if (v == null || v.isEmpty) return 'v1.0.0';
@@ -267,11 +292,17 @@ class AppDetailView extends StatelessWidget {
                                 child: SizedBox(
                                   height: 52,
                                   child: ElevatedButton.icon(
-                                    onPressed: (isAvailable && !isDownloading) ? () => vm.handleAction(app, context) : null,
+                                    onPressed: (isAvailable && !isDownloading)
+                                        ? () => vm.handleAction(app, context)
+                                        : (app.platformsSupported.contains('linux')
+                                            ? () => _copyLinuxCommand(context, app)
+                                            : null),
                                     icon: Icon(
                                       isInstalled
                                           ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
-                                          : (vm.isAppProtected(app.id) ? Icons.lock_outline : Icons.download_rounded),
+                                          : (app.platformsSupported.contains('linux') && !isAvailable
+                                              ? Icons.terminal_rounded
+                                              : (vm.isAppProtected(app.id) ? Icons.lock_outline : Icons.download_rounded)),
                                       size: 24,
                                     ),
                                     label: Text(
@@ -281,13 +312,26 @@ class AppDetailView extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: hasUpdate
                                           ? Colors.orangeAccent
-                                          : (isInstalled ? AppColors.surface : AppColors.accentCyan),
-                                      foregroundColor: (hasUpdate || !isInstalled) ? Colors.black : AppColors.textPrimary,
+                                          : (isInstalled
+                                              ? AppColors.surface
+                                              : (app.platformsSupported.contains('linux') && !isAvailable
+                                                  ? AppColors.surface
+                                                  : AppColors.accentCyan)),
+                                      foregroundColor: (hasUpdate || (!isInstalled && isAvailable))
+                                          ? Colors.black
+                                          : (app.platformsSupported.contains('linux') && !isAvailable
+                                              ? AppColors.accentCyan
+                                              : AppColors.textPrimary),
                                       elevation: 4,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(14),
-                                        side: isInstalled && !hasUpdate
-                                            ? const BorderSide(color: AppColors.border)
+                                        side: (isInstalled && !hasUpdate) || (app.platformsSupported.contains('linux') && !isAvailable)
+                                            ? BorderSide(
+                                                color: app.platformsSupported.contains('linux') && !isAvailable
+                                                    ? AppColors.accentCyan
+                                                    : AppColors.border,
+                                                width: 1.2,
+                                              )
                                             : BorderSide.none,
                                       ),
                                     ),
@@ -321,6 +365,91 @@ class AppDetailView extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 16),
+
+                          // Bloco de Instalação no Linux (Terminal / Kitty)
+                          if (app.linux != null || app.platformsSupported.contains('linux')) ...[
+                            Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0F172A),
+                                borderRadius: BorderRadius.circular(14),
+                                border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.4), width: 1.2),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.terminal_rounded, color: AppColors.accentCyan, size: 20),
+                                      const SizedBox(width: 8),
+                                      const Text(
+                                        'Instalação no Linux (Nós & HUD)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.textPrimary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      InkWell(
+                                        onTap: () => _copyLinuxCommand(context, app),
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.accentCyan.withValues(alpha: 0.15),
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.3)),
+                                          ),
+                                          child: const Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(Icons.copy_rounded, size: 14, color: AppColors.accentCyan),
+                                              SizedBox(width: 4),
+                                              Text(
+                                                'Copiar',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.accentCyan,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withValues(alpha: 0.6),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.white10),
+                                    ),
+                                    child: SelectableText(
+                                      'curl -sSL http://192.168.0.246/installers/${app.linux?.filename ?? 'install_${app.id}.sh'} | bash',
+                                      style: const TextStyle(
+                                        fontFamily: 'monospace',
+                                        fontSize: 12,
+                                        color: Color(0xFF38BDF8),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    (app.linux?.terminal != null && app.linux!.terminal!.isNotEmpty)
+                                        ? 'Executável otimizado para Kitty Terminal / TUI (compatível com RV415 & Celeron).'
+                                        : 'Script de instalação com verificação SHA-256 e integração ao sistema.',
+                                    style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
 
                           // Gestão de Fonte de Instalação e Atualizações
                           if (!isAndroid && app.windows != null) ...[
@@ -446,8 +575,16 @@ class AppDetailView extends StatelessWidget {
                                 _buildDivider(),
                                 _buildSpecItem(
                                   label: 'PLATAFORMA',
-                                  value: isAndroid ? 'Android' : 'Windows x64',
-                                  icon: isAndroid ? Icons.android : Icons.desktop_windows,
+                                  value: isAndroid
+                                      ? 'Android'
+                                      : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
+                                          ? 'Linux (Nós/HUD)'
+                                          : 'Windows x64'),
+                                  icon: isAndroid
+                                      ? Icons.android
+                                      : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
+                                          ? Icons.terminal_rounded
+                                          : Icons.desktop_windows),
                                 ),
                               ],
                             ),

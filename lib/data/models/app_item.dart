@@ -13,6 +13,7 @@ class AppItem {
   final List<String> platformsSupported;
   final PlatformConfig? windows;
   final PlatformConfig? android;
+  final PlatformConfig? linux;
   final List<String>? latestChangelog;
   final List<String>? screenshots;
   final String? banner;
@@ -33,6 +34,7 @@ class AppItem {
     required this.platformsSupported,
     this.windows,
     this.android,
+    this.linux,
     this.latestChangelog,
     this.screenshots,
     this.banner,
@@ -49,19 +51,28 @@ class AppItem {
   }
 
   String? getFilename(bool isAndroid) {
-    return isAndroid ? android?.filename : windows?.filename;
+    if (isAndroid) return android?.filename;
+    if (windows != null) return windows?.filename;
+    return linux?.filename;
   }
 
   double? getSizeMb(bool isAndroid) {
-    return isAndroid ? android?.sizeMb : windows?.sizeMb;
+    if (isAndroid) return android?.sizeMb;
+    if (windows != null) return windows?.sizeMb;
+    return linux?.sizeMb;
   }
 
   String? getVersion(bool isAndroid) {
-    return isAndroid ? android?.version : windows?.version;
+    if (isAndroid) return android?.version;
+    if (windows != null) return windows?.version;
+    return linux?.version;
   }
 
   String getActionText(bool isAndroid, bool isInstalled, {bool hasUpdate = false}) {
     if (!isAvailableOn(isAndroid)) {
+      if (platformsSupported.contains('linux') && !platformsSupported.contains(isAndroid ? 'android' : 'windows')) {
+        return 'Ver Comando Linux';
+      }
       return isAndroid ? 'Indisponível no Celular' : 'Apenas para Celular';
     }
     if (!isInstalled) return 'Instalar';
@@ -93,6 +104,7 @@ class AppItem {
       platformsSupported: parsePlatforms(json['platforms_supported']),
       windows: json['windows'] != null ? PlatformConfig.fromJson(json['windows']) : null,
       android: json['android'] != null ? PlatformConfig.fromJson(json['android']) : null,
+      linux: json['linux'] != null ? PlatformConfig.fromJson(json['linux']) : null,
       latestChangelog: json['latest_changelog'] != null
           ? List<String>.from(json['latest_changelog'])
           : null,
@@ -114,6 +126,10 @@ class PlatformConfig {
   final String? packageName;
   final String? wingetId;
   final String? chocoId;
+  final String? bundleRun;
+  final String? tarball;
+  final String? systemdService;
+  final String? terminal;
 
   PlatformConfig({
     required this.filename,
@@ -123,6 +139,10 @@ class PlatformConfig {
     this.packageName,
     this.wingetId,
     this.chocoId,
+    this.bundleRun,
+    this.tarball,
+    this.systemdService,
+    this.terminal,
   });
 
   factory PlatformConfig.fromJson(Map<String, dynamic> json) {
@@ -134,6 +154,10 @@ class PlatformConfig {
       packageName: json['package_name'],
       wingetId: json['winget_id'],
       chocoId: json['choco_id'],
+      bundleRun: json['bundle_run'],
+      tarball: json['tarball'],
+      systemdService: json['systemd_service'],
+      terminal: json['terminal'],
     );
   }
 }
