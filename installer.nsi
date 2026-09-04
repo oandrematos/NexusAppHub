@@ -1,8 +1,8 @@
-﻿!include "MUI2.nsh"
+!include "MUI2.nsh"
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.25_Installer.exe"
+OutFile "NexusAppHub_v0.3.26_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user

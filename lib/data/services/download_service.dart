@@ -54,20 +54,29 @@ class DownloadService {
 
       for (final base in clusterEndpoints) {
         try {
-          final uri = Uri.parse('$base/$safeUrlFilename');
+          // GitHub Releases converte espaços em pontos (ex: "Space Duel.exe" -> "Space.Duel.exe")
+          final isGitHub = base.contains('github.com');
+          final targetFilename = isGitHub ? filename.replaceAll(' ', '.') : safeUrlFilename;
+
+          final uri = Uri.parse('$base/$targetFilename');
           onStatus('Conectando ao nó do cluster ($base)...');
 
           final client = http.Client();
           final request = http.Request('GET', uri);
-          var response = await client.send(request).timeout(const Duration(seconds: 5));
+          var response = await client.send(request).timeout(const Duration(seconds: 8));
 
-          // Suporte explícito a redirecionamentos (ex: GitHub Releases 302 para AWS S3)
-          if (response.statusCode == 301 || response.statusCode == 302) {
+          // Suporte explícito a múltiplos redirecionamentos (ex: GitHub Releases 302 -> AWS S3 / Azure CDN)
+          int redirectCount = 0;
+          while ((response.statusCode == 301 ||
+                  response.statusCode == 302 ||
+                  response.statusCode == 307 ||
+                  response.statusCode == 308) &&
+              redirectCount < 5) {
             final loc = response.headers['location'];
-            if (loc != null) {
-              final redirectReq = http.Request('GET', Uri.parse(loc));
-              response = await client.send(redirectReq).timeout(const Duration(seconds: 5));
-            }
+            if (loc == null || loc.isEmpty) break;
+            final redirectReq = http.Request('GET', Uri.parse(loc));
+            response = await client.send(redirectReq).timeout(const Duration(seconds: 10));
+            redirectCount++;
           }
 
           if (response.statusCode == 200) {

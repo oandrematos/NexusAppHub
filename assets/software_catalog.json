@@ -86,21 +86,22 @@
             ],
             "windows": {
                 "executable": "NexusAppHub.exe",
-                "version": "0.3.25",
-                "filename": "NexusAppHub_v0.3.25_Installer.exe",
-                "size_mb": 11.96
+                "version": "0.3.26",
+                "filename": "NexusAppHub_v0.3.26_Installer.exe",
+                "size_mb": 45.26
             },
             "android": {
                 "package_name": "com.antigravity.nexus_app_hub",
-                "version": "0.3.25",
-                "filename": "NexusAppHub_Flutter_Android_v0.3.25.apk",
-                "size_mb": 22.62
+                "version": "0.3.26",
+                "filename": "NexusAppHub_Flutter_Android_v0.3.26.apk",
+                "size_mb": 91.24
             },
-            "version": "0.3.25",
+            "version": "0.3.26",
             "latest_changelog": [
-                "Resolução de falha no download de aplicativos (ThreadsDL e outros instaladores sincronizados em S1 e S2).",
-                "Priorização de repositório local no Desktop (0ms) e reordenação com nó de menor latência (S2).",
-                "Mensagens detalhadas de diagnóstico em falhas de rede."
+                "Resolução definitiva de downloads fora de casa: CDN Global GitHub com 100% dos 32 instaladores ativos disponíveis.",
+                "Suporte a redirecionamentos múltiplos (302) e mapeamento inteligente de nomes com espaços no CDN.",
+                "Prateleira oficial Cluster Linux & Telemetria com Nexus Kitty HUD v1.0.0 e gping v1.17.3.",
+                "Novos banners cinematográficos AAA e ícones Squircle M3E em alta definição."
             ],
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
