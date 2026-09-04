@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-03T22:30:43-03:00",
+    "updated_at":  "2026-09-03T22:55:41-03:00",
     "categories":  [
                        {
                            "id":  "games",
@@ -428,11 +428,11 @@
                                              ],
                      "windows":  {
                                      "executable":  "Smirror.exe",
-                                     "version":  "2.0.0",
-                                     "filename":  "Smirror_v2.0.0_Installer.exe",
+                                     "version":  "2.0.1",
+                                     "filename":  "Smirror_v2.0.1_Installer.exe",
                                      "size_mb":  71.7
                                  },
-                     "version":  "2.0.0",
+                     "version":  "2.0.1",
                      "latest_changelog":  null,
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner_card.png",
