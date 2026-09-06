@@ -42,24 +42,25 @@
                                                  "android"
                                              ],
                      "windows":  {
-                                     "filename":  "NeoBlocks_v0.1.0_alpha_Installer.exe",
-                                     "size_mb":  71.99,
-                                     "version":  "v0.1.0-alpha",
+                                     "filename":  "NeoBlocks_v0.1.1_alpha_Installer.exe",
+                                     "size_mb":  70.12,
+                                     "version":  "v0.1.1-alpha",
                                      "executable":  "NeoBlocks.exe"
                                  },
                      "android":  {
-                                     "filename":  "NeoBlocks_Android_v0.1.0_alpha.apk",
-                                     "size_mb":  5.97,
-                                     "version":  "v0.1.0-alpha",
+                                     "filename":  "NeoBlocks_Android_v0.1.1_alpha.apk",
+                                     "size_mb":  7.75,
+                                     "version":  "v0.1.1-alpha",
                                      "package_name":  "com.antigravity.neoblocks"
                                  },
-                     "version":  "v0.1.0-alpha",
+                     "version":  "v0.1.1-alpha",
                      "latest_changelog":  [
+                                              "Hotfix v0.1.1-alpha: correção no pipeline de renderização do laser drop e peças.",
+                                              "Calibração canônica de versão (versionName: 0.1.1, versionCode: 11101).",
                                               "Suporte nativo a 120 FPS no Galaxy S25 FE e displays de alta taxa de atualização.",
                                               "Efeitos visuais arcade: laser beam no hard drop, lock flash e explosão neon nas linhas.",
                                               "Screen shake responsivo e modal de pausa cyberpunk com bloqueio estrito de inputs.",
-                                              "Menu de configurações com seletor de taxa de quadros e HUD de FPS em tempo real.",
-                                              "Correção de colisões de package e compatibilidade universal com Android e Windows."
+                                              "Menu de configurações com seletor de taxa de quadros e HUD de FPS em tempo real."
                                           ],
                      "screenshots":  [
                                          "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
