@@ -1,8 +1,8 @@
-{
+﻿{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-04T13:52:00-03:00",
+    "updated_at":  "2026-09-06T18:24:03-03:00",
     "categories":  [
                        {
                            "id":  "games",
@@ -169,7 +169,8 @@
                      "short_description":  "Retro arena de Pong com power-ups e tema néon futurista.",
                      "platforms_supported":  [
                                                  "windows",
-                                                 "android"
+                                                 "android",
+                                                 "linux"
                                              ],
                      "windows":  {
                                      "filename":  "Super Pong_v2.0.0_x64.exe",
@@ -198,7 +199,17 @@
                      "screenshots":  [
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_1.png",
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/super_pong/super_pong_2.png"
-                                     ]
+                                     ],
+                     "linux":  {
+                                   "filename":  "super-pong_2.0.0_amd64.deb",
+                                   "package_deb":  "super-pong_2.0.0_amd64.deb",
+                                   "package_name":  "super-pong",
+                                   "tarball":  "Super_Pong_v2.0.0_Linux_x64.tar.gz",
+                                   "bundle_run":  "install_super_pong.sh",
+                                   "size_mb":  26.5,
+                                   "version":  "2.0.0",
+                                   "executable":  "/usr/bin/super-pong"
+                               }
                  },
                  {
                      "id":  "snake_game",
@@ -257,6 +268,7 @@
                      "platforms_supported":  [
                                                  "windows",
                                                  "android",
+                                                 "linux",
                                                  "web"
                                              ],
                      "windows":  {
@@ -302,7 +314,23 @@
                      "screenshots":  [
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_overview.png",
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/dashboard_cameras.png"
-                                     ]
+                                     ],
+                     "linux":  {
+                                   "filename":  "install_nexus_dashboard.sh",
+                                   "package_deb":  "nexus-dashboard_1.2.0_all.deb",
+                                   "tarball":  "nexus-dashboard_1.2.0_linux.tar.gz",
+                                   "size_mb":  1.9,
+                                   "version":  "v1.2.0",
+                                   "executable":  "nexus-dashboard",
+                                   "latest_changelog":  [
+                                                            "Versão desktop nativa oficial para Linux (Ubuntu / Debian / Universal)",
+                                                            "Motor WebKitGTK de alta performance (~45MB RAM) com aceleração de hardware para CFTV e Canvas",
+                                                            "Modo de contingência automático via Chromium-app para compatibilidade universal",
+                                                            "Varredura multihop dinâmica (LAN Escritório, LAN Casa, ZeroTier e WAN Cloudflare)",
+                                                            "Proteção rigorosa contra múltiplas instâncias concorrentes (Single-Instance Lock)",
+                                                            "Disponível via pacote Debian (.deb), instalador 1 clique e repositório APT do cluster"
+                                                        ]
+                               }
                  },
                  {
                      "id":  "wappchat",
@@ -946,7 +974,7 @@
                      "name":  "UniGetUI",
                      "title":  "UniGetUI — Gerenciador Gráfico Multi-Package (Winget/Scoop/Choco)",
                      "category":  "system",
-                     "category_name":  "Sistema & Utilitários",
+                     "category_name":  "Sistema \u0026 Utilitários",
                      "icon":  "📦",
                      "badge":  "STORE HUB",
                      "featured":  true,
@@ -980,7 +1008,7 @@
                      "name":  "Chocolatey GUI",
                      "title":  "Chocolatey GUI — Interface Oficial do Chocolatey",
                      "category":  "system",
-                     "category_name":  "Sistema & Utilitários",
+                     "category_name":  "Sistema \u0026 Utilitários",
                      "icon":  "🍫",
                      "badge":  "STORE HUB",
                      "featured":  true,
