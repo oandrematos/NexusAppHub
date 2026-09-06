@@ -940,6 +940,73 @@
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/screenshots/screen_1.png",
                                          "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gping/screenshots/screen_2.png"
                                      ]
+                 },
+                 {
+                     "id":  "unigetui",
+                     "name":  "UniGetUI",
+                     "title":  "UniGetUI — Gerenciador Gráfico Multi-Package (Winget/Scoop/Choco)",
+                     "category":  "system",
+                     "category_name":  "Sistema & Utilitários",
+                     "icon":  "📦",
+                     "badge":  "STORE HUB",
+                     "featured":  true,
+                     "description":  "Interface gráfica moderna e intuitiva para gerenciar os gerenciadores de pacotes mais populares do Windows (Winget, Scoop, Chocolatey, Pip, Npm, Cargo e .NET Tool). Permite instalar, atualizar e desinstalar milhares de softwares em lote.",
+                     "short_description":  "Gerenciador universal de pacotes com interface gráfica para Windows.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "windows":  {
+                                     "filename":  "UniGetUI.Installer.x64.exe",
+                                     "size_mb":  28.68,
+                                     "version":  "2026.2.7",
+                                     "executable":  "UniGetUI.exe"
+                                 },
+                     "version":  "2026.2.7",
+                     "latest_changelog":  [
+                                              "Suporte multi-gerenciador: Winget, Scoop, Chocolatey, Pip, Npm e .NET.",
+                                              "Instalação silenciosa Inno Setup em 1 clique pela Nexus App Hub.",
+                                              "Backup e restauração de listas de aplicativos instalados."
+                                          ],
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/unigetui/screenshots/screen_2.png"
+                                     ]
+                 },
+                 {
+                     "id":  "chocolateygui",
+                     "name":  "Chocolatey GUI",
+                     "title":  "Chocolatey GUI — Interface Oficial do Chocolatey",
+                     "category":  "system",
+                     "category_name":  "Sistema & Utilitários",
+                     "icon":  "🍫",
+                     "badge":  "STORE HUB",
+                     "featured":  true,
+                     "description":  "Interface gráfica oficial para o gerenciador de pacotes Chocolatey no Windows. Permite navegar, pesquisar e instalar pacotes da comunidade do Chocolatey com visualização rica de metadados e dependências.",
+                     "short_description":  "Interface gráfica oficial para a biblioteca de softwares Chocolatey.",
+                     "platforms_supported":  [
+                                                 "windows"
+                                             ],
+                     "windows":  {
+                                     "filename":  "ChocolateyGUI.msi",
+                                     "size_mb":  20.69,
+                                     "version":  "3.2.0",
+                                     "executable":  "ChocolateyGUI.exe"
+                                 },
+                     "version":  "3.2.0",
+                     "latest_changelog":  [
+                                              "Navegação e busca visual em milhares de pacotes da galeria Chocolatey.",
+                                              "Instalador oficial MSI com suporte a instalação limpa e silenciosa em 1 clique."
+                                          ],
+                     "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/banner.png",
+                     "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/banner_card.png",
+                     "icon_url":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/icon.png",
+                     "screenshots":  [
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/screenshots/screen_1.png",
+                                         "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/chocolateygui/screenshots/screen_2.png"
+                                     ]
                  }
              ]
 }
