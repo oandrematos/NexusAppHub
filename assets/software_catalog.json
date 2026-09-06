@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-06T18:24:03-03:00",
+    "updated_at":  "2026-09-06T18:34:48Z",
     "categories":  [
                        {
                            "id":  "games",
@@ -55,19 +55,19 @@
                                      "package_name":  "com.antigravity.neoblocks"
                                  },
                      "linux":  {
-                                     "filename":  "install_neo_blocks.sh",
-                                     "package_deb":  "neoblocks_0.1.1_amd64.deb",
-                                     "tarball":  "NeoBlocks_v0.1.1_alpha_linux_x86_64.tar.gz",
-                                     "size_mb":  91.2,
-                                     "version":  "v0.1.1-alpha",
-                                     "executable":  "neoblocks",
-                                     "latest_changelog":  [
-                                                              "Porte nativo oficial para Linux x86_64 compilado com Godot Engine 4.",
-                                                              "Pacote Debian (.deb) integrado ao repositório oficial APT do Nexus Cluster.",
-                                                              "Instalador silencioso em 1 clique (install_neo_blocks.sh) com atalho .desktop.",
-                                                              "Suporte a taxas de atualização de 120 FPS+ com efeitos de neon e áudio dinâmico."
-                                                          ]
-                                 },
+                                   "filename":  "install_neo_blocks.sh",
+                                   "package_deb":  "neoblocks_0.1.1_amd64.deb",
+                                   "tarball":  "NeoBlocks_v0.1.1_alpha_linux_x86_64.tar.gz",
+                                   "size_mb":  91.2,
+                                   "version":  "v0.1.1-alpha",
+                                   "executable":  "neoblocks",
+                                   "latest_changelog":  [
+                                                            "Porte nativo oficial para Linux x86_64 compilado com Godot Engine 4.",
+                                                            "Pacote Debian (.deb) integrado ao repositório oficial APT do Nexus Cluster.",
+                                                            "Instalador silencioso em 1 clique (install_neo_blocks.sh) com atalho .desktop.",
+                                                            "Suporte a taxas de atualização de 120 FPS+ com efeitos de neon e áudio dinâmico."
+                                                        ]
+                               },
                      "version":  "v0.1.1-alpha",
                      "latest_changelog":  [
                                               "Hotfix v0.1.1-alpha: correção no pipeline de renderização do laser drop e peças.",
@@ -140,7 +140,8 @@
                      "short_description":  "Shooter espacial de combate intenso com suporte a PC e celular.",
                      "platforms_supported":  [
                                                  "windows",
-                                                 "android"
+                                                 "android",
+                                                 "linux"
                                              ],
                      "windows":  {
                                      "filename":  "Space Duel_v2.0.0_x64.exe",
@@ -154,6 +155,16 @@
                                      "version":  "v1.1.0",
                                      "package_name":  "com.andre.spaceduel"
                                  },
+                     "linux":  {
+                                   "filename":  "space-duel_2.0.0_amd64.deb",
+                                   "package_deb":  "space-duel_2.0.0_amd64.deb",
+                                   "package_name":  "space-duel",
+                                   "tarball":  "Space.Duel_v2.0.0_Linux_x64.tar.gz",
+                                   "bundle_run":  "install_space_duel.sh",
+                                   "size_mb":  122.0,
+                                   "version":  "v2.0.0",
+                                   "executable":  "space-duel"
+                               },
                      "version":  "v2.0.0",
                      "latest_changelog":  [
                                               "Reescrita arquitetural completa na engine Godot 4 com C# (.NET 8)",
@@ -221,7 +232,7 @@
                                    "package_name":  "super-pong",
                                    "tarball":  "Super_Pong_v2.0.0_Linux_x64.tar.gz",
                                    "bundle_run":  "install_super_pong.sh",
-                                   "size_mb":  26.5,
+                                   "size_mb":  34,
                                    "version":  "2.0.0",
                                    "executable":  "/usr/bin/super-pong"
                                }
@@ -469,7 +480,8 @@
                      "description":  "Espelhamento inteligente e motor de displays virtuais para Android (Galaxy S25 FE e outros). Conexao agil USB/Wi-Fi, displays virtuais independentes por aplicativo e launcher integrado com extracao de icones da Play Store.",
                      "short_description":  "Espelhamento avancado de tela, displays virtuais e launcher Android no Windows.",
                      "platforms_supported":  [
-                                                 "windows"
+                                                 "windows",
+                                                 "linux"
                                              ],
                      "windows":  {
                                      "executable":  "Smirror.exe",
@@ -477,7 +489,18 @@
                                      "filename":  "Smirror_v2.0.1_Installer.exe",
                                      "size_mb":  71.7
                                  },
-                     "version":  "2.0.1",
+                     "linux":  {
+                                   "package_deb":  "smirror_2.0.2_amd64.deb",
+                                   "size_mb":  0.13,
+                                   "version":  "v2.0.2",
+                                   "executable":  "smirror",
+                                   "latest_changelog":  [
+                                                            "Porte nativo para Linux (Ubuntu/Debian) com interface GTK3 moderna.",
+                                                            "Integração transparente com adb, scrcpy e suporte a regras udev sem sudo.",
+                                                            "Instalação oficial via repositório APT e pacote .deb."
+                                                        ]
+                               },
+                     "version":  "2.0.2",
                      "latest_changelog":  null,
                      "banner":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner.png",
                      "banner_card":  "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/smirror/banner_card.png",
