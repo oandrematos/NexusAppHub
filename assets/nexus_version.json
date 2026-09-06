@@ -1,11 +1,12 @@
-﻿{
+{
     "changelog":  [
-                      "Correção na Instalação do Smirror e Instaladores do Ecossistema: Corrigida a invalidação de cache em memória que impedia que aplicativos recém-instalados fossem detectados como instalados.",
-                      "Parâmetros de Instalação Seguros: Limpeza de flags conflitantes que quebravam instaladores NSIS silenciosos, com fallback automático para execução interativa via Windows Shell em caso de erro.",
-                      "Detecção Imediata e em Duas Etapas: Reavaliação imediata e verificação confirmatória em 1.5s após a conclusão do instalador.",
-                      "Catálogo Completo Restaurado: Todos os 23 aplicativos preservados com o novo Neo-Blocks v0.1.0 e Dashboard v1.1.0."
+                      "Suporte universal a downloads CDN no GitHub Releases com múltiplos redirecionamentos 302/307/308.",
+                      "Correção crítica de mapeamento de nomes de instaladores no GitHub (substituição de espaços por pontos).",
+                      "Integração do ThreadsDL v0.6.1 com salvamento em DCIM e Google Fotos nativo.",
+                      "Integração de Neo-Blocks v0.1.0 com 120 FPS nativo (Galaxy S25 FE), animações arcade e screen shake.",
+                      "Suporte nativo a Linux Desktop (GTK3) e instalação de pacotes via PolicyKit (pkexec)."
                   ],
-    "build":  28,
-    "version":  "0.3.25",
-    "release_date":  "2026-09-03"
+    "build":  29,
+    "version":  "0.3.26",
+    "release_date":  "2026-09-06"
 }

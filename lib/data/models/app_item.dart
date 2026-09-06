@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 class AppItem {
   final String id;
   final String name;
@@ -43,6 +45,9 @@ class AppItem {
   });
 
   bool isAvailableOn(bool isAndroid) {
+    if (Platform.isLinux) {
+      return platformsSupported.contains('linux') && linux != null;
+    }
     if (isAndroid) {
       return platformsSupported.contains('android') && android != null;
     } else {
@@ -51,27 +56,30 @@ class AppItem {
   }
 
   String? getFilename(bool isAndroid) {
+    if (Platform.isLinux) return linux?.filename;
     if (isAndroid) return android?.filename;
-    if (windows != null) return windows?.filename;
-    return linux?.filename;
+    return windows?.filename ?? linux?.filename;
   }
 
   double? getSizeMb(bool isAndroid) {
+    if (Platform.isLinux) return linux?.sizeMb;
     if (isAndroid) return android?.sizeMb;
-    if (windows != null) return windows?.sizeMb;
-    return linux?.sizeMb;
+    return windows?.sizeMb ?? linux?.sizeMb;
   }
 
   String? getVersion(bool isAndroid) {
+    if (Platform.isLinux) return linux?.version;
     if (isAndroid) return android?.version;
-    if (windows != null) return windows?.version;
-    return linux?.version;
+    return windows?.version ?? linux?.version;
   }
 
   String getActionText(bool isAndroid, bool isInstalled, {bool hasUpdate = false}) {
     if (!isAvailableOn(isAndroid)) {
+      if (Platform.isLinux) {
+        return 'Indisponível no Linux';
+      }
       if (platformsSupported.contains('linux') && !platformsSupported.contains(isAndroid ? 'android' : 'windows')) {
-        return 'Ver Comando Linux';
+        return 'Apenas Linux';
       }
       return isAndroid ? 'Indisponível no Celular' : 'Apenas para Celular';
     }

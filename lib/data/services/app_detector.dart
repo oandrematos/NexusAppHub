@@ -98,6 +98,30 @@ class AppDetector {
       return null;
     }
 
+    if (Platform.isLinux) {
+      if (executableName == null || executableName.isEmpty) return null;
+      if (executableName.toLowerCase().contains('nexusapphub') ||
+          executableName.toLowerCase().contains('nexus_app_hub')) {
+        return AppVersionService.currentVersion;
+      }
+      final sanitized = executableName.replaceAll('.exe', '').trim();
+      try {
+        final res = await Process.run('dpkg-query', ['-W', '-f=\${Version}', sanitized]);
+        if (res.exitCode == 0) {
+          final v = res.stdout.toString().trim();
+          if (v.isNotEmpty) return v;
+        }
+      } catch (_) {}
+      try {
+        final res = await Process.run(sanitized, ['--version']);
+        if (res.exitCode == 0) {
+          final match = RegExp(r'(\d+\.\d+(\.\d+)?)').firstMatch(res.stdout.toString());
+          if (match != null) return match.group(1);
+        }
+      } catch (_) {}
+      return null;
+    }
+
     if (Platform.isWindows) {
       if (executableName == null || executableName.isEmpty) return null;
 
@@ -303,6 +327,29 @@ class AppDetector {
 
   static Future<String?> getInstalledExecutablePath(String? executableName) async {
     if (executableName == null || executableName.isEmpty) return null;
+
+    if (Platform.isLinux) {
+      final sanitized = executableName.replaceAll('.exe', '').trim();
+      try {
+        final res = await Process.run('which', [sanitized]);
+        if (res.exitCode == 0) {
+          final p = res.stdout.toString().trim();
+          if (p.isNotEmpty && File(p).existsSync()) return p;
+        }
+      } catch (_) {}
+      final home = Platform.environment['HOME'];
+      final commonPaths = [
+        '/usr/bin/$sanitized',
+        '/usr/local/bin/$sanitized',
+        '/opt/$sanitized',
+        if (home != null) '$home/.local/bin/$sanitized',
+        if (home != null) '$home/Applications/$sanitized',
+      ];
+      for (final cp in commonPaths) {
+        if (File(cp).existsSync()) return cp;
+      }
+      return null;
+    }
 
     final lowerExe = executableName.toLowerCase();
 

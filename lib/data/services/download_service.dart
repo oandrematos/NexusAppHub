@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_filex/open_filex.dart';
@@ -123,13 +124,67 @@ class DownloadService {
 
     try {
       if (isAndroid) {
-        final res = await OpenFilex.open(
-          targetFile.path,
-          type: 'application/vnd.android.package-archive',
-        );
-        if (res.type != ResultType.done) {
-          onError('Erro ao abrir o instalador: ${res.message}');
+        bool installed = false;
+        try {
+          const channel = MethodChannel('com.antigravity.nexus_app_hub/app_manager');
+          await channel.invokeMethod('installApk', {'filePath': targetFile.path});
+          installed = true;
+        } catch (e) {
+          // Fallback para OpenFilex se o canal customizado reportar exceção
+          try {
+            final res = await OpenFilex.open(
+              targetFile.path,
+              type: 'application/vnd.android.package-archive',
+            );
+            if (res.type == ResultType.done) {
+              installed = true;
+            } else {
+              onError('Erro ao abrir o instalador: ${res.message}');
+              return;
+            }
+          } catch (err) {
+            onError('Falha ao acionar instalador do Android: $err');
+            return;
+          }
+        }
+        if (!installed) {
+          onError('Não foi possível iniciar a instalação do APK.');
           return;
+        }
+      } else if (Platform.isLinux) {
+        final lower = filename.toLowerCase();
+        if (lower.endsWith('.deb')) {
+          onStatus('Instalando pacote DEB nativo via PolicyKit (apt)...');
+          final proc = await Process.start('pkexec', ['apt-get', 'install', '-y', targetFile.path]);
+          final exitCode = await proc.exitCode;
+          if (exitCode != 0) {
+            onStatus('Aplicando dependências via dpkg/apt-get...');
+            final dpkgProc = await Process.start('pkexec', ['dpkg', '-i', targetFile.path]);
+            await dpkgProc.exitCode;
+            final fixProc = await Process.start('pkexec', ['apt-get', 'install', '-f', '-y']);
+            await fixProc.exitCode;
+          }
+        } else if (lower.endsWith('.sh') || lower.endsWith('.run')) {
+          onStatus('Executando script de instalação com privilégios...');
+          await Process.run('chmod', ['+x', targetFile.path]);
+          final proc = await Process.start('pkexec', [targetFile.path]);
+          await proc.exitCode;
+        } else if (lower.endsWith('.appimage')) {
+          onStatus('Instalando AppImage em ~/Applications...');
+          await Process.run('chmod', ['+x', targetFile.path]);
+          final home = Platform.environment['HOME'] ?? '/home';
+          final appDir = Directory('$home/Applications');
+          if (!appDir.existsSync()) appDir.createSync(recursive: true);
+          final dest = File('${appDir.path}/$filename');
+          targetFile.copySync(dest.path);
+          await Process.run('chmod', ['+x', dest.path]);
+        } else {
+          final home = Platform.environment['HOME'] ?? '/home';
+          final binDir = Directory('$home/.local/bin');
+          if (!binDir.existsSync()) binDir.createSync(recursive: true);
+          final dest = File('${binDir.path}/$filename');
+          targetFile.copySync(dest.path);
+          await Process.run('chmod', ['+x', dest.path]);
         }
       } else {
         final lower = filename.toLowerCase();
@@ -153,11 +208,10 @@ class DownloadService {
           final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
 
           if (isSelfUpdate) {
-            // Atualização da própria loja: dispara o instalador desacoplado no Shell do Windows
-            // através do comando "start" e encerra a loja para liberar os arquivos para escrita.
+            // Atualização da própria loja: dispara o instalador silencioso desacoplado no Shell do Windows
             await Process.start(
               'cmd.exe',
-              ['/c', 'start', '""', targetFile.path],
+              ['/c', 'start', '""', targetFile.path, '/S'],
               mode: ProcessStartMode.detached,
             );
             await Future.delayed(const Duration(milliseconds: 600));

@@ -46,7 +46,7 @@ Section "Nexus App Hub"
     
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.25"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.26"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'
