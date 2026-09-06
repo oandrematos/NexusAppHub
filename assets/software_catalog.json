@@ -1,4 +1,4 @@
-﻿{
+{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -55,11 +55,11 @@
                                  },
                      "version":  "v0.1.0-alpha",
                      "latest_changelog":  [
-                                              "Lançamento oficial da versão Alpha v0.1.0 na divisão Nexus Arcade em Godot 4.",
-                                              "Super Rotation System (SRS) oficial com wall-kicks e floor-kicks matemáticos.",
-                                              "Gerador aleatório 7-Bag balanceado, Hold queue e Ghost piece com wireframe neon.",
-                                              "Controles universais: Teclado/Gamepad no Windows e botões táteis virtuais no Android.",
-                                              "Instalador oficial silencioso (/S) para Windows e pacote APK assinado para Android."
+                                              "Suporte nativo a 120 FPS no Galaxy S25 FE e displays de alta taxa de atualização.",
+                                              "Efeitos visuais arcade: laser beam no hard drop, lock flash e explosão neon nas linhas.",
+                                              "Screen shake responsivo e modal de pausa cyberpunk com bloqueio estrito de inputs.",
+                                              "Menu de configurações com seletor de taxa de quadros e HUD de FPS em tempo real.",
+                                              "Correção de colisões de package e compatibilidade universal com Android e Windows."
                                           ],
                      "screenshots":  [
                                          "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
