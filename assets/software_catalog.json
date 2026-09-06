@@ -1,4 +1,4 @@
-﻿{
+{
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
@@ -39,7 +39,8 @@
                      "short_description":  "O clássico arcade de blocos em versão neon cyberpunk com suporte a PC e celular.",
                      "platforms_supported":  [
                                                  "windows",
-                                                 "android"
+                                                 "android",
+                                                 "linux"
                                              ],
                      "windows":  {
                                      "filename":  "NeoBlocks_v0.1.1_alpha_Installer.exe",
@@ -52,6 +53,20 @@
                                      "size_mb":  7.75,
                                      "version":  "v0.1.1-alpha",
                                      "package_name":  "com.antigravity.neoblocks"
+                                 },
+                     "linux":  {
+                                     "filename":  "install_neo_blocks.sh",
+                                     "package_deb":  "neoblocks_0.1.1_amd64.deb",
+                                     "tarball":  "NeoBlocks_v0.1.1_alpha_linux_x86_64.tar.gz",
+                                     "size_mb":  91.2,
+                                     "version":  "v0.1.1-alpha",
+                                     "executable":  "neoblocks",
+                                     "latest_changelog":  [
+                                                              "Porte nativo oficial para Linux x86_64 compilado com Godot Engine 4.",
+                                                              "Pacote Debian (.deb) integrado ao repositório oficial APT do Nexus Cluster.",
+                                                              "Instalador silencioso em 1 clique (install_neo_blocks.sh) com atalho .desktop.",
+                                                              "Suporte a taxas de atualização de 120 FPS+ com efeitos de neon e áudio dinâmico."
+                                                          ]
                                  },
                      "version":  "v0.1.1-alpha",
                      "latest_changelog":  [
