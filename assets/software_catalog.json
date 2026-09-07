@@ -2,7 +2,7 @@
     "store_name": "Nexus App Hub",
     "developer": "André (Antigravity)",
     "schema_version": "3.0.0",
-    "updated_at": "2026-09-06T18:34:48Z",
+    "updated_at": "2026-09-07T23:38:00Z",
     "categories": [
         {
             "id": "games",
@@ -251,42 +251,42 @@
             "icon": "🐍",
             "badge": "ARCADE",
             "featured": true,
-            "description": "Reconstrução total do clássico jogo da cobrinha na engine Godot 4 com C# (.NET 8.0). Sistema de grade 25x25 responsivo, buffer inteligente de curvas sem atraso de input, aceleração progressiva, modos Clássico/Arcade/Turbo e colisão configurável.",
-            "short_description": "Cobrinha Arcade Neon em Godot 4 C# com buffer profissional de curvas.",
+            "description": "O clássico jogo da cobrinha totalmente reimaginado em estética Retrô Cyber Neon com motor Godot 4 e C#. Inclui opções avançadas de personalização da arena (Pequena, Média ou Grande; Formato Quadrado ou Retangular), menu de configurações completo (áudio SFX, controles touch, velocidades e bordas), menu de pausa com placar em tempo real e aceleração gradual a 60 FPS.",
+            "short_description": "Cobrinha Arcade Neon com arenas configuráveis, menu de opções e pausa com placar.",
             "platforms_supported": [
                 "windows",
                 "linux",
                 "android"
             ],
             "windows": {
-                "filename": "Snake_Game_v1.2.0_x64_Installer.exe",
-                "size_mb": 100.7,
-                "version": "v1.2.0",
+                "filename": "Snake_Game_v1.3.0_x64_Installer.exe",
+                "size_mb": 100.86,
+                "version": "v1.3.0",
                 "executable": "Snake_Game.exe"
             },
             "linux": {
-                "filename": "snake-game_1.2.0_amd64.deb",
-                "package_deb": "snake-game_1.2.0_amd64.deb",
+                "filename": "snake-game_1.3.0_amd64.deb",
+                "package_deb": "snake-game_1.3.0_amd64.deb",
                 "package_name": "snake-game",
-                "tarball": "Snake_Game_v1.2.0_Linux_x86_64.tar.gz",
+                "tarball": "Snake_Game_v1.3.0_Linux_x86_64.tar.gz",
                 "size_mb": 87.4,
-                "version": "1.2.0",
+                "version": "1.3.0",
                 "executable": "/usr/bin/snake-game"
             },
             "android": {
-                "filename": "Snake_Game_v1.2.0.apk",
-                "size_mb": 107.1,
-                "version": "1.2.0",
+                "filename": "Snake_Game_v1.3.0.apk",
+                "size_mb": 107.16,
+                "version": "1.3.0",
                 "package_name": "com.antigravity.snakegame"
             },
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "latest_changelog": [
-                "Reconstrução completa do zero em Godot 4 com C# (.NET 8.0).",
-                "Novo buffer de inputs FIFO eliminando perda de comandos em curvas rápidas.",
-                "Prevenção inteligente de reversão 180 graus contra suicídio acidental.",
-                "Modos de velocidade (Clássico, Arcade e Turbo) e física de bordas (Sólida ou Livre).",
-                "Suporte multiplataforma nativo: Windows (.exe NSIS) e Linux (.deb e Tarball - Protocolo Tux Prime).",
-                "Interface 100% em Português com D-Pad virtual responsivo para touch/telas."
+                "Opções dinâmicas de tamanho de arena: Pequena (16x16 / 20x14), Média (20x20 / 24x16) e Grande (25x25 / 28x18).",
+                "Seleção de formato de arena: Quadrada (proporção 1:1 clássica) e Retangular (widescreen).",
+                "Novo Menu de Configurações acessível tanto pelo Menu Principal quanto pelo Menu de Pausa.",
+                "Menu de Pausa aprimorado com exibição de pontuação atual e acesso direto às opções.",
+                "Persistência automática de preferências do jogador em arquivo de configuração.",
+                "Paridade multiplataforma absoluta: Windows (NSIS), Android (APK assinado) e Linux (DEB e Tarball)."
             ],
             "screenshots": [
                 "http://100.84.133.101/assets/screenshots/snake_screenshot_1.png",
