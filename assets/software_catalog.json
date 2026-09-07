@@ -111,18 +111,18 @@
             },
             "android": {
                 "package_name": "com.antigravity.nexus_app_hub",
-                "version": "0.3.27",
-                "filename": "NexusAppHub_Flutter_Android_v0.3.27.apk",
-                "size_mb": 89.18
+                "version": "0.3.28",
+                "filename": "NexusAppHub_Flutter_Android_v0.3.28.apk",
+                "size_mb": 89.05
             },
-            "version": "0.3.27",
+            "version": "0.3.28",
             "latest_changelog": [
+                "v0.3.28: Botão de ação inteligente com metamorfose para barra de progresso fluida, feedback háptico/elástico, bloqueio anti-re-clique e detecção não-bloqueante de instalação no Android.",
                 "v0.3.27: Timeout de sincronização de catálogo ampliado para 7s no Android e blindagem de detecção de updates.",
                 "Declaração completa de visibilidade de pacotes Android (<queries>) para Neo-Blocks e ecossistema.",
                 "Resolução definitiva de downloads fora de casa: CDN Global GitHub com 100% dos 32 instaladores ativos disponíveis.",
                 "Suporte a redirecionamentos múltiplos (302) e mapeamento inteligente de nomes com espaços no CDN.",
-                "Prateleira oficial Cluster Linux & Telemetria com Nexus Kitty HUD v1.0.0 e gping v1.17.3.",
-                "Novos banners cinematográficos AAA e ícones Squircle M3E em alta definição."
+                "Prateleira oficial Cluster Linux & Telemetria com Nexus Kitty HUD v1.0.0 e gping v1.17.3."
             ],
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",

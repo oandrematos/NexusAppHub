@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
 import 'cluster_image.dart';
+import 'animated_action_button.dart';
 
 class AppListTileWidget extends StatelessWidget {
   final AppItem app;
@@ -11,6 +12,9 @@ class AppListTileWidget extends StatelessWidget {
   final bool isUpdateIgnored;
   final String? installedVersion;
   final double? downloadProgress;
+  final String? downloadStatus;
+  final bool isActionInProgress;
+  final bool isInstalling;
   final String appSource;
   final VoidCallback onTap;
   final VoidCallback onAction;
@@ -26,6 +30,9 @@ class AppListTileWidget extends StatelessWidget {
     this.isUpdateIgnored = false,
     this.installedVersion,
     this.downloadProgress,
+    this.downloadStatus,
+    this.isActionInProgress = false,
+    this.isInstalling = false,
     this.appSource = 'nexus',
     required this.onTap,
     required this.onAction,
@@ -47,7 +54,6 @@ class AppListTileWidget extends StatelessWidget {
     final isAndroid = Platform.isAndroid;
     final isAvailable = app.isAvailableOn(isAndroid);
     final sizeMb = app.getSizeMb(isAndroid);
-    final isDownloading = downloadProgress != null && downloadProgress! > 0 && downloadProgress! < 1.0;
 
     return Material(
       color: Colors.transparent,
@@ -172,82 +178,23 @@ class AppListTileWidget extends StatelessWidget {
               ),
               const SizedBox(width: 10),
 
-              // Botão de Ação Estilo Pílula Play Store
-              if (isDownloading)
-                SizedBox(
-                  width: 38,
-                  height: 38,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        value: downloadProgress,
-                        color: AppColors.accentCyan,
-                        strokeWidth: 3,
-                      ),
-                      Text(
-                        '${((downloadProgress ?? 0) * 100).toInt()}%',
-                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                )
-              else if (!isAvailable)
-                if (app.platformsSupported.contains('linux') && !app.platformsSupported.contains(isAndroid ? 'android' : 'windows'))
-                  FilledButton.tonal(
-                    onPressed: onTap,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F172A),
-                      foregroundColor: AppColors.accentCyan,
-                      side: const BorderSide(color: AppColors.accentCyan, width: 0.8),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      minimumSize: const Size(68, 34),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.terminal_rounded, size: 14, color: AppColors.accentCyan),
-                        SizedBox(width: 4),
-                        Text('Linux', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  )
-                else
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Text(
-                      isAndroid ? 'Apenas PC' : 'Apenas Celular',
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
-                    ),
-                  )
-              else
-                FilledButton.tonal(
-                  onPressed: onAction,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: hasUpdate
-                        ? Colors.orangeAccent
-                        : (isInstalled ? AppColors.surface : AppColors.accentCyan),
-                    foregroundColor: hasUpdate
-                        ? Colors.black
-                        : (isInstalled ? AppColors.textPrimary : Colors.black),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    minimumSize: const Size(80, 36),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                  ),
-                  child: Text(
-                    hasUpdate ? 'Atualizar' : (isInstalled ? 'Abrir' : 'Instalar'),
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-                  ),
-                ),
+              // Botão de Ação Animado com Barra de Progresso Integrada
+              AnimatedActionButton(
+                app: app,
+                isInstalled: isInstalled,
+                hasUpdate: hasUpdate,
+                isAvailable: isAvailable,
+                isActionInProgress: isActionInProgress || (downloadProgress != null && downloadProgress! > 0),
+                downloadProgress: downloadProgress,
+                downloadStatus: downloadStatus,
+                isInstalling: isInstalling,
+                isCompact: true,
+                height: 36,
+                onAction: isAvailable ? onAction : onTap,
+              ),
 
               // Botão Desinstalar rápido quando instalado
-              if (isInstalled && onUninstall != null && !isDownloading && !app.id.contains('nexus_app_hub')) ...[
+              if (isInstalled && onUninstall != null && !isActionInProgress && (downloadProgress == null || downloadProgress == 0) && !app.id.contains('nexus_app_hub')) ...[
                 const SizedBox(width: 4),
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),

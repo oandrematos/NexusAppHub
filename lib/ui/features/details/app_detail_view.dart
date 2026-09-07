@@ -6,6 +6,7 @@ import '../../../data/models/app_item.dart';
 import '../../core/app_colors.dart';
 import '../home/home_view_model.dart';
 import '../../widgets/cluster_image.dart';
+import '../../widgets/animated_action_button.dart';
 
 class AppDetailView extends StatelessWidget {
   final AppItem app;
@@ -60,7 +61,9 @@ class AppDetailView extends StatelessWidget {
         final hasUpdate = vm.hasUpdate(app.id);
         final installedVersion = vm.getInstalledVersion(app.id);
         final downloadProgress = vm.getProgress(app.id);
-        final isDownloading = downloadProgress != null && downloadProgress > 0 && downloadProgress < 1.0;
+        final downloadStatus = vm.getStatus(app.id);
+        final isActionInProgress = vm.isActionInProgress(app.id);
+        final isInstalling = vm.isInstalling(app.id);
 
         final hasBanner = app.banner != null && app.banner!.isNotEmpty;
 
@@ -241,109 +244,33 @@ class AppDetailView extends StatelessWidget {
                           ),
                           const SizedBox(height: 24),
 
-                          if (isDownloading) ...[
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text(
-                                        'Baixando e instalando...',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.textPrimary,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${(downloadProgress * 100).toInt()}%',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.accentCyan,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  LinearProgressIndicator(
-                                    value: downloadProgress,
-                                    backgroundColor: AppColors.background,
-                                    color: AppColors.accentCyan,
-                                    minHeight: 8,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                          ],
-
                           Row(
                             children: [
                               Expanded(
-                                flex: isInstalled && !app.id.contains('nexus_app_hub') ? 3 : 1,
-                                child: SizedBox(
+                                flex: isInstalled && !app.id.contains('nexus_app_hub') && !isActionInProgress ? 3 : 1,
+                                child: AnimatedActionButton(
+                                  app: app,
+                                  isInstalled: isInstalled,
+                                  hasUpdate: hasUpdate,
+                                  isAvailable: isAvailable,
+                                  isActionInProgress: isActionInProgress,
+                                  downloadProgress: downloadProgress,
+                                  downloadStatus: downloadStatus,
+                                  isInstalling: isInstalling,
                                   height: 52,
-                                  child: ElevatedButton.icon(
-                                    onPressed: (isAvailable && !isDownloading)
-                                        ? () => vm.handleAction(app, context)
-                                        : (app.platformsSupported.contains('linux')
-                                            ? () => _copyLinuxCommand(context, app)
-                                            : null),
-                                    icon: Icon(
-                                      isInstalled
-                                          ? (hasUpdate ? Icons.system_update_alt : Icons.play_arrow_rounded)
-                                          : (app.platformsSupported.contains('linux') && !isAvailable
-                                              ? Icons.terminal_rounded
-                                              : (vm.isAppProtected(app.id) ? Icons.lock_outline : Icons.download_rounded)),
-                                      size: 24,
-                                    ),
-                                    label: Text(
-                                      app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 0.5),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: hasUpdate
-                                          ? Colors.orangeAccent
-                                          : (isInstalled
-                                              ? AppColors.surface
-                                              : (app.platformsSupported.contains('linux') && !isAvailable
-                                                  ? AppColors.surface
-                                                  : AppColors.accentCyan)),
-                                      foregroundColor: (hasUpdate || (!isInstalled && isAvailable))
-                                          ? Colors.black
-                                          : (app.platformsSupported.contains('linux') && !isAvailable
-                                              ? AppColors.accentCyan
-                                              : AppColors.textPrimary),
-                                      elevation: 4,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(14),
-                                        side: (isInstalled && !hasUpdate) || (app.platformsSupported.contains('linux') && !isAvailable)
-                                            ? BorderSide(
-                                                color: app.platformsSupported.contains('linux') && !isAvailable
-                                                    ? AppColors.accentCyan
-                                                    : AppColors.border,
-                                                width: 1.2,
-                                              )
-                                            : BorderSide.none,
-                                      ),
-                                    ),
-                                  ),
+                                  onAction: isAvailable
+                                      ? () => vm.handleAction(app, context)
+                                      : (app.platformsSupported.contains('linux')
+                                          ? () => _copyLinuxCommand(context, app)
+                                          : null),
                                 ),
                               ),
-                              if (isInstalled && !app.id.contains('nexus_app_hub')) ...[
+                              if (isInstalled && !app.id.contains('nexus_app_hub') && !isActionInProgress) ...[
                                 const SizedBox(width: 12),
                                 SizedBox(
                                   height: 52,
                                   child: OutlinedButton.icon(
-                                    onPressed: isDownloading ? null : () => _confirmUninstall(context, vm),
+                                    onPressed: () => _confirmUninstall(context, vm),
                                     icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 22),
                                     label: const Text(
                                       'Desinstalar',

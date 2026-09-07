@@ -51,6 +51,10 @@ class LibraryView extends StatelessWidget {
                     isInstalled: true,
                     hasUpdate: vm.hasUpdate(app.id),
                     installedVersion: vm.getInstalledVersion(app.id),
+                    downloadProgress: vm.getProgress(app.id),
+                    downloadStatus: vm.getStatus(app.id),
+                    isActionInProgress: vm.isActionInProgress(app.id),
+                    isInstalling: vm.isInstalling(app.id),
                     onTap: () {
                       Navigator.push(
                         context,

@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
 import 'cluster_image.dart';
+import 'animated_action_button.dart';
 
 class HeroCarouselWidget extends StatefulWidget {
   final List<AppItem> apps;
   final bool Function(String id) isInstalled;
   final bool Function(String id) hasUpdate;
+  final double? Function(String id)? getProgress;
+  final String? Function(String id)? getStatus;
+  final bool Function(String id)? isActionInProgress;
+  final bool Function(String id)? isInstalling;
   final void Function(AppItem app) onTap;
   final void Function(AppItem app) onAction;
 
@@ -17,6 +22,10 @@ class HeroCarouselWidget extends StatefulWidget {
     required this.apps,
     required this.isInstalled,
     required this.hasUpdate,
+    this.getProgress,
+    this.getStatus,
+    this.isActionInProgress,
+    this.isInstalling,
     required this.onTap,
     required this.onAction,
   });
@@ -73,6 +82,11 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
               final app = widget.apps[index];
               final installed = widget.isInstalled(app.id);
               final update = widget.hasUpdate(app.id);
+              final progress = widget.getProgress?.call(app.id);
+              final status = widget.getStatus?.call(app.id);
+              final inProgress = widget.isActionInProgress?.call(app.id) ?? (progress != null && progress > 0);
+              final installing = widget.isInstalling?.call(app.id) ?? false;
+              final isAvailable = app.isAvailableOn(Platform.isAndroid);
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -108,6 +122,16 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
                               Colors.black.withValues(alpha: 0.95),
                             ],
                             stops: const [0.3, 0.6, 1.0],
+                          ),
+                        ),
+                      ),
+
+                      // Toque para abrir detalhes na base do card
+                      Positioned.fill(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () => widget.onTap(app),
                           ),
                         ),
                       ),
@@ -202,36 +226,21 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
                             ),
                             const SizedBox(width: 12),
 
-                            // Botão de Ação Direta
-                            FilledButton(
-                              onPressed: () => widget.onAction(app),
-                              style: FilledButton.styleFrom(
-                                backgroundColor: update
-                                    ? Colors.orangeAccent
-                                    : (installed ? Colors.white.withValues(alpha: 0.2) : AppColors.accentCyan),
-                                foregroundColor: update ? Colors.black : (installed ? Colors.white : Colors.black),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: isDesktop ? 20 : 14,
-                                  vertical: isDesktop ? 12 : 8,
-                                ),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                              ),
-                              child: Text(
-                                update ? 'Atualizar' : (installed ? 'Abrir' : 'Instalar'),
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                              ),
+                            // Botão de Ação com Barra de Progresso e Animações
+                            AnimatedActionButton(
+                              app: app,
+                              isInstalled: installed,
+                              hasUpdate: update,
+                              isAvailable: isAvailable,
+                              isActionInProgress: inProgress,
+                              downloadProgress: progress,
+                              downloadStatus: status,
+                              isInstalling: installing,
+                              isHero: true,
+                              height: isDesktop ? 44 : 38,
+                              onAction: () => widget.onAction(app),
                             ),
                           ],
-                        ),
-                      ),
-
-                      // Toque para abrir detalhes
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => widget.onTap(app),
-                          ),
                         ),
                       ),
                     ],

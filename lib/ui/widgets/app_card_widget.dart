@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
+import 'animated_action_button.dart';
 import 'cluster_image.dart';
 
 class AppCardWidget extends StatelessWidget {
@@ -10,6 +11,9 @@ class AppCardWidget extends StatelessWidget {
   final bool hasUpdate;
   final String? installedVersion;
   final double? downloadProgress;
+  final String? downloadStatus;
+  final bool isActionInProgress;
+  final bool isInstalling;
   final VoidCallback onTap;
   final VoidCallback onAction;
   final VoidCallback? onUninstall;
@@ -21,6 +25,9 @@ class AppCardWidget extends StatelessWidget {
     this.hasUpdate = false,
     this.installedVersion,
     this.downloadProgress,
+    this.downloadStatus,
+    this.isActionInProgress = false,
+    this.isInstalling = false,
     required this.onTap,
     required this.onAction,
     this.onUninstall,
@@ -37,7 +44,6 @@ class AppCardWidget extends StatelessWidget {
     final isAndroid = Platform.isAndroid;
     final isAvailable = app.isAvailableOn(isAndroid);
     final sizeMb = app.getSizeMb(isAndroid);
-    final isDownloading = downloadProgress != null && downloadProgress! > 0 && downloadProgress! < 1.0;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -162,17 +168,6 @@ class AppCardWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(height: 8),
-              if (isDownloading) ...[
-                LinearProgressIndicator(
-                  value: downloadProgress,
-                  backgroundColor: AppColors.surface,
-                  color: AppColors.accentCyan,
-                  minHeight: 6,
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                const SizedBox(height: 8),
-              ],
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -237,7 +232,7 @@ class AppCardWidget extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (isInstalled && onUninstall != null && !isDownloading) ...[
+                      if (isInstalled && onUninstall != null && !isActionInProgress && (downloadProgress == null || downloadProgress == 0)) ...[
                         IconButton(
                           icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
                           tooltip: 'Desinstalar',
@@ -247,37 +242,18 @@ class AppCardWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                       ],
-                      ElevatedButton(
-                        onPressed: isAvailable && !isDownloading ? onAction : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: hasUpdate
-                              ? Colors.orangeAccent
-                              : (isInstalled ? AppColors.surface : AppColors.accentCyan),
-                          foregroundColor: hasUpdate
-                              ? Colors.black
-                              : (isInstalled ? AppColors.textPrimary : Colors.black),
-                          disabledBackgroundColor: AppColors.surface.withValues(alpha: 0.5),
-                          disabledForegroundColor: AppColors.textSecondary.withValues(alpha: 0.5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (app.id == 'nexus_dashboard' && !isInstalled && !isDownloading) ...[
-                              const Icon(Icons.lock_outline, size: 13),
-                              const SizedBox(width: 4),
-                            ],
-                            Text(
-                              isDownloading
-                                  ? '${((downloadProgress ?? 0) * 100).toInt()}%'
-                                  : app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate),
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                            ),
-                          ],
-                        ),
+                      AnimatedActionButton(
+                        app: app,
+                        isInstalled: isInstalled,
+                        hasUpdate: hasUpdate,
+                        isAvailable: isAvailable,
+                        isActionInProgress: isActionInProgress || (downloadProgress != null && downloadProgress! > 0),
+                        downloadProgress: downloadProgress,
+                        downloadStatus: downloadStatus,
+                        isInstalling: isInstalling,
+                        isCompact: true,
+                        height: 36,
+                        onAction: isAvailable ? onAction : onTap,
                       ),
                     ],
                   ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nexus_app_hub/data/models/app_item.dart';
@@ -21,6 +22,7 @@ class HomeViewModel extends ChangeNotifier {
   final Map<String, bool> _hasUpdateStatus = {};
   final Map<String, double> _downloadProgress = {};
   final Map<String, String> _downloadStatus = {};
+  final Map<String, bool> _isInstalling = {};
 
   bool _isLoading = true;
   String _searchQuery = '';
@@ -47,6 +49,9 @@ class HomeViewModel extends ChangeNotifier {
   String? getInstalledVersion(String appId) => _installedVersions[appId];
   double? getProgress(String appId) => _downloadProgress[appId];
   String? getStatus(String appId) => _downloadStatus[appId];
+  bool isDownloading(String appId) => _downloadProgress.containsKey(appId);
+  bool isInstalling(String appId) => _isInstalling[appId] ?? false;
+  bool isActionInProgress(String appId) => isDownloading(appId) || isInstalling(appId);
 
   HomeViewModel() {
     loadData();
@@ -268,6 +273,8 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> handleAction(AppItem app, BuildContext context) async {
+    if (isActionInProgress(app.id)) return;
+
     if (isInstalled(app.id) && !hasUpdate(app.id)) {
       final launched = await AppDetector.launchApp(app);
       if (!launched) {
@@ -557,6 +564,8 @@ class HomeViewModel extends ChangeNotifier {
     if (filename == null) return;
 
     _downloadProgress[app.id] = 0.01;
+    _downloadStatus[app.id] = 'Iniciando download...';
+    _isInstalling[app.id] = false;
     notifyListeners();
 
     await _downloadService.downloadAndInstall(
@@ -572,6 +581,7 @@ class HomeViewModel extends ChangeNotifier {
       onError: (err) {
         _downloadProgress.remove(app.id);
         _downloadStatus.remove(app.id);
+        _isInstalling.remove(app.id);
         notifyListeners();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -581,18 +591,44 @@ class HomeViewModel extends ChangeNotifier {
         );
       },
       onCompleted: () async {
-        _downloadProgress.remove(app.id);
-        _downloadStatus.remove(app.id);
-        AppDetector.clearCache();
-        await _checkInstallations();
-        notifyListeners();
+        if (isAndroid) {
+          // No Android, a chamada para installApk dispara o instalador do sistema.
+          // Mantemos o app no estado 'Instalando...' com o botão indisponível/bloqueado.
+          _isInstalling[app.id] = true;
+          _downloadStatus[app.id] = 'Instalando aplicativo...';
+          _downloadProgress[app.id] = 1.0;
+          notifyListeners();
 
-        // Segunda verificação após 1.5s para garantir que os arquivos e registros terminaram de ser escritos
-        Future.delayed(const Duration(milliseconds: 1500), () async {
+          // Monitoramento ativo e não-bloqueante em background (polling a cada 1s por até 90s)
+          int attempts = 0;
+          Timer.periodic(const Duration(seconds: 1), (timer) async {
+            attempts++;
+            AppDetector.clearCache();
+            final installed = await AppDetector.isAppInstalled(null, app.android?.packageName);
+            if (installed || attempts >= 90) {
+              timer.cancel();
+              _isInstalling.remove(app.id);
+              _downloadProgress.remove(app.id);
+              _downloadStatus.remove(app.id);
+              await _checkInstallations();
+              notifyListeners();
+            }
+          });
+        } else {
+          _downloadProgress.remove(app.id);
+          _downloadStatus.remove(app.id);
+          _isInstalling.remove(app.id);
           AppDetector.clearCache();
           await _checkInstallations();
           notifyListeners();
-        });
+
+          // Segunda verificação após 1.5s para garantir que os arquivos e registros terminaram de ser escritos
+          Future.delayed(const Duration(milliseconds: 1500), () async {
+            AppDetector.clearCache();
+            await _checkInstallations();
+            notifyListeners();
+          });
+        }
       },
     );
   }
