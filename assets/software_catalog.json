@@ -2,7 +2,7 @@
     "store_name":  "Nexus App Hub",
     "developer":  "André (Antigravity)",
     "schema_version":  "3.0.0",
-    "updated_at":  "2026-09-07T17:54:18Z",
+    "updated_at":  "2026-09-07T17:59:26Z",
     "categories":  [
                        {
                            "id":  "games",
@@ -50,7 +50,7 @@
                                              ],
                      "windows":  {
                                      "filename":  "NeoBlocks_v0.2.0_alpha_Installer.exe",
-                                     "size_mb":  70.12,
+                                     "size_mb":  85.59,
                                      "version":  "v0.2.0-alpha",
                                      "executable":  "NeoBlocks.exe"
                                  },
@@ -266,11 +266,11 @@
                                    "executable":  "/usr/bin/super-pong"
                                },
                      "latest_changelog":  [
-                                              "Operação Gamepad Sovereign: Suporte nativo completo a controles X-Input (Xbox) e PS4 DualShock 4 (USB/Bluetooth).",
-                                              "Suporte a 2 controles simultâneos para Multiplayer Local / Modo Versus.",
-                                              "Calibração de zero deadzone (0.1) com alta sensibilidade e controle analógico proporcional.",
-                                              "Navegação integral por menus via D-Pad/Analógico, A/✕ para confirmar e B/◯ para voltar.",
-                                              "Reescrita em Godot 4 C# (.NET 8) com física contínua e sistema de Power-Ups dinâmicos.",
+                                              "Operacao Gamepad Sovereign: Suporte nativo completo a controles X-Input (Xbox) e PS4 DualShock 4 (USB/Bluetooth).",
+                                              "Suporte a 2 controles simultaneos para Multiplayer Local / Modo Versus.",
+                                              "Calibracao de zero deadzone (0.1) com alta sensibilidade e controle analogico proporcional.",
+                                              "Navegacao integral por menus via D-Pad/Analogico, A/Cruz para confirmar e B/Circulo para voltar.",
+                                              "Reescrita em Godot 4 C# (.NET 8) com fisica continua e sistema de Power-Ups dinamicos.",
                                               "Compatibilidade multiplataforma total: Windows, Linux nativo (.deb/tar.gz) e Android."
                                           ]
                  },
