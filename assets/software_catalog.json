@@ -43,9 +43,9 @@
                 "linux"
             ],
             "windows": {
-                "filename": "NeoBlocks_v0.1.1_alpha_Installer.exe",
+                "filename": "NeoBlocks_v0.2.0_alpha_Installer.exe",
                 "size_mb": 70.12,
-                "version": "v0.1.1-alpha",
+                "version": "v0.2.0-alpha",
                 "executable": "NeoBlocks.exe"
             },
             "android": {
@@ -78,10 +78,7 @@
                 "Textos flutuantes neon (+100, +300, +500, +1200 NEO TETRIS!!) e combos x2/x3.",
                 "Ghost Piece holográfica com varredura contínua de cyber scanlines.",
                 "Correção de visibilidade imediata das peças no topo da matriz.",
-                "Suporte a 120 FPS cravados no Galaxy S25 FE com medidor em tempo real no HUD.",
-                "Efeitos visuais arcade: laser beam no hard drop, lock flash e explosão neon nas linhas.",
-                "Screen shake responsivo e modal de pausa cyberpunk com bloqueio estrito de inputs.",
-                "Menu de configurações com seletor de taxa de quadros e HUD de FPS em tempo real."
+                "Suporte a 120 FPS cravados no Galaxy S25 FE com medidor em tempo real no HUD."
             ],
             "screenshots": [
                 "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
@@ -277,10 +274,10 @@
                 "executable": "/usr/bin/snake-game"
             },
             "android": {
-                "filename": "Snake Game_Android_v0.3.2_alpha.apk",
-                "size_mb": 44.1,
-                "version": "1.0.0",
-                "package_name": "com.example.snake_game"
+                "filename": "Snake_Game_v1.2.0.apk",
+                "size_mb": 107.1,
+                "version": "1.2.0",
+                "package_name": "com.antigravity.snakegame"
             },
             "version": "v1.2.0",
             "latest_changelog": [
