@@ -479,7 +479,8 @@
             "short_description": "Downloader rápido de mídias e postagens do Threads.",
             "platforms_supported": [
                 "android",
-                "windows"
+                "windows",
+                "linux"
             ],
             "android": {
                 "filename": "ThreadsDL_Android_v0.6.1.apk",
@@ -496,7 +497,23 @@
                 "version": "v0.6.1",
                 "executable": "threadsdl.exe"
             },
+            "linux": {
+                "filename": "ThreadsDL_Linux_v0.6.1_amd64.deb",
+                "package_deb": "threadsdl_0.6.1_amd64.deb",
+                "package_name": "threadsdl",
+                "tarball": "ThreadsDL_Linux_v0.6.1_portable.tar.gz",
+                "size_mb": 8.3,
+                "version": "0.6.1",
+                "executable": "/usr/bin/threadsdl",
+                "latest_changelog": [
+                    "Porte nativo oficial para Linux x86_64 compilado em GTK3.",
+                    "Pacote Debian (.deb) e versão universal portátil (.tar.gz).",
+                    "Integração nativa com repositório APT oficial do cluster ('sudo apt install threadsdl').",
+                    "Motor duplo de download (scraping direto Meta + fallback resiliente via threadsdownloader.com)."
+                ]
+            },
             "latest_changelog": [
+                "Lançamento nativo oficial para Linux x86_64 (.deb e tarball portátil) via Protocolo Tux Prime",
                 "Salvamento otimizado: mídias salvas prioritariamente em DCIM/ThreadsDL e Pictures/ThreadsDL para visibilidade imediata no Google Fotos",
                 "Integração nativa com MediaScannerConnection para indexação em tempo real no Android",
                 "Motor Duplo de Extração: scraping direto Meta/Threads + fallback resiliente via threadsdownloader.com",
