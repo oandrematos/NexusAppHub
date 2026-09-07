@@ -21,6 +21,8 @@ class AppItem {
   final String? banner;
   final String? bannerCard;
   final String? iconUrl;
+  final bool gamepad;
+  final List<String> controllers;
 
   AppItem({
     required this.id,
@@ -42,6 +44,8 @@ class AppItem {
     this.banner,
     this.bannerCard,
     this.iconUrl,
+    this.gamepad = false,
+    this.controllers = const [],
   });
 
   bool isAvailableOn(bool isAndroid) {
@@ -122,6 +126,10 @@ class AppItem {
       banner: json['banner'],
       bannerCard: json['banner_card'],
       iconUrl: json['icon_url'],
+      gamepad: json['gamepad'] ?? false,
+      controllers: json['controllers'] != null
+          ? List<String>.from(json['controllers'])
+          : const [],
     );
   }
 }
