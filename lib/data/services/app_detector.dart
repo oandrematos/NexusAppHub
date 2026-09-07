@@ -248,6 +248,12 @@ class AppDetector {
       if (Platform.environment['LOCALAPPDATA'] != null)
         '${Platform.environment['LOCALAPPDATA']}\\Programs\\Smirror\\Smirror.exe',
     ],
+    'neoblocks.exe': [
+      if (Platform.environment['LOCALAPPDATA'] != null) ...[
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\Neo-Blocks\\NeoBlocks.exe',
+        '${Platform.environment['LOCALAPPDATA']}\\Programs\\NeoBlocks\\NeoBlocks.exe',
+      ],
+    ],
   };
 
   static Future<String?> _queryAppPathRegistry(String executableName) async {
@@ -295,7 +301,11 @@ class AppDetector {
       appName,
       appName.replaceAll(' ', ''),
       appName.replaceAll('_', ''),
+      appName.replaceAll('-', ''),
       appName.replaceAll(' ', '_'),
+      appName.replaceAll(' ', '-'),
+      appName.replaceAllMapped(RegExp(r'([a-z])([A-Z])'), (m) => '${m[1]}-${m[2]}'),
+      appName.replaceAllMapped(RegExp(r'([a-z])([A-Z])'), (m) => '${m[1]} ${m[2]}'),
     ];
     final hives = [
       'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall',
@@ -365,7 +375,7 @@ class AppDetector {
     if (appPath != null) return appPath;
 
     final sanitizedBase = executableName.replaceAll('.exe', '').trim();
-    final noSepBase = sanitizedBase.replaceAll('_', '').replaceAll(' ', '').toLowerCase();
+    final noSepBase = sanitizedBase.replaceAll('_', '').replaceAll(' ', '').replaceAll('-', '').toLowerCase();
 
     for (final base in _baseDirs) {
       final directPath = '$base/$executableName';
@@ -380,7 +390,14 @@ class AppDetector {
       final underscoreSub = '$base/${sanitizedBase.replaceAll(' ', '_')}/$executableName';
       if (File(underscoreSub).existsSync()) return underscoreSub;
 
-      final noSepSub = '$base/${sanitizedBase.replaceAll('_', '').replaceAll(' ', '')}/$executableName';
+      final hyphenSub = '$base/${sanitizedBase.replaceAll('_', '-').replaceAll(' ', '-')}/$executableName';
+      if (File(hyphenSub).existsSync()) return hyphenSub;
+
+      final camelHyphen = sanitizedBase.replaceAllMapped(RegExp(r'([a-z])([A-Z])'), (m) => '${m[1]}-${m[2]}');
+      final camelHyphenSub = '$base/$camelHyphen/$executableName';
+      if (File(camelHyphenSub).existsSync()) return camelHyphenSub;
+
+      final noSepSub = '$base/${sanitizedBase.replaceAll('_', '').replaceAll(' ', '').replaceAll('-', '')}/$executableName';
       if (File(noSepSub).existsSync()) return noSepSub;
 
       if (noSepBase.contains('dashboard')) {
@@ -412,7 +429,7 @@ class AppDetector {
           for (final entity in dir.listSync(followLinks: false)) {
             if (entity is Directory) {
               final folderName = entity.uri.pathSegments.reversed.skip(1).first.toLowerCase();
-              final cleanFolder = folderName.replaceAll('_', '').replaceAll(' ', '');
+              final cleanFolder = folderName.replaceAll('_', '').replaceAll(' ', '').replaceAll('-', '');
               if (cleanFolder == noSepBase) {
                 final cand = '${entity.path}/$executableName';
                 if (File(cand).existsSync()) return cand;

@@ -34,18 +34,25 @@ class DownloadService {
 
     bool success = false;
 
-    // 1. PRIORIDADE ZERO-LATÊNCIA NO DESKTOP: Repositório Local de Instaladores
+    // 1. PRIORIDADE ZERO-LATÊNCIA NO DESKTOP: Repositório Local de Instaladores (OneDrive e Drive W:)
     if (!isAndroid) {
-      final localInstallersDir = Directory(r'D:\OneDrive\Antigravity Projects\Installers');
-      final localFile = File('${localInstallersDir.path}/$filename');
-      if (localFile.existsSync() && localFile.lengthSync() > 0) {
-        onStatus('Obtendo do repositório local de instaladores...');
-        onProgress(0.5);
-        try {
-          await localFile.copy(targetFile.path);
-          onProgress(1.0);
-          success = true;
-        } catch (_) {}
+      final localCandidates = [
+        Directory(r'D:\OneDrive\Antigravity Projects\Installers'),
+        Directory(r'W:\Installers'),
+        Directory(r'W:\Antigravity Projects\Installers'),
+      ];
+      for (final dir in localCandidates) {
+        final localFile = File('${dir.path}/$filename');
+        if (localFile.existsSync() && localFile.lengthSync() > 0) {
+          onStatus('Obtendo do repositório local (${dir.path})...');
+          onProgress(0.5);
+          try {
+            await localFile.copy(targetFile.path);
+            onProgress(1.0);
+            success = true;
+            break;
+          } catch (_) {}
+        }
       }
     }
 
@@ -231,6 +238,7 @@ class DownloadService {
 
             int exitCode = -1;
             try {
+              onStatus('Instalando ${filename.replaceAll('.exe', '')}...');
               final proc = await Process.start(
                 targetFile.path,
                 silentArgs,
