@@ -98,7 +98,8 @@
             "short_description": "Loja e launcher unificado em Flutter para PC e Celular.",
             "platforms_supported": [
                 "windows",
-                "android"
+                "android",
+                "linux"
             ],
             "windows": {
                 "executable": "NexusAppHub.exe",
@@ -111,6 +112,21 @@
                 "version": "0.3.26",
                 "filename": "NexusAppHub_Flutter_Android_v0.3.26.apk",
                 "size_mb": 91.24
+            },
+            "linux": {
+                "filename": "nexus-app-hub_0.3.26_amd64.deb",
+                "package_deb": "nexus-app-hub_0.3.26_amd64.deb",
+                "package_name": "nexus-app-hub",
+                "version": "0.3.26",
+                "size_mb": 44.06,
+                "executable": "/usr/bin/nexus-app-hub",
+                "desktop_file": "/usr/share/applications/nexus-app-hub.desktop",
+                "latest_changelog": [
+                    "Lançamento nativo oficial para Linux x86_64 compilado em GTK3.",
+                    "Pacote Debian (.deb) integrado ao repositório oficial APT do cluster.",
+                    "Instalação e gerenciamento nativo com 'sudo apt install nexus-app-hub' ou 'nexus-hub'.",
+                    "Suporte completo a instalação silenciosa de pacotes DEB, AppImage e scripts shell."
+                ]
             },
             "version": "0.3.26",
             "latest_changelog": [
