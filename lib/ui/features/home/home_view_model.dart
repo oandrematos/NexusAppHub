@@ -140,6 +140,11 @@ class HomeViewModel extends ChangeNotifier {
     if (cleanInstalled.isEmpty || cleanCatalog.isEmpty) return false;
     if (cleanInstalled == cleanCatalog) return false;
 
+    // Special case: if installed version is the legacy mistaken 1.1.x and catalog is 0.x, it's an update!
+    if (cleanInstalled.startsWith('1.1.') && cleanCatalog.startsWith('0.')) {
+      return true;
+    }
+
     final instParts = cleanInstalled.split('.').map((e) => int.tryParse(e) ?? 0).toList();
     final catParts = cleanCatalog.split('.').map((e) => int.tryParse(e) ?? 0).toList();
 
