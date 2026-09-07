@@ -43,39 +43,42 @@
                 "linux"
             ],
             "windows": {
-                "filename": "NeoBlocks_v0.1.1_alpha_Installer.exe",
+                "filename": "NeoBlocks_v0.2.0_alpha_Installer.exe",
                 "size_mb": 70.12,
-                "version": "v0.1.1-alpha",
+                "version": "v0.2.0-alpha",
                 "executable": "NeoBlocks.exe"
             },
             "android": {
-                "filename": "NeoBlocks_Android_v0.1.1_alpha.apk",
+                "filename": "NeoBlocks_Android_v0.2.0_alpha.apk",
                 "size_mb": 7.75,
-                "version": "v0.1.1-alpha",
+                "version": "v0.2.0-alpha",
                 "package_name": "com.antigravity.neoblocks"
             },
             "linux": {
                 "filename": "install_neo_blocks.sh",
-                "package_deb": "neoblocks_0.1.1_amd64.deb",
-                "tarball": "NeoBlocks_v0.1.1_alpha_linux_x86_64.tar.gz",
-                "size_mb": 91.2,
-                "version": "v0.1.1-alpha",
+                "package_deb": "neoblocks_0.2.0_amd64.deb",
+                "tarball": "NeoBlocks_v0.2.0_alpha_linux_x86_64.tar.gz",
+                "size_mb": 92.0,
+                "version": "v0.2.0-alpha",
                 "executable": "neoblocks",
                 "latest_changelog": [
-                    "Porte nativo oficial para Linux x86_64 compilado com Godot Engine 4.",
-                    "Pacote Debian (.deb) integrado ao repositório oficial APT do Nexus Cluster.",
-                    "Instalador silencioso em 1 clique (install_neo_blocks.sh) com atalho .desktop.",
-                    "Suporte a taxas de atualização de 120 FPS+ com efeitos de neon e áudio dinâmico."
+                    "Super Overhaul de Animações: Squash & Stretch elástico nos blocos travados.",
+                    "Ondas de Choque (Shockwave Rings) concêntricas no Hard Drop.",
+                    "Trilha laser de feixe duplo e desintegração explosiva em voxels nas linhas.",
+                    "Queda gravitacional suave com ricochete (collapse bounce) e textos flutuantes neon.",
+                    "Suporte nativo a 120 FPS cravados e HUD de telemetria em tempo real."
                 ]
             },
-            "version": "v0.1.1-alpha",
+            "version": "v0.2.0-alpha",
             "latest_changelog": [
-                "Hotfix v0.1.1-alpha: correção no pipeline de renderização do laser drop e peças.",
-                "Calibração canônica de versão (versionName: 0.1.1, versionCode: 11101).",
-                "Suporte nativo a 120 FPS no Galaxy S25 FE e displays de alta taxa de atualização.",
-                "Efeitos visuais arcade: laser beam no hard drop, lock flash e explosão neon nas linhas.",
-                "Screen shake responsivo e modal de pausa cyberpunk com bloqueio estrito de inputs.",
-                "Menu de configurações com seletor de taxa de quadros e HUD de FPS em tempo real."
+                "Super Overhaul de Animações: Squash & Stretch elástico e impacto nos blocos travados.",
+                "Ondas de Choque (Shockwave Rings) concêntricas no Hard Drop.",
+                "Trilha laser de feixe duplo com faíscas neon ascendentes.",
+                "Desintegração explosiva em voxels neon e queda gravitacional com collapse bounce.",
+                "Textos flutuantes neon (+100, +300, +500, +1200 NEO TETRIS!!) e combos x2/x3.",
+                "Ghost Piece holográfica com varredura contínua de cyber scanlines.",
+                "Correção de visibilidade imediata das peças no topo da matriz.",
+                "Suporte a 120 FPS cravados no Galaxy S25 FE com medidor em tempo real no HUD."
             ],
             "screenshots": [
                 "http://192.168.196.101/assets/screenshots/neoblocks_screen_1.png",
