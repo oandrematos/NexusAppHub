@@ -1,12 +1,13 @@
 {
     "changelog":  [
-                      "Suporte universal a downloads CDN no GitHub Releases com múltiplos redirecionamentos 302/307/308.",
-                      "Correção crítica de mapeamento de nomes de instaladores no GitHub (substituição de espaços por pontos).",
-                      "Integração do ThreadsDL v0.6.1 com salvamento em DCIM e Google Fotos nativo.",
-                      "Integração de Neo-Blocks v0.1.0 com 120 FPS nativo (Galaxy S25 FE), animações arcade e screen shake.",
-                      "Suporte nativo a Linux Desktop (GTK3) e instalação de pacotes via PolicyKit (pkexec)."
+                      "Timeout de sincronizacao de catalogo ampliado para 7s com blindagem de deteccao de updates.",
+                      "Declaracao completa de visibilidade de pacotes Android (<queries>) para Neo-Blocks e ecossistema.",
+                      "Suporte universal a downloads CDN no GitHub Releases com multiplos redirecionamentos 302/307/308.",
+                      "Correcao critica de mapeamento de nomes de instaladores no GitHub (substituicao de espacos por pontos).",
+                      "Integracao do ThreadsDL v0.6.1 com salvamento em DCIM e Google Fotos nativo.",
+                      "Integracao de Neo-Blocks v0.2.0 com 120 FPS nativo (Galaxy S25 FE), animacoes arcade e screen shake."
                   ],
-    "build":  29,
-    "version":  "0.3.26",
-    "release_date":  "2026-09-06"
+    "build":  30,
+    "version":  "0.3.27",
+    "release_date":  "2026-09-07"
 }

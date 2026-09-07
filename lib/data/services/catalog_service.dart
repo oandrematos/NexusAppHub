@@ -22,15 +22,23 @@ class CatalogService {
     }
   }
 
-  // Sincronização remota em background com timeout curto (1.5s)
+  // Sincronização remota em background com timeout resiliente
   Future<List<AppItem>?> fetchRemoteCatalog() async {
     for (final url in clusterCatalogUrls) {
       try {
         final cacheBusterUrl = '$url?t=${DateTime.now().millisecondsSinceEpoch}';
+        final isGithub = url.contains('githubusercontent.com');
+        final timeoutDuration = isGithub
+            ? const Duration(milliseconds: 7000)
+            : const Duration(milliseconds: 1800);
         final resp = await http.get(
           Uri.parse(cacheBusterUrl),
-          headers: {'Cache-Control': 'no-cache', 'Pragma': 'no-cache'},
-        ).timeout(const Duration(milliseconds: 1500));
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          },
+        ).timeout(timeoutDuration);
         if (resp.statusCode == 200) {
           final data = json.decode(utf8.decode(resp.bodyBytes));
           if (data['apps'] != null) {

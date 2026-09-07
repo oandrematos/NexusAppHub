@@ -9,6 +9,8 @@
     <queries>
         <package android:name="com.antigravity.alfred" />
         <package android:name="com.antigravity.nexus_app_hub" />
+        <package android:name="com.antigravity.neoblocks" />
+        <package android:name="com.andre.neoblocks" />
         <package android:name="com.antigravity.spaceduel" />
         <package android:name="com.andre.spaceduel" />
         <package android:name="com.antigravity.superpong" />

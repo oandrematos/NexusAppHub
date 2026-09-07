@@ -184,9 +184,19 @@ class HomeViewModel extends ChangeNotifier {
     await Future.wait(_allApps.map((app) async {
       if (app.id == 'nexus_app_hub') {
         _installedStatus[app.id] = true;
-        _installedVersions[app.id] = AppVersionService.currentVersion;
+        String curVer = AppVersionService.currentVersion;
+        if (isAndroid) {
+          final installedOnDevice = await AppDetector.getInstalledVersion(
+            null,
+            'com.antigravity.nexus_app_hub',
+          );
+          if (installedOnDevice != null && installedOnDevice.isNotEmpty) {
+            curVer = installedOnDevice;
+          }
+        }
+        _installedVersions[app.id] = curVer;
         final catVer = app.getVersion(isAndroid);
-        final hasNewer = _isNewerVersion(AppVersionService.currentVersion, catVer);
+        final hasNewer = _isNewerVersion(curVer, catVer);
         _hasUpdateStatus[app.id] = hasNewer && !_prefs.isUpdateIgnored(app.id);
         return;
       }

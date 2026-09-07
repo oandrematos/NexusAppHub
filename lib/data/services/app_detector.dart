@@ -20,6 +20,12 @@ class AppDetector {
 
   static List<String> _getPackageCandidates(String packageName) {
     final list = <String>[packageName];
+    if (packageName == 'com.antigravity.neoblocks') {
+      list.add('com.andre.neoblocks');
+    } else if (packageName == 'com.andre.neoblocks') {
+      list.add('com.antigravity.neoblocks');
+    }
+
     if (packageName == 'com.antigravity.threadsdl') {
       list.add('com.andre.threadsdl');
     } else if (packageName == 'com.andre.threadsdl') {
