@@ -24,19 +24,10 @@ if (-not (Test-Path $DestinationPath)) {
     New-Item -ItemType Directory -Path $DestinationPath -Force | Out-Null
 }
 
-$robocopyArgs = @(
-    $SourcePath,
-    $DestinationPath,
-    "*.*",
-    "/XO",
-    "/FFT",
-    "/R:1",
-    "/W:2",
-    "/NP"
-)
+$argLine = "`"$SourcePath`" `"$DestinationPath`" *.* /XO /FFT /R:1 /W:2 /NP"
 
 Write-Host "🚀 Executando Robocopy incremental..." -ForegroundColor Yellow
-$process = Start-Process -FilePath "robocopy.exe" -ArgumentList $robocopyArgs -NoNewWindow -Wait -PassThru
+$process = Start-Process -FilePath "robocopy.exe" -ArgumentList $argLine -NoNewWindow -Wait -PassThru
 
 if ($process.ExitCode -le 7) {
     Write-Host "✔ [CITADEL] Sincronizacao concluida com sucesso! Codigo de saida: $($process.ExitCode)" -ForegroundColor Green
