@@ -2,7 +2,7 @@
     "store_name": "Nexus App Hub",
     "developer": "André (Antigravity)",
     "schema_version": "3.0.0",
-    "updated_at": "2026-09-07T23:38:00Z",
+    "updated_at": "2026-09-08T00:18:41Z",
     "categories": [
         {
             "id": "games",
@@ -295,6 +295,46 @@
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/banner_card.png",
             "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/snake_game/icon.png"
+        },
+        {
+            "id": "gangstar_mirage_city",
+            "gamepad": true,
+            "title": "Gangstar Mirage City: Online (Vice Open World)",
+            "short_description": "Mundo aberto 3D multiplayer online com suporte a controle.",
+            "description": "Jogo de ação e RPG em mundo aberto 3D com gráficos de última geração, disputas de gangues, missões cooperativas e PvP, customização avançada de carros e exploração urbana livre. Suporte nativo a gamepads no celular.",
+            "version": "1.0.0_11200",
+            "featured": true,
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gangstar_mirage_city/banner.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gangstar_mirage_city/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gangstar_mirage_city/screenshots/screen_2.png"
+            ],
+            "controllers": [
+                "xinput",
+                "dualshock4",
+                "touch"
+            ],
+            "android": {
+                "version": "1.0.0_11200",
+                "size_mb": 996.46,
+                "filename": "Gangstar_Mirage_City_Android_v1.0.0_11200.apk",
+                "package_name": "com.levelinfinite.gst"
+            },
+            "platforms_supported": [
+                "android"
+            ],
+            "icon": "🔫",
+            "badge": "MUNDO ABERTO",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gangstar_mirage_city/banner_card.png",
+            "name": "Gangstar Mirage City",
+            "latest_changelog": [
+                "Lançamento oficial soft-launch no Brasil e América Latina.",
+                "Suporte completo a controles de videogame (Xbox e DualShock/DualSense) no Android.",
+                "Mundo aberto 3D multiplayer massivo online com suporte a clãs e assaltos cooperativos."
+            ],
+            "category": "games",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/gangstar_mirage_city/icon.png",
+            "category_name": "Jogos & Arcade"
         },
         {
             "id": "nexus_dashboard",
