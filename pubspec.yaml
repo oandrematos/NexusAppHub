@@ -49,6 +49,8 @@ flutter:
     - assets/showcase/smirror/
     - assets/showcase/smirror/screenshots/
     - assets/showcase/snake_game/
+    - assets/showcase/gangstar_mirage_city/
+    - assets/showcase/gangstar_mirage_city/screenshots/
     - assets/showcase/space_duel/
     - assets/showcase/super_pong/
     - assets/showcase/tailscale/
