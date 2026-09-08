@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Holo Card Studio — 3D Holographic Showcase</title>
+    <style>
+        :root {
+            --bg-dark: #07090e;
+            --bg-panel: #0d121d;
+            --cyan-neon: #00f0ff;
+            --magenta-neon: #ff007f;
+            --gold-neon: #ffd700;
+            --purple-neon: #a855f7;
+            --green-neon: #10b981;
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 20% 70%, rgba(168, 85, 247, 0.06) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+            padding: 24px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            max-width: 860px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .badge-hub {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            color: var(--cyan-neon);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--cyan-neon) 70%, var(--magenta-neon) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 14px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* CARD STAGE */
+        .stage-container {
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card-wrapper {
+            position: relative;
+            width: 360px;
+            height: 520px;
+            border-radius: 28px;
+            transform-style: preserve-3d;
+            transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+            cursor: grab;
+        }
+
+        .card-wrapper:active {
+            cursor: grabbing;
+        }
+
+        /* GLOW BACKGROUND */
+        .card-ambient-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 40px;
+            background: radial-gradient(circle at 50% 50%, var(--card-glow, rgba(0, 240, 255, 0.35)), transparent 70%);
+            filter: blur(24px);
+            opacity: 0.6;
+            transition: opacity 0.3s ease, background 0.3s ease;
+            z-index: -1;
+            transform: translateZ(-30px);
+        }
+
+        /* 4-PLANE PARALLAX CARD INTERIOR */
+        .card-body {
+            position: absolute;
+            inset: 0;
+            border-radius: 26px;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            background: #0d121d;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.05);
+        }
+
+        /* LAYER 1: RECEDED BACKGROUND (-25px) */
+        .layer-bg {
+            position: absolute;
+            inset: -10%;
+            width: 120%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(-25px) scale(1.1);
+            filter: brightness(0.65) contrast(1.15) saturate(1.2);
+            transition: background-image 0.4s ease;
+        }
+
+        /* LAYER 2: HOLOGRAPHIC FOIL & IRIDESCENT SHADER (0px) */
+        .layer-holo {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            mix-blend-mode: color-dodge;
+            opacity: 0.75;
+            z-index: 2;
+            background: 
+                radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.9) 0%, transparent 45%),
+                linear-gradient(
+                    calc(var(--angle, 45deg)), 
+                    rgba(255, 0, 0, 0.45) 0%, 
+                    rgba(255, 154, 0, 0.45) 12%, 
+                    rgba(240, 255, 0, 0.45) 24%, 
+                    rgba(0, 255, 100, 0.45) 36%, 
+                    rgba(0, 240, 255, 0.5) 48%, 
+                    rgba(0, 100, 255, 0.5) 60%, 
+                    rgba(180, 0, 255, 0.5) 75%, 
+                    rgba(255, 0, 150, 0.45) 90%, 
+                    rgba(255, 0, 0, 0.45) 100%
+                ),
+                repeating-linear-gradient(
+                    calc(var(--angle, 45deg) + 90deg),
+                    rgba(255, 255, 255, 0.12) 0px,
+                    rgba(255, 255, 255, 0.12) 2px,
+                    transparent 2px,
+                    transparent 6px
+                );
+            transition: opacity 0.3s ease;
+        }
+
+        /* GLITTER / VORONOI SPARKLE PARTICLES */
+        .layer-glitter {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            opacity: 0.6;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, var(--cyan-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, var(--magenta-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, var(--gold-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, var(--cyan-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 220px 50px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 260px 140px, var(--magenta-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 290px 90px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 320px 170px, var(--gold-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 70px 240px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 140px 290px, var(--cyan-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 210px 230px, var(--magenta-neon), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 280px 270px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 330px 250px, var(--gold-neon), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 180px 180px;
+            transform: translateZ(10px);
+        }
+
+        /* LAYER 3: SUBJECT POP-OUT (+40px) */
+        .layer-subject {
+            position: absolute;
+            top: 48px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(45px) scale(1.1);
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            pointer-events: none;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .layer-subject img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 46px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 25px var(--card-glow, rgba(0, 240, 255, 0.5));
+        }
+
+        /* LAYER 4: GLASS UI FOREGROUND (+65px) */
+        .layer-ui {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+            z-index: 4;
+            transform: translateZ(65px);
+            pointer-events: none;
+        }
+
+        .ui-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rarity-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 12px;
+            background: rgba(13, 18, 29, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .rarity-pill .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--card-glow, var(--cyan-neon));
+            box-shadow: 0 0 8px var(--card-glow, var(--cyan-neon));
+        }
+
+        .card-number {
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(13, 18, 29, 0.7);
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ui-bottom {
+            background: rgba(13, 18, 29, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .app-category {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--card-glow, var(--cyan-neon));
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .app-metrics {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .metric-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* SHINE / REFLECTION SPECULAR GLARE */
+        .layer-glare {
+            position: absolute;
+            inset: 0;
+            border-radius: 26px;
+            background: radial-gradient(
+                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.45) 0%,
+                rgba(255, 255, 255, 0.15) 30%,
+                transparent 60%
+            );
+            pointer-events: none;
+            mix-blend-mode: hard-light;
+            z-index: 5;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        /* CONTROLS / APP SELECTOR */
+        .controls-panel {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 16px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .btn-app {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-app:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-app.active {
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--cyan-neon);
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+        }
+
+        .btn-app.active.pink {
+            background: rgba(255, 0, 127, 0.15);
+            border-color: var(--magenta-neon);
+            box-shadow: 0 0 16px rgba(255, 0, 127, 0.35);
+        }
+
+        .btn-app.active.gold {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold-neon);
+            box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+        }
+
+        .btn-app.active.green {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--green-neon);
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+        }
+
+        /* SPECS BAR */
+        .specs-bar {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .spec-item span.val {
+            color: var(--cyan-neon);
+            font-family: 'Consolas', monospace;
+            font-weight: 700;
+        }
+
+        /* AUTO ROTATE TOGGLE */
+        .toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-dim);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            border-color: var(--cyan-neon);
+            color: var(--cyan-neon);
+            background: rgba(0, 240, 255, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="badge-hub">⚡ BOLETIM TECH #006 // PROTOCOLO HOLO-CARD</div>
+        <h1>NEXUS HOLO CARD STUDIO</h1>
+        <p class="subtitle">
+            Prototipagem de Cards 3D Holográficos com Shaders Iridescentes, 
+            Paralaxe de 4 Camadas e Dispersão Rainbow para a Vitrine VIP da <strong>Nexus App Hub</strong>.
+        </p>
+    </header>
+
+    <!-- 3D CARD STAGE -->
+    <div class="stage-container" id="stage">
+        <div class="card-wrapper" id="card">
+            <div class="card-ambient-glow" id="cardGlow"></div>
+            
+            <div class="card-body">
+                <!-- LAYER 1: RECEDED BACKGROUND -->
+                <div class="layer-bg" id="cardBg"></div>
+
+                <!-- LAYER 2: FOIL IRIDESCENCE & SPARKLES -->
+                <div class="layer-holo"></div>
+                <div class="layer-glitter"></div>
+
+                <!-- LAYER 3: SUBJECT POP-OUT -->
+                <div class="layer-subject" id="subjectWrap">
+                    <img id="cardIcon" src="file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/gangstar_mirage_city/icon.png" alt="Card Icon">
+                </div>
+
+                <!-- LAYER 4: GLASS UI FOREGROUND -->
+                <div class="layer-ui">
+                    <div class="ui-top">
+                        <div class="rarity-pill">
+                            <span class="dot"></span>
+                            <span id="cardRarity">ULTIMATE FOIL</span>
+                        </div>
+                        <div class="card-number" id="cardSerial">NX-28/28</div>
+                    </div>
+
+                    <div class="ui-bottom">
+                        <div class="app-title" id="cardTitle">Gangstar Mirage City</div>
+                        <span class="app-category" id="cardCategory">3D OPEN WORLD // ACTION</span>
+                        
+                        <div class="app-metrics">
+                            <div class="metric-badge">🎮 <span id="cardPlat">Android & Big Picture</span></div>
+                            <div class="metric-badge">★ <span id="cardScore">9.9 / 10</span></div>
+                            <div class="metric-badge">⚡ <span id="cardSize">996 MB</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAYER 5: SPECULAR GLARE -->
+                <div class="layer-glare"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls-panel">
+        <button class="btn-app active pink" onclick="selectApp('gangstar')">🏙️ Gangstar Mirage</button>
+        <button class="btn-app" onclick="selectApp('neoblocks')">🧱 Neo-Blocks Arcade</button>
+        <button class="btn-app" onclick="selectApp('spaceduel')">🚀 Space Duel</button>
+        <button class="btn-app" onclick="selectApp('superpong')">🏓 Super Pong</button>
+        <button class="btn-app" onclick="selectApp('kitty')">🐾 Kitty HUD Engine</button>
+        <button class="toggle-btn active" id="gyroBtn" onclick="toggleGyro()">Auto-Giro: ON</button>
+    </div>
+
+    <!-- SPECS -->
+    <div class="specs-bar">
+        <div class="spec-item">Arquitetura: <span class="val">4-Plane Parallax</span></div>
+        <div class="spec-item">Shading: <span class="val">Iridescent Conic Foil</span></div>
+        <div class="spec-item">FPS: <span class="val" id="fpsCounter">60 FPS</span></div>
+        <div class="spec-item">GPU Overhead: <span class="val">&lt; 0.8%</span></div>
+    </div>
+
+    <script>
+        const card = document.getElementById('card');
+        const cardBg = document.getElementById('cardBg');
+        const cardIcon = document.getElementById('cardIcon');
+        const cardTitle = document.getElementById('cardTitle');
+        const cardCategory = document.getElementById('cardCategory');
+        const cardRarity = document.getElementById('cardRarity');
+        const cardSerial = document.getElementById('cardSerial');
+        const cardPlat = document.getElementById('cardPlat');
+        const cardScore = document.getElementById('cardScore');
+        const cardSize = document.getElementById('cardSize');
+        const cardGlow = document.getElementById('cardGlow');
+        const gyroBtn = document.getElementById('gyroBtn');
+
+        // APP DATABASE
+        const apps = {
+            gangstar: {
+                title: "Gangstar Mirage City",
+                category: "3D OPEN WORLD // ACTION",
+                rarity: "ULTIMATE FOIL",
+                serial: "NX-28/28",
+                plat: "Android / Gamepad",
+                score: "9.9 / 10",
+                size: "996 MB",
+                glow: "rgba(255, 0, 128, 0.45)",
+                themeClass: "pink",
+                icon: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/gangstar_mirage_city/icon.png",
+                bg: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/gangstar_mirage_city/banner.png"
+            },
+            neoblocks: {
+                title: "Neo-Blocks Arcade",
+                category: "CYBERPUZZLE // GODOT 4",
+                rarity: "SECRET RARE",
+                serial: "NX-08/28",
+                plat: "Windows / Linux / X-Input",
+                score: "9.8 / 10",
+                size: "34 MB",
+                glow: "rgba(0, 240, 255, 0.45)",
+                themeClass: "",
+                icon: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/neoblocks/icon.png",
+                bg: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/neoblocks/banner.png"
+            },
+            spaceduel: {
+                title: "Space Duel Arena",
+                category: "SPACE COMBAT // MULTIPLAYER",
+                rarity: "HOLO PRISMATIC",
+                serial: "NX-17/28",
+                plat: "Godot 4 C# / Gamepad",
+                score: "9.7 / 10",
+                size: "42 MB",
+                glow: "rgba(255, 215, 0, 0.45)",
+                themeClass: "gold",
+                icon: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/space_duel/icon.png",
+                bg: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/space_duel/banner.png"
+            },
+            superpong: {
+                title: "Super Pong Retro",
+                category: "CYBER ARCADE // VERSUS",
+                rarity: "EMERALD FOIL",
+                serial: "NX-18/28",
+                plat: "2x Gamepads / Multiplat",
+                score: "9.6 / 10",
+                size: "18 MB",
+                glow: "rgba(16, 185, 129, 0.45)",
+                themeClass: "green",
+                icon: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/super_pong/icon.png",
+                bg: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/super_pong/banner.png"
+            },
+            kitty: {
+                title: "Nexus Kitty HUD",
+                category: "LINUX SYSTEM ENGINE",
+                rarity: "CYBER MATRIX",
+                serial: "NX-11/28",
+                plat: "Debian / Ubuntu / Celeron",
+                score: "10 / 10",
+                size: "4.2 MB",
+                glow: "rgba(0, 240, 255, 0.45)",
+                themeClass: "",
+                icon: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/nexus_kitty_hud/icon.png",
+                bg: "file:///C:/Antigravity Projects/NexusAppHub_dev/assets/showcase/nexus_kitty_hud/banner.png"
+            }
+        };
+
+        let currentApp = 'gangstar';
+        let autoGyro = true;
+        let isHovered = false;
+        let mouseX = 0, mouseY = 0;
+        let rotX = 0, rotY = 0;
+        let targetRotX = 0, targetRotY = 0;
+        let animFrame = 0;
+
+        function selectApp(id) {
+            currentApp = id;
+            const data = apps[id];
+
+            cardTitle.innerText = data.title;
+            cardCategory.innerText = data.category;
+            cardRarity.innerText = data.rarity;
+            cardSerial.innerText = data.serial;
+            cardPlat.innerText = data.plat;
+            cardScore.innerText = data.score;
+            cardSize.innerText = data.size;
+            cardIcon.src = data.icon;
+            cardBg.style.backgroundImage = `url('${data.bg}')`;
+            
+            document.documentElement.style.setProperty('--card-glow', data.glow);
+
+            // Update button styles
+            document.querySelectorAll('.btn-app').forEach(btn => {
+                btn.className = 'btn-app';
+            });
+            event.currentTarget.classList.add('active');
+            if (data.themeClass) {
+                event.currentTarget.classList.add(data.themeClass);
+            }
+        }
+
+        // Initialize with Gangstar
+        cardBg.style.backgroundImage = `url('${apps.gangstar.bg}')`;
+        document.documentElement.style.setProperty('--card-glow', apps.gangstar.glow);
+
+        // 3D PARALLAX & FOIL SHADER MATH
+        function updateCardPhysics() {
+            if (autoGyro && !isHovered) {
+                animFrame += 0.035;
+                targetRotX = Math.sin(animFrame) * 12;
+                targetRotY = Math.cos(animFrame * 0.8) * 16;
+                
+                // Holographic angle and specular reflection
+                const normX = (Math.cos(animFrame * 0.8) + 1) * 50;
+                const normY = (Math.sin(animFrame) + 1) * 50;
+                const angle = Math.atan2(targetRotY, targetRotX) * (180 / Math.PI) + 90;
+
+                card.style.setProperty('--mouse-x', `${normX}%`);
+                card.style.setProperty('--mouse-y', `${normY}%`);
+                card.style.setProperty('--angle', `${angle}deg`);
+            }
+
+            // Smooth damping
+            rotX += (targetRotX - rotX) * 0.15;
+            rotY += (targetRotY - rotY) * 0.15;
+
+            card.style.transform = `rotateX(${-rotX}deg) rotateY(${rotY}deg)`;
+
+            requestAnimationFrame(updateCardPhysics);
+        }
+
+        // MOUSE & TOUCH INTERACTION
+        const stage = document.getElementById('stage');
+
+        stage.addEventListener('mousemove', (e) => {
+            isHovered = true;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const px = (x / rect.width);
+            const py = (y / rect.height);
+
+            targetRotY = (px - 0.5) * 38;
+            targetRotX = (py - 0.5) * -38;
+
+            const angle = Math.atan2(py - 0.5, px - 0.5) * (180 / Math.PI) + 90;
+
+            card.style.setProperty('--mouse-x', `${px * 100}%`);
+            card.style.setProperty('--mouse-y', `${py * 100}%`);
+            card.style.setProperty('--angle', `${angle}deg`);
+        });
+
+        stage.addEventListener('mouseleave', () => {
+            isHovered = false;
+            targetRotX = 0;
+            targetRotY = 0;
+        });
+
+        function toggleGyro() {
+            autoGyro = !autoGyro;
+            gyroBtn.classList.toggle('active', autoGyro);
+            gyroBtn.innerText = `Auto-Giro: ${autoGyro ? 'ON' : 'OFF'}`;
+            if (!autoGyro) {
+                targetRotX = 0;
+                targetRotY = 0;
+            }
+        }
+
+        // START ANIMATION LOOP
+        requestAnimationFrame(updateCardPhysics);
+    </script>
+</body>
+</html>

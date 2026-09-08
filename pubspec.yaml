@@ -32,6 +32,8 @@ flutter:
     - assets/showcase/anydesk/screenshots/
     - assets/showcase/chrome/
     - assets/showcase/chrome/screenshots/
+    - assets/showcase/ctr/
+    - assets/showcase/ctr/screenshots/
     - assets/showcase/explorerpatcher/
     - assets/showcase/explorerpatcher/screenshots/
     - assets/showcase/firefox/
