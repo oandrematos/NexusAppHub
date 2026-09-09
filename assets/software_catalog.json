@@ -321,18 +321,18 @@
                 "linux"
             ],
             "windows": {
-                "filename": "Super Pong_v2.0.0_x64.exe",
-                "size_mb": 176.9,
-                "version": "v2.0.0",
+                "filename": "Super_Pong_v2.0.0_x64_Installer.exe",
+                "size_mb": 93.4,
+                "version": "2.0.0",
                 "executable": "Super Pong.exe"
             },
             "android": {
                 "filename": "Super Pong_Android_v1.1.1.apk",
                 "size_mb": 7.0,
-                "version": "1.0",
+                "version": "1.1.1",
                 "package_name": "com.antigravity.superpong"
             },
-            "version": "1.0",
+            "version": "2.0.0",
             "latest_changelog": [
                 "Migração completa e reescrita do motor para Godot 4 com C# (.NET 8.0).",
                 "Física de rebote angular precisa e aceleração dinâmica de velocidade.",

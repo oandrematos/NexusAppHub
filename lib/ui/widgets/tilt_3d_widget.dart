@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../core/app_colors.dart';
 
-/// Widget 3D de alta performance projetado para rodar a 120 FPS cravados.
-/// Aplica perspectiva tridimensional com rotação nos eixos X e Y baseada na
-/// interação do usuário (mouse no Desktop ou toque no Mobile) e camada de
-/// reflexo especular holográfico dinâmico (TCG Foil Shimmer).
-///
-/// Possui suporte nativo e espacial a Gamepads (Xbox/PlayStation) e Teclado,
-/// exibindo anel de foco neon 3D (Gamepad Focus Ring) e auto-scroll dinâmico.
+/// Widget 3D ultra-leve e otimizado para rodar a 120 FPS cravados sem engasgos.
+/// Em repouso, não executa cálculos matriciais nem animações, preservando
+/// 100% da performance da rolagem da loja.
+/// Quando focado por controle ou apontado com o mouse, ativa perspectiva suave
+/// e anel neon dinâmico (Gamepad Focus Ring).
 class Tilt3DWidget extends StatefulWidget {
   final Widget child;
   final double maxTilt;
@@ -24,12 +22,12 @@ class Tilt3DWidget extends StatefulWidget {
   const Tilt3DWidget({
     super.key,
     required this.child,
-    this.maxTilt = 0.16, // ~9 a 10 graus de inclinação máxima
-    this.perspective = 0.0014, // Fator de perspectiva 3D realista
-    this.enableGlare = true,
-    this.borderRadius = 20.0,
+    this.maxTilt = 0.08,
+    this.perspective = 0.0012,
+    this.enableGlare = false,
+    this.borderRadius = 18.0,
     this.onTap,
-    this.scaleOnHover = 1.035,
+    this.scaleOnHover = 1.03,
     this.glareColor,
     this.focusNode,
     this.autofocus = false,
@@ -39,8 +37,8 @@ class Tilt3DWidget extends StatefulWidget {
   State<Tilt3DWidget> createState() => _Tilt3DWidgetState();
 }
 
-class _Tilt3DWidgetState extends State<Tilt3DWidget> {
-  Offset _tilt = Offset.zero; // Normalizado de -1.0 a 1.0
+class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderStateMixin {
+  Offset _tilt = Offset.zero;
   bool _isHovered = false;
   bool _isFocused = false;
   FocusNode? _internalFocusNode;
@@ -54,10 +52,11 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> {
     super.dispose();
   }
 
-  void _onHover(Offset localPos, Size size) {
-    if (size.width == 0 || size.height == 0) return;
-    final dx = ((localPos.dx / size.width) - 0.5) * 2.0;
-    final dy = ((localPos.dy / size.height) - 0.5) * 2.0;
+  void _onHover(PointerHoverEvent e) {
+    final size = context.size;
+    if (size == null || size.width == 0 || size.height == 0) return;
+    final dx = ((e.localPosition.dx / size.width) - 0.5) * 2.0;
+    final dy = ((e.localPosition.dy / size.height) - 0.5) * 2.0;
     setState(() {
       _tilt = Offset(dx.clamp(-1.0, 1.0), dy.clamp(-1.0, 1.0));
       _isHovered = true;
@@ -65,30 +64,20 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> {
   }
 
   void _onExit() {
-    setState(() {
-      _tilt = Offset.zero;
-      _isHovered = false;
-    });
+    if (_isHovered) {
+      setState(() {
+        _tilt = Offset.zero;
+        _isHovered = false;
+      });
+    }
   }
 
   void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _isFocused = hasFocus;
-      if (hasFocus) {
-        _tilt = const Offset(0.0, -0.2); // Leve projeção 3D para cima
-      } else {
-        _tilt = Offset.zero;
-      }
-    });
-
-    if (hasFocus && mounted) {
-      // Auto-scroll suave para centralizar o elemento focado na tela
-      Scrollable.ensureVisible(
-        context,
-        alignment: 0.5,
-        duration: const Duration(milliseconds: 260),
-        curve: Curves.easeOutCubic,
-      );
+    if (_isFocused != hasFocus) {
+      setState(() {
+        _isFocused = hasFocus;
+        _tilt = hasFocus ? const Offset(0.0, -0.15) : Offset.zero;
+      });
     }
   }
 
@@ -112,141 +101,92 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> {
   Widget build(BuildContext context) {
     final active = _isHovered || _isFocused;
 
-    return RepaintBoundary(
-      child: Focus(
+    // Se estiver em repouso e sem foco, renderiza o container padrão com zero custo de animação
+    if (!active && _tilt == Offset.zero) {
+      return Focus(
         focusNode: _effectiveFocusNode,
         autofocus: widget.autofocus,
         onFocusChange: _handleFocusChange,
         onKeyEvent: _handleKeyEvent,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final size = Size(constraints.maxWidth, constraints.maxHeight);
+        child: MouseRegion(
+          onHover: _onHover,
+          cursor: widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: widget.child,
+          ),
+        ),
+      );
+    }
 
-            return MouseRegion(
-              onHover: (e) => _onHover(e.localPosition, size),
-              onExit: (_) => _onExit(),
-              cursor: widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
-              child: GestureDetector(
-                onTap: () {
-                  _effectiveFocusNode.requestFocus();
-                  widget.onTap?.call();
-                },
-                onPanUpdate: (e) => _onHover(e.localPosition, size),
-                onPanEnd: (_) => _onExit(),
-                onPanCancel: _onExit,
-                child: TweenAnimationBuilder<Offset>(
-                  tween: Tween<Offset>(begin: Offset.zero, end: _tilt),
-                  duration: Duration(milliseconds: active ? 140 : 350),
-                  curve: Curves.easeOutCubic,
-                  builder: (context, tiltOffset, child) {
-                    final tiltX = tiltOffset.dx;
-                    final tiltY = tiltOffset.dy;
+    // Quando ativo, aplica a projeção 3D acelerada por hardware
+    final tiltX = _tilt.dx;
+    final tiltY = _tilt.dy;
 
-                    // Matriz de projeção 3D com perspectiva cônica
-                    final matrix = Matrix4.identity()
-                      ..setEntry(3, 2, widget.perspective)
-                      ..rotateX(-tiltY * widget.maxTilt)
-                      ..rotateY(tiltX * widget.maxTilt);
+    final matrix = Matrix4.identity()
+      ..setEntry(3, 2, widget.perspective)
+      ..rotateX(-tiltY * widget.maxTilt)
+      ..rotateY(tiltX * widget.maxTilt)
+      ..scaleByDouble(widget.scaleOnHover, widget.scaleOnHover, 1.0, 1.0);
 
-                    if (active) {
-                      matrix.scaleByDouble(widget.scaleOnHover, widget.scaleOnHover, 1.0, 1.0);
-                    }
+    return Focus(
+      focusNode: _effectiveFocusNode,
+      autofocus: widget.autofocus,
+      onFocusChange: _handleFocusChange,
+      onKeyEvent: _handleKeyEvent,
+      child: MouseRegion(
+        onHover: _onHover,
+        onExit: (_) => _onExit(),
+        cursor: widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
+        child: GestureDetector(
+          onTap: () {
+            _effectiveFocusNode.requestFocus();
+            widget.onTap?.call();
+          },
+          child: Transform(
+            transform: matrix,
+            alignment: FractionalOffset.center,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                boxShadow: [
+                  BoxShadow(
+                    color: _isFocused
+                        ? AppColors.accentCyan.withValues(alpha: 0.5)
+                        : Colors.cyanAccent.withValues(alpha: 0.18),
+                    blurRadius: _isFocused ? 24 : 16,
+                    spreadRadius: _isFocused ? 3 : 1,
+                    offset: Offset(tiltX * 6, tiltY * 6 + 4),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    widget.child,
 
-                    return Transform(
-                      transform: matrix,
-                      alignment: FractionalOffset.center,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(widget.borderRadius),
-                          boxShadow: active
-                              ? [
-                                  BoxShadow(
-                                    color: _isFocused
-                                        ? AppColors.accentCyan.withValues(alpha: 0.45)
-                                        : Colors.cyanAccent.withValues(alpha: 0.22),
-                                    blurRadius: _isFocused ? 32 : 28,
-                                    spreadRadius: _isFocused ? 4 : 2,
-                                    offset: Offset(tiltX * 8, tiltY * 8 + 6),
-                                  ),
-                                  const BoxShadow(
-                                    color: Colors.black54,
-                                    blurRadius: 24,
-                                    offset: Offset(0, 12),
-                                  ),
-                                ]
-                              : const [
-                                  BoxShadow(
-                                    color: Colors.black38,
-                                    blurRadius: 12,
-                                    offset: Offset(0, 6),
-                                  ),
-                                ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(widget.borderRadius),
-                          child: Stack(
-                            fit: StackFit.passthrough,
-                            children: [
-                              // Conteúdo principal
-                              widget.child,
-
-                              // Camada de Reflexo Especular Holográfico (Glare Shimmer)
-                              if (widget.enableGlare && active)
-                                Positioned.fill(
-                                  child: IgnorePointer(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(widget.borderRadius),
-                                        gradient: LinearGradient(
-                                          begin: Alignment(
-                                            -tiltX * 1.5 - 0.5,
-                                            -tiltY * 1.5 - 0.5,
-                                          ),
-                                          end: Alignment(
-                                            -tiltX * 1.5 + 0.5,
-                                            -tiltY * 1.5 + 0.5,
-                                          ),
-                                          colors: [
-                                            Colors.white.withValues(alpha: 0.0),
-                                            (widget.glareColor ?? Colors.cyanAccent).withValues(alpha: 0.15),
-                                            Colors.white.withValues(alpha: 0.25),
-                                            Colors.purpleAccent.withValues(alpha: 0.12),
-                                            Colors.white.withValues(alpha: 0.0),
-                                          ],
-                                          stops: const [0.0, 0.35, 0.5, 0.65, 1.0],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                              // Gamepad Focus Ring & Borda neon 3D
-                              if (active)
-                                Positioned.fill(
-                                  child: IgnorePointer(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(widget.borderRadius),
-                                        border: Border.all(
-                                          color: _isFocused
-                                              ? AppColors.accentCyan
-                                              : Colors.cyanAccent.withValues(alpha: 0.45),
-                                          width: _isFocused ? 2.5 : 1.2,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
+                    // Gamepad Focus Ring Neon
+                    if (_isFocused)
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(widget.borderRadius),
+                              border: Border.all(
+                                color: AppColors.accentCyan,
+                                width: 2.2,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    );
-                  },
+                  ],
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

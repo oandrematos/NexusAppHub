@@ -8,8 +8,8 @@ class DownloadService {
   static const List<String> clusterEndpoints = [
     'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real - Menor Latência)
     'http://192.168.196.101/installers', // S1 (ZeroTier / Nuvem)
-    'http://100.84.133.101/installers',  // S1 (Tailscale)
-    'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global
+    'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global (Latest)
+    'https://github.com/oandrematos/NexusAppHub/releases/download/v0.3.26', // GitHub CDN Global (Base Archive)
   ];
 
   Future<void> downloadAndInstall({

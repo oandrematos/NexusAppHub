@@ -364,7 +364,7 @@ class HomeViewModel extends ChangeNotifier {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'O download de ${app.name} requer credencial de segurança do cluster (PIN: $expectedPassword).',
+                    'O download de ${app.name} requer credencial de segurança do cluster.',
                     style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.4),
                   ),
                   const SizedBox(height: 18),
@@ -404,7 +404,7 @@ class HomeViewModel extends ChangeNotifier {
                         Navigator.pop(ctx, true);
                       } else {
                         setState(() {
-                          errorMessage = 'PIN incorreto. (Credencial padrão: $expectedPassword)';
+                          errorMessage = 'PIN incorreto. Acesso restrito.';
                         });
                         controller.clear();
                       }
@@ -438,7 +438,7 @@ class HomeViewModel extends ChangeNotifier {
                       Navigator.pop(ctx, true);
                     } else {
                       setState(() {
-                        errorMessage = 'PIN incorreto. (Credencial padrão: $expectedPassword)';
+                        errorMessage = 'PIN incorreto. Acesso restrito.';
                       });
                       controller.clear();
                     }

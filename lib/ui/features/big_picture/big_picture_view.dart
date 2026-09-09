@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +9,6 @@ import '../../core/app_colors.dart';
 import '../../core/spatial_route.dart';
 import '../../widgets/cluster_image.dart';
 import '../../widgets/gamepad_hud_bar.dart';
-import '../../widgets/tilt_3d_widget.dart';
 import '../details/app_detail_view.dart';
 import '../home/home_view_model.dart';
 
@@ -23,7 +21,7 @@ class BigPictureView extends StatefulWidget {
 
 class _BigPictureViewState extends State<BigPictureView> {
   int _selectedCategoryIndex = 0;
-  AppItem? _focusedApp;
+  int _focusedAppIndex = 0;
   late Timer _clockTimer;
   String _currentTime = '';
   final ScrollController _shelfController = ScrollController();
@@ -41,12 +39,16 @@ class _BigPictureViewState extends State<BigPictureView> {
     _updateTime();
     _clockTimer = Timer.periodic(const Duration(seconds: 30), (_) => _updateTime());
 
-    // Conecta atalho de retorno ao GamepadService
-    GamepadService().onBackAction = () {
+    // Conecta controles do GamepadService
+    final gp = GamepadService();
+    gp.onBackAction = () {
       if (mounted) Navigator.of(context).maybePop();
     };
-    GamepadService().onTabNext = () => _changeCategory(1);
-    GamepadService().onTabPrevious = () => _changeCategory(-1);
+    gp.onTabNext = () => _changeCategory(1);
+    gp.onTabPrevious = () => _changeCategory(-1);
+    gp.onActionA = () => _handleGamepadActionA();
+    gp.onActionX = () => _handleGamepadActionX();
+    gp.onDirectionalStep = (step) => _handleDirectionalStep(step);
   }
 
   void _updateTime() {
@@ -61,16 +63,82 @@ class _BigPictureViewState extends State<BigPictureView> {
     setState(() {
       final newIdx = (_selectedCategoryIndex + delta) % _categories.length;
       _selectedCategoryIndex = newIdx < 0 ? _categories.length - 1 : newIdx;
+      _focusedAppIndex = 0;
     });
+    _scrollToFocused();
+  }
+
+  void _handleDirectionalStep(int step) {
+    final vm = context.read<HomeViewModel>();
+    final isAndroid = Platform.isAndroid;
+    final availableApps = vm.apps.where((a) => a.isAvailableOn(isAndroid)).toList();
+    final currentList = _getFilteredApps(availableApps);
+    if (currentList.isEmpty) return;
+
+    if (step == 1) {
+      // Direita
+      if (_focusedAppIndex < currentList.length - 1) {
+        setState(() => _focusedAppIndex++);
+        _scrollToFocused();
+      }
+    } else if (step == -1) {
+      // Esquerda
+      if (_focusedAppIndex > 0) {
+        setState(() => _focusedAppIndex--);
+        _scrollToFocused();
+      }
+    } else if (step == -2) {
+      // Cima -> muda categoria
+      _changeCategory(-1);
+    } else if (step == 2) {
+      // Baixo -> muda categoria
+      _changeCategory(1);
+    }
+  }
+
+  void _scrollToFocused() {
+    if (_shelfController.hasClients) {
+      final targetOffset = (_focusedAppIndex * 192.0).clamp(0.0, _shelfController.position.maxScrollExtent);
+      _shelfController.animateTo(
+        targetOffset,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOutCubic,
+      );
+    }
+  }
+
+  void _handleGamepadActionA() {
+    final vm = context.read<HomeViewModel>();
+    final isAndroid = Platform.isAndroid;
+    final availableApps = vm.apps.where((a) => a.isAvailableOn(isAndroid)).toList();
+    final currentList = _getFilteredApps(availableApps);
+    if (currentList.isNotEmpty && _focusedAppIndex < currentList.length) {
+      final app = currentList[_focusedAppIndex];
+      vm.handleAction(app, context);
+    }
+  }
+
+  void _handleGamepadActionX() {
+    final vm = context.read<HomeViewModel>();
+    final isAndroid = Platform.isAndroid;
+    final availableApps = vm.apps.where((a) => a.isAvailableOn(isAndroid)).toList();
+    final currentList = _getFilteredApps(availableApps);
+    if (currentList.isNotEmpty && _focusedAppIndex < currentList.length) {
+      _openDetails(currentList[_focusedAppIndex]);
+    }
   }
 
   @override
   void dispose() {
     _clockTimer.cancel();
     _shelfController.dispose();
-    GamepadService().onBackAction = null;
-    GamepadService().onTabNext = null;
-    GamepadService().onTabPrevious = null;
+    final gp = GamepadService();
+    gp.onBackAction = null;
+    gp.onTabNext = null;
+    gp.onTabPrevious = null;
+    gp.onActionA = null;
+    gp.onActionX = null;
+    gp.onDirectionalStep = null;
     super.dispose();
   }
 
@@ -87,38 +155,29 @@ class _BigPictureViewState extends State<BigPictureView> {
     final availableApps = vm.apps.where((a) => a.isAvailableOn(isAndroid)).toList();
     final currentList = _getFilteredApps(availableApps);
 
-    // Seleciona o primeiro app focado por padrão
-    final activeApp = _focusedApp ?? (currentList.isNotEmpty ? currentList.first : null);
+    if (_focusedAppIndex >= currentList.length && currentList.isNotEmpty) {
+      _focusedAppIndex = currentList.length - 1;
+    }
+
+    final activeApp = currentList.isNotEmpty ? currentList[_focusedAppIndex] : null;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF090D16),
+      backgroundColor: const Color(0xFF070A12),
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Fundo dinâmico com iluminação ambiente e desfoque cinematográfico
-          if (activeApp != null)
-            Positioned.fill(
-              child: Opacity(
-                opacity: 0.35,
-                child: ImageFiltered(
-                  imageFilter: ImageFilter.blur(sigmaX: 45, sigmaY: 45),
-                  child: ClusterImage(
-                    url: activeApp.bannerCard ?? activeApp.banner ?? activeApp.coverCard ?? activeApp.iconUrl,
-                    fit: BoxFit.cover,
-                  ),
+          // Fundo imersivo com gradiente cibernético de alta performance (Zero GPU Lag)
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment(0.4, -0.6),
+                  radius: 1.4,
+                  colors: [
+                    Color(0xFF0E1A2D),
+                    Color(0xFF060910),
+                  ],
                 ),
-              ),
-            ),
-
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color(0xFF090D16).withValues(alpha: 0.85),
-                  const Color(0xFF05080E).withValues(alpha: 0.96),
-                ],
               ),
             ),
           ),
@@ -127,7 +186,7 @@ class _BigPictureViewState extends State<BigPictureView> {
           SafeArea(
             child: Column(
               children: [
-                // Header Topo Estilo Console
+                // Top Bar Estilo Console
                 _buildTopBar(),
 
                 // Hero Showcase Superior do App Focado
@@ -165,6 +224,8 @@ class _BigPictureViewState extends State<BigPictureView> {
   }
 
   Widget _buildTopBar() {
+    final isConnected = GamepadService().isGamepadConnected;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
       child: Row(
@@ -210,7 +271,7 @@ class _BigPictureViewState extends State<BigPictureView> {
 
           const SizedBox(width: 32),
 
-          // Seletor de Categorias Estilo Abas de Console
+          // Seletor de Categorias
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -220,10 +281,14 @@ class _BigPictureViewState extends State<BigPictureView> {
                   return Padding(
                     padding: const EdgeInsets.only(right: 12.0),
                     child: InkWell(
-                      onTap: () => setState(() => _selectedCategoryIndex = idx),
+                      onTap: () => setState(() {
+                        _selectedCategoryIndex = idx;
+                        _focusedAppIndex = 0;
+                        _scrollToFocused();
+                      }),
                       borderRadius: BorderRadius.circular(20),
                       child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 180),
                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                         decoration: BoxDecoration(
                           color: isSelected
@@ -271,11 +336,19 @@ class _BigPictureViewState extends State<BigPictureView> {
             ),
             child: Row(
               children: [
-                const Icon(Icons.gamepad, size: 16, color: Colors.greenAccent),
+                Icon(
+                  Icons.gamepad,
+                  size: 16,
+                  color: isConnected ? Colors.greenAccent : AppColors.textSecondary,
+                ),
                 const SizedBox(width: 6),
-                const Text(
-                  'GAMEPAD CONECTADO',
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.greenAccent),
+                Text(
+                  isConnected ? 'GAMEPAD ATIVO' : 'TECLADO / GAMEPAD',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: isConnected ? Colors.greenAccent : AppColors.textSecondary,
+                  ),
                 ),
                 const SizedBox(width: 14),
                 Text(
@@ -315,68 +388,62 @@ class _BigPictureViewState extends State<BigPictureView> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Banner Panorâmico 16:9 com Tilt 3D
+          // Banner Panorâmico 16:9
           SizedBox(
             width: 380,
             height: 214,
-            child: Tilt3DWidget(
-              borderRadius: 20,
-              maxTilt: 0.07,
-              scaleOnHover: 1.02,
-              onTap: () => _openDetails(app),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClusterImage(
-                      url: app.bannerCard ?? app.banner ?? app.coverCard ?? app.iconUrl,
-                      fit: BoxFit.cover,
-                      fallback: Container(color: AppColors.surface),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClusterImage(
+                    url: app.bannerCard ?? app.banner ?? app.coverCard ?? app.iconUrl,
+                    fit: BoxFit.cover,
+                    fallback: Container(color: AppColors.surface),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.75),
+                        ],
+                      ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withValues(alpha: 0.75),
+                  ),
+                  if (app.gamepad)
+                    Positioned(
+                      top: 12,
+                      right: 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppColors.accentPurple.withValues(alpha: 0.9),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.accentPurple.withValues(alpha: 0.5),
+                              blurRadius: 8,
+                            ),
+                          ],
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.sports_esports, size: 14, color: Colors.white),
+                            SizedBox(width: 4),
+                            Text(
+                              'GAMEPAD READY',
+                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    if (app.gamepad)
-                      Positioned(
-                        top: 12,
-                        right: 12,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: AppColors.accentPurple.withValues(alpha: 0.9),
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.accentPurple.withValues(alpha: 0.5),
-                                blurRadius: 8,
-                              ),
-                            ],
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.sports_esports, size: 14, color: Colors.white),
-                              SizedBox(width: 4),
-                              Text(
-                                'GAMEPAD READY',
-                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                ],
               ),
             ),
           ),
@@ -433,9 +500,6 @@ class _BigPictureViewState extends State<BigPictureView> {
                     fontWeight: FontWeight.w900,
                     letterSpacing: 0.5,
                     color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black, blurRadius: 10),
-                    ],
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -456,14 +520,12 @@ class _BigPictureViewState extends State<BigPictureView> {
 
                 const SizedBox(height: 20),
 
-                // Botão Primário de Ação Estilo Arcade [A]
+                // Botões de Ação
                 Row(
                   children: [
-                    Tilt3DWidget(
-                      borderRadius: 14,
-                      maxTilt: 0.05,
-                      scaleOnHover: 1.05,
+                    InkWell(
                       onTap: () => vm.handleAction(app, context),
+                      borderRadius: BorderRadius.circular(14),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
                         decoration: BoxDecoration(
@@ -505,12 +567,9 @@ class _BigPictureViewState extends State<BigPictureView> {
 
                     const SizedBox(width: 16),
 
-                    // Botão Secundário [X] Detalhes
-                    Tilt3DWidget(
-                      borderRadius: 14,
-                      maxTilt: 0.05,
-                      scaleOnHover: 1.05,
+                    InkWell(
                       onTap: () => _openDetails(app),
+                      borderRadius: BorderRadius.circular(14),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
                         decoration: BoxDecoration(
@@ -583,123 +642,115 @@ class _BigPictureViewState extends State<BigPictureView> {
             itemCount: list.length,
             itemBuilder: (context, index) {
               final item = list[index];
-              final isFocused = _focusedApp?.id == item.id;
+              final isFocused = _focusedAppIndex == index;
 
               return Padding(
                 padding: const EdgeInsets.only(right: 22.0),
                 child: SizedBox(
                   width: 170,
-                  child: Tilt3DWidget(
-                    borderRadius: 16,
-                    maxTilt: 0.12,
-                    scaleOnHover: 1.08,
-                    autofocus: index == 0 && _focusedApp == null,
+                  child: InkWell(
                     onTap: () {
-                      setState(() => _focusedApp = item);
+                      setState(() => _focusedAppIndex = index);
+                      _scrollToFocused();
                       _openDetails(item);
                     },
-                    child: Focus(
-                      onFocusChange: (hasF) {
-                        if (hasF) {
-                          setState(() => _focusedApp = item);
-                        }
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.cardBg,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: isFocused
-                                ? AppColors.accentCyan
-                                : AppColors.border.withValues(alpha: 0.6),
-                            width: isFocused ? 2.5 : 1.0,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: isFocused
-                                  ? AppColors.accentCyan.withValues(alpha: 0.4)
-                                  : Colors.black.withValues(alpha: 0.5),
-                              blurRadius: isFocused ? 24 : 14,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
+                    borderRadius: BorderRadius.circular(16),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 180),
+                      transform: isFocused
+                          ? (Matrix4.identity()..scaleByDouble(1.06, 1.06, 1.0, 1.0))
+                          : Matrix4.identity(),
+                      transformAlignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.cardBg,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: isFocused ? AppColors.accentCyan : AppColors.border.withValues(alpha: 0.6),
+                          width: isFocused ? 2.5 : 1.0,
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              // Capa do Poster
-                              ClusterImage(
-                                url: item.coverCard ?? item.bannerCard ?? item.banner ?? item.iconUrl,
-                                fit: BoxFit.cover,
-                                fallback: Container(color: AppColors.surface),
-                              ),
-                              // Gradiente Inferior com Título
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.black.withValues(alpha: 0.9),
-                                    ],
-                                    stops: const [0.4, 1.0],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 12,
-                                left: 10,
-                                right: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      item.title,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.white,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      item.categoryName,
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                        color: AppColors.accentCyan,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              if (item.gamepad)
-                                Positioned(
-                                  top: 8,
-                                  right: 8,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withValues(alpha: 0.8),
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: const Icon(
-                                      Icons.sports_esports,
-                                      size: 14,
-                                      color: AppColors.accentPurple,
-                                    ),
-                                  ),
-                                ),
-                            ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: isFocused
+                                ? AppColors.accentCyan.withValues(alpha: 0.45)
+                                : Colors.black.withValues(alpha: 0.4),
+                            blurRadius: isFocused ? 24 : 12,
+                            offset: Offset(0, isFocused ? 8 : 4),
                           ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            ClusterImage(
+                              url: item.coverCard ?? item.bannerCard ?? item.banner ?? item.iconUrl,
+                              fit: BoxFit.cover,
+                              fallback: Container(color: AppColors.surface),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.black.withValues(alpha: 0.9),
+                                  ],
+                                  stops: const [0.4, 1.0],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 12,
+                              left: 10,
+                              right: 10,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.white,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    item.categoryName,
+                                    style: const TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.accentCyan,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (item.gamepad)
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withValues(alpha: 0.8),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: const Icon(
+                                    Icons.sports_esports,
+                                    size: 14,
+                                    color: AppColors.accentPurple,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ),
