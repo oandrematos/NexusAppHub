@@ -1,11 +1,11 @@
 {
     "changelog": [
-        "Universalização 3D em todos os cards da loja (Detalhes, Gerenciadores de Pacotes, Configurações e Vitrine).",
-        "Barra de progresso de alta fidelidade interpolada a 120 FPS via lerp inercial com streaming granular.",
-        "Novas micro-animações táteis 3D com física elástica nos botões de ação e estados interativos de download.",
-        "Ingestão das capas oficiais de vitrine (Cover Cards) para Real Football 2005 e 2006 (Pixel Studio)."
+        "Novo Modo Big Picture (10-Foot Console UI) para TV, monitores grandes e uso com Gamepad.",
+        "Suporte completo e nativo a controles (Xbox, PlayStation e genéricos USB/Bluetooth) no Windows e Android.",
+        "Navegação espacial 2D com anéis de foco neon 3D (Gamepad Focus Ring) e auto-scroll dinâmico nos cards.",
+        "Hero Showcase cinematográfico e posters em Cover Flow com atalhos universais [A], [B], [X], [LB]/[RB] e F11."
     ],
-    "build": 34,
-    "version": "0.3.31",
+    "build": 35,
+    "version": "0.3.32",
     "release_date": "2026-09-09"
 }

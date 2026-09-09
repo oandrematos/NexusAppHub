@@ -105,22 +105,22 @@
             ],
             "windows": {
                 "executable": "NexusAppHub.exe",
-                "version": "0.3.31",
-                "filename": "NexusAppHub_v0.3.31_Installer.exe",
+                "version": "0.3.32",
+                "filename": "NexusAppHub_v0.3.32_Installer.exe",
                 "size_mb": 71.55
             },
             "android": {
                 "package_name": "com.antigravity.nexus_app_hub",
-                "version": "0.3.31",
-                "filename": "NexusAppHub_v0.3.31.apk",
+                "version": "0.3.32",
+                "filename": "NexusAppHub_v0.3.32.apk",
                 "size_mb": 128.72
             },
-            "version": "0.3.31",
+            "version": "0.3.32",
             "latest_changelog": [
-                "v0.3.31: Universalização 3D em todos os cards da loja (Detalhes, Gerenciadores de Pacotes, Configurações e Vitrine).",
-                "Barra de progresso de alta fidelidade interpolada a 120 FPS com lerp inercial e streaming granular.",
-                "Novas micro-animações táteis 3D com física elástica nos botões de ação e estados interativos de download.",
-                "Ingestão das capas oficiais de vitrine (Cover Cards) para Real Football 2005 e 2006 (Pixel Studio)."
+                "v0.3.32: Novo Modo Big Picture (10-Foot Console UI) para TV, monitores e modo arcade portátil.",
+                "Suporte completo e nativo a controles (Xbox, PlayStation e genéricos) no Windows e Android.",
+                "Navegação espacial 2D com anéis de foco neon 3D (Gamepad Focus Ring) e auto-scroll dinâmico nos cards.",
+                "Hero Showcase com banner dinâmico e Cover Flow cinematográfico com atalhos universais [A], [B], [X], [LB]/[RB] e F11."
             ],
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_app_hub/banner_card.png",
