@@ -8,6 +8,10 @@ InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
 
+; Ícone do Instalador e Desinstalador
+!define MUI_ICON "assets\app.ico"
+!define MUI_UNICON "assets\app.ico"
+
 Function .onInit
     ; Fechar instÃ¢ncias ativas do Nexus App Hub (sem /T para nÃ£o encerrar a Ã¡rvore do prÃ³prio instalador)
     nsExec::Exec 'taskkill /F /IM NexusAppHub.exe'
@@ -46,7 +50,7 @@ Section "Nexus App Hub"
     
     ; Registro do Windows (Adicionar ou Remover Programas com suporte a Silent)
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayName" "Nexus App Hub"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.30"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayVersion" "0.3.32"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "Publisher" "Antigravity Ecosystem"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "DisplayIcon" "$INSTDIR\app.ico"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\NexusAppHub" "UninstallString" '"$INSTDIR\Uninstall.exe"'
