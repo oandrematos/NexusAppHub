@@ -7,6 +7,7 @@ import '../../core/app_colors.dart';
 import '../home/home_view_model.dart';
 import '../../widgets/cluster_image.dart';
 import '../../widgets/animated_action_button.dart';
+import '../../widgets/tilt_3d_widget.dart';
 
 class AppDetailView extends StatelessWidget {
   final AppItem app;
@@ -124,28 +125,33 @@ class AppDetailView extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  color: AppColors.surface,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: AppColors.border, width: 1.5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.4),
-                                      blurRadius: 16,
-                                      offset: const Offset(0, 8),
-                                    ),
-                                  ],
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(18),
-                                  child: ClusterImage(
-                                    url: app.iconUrl,
-                                    fit: BoxFit.cover,
-                                    fallback: Center(
-                                      child: Text(app.icon, style: const TextStyle(fontSize: 40)),
+                              Tilt3DWidget(
+                                borderRadius: 20,
+                                maxTilt: 0.15,
+                                scaleOnHover: 1.05,
+                                child: Container(
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.surface,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color: AppColors.border, width: 1.5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(alpha: 0.4),
+                                        blurRadius: 16,
+                                        offset: const Offset(0, 8),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(18),
+                                    child: ClusterImage(
+                                      url: app.iconUrl,
+                                      fit: BoxFit.cover,
+                                      fallback: Center(
+                                        child: Text(app.icon, style: const TextStyle(fontSize: 40)),
+                                      ),
                                     ),
                                   ),
                                 ),

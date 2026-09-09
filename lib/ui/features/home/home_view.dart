@@ -9,6 +9,7 @@ import '../../widgets/hero_carousel_widget.dart';
 import '../../widgets/store_shelf_widget.dart';
 import '../../widgets/game_card_widget.dart';
 import '../details/app_detail_view.dart';
+import '../../core/spatial_route.dart';
 import 'package:nexus_app_hub/data/models/app_item.dart';
 
 class HomeView extends StatefulWidget {
@@ -537,8 +538,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   void _openDetails(BuildContext context, AppItem app, HomeViewModel vm) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => AppDetailView(app: app),
+      Spatial3DRoute(
+        page: AppDetailView(app: app),
       ),
     );
   }

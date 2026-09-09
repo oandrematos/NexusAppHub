@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.os.Bundle
+import android.view.WindowManager
 import androidx.core.content.FileProvider
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -13,6 +15,33 @@ import java.io.File
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.antigravity.nexus_app_hub/app_manager"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableHighRefreshRate()
+    }
+
+    private fun enableHighRefreshRate() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val currentDisplay = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    display
+                } else {
+                    @Suppress("DEPRECATION")
+                    windowManager.defaultDisplay
+                }
+                val modes = currentDisplay?.supportedModes
+                val maxMode = modes?.maxByOrNull { it.refreshRate }
+                if (maxMode != null && maxMode.refreshRate >= 90f) {
+                    val params = window.attributes
+                    params.preferredDisplayModeId = maxMode.modeId
+                    window.attributes = params
+                }
+            }
+        } catch (e: Exception) {
+            // Fallback transparente
+        }
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

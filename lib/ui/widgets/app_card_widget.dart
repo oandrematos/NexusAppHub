@@ -4,6 +4,7 @@ import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
 import 'animated_action_button.dart';
 import 'cluster_image.dart';
+import 'tilt_3d_widget.dart';
 
 class AppCardWidget extends StatelessWidget {
   final AppItem app;
@@ -45,10 +46,14 @@ class AppCardWidget extends StatelessWidget {
     final isAvailable = app.isAvailableOn(isAndroid);
     final sizeMb = app.getSizeMb(isAndroid);
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
+    return Tilt3DWidget(
+      borderRadius: 16,
+      maxTilt: 0.08,
+      scaleOnHover: 1.02,
+      onTap: onTap,
+      child: Card(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

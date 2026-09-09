@@ -5,6 +5,7 @@ import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
 import 'cluster_image.dart';
 import 'animated_action_button.dart';
+import 'tilt_3d_widget.dart';
 
 class HeroCarouselWidget extends StatefulWidget {
   final List<AppItem> apps;
@@ -42,7 +43,7 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.94);
+    _pageController = PageController(viewportFraction: 0.90);
     if (widget.apps.length > 1) {
       _timer = Timer.periodic(const Duration(seconds: 6), (_) {
         if (!mounted || widget.apps.isEmpty) return;
@@ -88,162 +89,229 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
               final installing = widget.isInstalling?.call(app.id) ?? false;
               final isAvailable = app.isAvailableOn(Platform.isAndroid);
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      // Banner em alta definição embutido
-                      ClusterImage(
-                        url: app.banner ?? app.bannerCard ?? app.iconUrl,
-                        fit: BoxFit.cover,
-                        fallback: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xFF0F172A), Color(0xFF1E1B4B)],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+              return AnimatedBuilder(
+                animation: _pageController,
+                builder: (context, cardChild) {
+                  double pageOffset = 0.0;
+                  if (_pageController.hasClients && _pageController.position.haveDimensions) {
+                    pageOffset = (_pageController.page ?? _currentPage.toDouble()) - index;
+                  } else {
+                    pageOffset = (_currentPage - index).toDouble();
+                  }
+
+                  final rotY = (pageOffset * -0.22).clamp(-0.45, 0.45);
+                  final scale = (1.0 - (pageOffset.abs() * 0.06)).clamp(0.88, 1.0);
+                  final opacity = (1.0 - (pageOffset.abs() * 0.25)).clamp(0.45, 1.0);
+
+                  final matrix = Matrix4.identity()
+                    ..setEntry(3, 2, 0.0012)
+                    ..rotateY(rotY)
+                    ..scaleByDouble(scale, scale, 1.0, 1.0);
+
+                  return RepaintBoundary(
+                    child: Opacity(
+                      opacity: opacity,
+                      child: Transform(
+                        transform: matrix,
+                        alignment: pageOffset > 0 ? Alignment.centerRight : Alignment.centerLeft,
+                        child: Tilt3DWidget(
+                          borderRadius: 20,
+                          onTap: () => widget.onTap(app),
+                          child: cardChild!,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // Banner em alta definição embutido
+                        ClusterImage(
+                          url: app.banner ?? app.bannerCard ?? app.iconUrl,
+                          fit: BoxFit.cover,
+                          fallback: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF0F172A), Color(0xFF1E1B4B)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      // Gradiente de sobreposição cinematográfico
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withValues(alpha: 0.4),
-                              Colors.black.withValues(alpha: 0.95),
-                            ],
-                            stops: const [0.3, 0.6, 1.0],
+                        // Gradiente de sobreposição cinematográfico
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withValues(alpha: 0.4),
+                                Colors.black.withValues(alpha: 0.95),
+                              ],
+                              stops: const [0.3, 0.6, 1.0],
+                            ),
                           ),
                         ),
-                      ),
 
-                      // Toque para abrir detalhes na base do card
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => widget.onTap(app),
+                        // Toque para abrir detalhes na base do card
+                        Positioned.fill(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () => widget.onTap(app),
+                            ),
                           ),
                         ),
-                      ),
 
-                      // Conteúdo Informativo e Botão de Ação
-                      Positioned(
-                        left: 20,
-                        right: 20,
-                        bottom: 18,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            // Ícone
-                            Container(
-                              width: isDesktop ? 58 : 46,
-                              height: isDesktop ? 58 : 46,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(14),
-                                color: AppColors.surface,
-                                border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.5)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.accentCyan.withValues(alpha: 0.3),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 3),
+                        // Conteúdo Informativo e Botão de Ação
+                        Positioned(
+                          left: 20,
+                          right: 20,
+                          bottom: 18,
+                          child: Row(
+                            children: [
+                              // Ícone do App em Squircle
+                              Container(
+                                width: isDesktop ? 52 : 46,
+                                height: isDesktop ? 52 : 46,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.2),
+                                    width: 1.5,
                                   ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(13),
-                                child: ClusterImage(
-                                  url: app.iconUrl,
-                                  fit: BoxFit.cover,
-                                  fallback: Center(child: Text(app.icon, style: const TextStyle(fontSize: 24))),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(alpha: 0.4),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ClusterImage(
+                                    url: app.iconUrl,
+                                    fit: BoxFit.cover,
+                                    fallback: Center(
+                                      child: Text(
+                                        app.icon,
+                                        style: TextStyle(fontSize: isDesktop ? 26 : 22),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 14),
+                              const SizedBox(width: 14),
 
-                            // Título e Descrição
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.accentCyan.withValues(alpha: 0.2),
-                                          borderRadius: BorderRadius.circular(6),
-                                        ),
-                                        child: Text(
-                                          app.categoryName.toUpperCase(),
-                                          style: const TextStyle(
-                                            color: AppColors.accentCyan,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 0.8,
+                              // Título, Categoria e Badge
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            app.name,
+                                            style: TextStyle(
+                                              fontSize: isDesktop ? 19 : 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              shadows: const [
+                                                Shadow(
+                                                  color: Colors.black87,
+                                                  blurRadius: 6,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    app.name,
-                                    style: TextStyle(
-                                      fontSize: isDesktop ? 22 : 17,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      letterSpacing: -0.5,
+                                        if (app.badge.isNotEmpty) ...[
+                                          const SizedBox(width: 8),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 7,
+                                              vertical: 2.5,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.accentCyan.withValues(alpha: 0.2),
+                                              borderRadius: BorderRadius.circular(6),
+                                              border: Border.all(
+                                                color: AppColors.accentCyan.withValues(alpha: 0.6),
+                                                width: 1,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              app.badge,
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.accentCyan,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ],
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  if (isDesktop && app.description.isNotEmpty) ...[
                                     const SizedBox(height: 2),
                                     Text(
-                                      app.description,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white70,
+                                      app.shortDescription.isNotEmpty ? app.shortDescription : app.categoryName,
+                                      style: TextStyle(
+                                        fontSize: isDesktop ? 13 : 11.5,
+                                        color: Colors.white.withValues(alpha: 0.8),
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
+                                    if (isDesktop && app.description.isNotEmpty) ...[
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        app.description,
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.white70,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                   ],
-                                ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 12),
+                              const SizedBox(width: 12),
 
-                            // Botão de Ação com Barra de Progresso e Animações
-                            AnimatedActionButton(
-                              app: app,
-                              isInstalled: installed,
-                              hasUpdate: update,
-                              isAvailable: isAvailable,
-                              isActionInProgress: inProgress,
-                              downloadProgress: progress,
-                              downloadStatus: status,
-                              isInstalling: installing,
-                              isHero: true,
-                              height: isDesktop ? 44 : 38,
-                              onAction: () => widget.onAction(app),
-                            ),
-                          ],
+                              // Botão de Ação com Barra de Progresso e Animações
+                              AnimatedActionButton(
+                                app: app,
+                                isInstalled: installed,
+                                hasUpdate: update,
+                                isAvailable: isAvailable,
+                                isActionInProgress: inProgress,
+                                downloadProgress: progress,
+                                downloadStatus: status,
+                                isInstalling: installing,
+                                isHero: true,
+                                height: isDesktop ? 44 : 38,
+                                onAction: () => widget.onAction(app),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

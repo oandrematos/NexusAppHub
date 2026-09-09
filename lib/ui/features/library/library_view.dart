@@ -4,6 +4,7 @@ import '../home/home_view_model.dart';
 import '../../core/app_colors.dart';
 import '../../widgets/app_card_widget.dart';
 import '../details/app_detail_view.dart';
+import '../../core/spatial_route.dart';
 
 class LibraryView extends StatelessWidget {
   const LibraryView({super.key});
@@ -58,8 +59,8 @@ class LibraryView extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => AppDetailView(app: app),
+                        Spatial3DRoute(
+                          page: AppDetailView(app: app),
                         ),
                       );
                     },

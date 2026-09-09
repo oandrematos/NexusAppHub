@@ -4,6 +4,7 @@ import '../../data/models/app_item.dart';
 import '../core/app_colors.dart';
 import 'cluster_image.dart';
 import 'animated_action_button.dart';
+import 'tilt_3d_widget.dart';
 
 class AppListTileWidget extends StatelessWidget {
   final AppItem app;
@@ -55,12 +56,13 @@ class AppListTileWidget extends StatelessWidget {
     final isAvailable = app.isAvailableOn(isAndroid);
     final sizeMb = app.getSizeMb(isAndroid);
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      child: Tilt3DWidget(
+        borderRadius: 16,
+        maxTilt: 0.04,
+        scaleOnHover: 1.012,
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        hoverColor: AppColors.surface.withValues(alpha: 0.6),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
