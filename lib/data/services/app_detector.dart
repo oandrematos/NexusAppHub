@@ -133,6 +133,11 @@ class AppDetector {
 
       if (executableName.toLowerCase().contains('nexusapphub') ||
           executableName.toLowerCase().contains('nexus_app_hub')) {
+        final regVer = await _getWindowsRegistryVersion('NexusAppHub');
+        if (regVer != null && regVer.isNotEmpty) {
+          _versionCache[executableName] = regVer;
+          return regVer;
+        }
         return AppVersionService.currentVersion;
       }
 

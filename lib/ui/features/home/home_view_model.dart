@@ -53,6 +53,16 @@ class HomeViewModel extends ChangeNotifier {
   bool isInstalling(String appId) => _isInstalling[appId] ?? false;
   bool isActionInProgress(String appId) => isDownloading(appId) || isInstalling(appId);
 
+  List<AppItem> get appsWithUpdates => _allApps.where((a) => isInstalled(a.id) && hasUpdate(a.id)).toList();
+  int get updateCount => appsWithUpdates.length + (hasStoreUpdate ? 1 : 0);
+
+  List<AppItem> get recentlyUpdatedApps {
+    return _allApps.where((a) => a.latestChangelog != null && a.latestChangelog!.isNotEmpty).toList();
+  }
+
+  bool _isUpdatingAll = false;
+  bool get isUpdatingAll => _isUpdatingAll;
+
   HomeViewModel() {
     loadData();
   }
@@ -104,6 +114,11 @@ class HomeViewModel extends ChangeNotifier {
           null,
           'com.antigravity.nexus_app_hub',
         );
+      } else {
+        currentVer = await AppDetector.getInstalledVersion(
+          'NexusAppHub.exe',
+          null,
+        );
       }
       currentVer ??= AppVersionService.currentVersion;
 
@@ -111,8 +126,11 @@ class HomeViewModel extends ChangeNotifier {
         _hasStoreUpdate = true;
         _storeUpdateVersion = serverVer;
         _storeUpdateApp = hubApp;
-        notifyListeners();
+      } else {
+        _hasStoreUpdate = false;
+        _storeUpdateApp = null;
       }
+      notifyListeners();
     } catch (_) {}
   }
 
@@ -127,9 +145,28 @@ class HomeViewModel extends ChangeNotifier {
       await _checkInstallations();
       await _checkStoreSelfUpdate();
       _applyFilters();
-      return _hasStoreUpdate;
+      return updateCount > 0;
     } finally {
       _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> updateAll(BuildContext context) async {
+    if (_isUpdatingAll) return;
+    final toUpdate = List<AppItem>.from(appsWithUpdates);
+    if (toUpdate.isEmpty) return;
+
+    _isUpdatingAll = true;
+    notifyListeners();
+
+    try {
+      for (final app in toUpdate) {
+        if (!context.mounted) break;
+        await installApp(app, context);
+      }
+    } finally {
+      _isUpdatingAll = false;
       notifyListeners();
     }
   }
@@ -268,7 +305,10 @@ class HomeViewModel extends ChangeNotifier {
           app.description.toLowerCase().contains(_searchQuery) ||
           app.categoryName.toLowerCase().contains(_searchQuery);
 
-      final matchesCategory = _selectedCategory == 'all' || app.category == _selectedCategory;
+      final matchesCategory = _selectedCategory == 'all' ||
+          (_selectedCategory == 'updates'
+              ? (isInstalled(app.id) && hasUpdate(app.id))
+              : app.category == _selectedCategory);
 
       final matchesPlatform = _selectedPlatform == 'all' ||
           app.platformsSupported.contains(_selectedPlatform) ||

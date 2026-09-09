@@ -23,14 +23,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   final TextEditingController _searchCtrl = TextEditingController();
 
-  final List<Map<String, String>> _categories = [
-    {'id': 'all', 'name': 'Todos'},
-    {'id': 'games', 'name': 'Jogos & Arcade'},
-    {'id': 'system', 'name': 'Sistema & Cluster'},
-    {'id': 'social', 'name': 'Comunicação'},
-    {'id': 'productivity', 'name': 'Produtividade & IA'},
-    {'id': 'media', 'name': 'Mídia & Ferramentas'},
-  ];
 
   @override
   void initState() {
@@ -156,36 +148,63 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                     const SizedBox(height: 12),
 
                     // Chips de Categoria Deslizantes
-                    SizedBox(
-                      height: 38,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _categories.length,
-                        separatorBuilder: (_, __) => const SizedBox(width: 8),
-                        itemBuilder: (context, index) {
-                          final cat = _categories[index];
-                          final isSelected = vm.selectedCategory == cat['id'];
-                          return FilterChip(
-                            selected: isSelected,
-                            label: Text(cat['name']!),
-                            labelStyle: TextStyle(
-                              color: isSelected ? Colors.black : AppColors.textPrimary,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                              fontSize: 12,
-                            ),
-                            backgroundColor: AppColors.surface,
-                            selectedColor: AppColors.accentCyan,
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                color: isSelected ? AppColors.accentCyan : AppColors.border,
-                              ),
-                            ),
-                            onSelected: (_) => vm.setCategory(cat['id']!),
-                          );
-                        },
-                      ),
+                    Builder(
+                      builder: (context) {
+                        final categories = [
+                          {'id': 'all', 'name': 'Todos'},
+                          if (vm.updateCount > 0)
+                            {'id': 'updates', 'name': '🔄 Atualizações (${vm.updateCount})'}
+                          else
+                            {'id': 'updates', 'name': '🔄 Atualizações'},
+                          {'id': 'games', 'name': 'Jogos & Arcade'},
+                          {'id': 'system', 'name': 'Sistema & Cluster'},
+                          {'id': 'social', 'name': 'Comunicação'},
+                          {'id': 'productivity', 'name': 'Produtividade & IA'},
+                          {'id': 'media', 'name': 'Mídia & Ferramentas'},
+                        ];
+
+                        return SizedBox(
+                          height: 38,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: categories.length,
+                            separatorBuilder: (_, __) => const SizedBox(width: 8),
+                            itemBuilder: (context, index) {
+                              final cat = categories[index];
+                              final isSelected = vm.selectedCategory == cat['id'];
+                              final isUpdatesChip = cat['id'] == 'updates';
+                              final hasPending = isUpdatesChip && vm.updateCount > 0;
+
+                              return FilterChip(
+                                selected: isSelected,
+                                avatar: hasPending
+                                    ? const Icon(Icons.circle, color: Colors.orangeAccent, size: 10)
+                                    : null,
+                                label: Text(cat['name']!),
+                                labelStyle: TextStyle(
+                                  color: isSelected
+                                      ? Colors.black
+                                      : (hasPending ? Colors.orangeAccent : AppColors.textPrimary),
+                                  fontWeight: (isSelected || hasPending) ? FontWeight.bold : FontWeight.normal,
+                                  fontSize: 12,
+                                ),
+                                backgroundColor: AppColors.surface,
+                                selectedColor: isUpdatesChip ? Colors.orangeAccent : AppColors.accentCyan,
+                                padding: const EdgeInsets.symmetric(horizontal: 4),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  side: BorderSide(
+                                    color: isSelected
+                                        ? (isUpdatesChip ? Colors.orangeAccent : AppColors.accentCyan)
+                                        : (hasPending ? Colors.orangeAccent.withValues(alpha: 0.6) : AppColors.border),
+                                  ),
+                                ),
+                                onSelected: (_) => vm.setCategory(cat['id']!),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -240,6 +259,121 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           onAction: (app) => vm.handleAction(app, context),
         ),
         const SizedBox(height: 28),
+
+        // 1.5. Prateleira "🚀 Atualizações Prontas"
+        if (vm.appsWithUpdates.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          '🚀 Atualizações Prontas',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: -0.3,
+                            color: Colors.orangeAccent,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.orangeAccent.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.orangeAccent, width: 1),
+                          ),
+                          child: Text(
+                            '${vm.appsWithUpdates.length}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.orangeAccent,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    const Text(
+                      'Novas versões disponíveis para seus aplicativos instalados',
+                      style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                    ),
+                  ],
+                ),
+                ElevatedButton.icon(
+                  onPressed: vm.isUpdatingAll ? null : () => vm.updateAll(context),
+                  icon: vm.isUpdatingAll
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                        )
+                      : const Icon(Icons.download_rounded, size: 16),
+                  label: Text(vm.isUpdatingAll ? 'Atualizando...' : 'Atualizar Todos'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orangeAccent,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          StoreShelfWidget(
+            title: '',
+            subtitle: '',
+            height: 195,
+            itemCount: vm.appsWithUpdates.length,
+            itemBuilder: (context, index) {
+              final app = vm.appsWithUpdates[index];
+              return GameCardWidget(
+                app: app,
+                isInstalled: true,
+                hasUpdate: true,
+                downloadProgress: vm.getProgress(app.id),
+                downloadStatus: vm.getStatus(app.id),
+                isActionInProgress: vm.isActionInProgress(app.id),
+                isInstalling: vm.isInstalling(app.id),
+                onTap: () => _openDetails(context, app, vm),
+                onAction: () => vm.handleAction(app, context),
+              );
+            },
+          ),
+          const SizedBox(height: 28),
+        ],
+
+        // 1.8. Prateleira "✨ Recém-Atualizados no Ecossistema"
+        if (vm.recentlyUpdatedApps.isNotEmpty) ...[
+          StoreShelfWidget(
+            title: '✨ Recém-Atualizados no Ecossistema',
+            subtitle: 'Últimas novidades entregues pela frota com changelogs oficiais',
+            height: 195,
+            itemCount: vm.recentlyUpdatedApps.length,
+            itemBuilder: (context, index) {
+              final item = vm.recentlyUpdatedApps[index];
+              return GameCardWidget(
+                app: item,
+                isInstalled: vm.isInstalled(item.id),
+                hasUpdate: vm.hasUpdate(item.id),
+                downloadProgress: vm.getProgress(item.id),
+                downloadStatus: vm.getStatus(item.id),
+                isActionInProgress: vm.isActionInProgress(item.id),
+                isInstalling: vm.isInstalling(item.id),
+                onTap: () => _openDetails(context, item, vm),
+                onAction: () => vm.handleAction(item, context),
+              );
+            },
+          ),
+          const SizedBox(height: 28),
+        ],
 
         // 2. Prateleira "Jogos & Arcade" (Carrossel Horizontal com Banner)
         if (gameApps.isNotEmpty) ...[
@@ -436,6 +570,52 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
   Widget _buildSearchOrCategoryResults(HomeViewModel vm, bool isDesktop) {
     if (vm.apps.isEmpty) {
+      if (vm.selectedCategory == 'updates') {
+        return SliverFillRemaining(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF10B981).withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 2),
+                  ),
+                  child: const Icon(Icons.verified_outlined, size: 52, color: Color(0xFF10B981)),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Tudo Atualizado!',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'Todos os seus aplicativos estão na versão mais recente.',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () => vm.checkForUpdates(),
+                  icon: const Icon(Icons.refresh, size: 16),
+                  label: const Text('Buscar Novas Atualizações'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.surface,
+                    foregroundColor: AppColors.accentCyan,
+                    side: const BorderSide(color: AppColors.accentCyan),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
       return const SliverFillRemaining(
         child: Center(
           child: Text(

@@ -2,7 +2,7 @@
     "store_name": "Nexus App Hub",
     "developer": "André (Antigravity)",
     "schema_version": "3.0.0",
-    "updated_at": "2026-09-09T15:34:51.533274+00:00",
+    "updated_at": "2026-09-09T15:47:27.969302+00:00",
     "categories": [
         {
             "id": "games",
@@ -256,7 +256,7 @@
             "category": "games",
             "category_name": "Jogos & Arcade",
             "icon": "⚽",
-            "badge": "3D OPENGL",
+            "badge": "v0.0.2 3D OPENGL",
             "featured": true,
             "description": "A lendária edição tridimensional de Real Football 2006 (JSR-184 M3G) recompilada para PC com aceleração 3D por hardware (OpenGL/LWJGL), framerate destravado para 30 FPS cravados (adeus aos 13 FPS!) e resolução nativa clássica 240x320 com suporte a Gamepad Xbox.",
             "short_description": "Futebol 3D da Gameloft com aceleração OpenGL por GPU, 30 FPS e suporte a controle de Xbox.",
@@ -264,17 +264,17 @@
                 "windows"
             ],
             "windows": {
-                "filename": "RealFootball2006_3D_v0.0.1_pre_alpha_Installer.exe",
-                "version": "0.0.1",
+                "filename": "RealFootball2006_3D_v0.0.2_pre_alpha_Installer.exe",
+                "version": "0.0.2",
                 "executable": "RealFootball2006_3D.exe",
-                "size_mb": 39.82
+                "size_mb": 37.26
             },
-            "version": "0.0.1",
+            "version": "0.0.2",
             "latest_changelog": [
-                "v0.0.1: Aceleração 3D por hardware OpenGL (LWJGL) via KEmulator nnmod x64, eliminando glitches de gramado e renderizando todas as malhas poligonais e shaders .gli dos atletas.",
-                "v0.0.1: Framerate destravado de 13 FPS para 30 FPS fluidos através de bytecode patch no loop de tempo de c.class (80ms -> 33ms).",
-                "v0.0.1: Resolução nativa exata 240x320 (pixel-perfect 1:1) com proporção clássica original sem distorções.",
-                "v0.0.1: Suporte Plug & Play a Gamepad Xbox One / Series com injeção direta de hardware e isolamento limpo de processo via Job Object do Windows."
+                "v0.0.2: Migração definitiva de motor gráfico para KEmulator nnmod x64 com aceleração por hardware OpenGL (LWJGL).",
+                "v0.0.2: Erradicação dos glitches de gramado e correção total da compilação de malhas 3D .gli (jogadores e bola 100% visíveis).",
+                "v0.0.2: Framerate destravado de 13 FPS para 30 FPS fluidos no loop de tempo (c.class de 80ms para 33ms).",
+                "v0.0.2: Resolução fixada em rigorosos 240x320 nativos (pixel-perfect 1:1) com proporção clássica original sem distorção."
             ],
             "gamepad": true,
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/banner.png",

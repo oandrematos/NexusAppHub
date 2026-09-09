@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'app_colors.dart';
 import '../widgets/tilt_3d_widget.dart';
+import '../features/home/home_view_model.dart';
 
 class ResponsiveScaffold extends StatelessWidget {
   final int selectedIndex;
@@ -19,6 +21,7 @@ class ResponsiveScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<HomeViewModel>();
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop = constraints.maxWidth >= 768 && !Platform.isAndroid;
@@ -114,23 +117,37 @@ class ResponsiveScaffold extends StatelessWidget {
                       ),
                     ),
                   ),
-                  destinations: const [
-                    NavigationRailDestination(
+                  destinations: [
+                    const NavigationRailDestination(
                       icon: Icon(Icons.storefront_outlined),
                       selectedIcon: Icon(Icons.storefront, color: AppColors.accentCyan),
                       label: Text('Destaques'),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.apps_outlined),
-                      selectedIcon: Icon(Icons.apps, color: AppColors.accentCyan),
-                      label: Text('Biblioteca'),
+                      icon: vm.updateCount > 0
+                          ? Badge.count(
+                              count: vm.updateCount,
+                              backgroundColor: Colors.orangeAccent,
+                              textColor: Colors.black,
+                              child: const Icon(Icons.apps_outlined),
+                            )
+                          : const Icon(Icons.apps_outlined),
+                      selectedIcon: vm.updateCount > 0
+                          ? Badge.count(
+                              count: vm.updateCount,
+                              backgroundColor: Colors.orangeAccent,
+                              textColor: Colors.black,
+                              child: const Icon(Icons.apps, color: AppColors.accentCyan),
+                            )
+                          : const Icon(Icons.apps, color: AppColors.accentCyan),
+                      label: const Text('Biblioteca'),
                     ),
-                    NavigationRailDestination(
+                    const NavigationRailDestination(
                       icon: Icon(Icons.source_outlined),
                       selectedIcon: Icon(Icons.source_rounded, color: AppColors.accentCyan),
                       label: Text('Gerenciadores'),
                     ),
-                    NavigationRailDestination(
+                    const NavigationRailDestination(
                       icon: Icon(Icons.settings_outlined),
                       selectedIcon: Icon(Icons.settings, color: AppColors.accentCyan),
                       label: Text('Ajustes'),
@@ -198,23 +215,37 @@ class ResponsiveScaffold extends StatelessWidget {
             indicatorColor: AppColors.accentCyan.withValues(alpha: 0.2),
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
-            destinations: const [
-              NavigationDestination(
+            destinations: [
+              const NavigationDestination(
                 icon: Icon(Icons.storefront_outlined),
                 selectedIcon: Icon(Icons.storefront, color: AppColors.accentCyan),
                 label: 'Loja',
               ),
               NavigationDestination(
-                icon: Icon(Icons.apps_outlined),
-                selectedIcon: Icon(Icons.apps, color: AppColors.accentCyan),
+                icon: vm.updateCount > 0
+                    ? Badge.count(
+                        count: vm.updateCount,
+                        backgroundColor: Colors.orangeAccent,
+                        textColor: Colors.black,
+                        child: const Icon(Icons.apps_outlined),
+                      )
+                    : const Icon(Icons.apps_outlined),
+                selectedIcon: vm.updateCount > 0
+                    ? Badge.count(
+                        count: vm.updateCount,
+                        backgroundColor: Colors.orangeAccent,
+                        textColor: Colors.black,
+                        child: const Icon(Icons.apps, color: AppColors.accentCyan),
+                      )
+                    : const Icon(Icons.apps, color: AppColors.accentCyan),
                 label: 'Meus Apps',
               ),
-              NavigationDestination(
+              const NavigationDestination(
                 icon: Icon(Icons.source_outlined),
                 selectedIcon: Icon(Icons.source_rounded, color: AppColors.accentCyan),
                 label: 'Pacotes',
               ),
-              NavigationDestination(
+              const NavigationDestination(
                 icon: Icon(Icons.settings_outlined),
                 selectedIcon: Icon(Icons.settings, color: AppColors.accentCyan),
                 label: 'Ajustes',
