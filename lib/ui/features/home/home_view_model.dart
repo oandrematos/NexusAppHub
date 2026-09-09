@@ -73,21 +73,20 @@ class HomeViewModel extends ChangeNotifier {
     }
 
     // 2. Detecção de instalações em paralelo de forma não-bloqueante
-    _checkInstallations().then((_) {
-      _checkStoreSelfUpdate();
+    _checkInstallations().then((_) async {
+      await _checkStoreSelfUpdate();
       _applyFilters();
       notifyListeners();
     });
 
     // 3. Sincronização remota de catálogo em background (sem travar a tela)
-    _catalogService.fetchRemoteCatalog().then((remoteApps) {
+    _catalogService.fetchRemoteCatalog().then((remoteApps) async {
       if (remoteApps != null && remoteApps.isNotEmpty) {
         _allApps = remoteApps;
-        _checkInstallations().then((_) {
-          _checkStoreSelfUpdate();
-          _applyFilters();
-          notifyListeners();
-        });
+        await _checkInstallations();
+        await _checkStoreSelfUpdate();
+        _applyFilters();
+        notifyListeners();
       }
     });
   }
@@ -112,8 +111,27 @@ class HomeViewModel extends ChangeNotifier {
         _hasStoreUpdate = true;
         _storeUpdateVersion = serverVer;
         _storeUpdateApp = hubApp;
+        notifyListeners();
       }
     } catch (_) {}
+  }
+
+  Future<bool> checkForUpdates() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final remoteApps = await _catalogService.fetchRemoteCatalog();
+      if (remoteApps != null && remoteApps.isNotEmpty) {
+        _allApps = remoteApps;
+      }
+      await _checkInstallations();
+      await _checkStoreSelfUpdate();
+      _applyFilters();
+      return _hasStoreUpdate;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> updateStore(BuildContext context) async {

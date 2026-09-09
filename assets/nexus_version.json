@@ -1,13 +1,13 @@
 {
     "changelog":  [
-                      "Timeout de sincronizacao de catalogo ampliado para 7s com blindagem de deteccao de updates.",
-                      "Declaracao completa de visibilidade de pacotes Android (<queries>) para Neo-Blocks e ecossistema.",
-                      "Suporte universal a downloads CDN no GitHub Releases com multiplos redirecionamentos 302/307/308.",
-                      "Correcao critica de mapeamento de nomes de instaladores no GitHub (substituicao de espacos por pontos).",
-                      "Integracao do ThreadsDL v0.6.1 com salvamento em DCIM e Google Fotos nativo.",
-                      "Integracao de Neo-Blocks v0.2.0 com 120 FPS nativo (Galaxy S25 FE), animacoes arcade e screen shake."
+                      "Blindagem de auto-atualização assíncrona da loja (notificação reativa imediata na UI).",
+                      "Sincronização ponta-a-ponta com verificação manual resiliente na tela de Configurações.",
+                      "Cover Flow 3D no Hero Carousel com rotação tridimensional e profundidade espacial Z.",
+                      "Tilt3DWidget com iluminação holográfica interativa no toque e mouse a 120 FPS.",
+                      "Ativação nativa de alta taxa de atualização (120Hz/144Hz) no Android (Galaxy S25 FE).",
+                      "Ingestão do clássico Real Football 2005 e 2006 RetroRecomp no catálogo oficial."
                   ],
-    "build":  30,
-    "version":  "0.3.27",
-    "release_date":  "2026-09-07"
+    "build":  33,
+    "version":  "0.3.30",
+    "release_date":  "2026-09-09"
 }

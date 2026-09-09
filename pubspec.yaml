@@ -1,7 +1,7 @@
 name: nexus_app_hub
 description: "Nexus App Hub â€” Central & Launcher Oficial do Ecossistema Antigravity."
 publish_to: 'none'
-version: 0.3.29+32
+version: 0.3.30+33
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -55,6 +55,8 @@ flutter:
     - assets/showcase/gangstar_mirage_city/screenshots/
     - assets/showcase/real_football_2005/
     - assets/showcase/real_football_2005/screenshots/
+    - assets/showcase/real_football_2006/
+    - assets/showcase/real_football_2006/screenshots/
     - assets/showcase/space_duel/
     - assets/showcase/super_pong/
     - assets/showcase/tailscale/

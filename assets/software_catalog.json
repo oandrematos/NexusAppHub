@@ -105,18 +105,19 @@
             ],
             "windows": {
                 "executable": "NexusAppHub.exe",
-                "version": "0.3.26",
-                "filename": "NexusAppHub_v0.3.26_Installer.exe",
+                "version": "0.3.30",
+                "filename": "NexusAppHub_v0.3.30_Installer.exe",
                 "size_mb": 45.26
             },
             "android": {
                 "package_name": "com.antigravity.nexus_app_hub",
-                "version": "0.3.29",
-                "filename": "NexusAppHub_Flutter_Android_v0.3.29.apk",
-                "size_mb": 144.78
+                "version": "0.3.30",
+                "filename": "NexusAppHub_Flutter_Android_v0.3.30.apk",
+                "size_mb": 128.72
             },
-            "version": "0.3.29",
+            "version": "0.3.30",
             "latest_changelog": [
+                "v0.3.30: Blindagem da auto-atualização assíncrona reativa na UI e sincronização ponta-a-ponta na tela de Configurações.",
                 "v0.3.29: Nexus App Hub 3D & 120 FPS Edition — Cover Flow 3D no Hero Carousel, Tilt3DWidget com física holográfica, transições espaciais Spatial3DRoute e ativação nativa de 120Hz no Android.",
                 "v0.3.28: Botão de ação inteligente com metamorfose para barra de progresso fluida, feedback háptico/elástico, bloqueio anti-re-clique e detecção não-bloqueante de instalação no Android.",
                 "v0.3.27: Timeout de sincronização de catálogo ampliado para 7s no Android e blindagem de detecção de updates.",
@@ -212,6 +213,40 @@
                 "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2005/screenshots/screen_1.png",
                 "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2005/screenshots/screen_2.png"
             ]
+        },
+        {
+            "id": "real_football_2006",
+            "name": "Real Football 2006",
+            "title": "Real Football 2006 RetroRecomp",
+            "category": "games",
+            "category_name": "Jogos & Emuladores",
+            "icon": "⚽",
+            "badge": "CLÁSSICO 3D",
+            "featured": true,
+            "description": "Edição clássica de ouro do futebol retrô recompilada para PC e dispositivos modernos. Suporte completo a gamepads, física de bola realista e Cover Flow 3D na vitrine da Nexus App Hub.",
+            "short_description": "Clássico do futebol Java/Symbian recompilado nativamente com suporte a Gamepad.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "windows": {
+                "filename": "RealFootball2006_Setup.exe",
+                "version": "v0.0.1-pre-alpha",
+                "executable": "RealFootball2006.exe",
+                "size_mb": 28.4
+            },
+            "version": "v0.0.1-pre-alpha",
+            "latest_changelog": [
+                "Adaptação gráfica em alta definição com suporte a 120 FPS.",
+                "Mapeamento de controles Xbox/PlayStation nativo em cooperação com Pixel Studio."
+            ],
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/screenshots/screen_2.png"
+            ],
+            "gamepad": true
         },
         {
             "id": "space_duel",

@@ -22,12 +22,12 @@ class _SettingsViewState extends State<SettingsView> {
       _checkStatus = 'Consultando CDN global e servidores do cluster...';
     });
 
-    await vm.loadData();
+    final hasUpdate = await vm.checkForUpdates();
 
     if (!mounted) return;
     setState(() {
       _isCheckingUpdate = false;
-      if (vm.hasStoreUpdate) {
+      if (hasUpdate || vm.hasStoreUpdate) {
         _checkStatus = 'Nova versão encontrada: v${vm.storeUpdateVersion}!';
       } else {
         _checkStatus = 'Você já está usando a versão mais recente!';
