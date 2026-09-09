@@ -6,8 +6,7 @@ import 'package:open_filex/open_filex.dart';
 
 class DownloadService {
   static const List<String> clusterEndpoints = [
-    'http://192.168.0.246/installers',   // S2 (Wi-Fi Doméstico Casa Real - Menor Latência)
-    'http://192.168.196.101/installers', // S1 (ZeroTier / Nuvem)
+    'http://192.168.196.101/installers', // S1 (Nexus Server / ZeroTier)
     'https://github.com/oandrematos/NexusAppHub/releases/latest/download', // GitHub CDN Global (Latest)
     'https://github.com/oandrematos/NexusAppHub/releases/download/v0.3.26', // GitHub CDN Global (Base Archive)
   ];
@@ -219,75 +218,87 @@ class DownloadService {
         }
       } else {
         final lower = filename.toLowerCase();
-        bool isInstaller = lower.contains('installer') ||
-            lower.contains('setup') ||
-            lower.contains('_x64.exe') ||
-            lower.contains('space duel');
-
-        if (!isInstaller) {
+        if (lower.endsWith('.msi')) {
+          onStatus('Iniciando instalador MSI...');
           try {
-            final bytes = targetFile.readAsBytesSync();
-            final str = String.fromCharCodes(bytes.take(2000000));
-            if (str.contains('Nullsoft') || str.contains('Inno Setup') || str.contains('WiseMain')) {
-              isInstaller = true;
-            }
-          } catch (_) {}
-        }
-
-        if (isInstaller) {
-          final lowerF = filename.toLowerCase();
-          final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
-
-          if (isSelfUpdate) {
-            // Atualização da própria loja: dispara o instalador silencioso desacoplado no Shell do Windows
             await Process.start(
-              'cmd.exe',
-              ['/c', 'start', '""', targetFile.path, '/S'],
+              'msiexec.exe',
+              ['/i', targetFile.path, '/qn', '/norestart'],
               mode: ProcessStartMode.detached,
             );
-            await Future.delayed(const Duration(milliseconds: 600));
-            exit(0);
-          } else {
-            // Flags otimizadas e limpas para cada tipo de instalador
-            List<String> silentArgs = ['/S'];
-            try {
-              final bytes = targetFile.readAsBytesSync();
-              final header = String.fromCharCodes(bytes.take(1000000));
-              if (header.contains('Inno Setup')) {
-                silentArgs = ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-'];
-              } else if (header.contains('Nullsoft')) {
-                silentArgs = ['/S'];
-              }
-            } catch (_) {}
-
-            int exitCode = -1;
-            try {
-              onStatus('Instalando ${filename.replaceAll('.exe', '')}...');
-              final proc = await Process.start(
-                targetFile.path,
-                silentArgs,
-                workingDirectory: targetFile.parent.path,
-                mode: ProcessStartMode.normal,
-              );
-              exitCode = await proc.exitCode;
-            } catch (_) {}
-
-            // Se o instalador silencioso falhar ou retornar código de erro, dispara interativo via Shell do Windows
-            if (exitCode != 0) {
-              await Process.start(
-                'cmd.exe',
-                ['/c', 'start', '""', targetFile.path],
-                mode: ProcessStartMode.detached,
-              );
-            }
+          } catch (_) {
+            await Process.start(
+              'msiexec.exe',
+              ['/i', targetFile.path],
+              mode: ProcessStartMode.detached,
+            );
           }
         } else {
-          final localAppData = Platform.environment['LOCALAPPDATA'] ?? 'C:/Users/Andre/AppData/Local';
-          final appBaseName = filename.replaceAll('.exe', '').split('_')[0].trim();
-          final installDir = Directory('$localAppData/Programs/$appBaseName');
-          if (!installDir.existsSync()) installDir.createSync(recursive: true);
-          final targetDest = File('${installDir.path}/$filename');
-          targetFile.copySync(targetDest.path);
+          bool isInstaller = lower.contains('installer') ||
+              lower.contains('setup') ||
+              lower.contains('_x64.exe') ||
+              lower.contains('space duel');
+
+          if (!isInstaller) {
+            try {
+              final bytes = targetFile.readAsBytesSync();
+              final str = String.fromCharCodes(bytes.take(2000000));
+              if (str.contains('Nullsoft') || str.contains('Inno Setup') || str.contains('WiseMain')) {
+                isInstaller = true;
+              }
+            } catch (_) {}
+          }
+
+          if (isInstaller) {
+            final lowerF = filename.toLowerCase();
+            final isSelfUpdate = lowerF.contains('nexusapphub') || lowerF.contains('nexus_app_hub');
+
+            if (isSelfUpdate) {
+              // Atualização da própria loja: dispara o instalador silencioso desacoplado no Shell do Windows
+              await Process.start(
+                'cmd.exe',
+                ['/c', 'start', '""', targetFile.path, '/S'],
+                mode: ProcessStartMode.detached,
+              );
+              await Future.delayed(const Duration(milliseconds: 600));
+              exit(0);
+            } else {
+              // Flags otimizadas e limpas para cada tipo de instalador
+              List<String> silentArgs = ['/S'];
+              try {
+                final bytes = targetFile.readAsBytesSync();
+                final header = String.fromCharCodes(bytes.take(1000000));
+                if (header.contains('Inno Setup')) {
+                  silentArgs = ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-'];
+                } else if (header.contains('Nullsoft')) {
+                  silentArgs = ['/S'];
+                }
+              } catch (_) {}
+
+              onStatus('Iniciando instalador de ${filename.replaceAll('.exe', '')}...');
+              // Dispara de forma desacoplada com ShellExecute (start) para permitir UAC normal do Windows sem congelar a loja
+              try {
+                await Process.start(
+                  'cmd.exe',
+                  ['/c', 'start', '""', targetFile.path, ...silentArgs],
+                  mode: ProcessStartMode.detached,
+                );
+              } catch (_) {
+                await Process.start(
+                  'cmd.exe',
+                  ['/c', 'start', '""', targetFile.path],
+                  mode: ProcessStartMode.detached,
+                );
+              }
+            }
+          } else {
+            final localAppData = Platform.environment['LOCALAPPDATA'] ?? 'C:/Users/Andre/AppData/Local';
+            final appBaseName = filename.replaceAll('.exe', '').split('_')[0].trim();
+            final installDir = Directory('$localAppData/Programs/$appBaseName');
+            if (!installDir.existsSync()) installDir.createSync(recursive: true);
+            final targetDest = File('${installDir.path}/$filename');
+            targetFile.copySync(targetDest.path);
+          }
         }
       }
       onCompleted();

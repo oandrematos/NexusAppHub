@@ -177,24 +177,16 @@ class HomeViewModel extends ChangeNotifier {
 
   bool _isNewerVersion(String? installed, String? catalog) {
     if (installed == null || catalog == null) return false;
-    final cleanInstalled = installed
-        .replaceAll('v', '')
-        .replaceAll('V', '')
-        .replaceAll('-alpha', '')
-        .replaceAll('-beta', '')
-        .replaceAll(',', '.')
-        .replaceAll('_', '.')
-        .replaceAll(' ', '')
-        .trim();
-    final cleanCatalog = catalog
-        .replaceAll('v', '')
-        .replaceAll('V', '')
-        .replaceAll('-alpha', '')
-        .replaceAll('-beta', '')
-        .replaceAll(',', '.')
-        .replaceAll('_', '.')
-        .replaceAll(' ', '')
-        .trim();
+
+    String clean(String v) {
+      var s = v.replaceAll(RegExp(r'^[vV]'), '');
+      s = s.replaceAll(RegExp(r'[-_]?(pre[-_]?alpha|alpha|beta|rc\d*)', caseSensitive: false), '');
+      s = s.replaceAll(',', '.').replaceAll('_', '.').replaceAll(' ', '').trim();
+      return s;
+    }
+
+    final cleanInstalled = clean(installed);
+    final cleanCatalog = clean(catalog);
 
     if (cleanInstalled.isEmpty || cleanCatalog.isEmpty) return false;
     if (cleanInstalled == cleanCatalog) return false;
@@ -516,17 +508,31 @@ class HomeViewModel extends ChangeNotifier {
           });
         } else {
           _downloadProgress.remove(app.id);
-          _downloadStatus.remove(app.id);
-          _isInstalling.remove(app.id);
+          _downloadStatus[app.id] = 'Instalação em andamento...';
+          _isInstalling[app.id] = true;
           AppDetector.clearCache();
           await _checkInstallations();
           notifyListeners();
 
-          // Segunda verificação após 1.5s para garantir que os arquivos e registros terminaram de ser escritos
-          Future.delayed(const Duration(milliseconds: 1500), () async {
+          // Monitoramento não-bloqueante por até 30s para transição automática para "Abrir"
+          int pollAttempts = 0;
+          Timer.periodic(const Duration(seconds: 2), (timer) async {
+            pollAttempts++;
             AppDetector.clearCache();
             await _checkInstallations();
             notifyListeners();
+
+            final installed = isInstalled(app.id);
+            final pendingUpdate = hasUpdate(app.id);
+            if ((installed && !pendingUpdate) || pollAttempts >= 15) {
+              timer.cancel();
+              _isInstalling.remove(app.id);
+              _downloadProgress.remove(app.id);
+              _downloadStatus.remove(app.id);
+              AppDetector.clearCache();
+              await _checkInstallations();
+              notifyListeners();
+            }
           });
         }
       },

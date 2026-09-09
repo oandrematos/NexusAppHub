@@ -519,8 +519,8 @@
             "windows": {
                 "filename": "NexusDashboard_v1.2.0_Installer.exe",
                 "size_mb": 0.69,
-                "version": "v1.3.0",
-                "executable": "nexus_dashboard.exe",
+                "version": "v1.2.0",
+                "executable": "AntigravityDashboard.exe",
                 "latest_changelog": [
                     "Operação Panóptico: monitoramento dinâmico em tempo real de miniaturas das estações (Danillo-PC, Miguel-PC, Dell-PC, etc.)",
                     "Modo Tela Cheia em Resolução Total (HD 1080p Nativo sob demanda) com suporte à Fullscreen API",
@@ -600,8 +600,8 @@
             "windows": {
                 "filename": "NexusDashboard_v1.2.0_Installer.exe",
                 "size_mb": 0.69,
-                "version": "v1.4.0-beta.1",
-                "executable": "nexus_dashboard.exe",
+                "version": "v1.2.0",
+                "executable": "AntigravityDashboard.exe",
                 "latest_changelog": [
                     "Motor de renderização Bifrost 3D acelerado por hardware (DirectX 11/12 e WebGL)",
                     "Visualização holográfica tridimensional do cluster e computadores da Lanhouse",
