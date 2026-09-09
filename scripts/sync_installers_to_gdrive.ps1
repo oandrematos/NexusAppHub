@@ -1,15 +1,14 @@
-﻿# [CITADEL] Script de Sincronizacao de Instaladores: OneDrive -> Google Drive (Disco W:)
+# [CITADEL] Script de Sincronizacao de Instaladores: OneDrive -> Google Drive (Disco W:)
 # Mantem a paridade total entre o armazenamento primario e os espelhos no RaiDrive
 
 param(
     [string]$SourcePath = "D:\OneDrive\Antigravity Projects\Installers",
     [string[]]$Destinations = @(
-        "W:\Antigravity Projects\Installers",
-        "W:\Installers"
+        "W:\Antigravity Projects\Installers"
     )
 )
 
-Write-Host "🛡 [CITADEL] Iniciando Sincronizacao Dupla de Instaladores..." -ForegroundColor Cyan
+Write-Host "🛡 [CITADEL] Iniciando Sincronizacao de Instaladores..." -ForegroundColor Cyan
 Write-Host "   Origem : $SourcePath" -ForegroundColor Gray
 
 if (-not (Test-Path $SourcePath)) {

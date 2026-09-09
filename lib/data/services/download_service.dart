@@ -38,7 +38,6 @@ class DownloadService {
     if (!isAndroid) {
       final localCandidates = [
         Directory(r'D:\OneDrive\Antigravity Projects\Installers'),
-        Directory(r'W:\Installers'),
         Directory(r'W:\Antigravity Projects\Installers'),
       ];
       for (final dir in localCandidates) {
