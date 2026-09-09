@@ -107,7 +107,7 @@
                 "executable": "NexusAppHub.exe",
                 "version": "0.3.30",
                 "filename": "NexusAppHub_v0.3.30_Installer.exe",
-                "size_mb": 45.26
+                "size_mb": 71.55
             },
             "android": {
                 "package_name": "com.antigravity.nexus_app_hub",
