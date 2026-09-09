@@ -264,10 +264,18 @@
                 "windows"
             ],
             "windows": {
-                "filename": "RealFootball2006_3D_v0.0.2_pre_alpha_Installer.exe",
-                "version": "0.0.2",
+                "filename": "RealFootball2006_3D_v0.0.3_pre_alpha_Installer.exe",
+                "version": "v0.0.3-pre-alpha",
                 "executable": "RealFootball2006_3D.exe",
-                "size_mb": 37.26
+                "size_mb": 9.15,
+                "latest_changelog": [
+                    "Retorno definitivo ao motor oficial FreeJ2ME da frota Nexus (KEmulator totalmente expurgado)",
+                    "Erradicação total dos glitches e ruídos gráficos de confetes na resolução vertical",
+                    "Desativação do HUD amarelo invasivo FPS: 13 no canto superior direito",
+                    "Resolução rigorosamente fixada em 240x320 pixel-perfect nativa (1:1 clássica sem distorção)",
+                    "Framerate destravado e fluido a 30 FPS cravados no loop de tempo (c.class a 33ms)",
+                    "Suporte nativo completo a Gamepad Xbox com mapeamento arcade via XInput e ScanCode"
+                ]
             },
             "version": "0.0.2",
             "latest_changelog": [
