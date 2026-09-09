@@ -511,13 +511,14 @@
             "windows": {
                 "filename": "NexusDashboard_v1.2.0_Installer.exe",
                 "size_mb": 0.69,
-                "version": "v1.2.0",
+                "version": "v1.3.0",
                 "executable": "nexus_dashboard.exe",
                 "latest_changelog": [
-                    "Aplicação desktop 100% nativa Windows (.NET / WinForms / WebView2) - sem processo msedge.exe avulso",
-                    "Bloqueio estrito de múltiplas instâncias (Single-Instance Mutex) trazendo a janela existente ao topo",
-                    "Remoção total de menus de contexto do navegador e atalhos de browser para experiência nativa pura",
-                    "Gerenciamento dinâmico de novos computadores e nós na malha via Hub (botão Novo Dispositivo)"
+                    "Operação Panóptico: monitoramento dinâmico em tempo real de miniaturas das estações (Danillo-PC, Miguel-PC, Dell-PC, etc.)",
+                    "Modo Tela Cheia em Resolução Total (HD 1080p Nativo sob demanda) com suporte à Fullscreen API",
+                    "Toggle Rápido Stealth para corte instantâneo de 100% do tráfego de imagens (Regra de Ouro)",
+                    "Renderização atômica in-place e double-buffering preloading (zero flicker)",
+                    "Cronômetro de uso em tempo real e extrato financeiro da Lanhouse com baixa de pagamentos"
                 ],
                 "screenshots": [
                     "http://192.168.196.101:8080/assets/dashboard_overview.png",
@@ -543,7 +544,7 @@
             },
             "web": {
                 "url": "http://192.168.196.101:8080/",
-                "version": "v1.2.0"
+                "version": "v1.3.0"
             },
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_dashboard/banner_card.png",
@@ -557,15 +558,46 @@
                 "package_deb": "nexus-dashboard_1.2.0_all.deb",
                 "tarball": "nexus-dashboard_1.2.0_linux.tar.gz",
                 "size_mb": 1.9,
-                "version": "v1.2.0",
+                "version": "v1.3.0",
                 "executable": "nexus-dashboard",
                 "latest_changelog": [
-                    "Versão desktop nativa oficial para Linux (Ubuntu / Debian / Universal)",
-                    "Motor WebKitGTK de alta performance (~45MB RAM) com aceleração de hardware para CFTV e Canvas",
-                    "Modo de contingência automático via Chromium-app para compatibilidade universal",
-                    "Varredura multihop dinâmica (LAN Escritório, LAN Casa, ZeroTier e WAN Cloudflare)",
-                    "Proteção rigorosa contra múltiplas instâncias concorrentes (Single-Instance Lock)",
-                    "Disponível via pacote Debian (.deb), instalador 1 clique e repositório APT do cluster"
+                    "Operação Panóptico: monitoramento dinâmico em tempo real de miniaturas das estações (Danillo-PC, Miguel-PC, Dell-PC, etc.)",
+                    "Modo Tela Cheia em Resolução Total (HD 1080p Nativo sob demanda) com suporte à Fullscreen API",
+                    "Toggle Rápido Stealth para corte instantâneo de 100% do tráfego de imagens (Regra de Ouro)",
+                    "Renderização atômica in-place e double-buffering preloading (zero flicker)",
+                    "Cronômetro de uso em tempo real e extrato financeiro da Lanhouse com baixa de pagamentos"
+                ]
+            }
+        },
+        {
+            "id": "nexus_dashboard_beta",
+            "name": "Nexus Dashboard (Bifrost 3D Beta)",
+            "title": "Nexus Dashboard 3D — Central Holográfica Experimental",
+            "category": "system",
+            "category_name": "Sistema & Utilitários",
+            "icon": "🌌",
+            "badge": "BETA 3D",
+            "featured": true,
+            "description": "Edição experimental do Nexus Dashboard equipada com o motor holográfico Bifrost 3D acelerado por hardware via DirectX 11/12 (Windows) e Vulkan (Linux/Android). Apresenta a topologia neural tridimensional dos nós do cluster e estações da Lanhouse com feixes de dados a 120 FPS e renderização 100% no cliente com impacto zero nos servidores.",
+            "short_description": "Central holográfica 3D experimental acelerada por hardware via DirectX e Vulkan.",
+            "platforms_supported": [
+                "windows",
+                "linux",
+                "web"
+            ],
+            "web": {
+                "url": "http://192.168.196.101:8080/?engine=3d",
+                "version": "v1.4.0-beta.1"
+            },
+            "windows": {
+                "filename": "NexusDashboard_v1.2.0_Installer.exe",
+                "size_mb": 0.69,
+                "version": "v1.4.0-beta.1",
+                "executable": "nexus_dashboard.exe",
+                "latest_changelog": [
+                    "Motor de renderização Bifrost 3D acelerado por hardware (DirectX 11/12 e WebGL)",
+                    "Visualização holográfica tridimensional do cluster e computadores da Lanhouse",
+                    "Taxa de quadros de 120 FPS cravados e transições de câmera orbitais dinâmicas"
                 ]
             }
         },

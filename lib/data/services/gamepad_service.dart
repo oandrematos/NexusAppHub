@@ -98,15 +98,25 @@ class GamepadService extends ChangeNotifier {
   void _pollXInput() {
     if (_xinputGetState == null || _xinputPtr == null) return;
 
-    final res = _xinputGetState!(0, _xinputPtr!);
-    final connected = (res == 0);
+    int activeSlot = -1;
+    for (int i = 0; i < 4; i++) {
+      if (_xinputGetState!(i, _xinputPtr!) == 0) {
+        activeSlot = i;
+        break;
+      }
+    }
+
+    final connected = (activeSlot != -1);
 
     if (connected != _isGamepadConnected) {
       _isGamepadConnected = connected;
       notifyListeners();
     }
 
-    if (!connected) return;
+    if (!connected) {
+      _lastButtons = 0;
+      return;
+    }
 
     final state = _xinputPtr!.ref;
     final buttons = state.gamepad.wButtons;
