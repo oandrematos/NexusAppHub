@@ -2,7 +2,7 @@
     "store_name": "Nexus App Hub",
     "developer": "André (Antigravity)",
     "schema_version": "3.0.0",
-    "updated_at": "2026-09-09T01:08:04Z",
+    "updated_at": "2026-09-09T15:34:51.533274+00:00",
     "categories": [
         {
             "id": "games",
@@ -248,6 +248,44 @@
             ],
             "gamepad": true,
             "cover_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/cover_card.png"
+        },
+        {
+            "id": "real_football_2006_3d",
+            "name": "Real Football 2006 3D",
+            "title": "Real Football 2006 3D (OpenGL Edition)",
+            "category": "games",
+            "category_name": "Jogos & Arcade",
+            "icon": "⚽",
+            "badge": "3D OPENGL",
+            "featured": true,
+            "description": "A lendária edição tridimensional de Real Football 2006 (JSR-184 M3G) recompilada para PC com aceleração 3D por hardware (OpenGL/LWJGL), framerate destravado para 30 FPS cravados (adeus aos 13 FPS!) e resolução nativa clássica 240x320 com suporte a Gamepad Xbox.",
+            "short_description": "Futebol 3D da Gameloft com aceleração OpenGL por GPU, 30 FPS e suporte a controle de Xbox.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "windows": {
+                "filename": "RealFootball2006_3D_v0.0.1_pre_alpha_Installer.exe",
+                "version": "0.0.1",
+                "executable": "RealFootball2006_3D.exe",
+                "size_mb": 39.82
+            },
+            "version": "0.0.1",
+            "latest_changelog": [
+                "v0.0.1: Aceleração 3D por hardware OpenGL (LWJGL) via KEmulator nnmod x64, eliminando glitches de gramado e renderizando todas as malhas poligonais e shaders .gli dos atletas.",
+                "v0.0.1: Framerate destravado de 13 FPS para 30 FPS fluidos através de bytecode patch no loop de tempo de c.class (80ms -> 33ms).",
+                "v0.0.1: Resolução nativa exata 240x320 (pixel-perfect 1:1) com proporção clássica original sem distorções.",
+                "v0.0.1: Suporte Plug & Play a Gamepad Xbox One / Series com injeção direta de hardware e isolamento limpo de processo via Job Object do Windows."
+            ],
+            "gamepad": true,
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/icon.png",
+            "cover_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/cover_card.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/screenshots/screen_1.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/screenshots/screen_2.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006_3d/screenshots/screen_3.png"
+            ]
         },
         {
             "id": "space_duel",
