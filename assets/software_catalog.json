@@ -192,16 +192,16 @@
                 "windows"
             ],
             "windows": {
-                "filename": "RealFootball2005_v0.0.1_pre_alpha_Installer.exe",
-                "size_mb": 19.05,
-                "version": "v0.0.1-pre-alpha",
+                "filename": "RealFootball2005_v0.0.2_pre_alpha_Installer.exe",
+                "size_mb": 17.15,
+                "version": "0.0.2",
                 "executable": "RealFootball2005.exe"
             },
-            "version": "v0.0.1-pre-alpha",
+            "version": "0.0.2",
             "latest_changelog": [
-                "v0.0.1-pre-alpha: Primeira recompilação nativa para PC com suporte a 120 FPS e taxa de atualização variável.",
-                "Suporte total a Gamepads XInput e PlayStation com mapeamento automático de botões.",
-                "Vitrine holográfica 3D e assets integrados no Nexus App Hub."
+                "v0.0.2: Compilacao nativa em GUI Subsystem 2 (WinMain), sem qualquer janela de terminal/console.",
+                "v0.0.2: Screenshots autenticos de gameplay e menus taticos pelo Creative Studio (Pixel).",
+                "v0.0.2: Otimizacao de resposta dos controles XInput e teclado."
             ],
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2005/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2005/banner_card.png",
@@ -227,15 +227,17 @@
                 "windows"
             ],
             "windows": {
-                "filename": "RealFootball2006_Setup.exe",
-                "version": "v0.0.1-pre-alpha",
+                "filename": "RealFootball2006_v0.0.2_pre_alpha_Installer.exe",
+                "version": "0.0.2",
                 "executable": "RealFootball2006.exe",
-                "size_mb": 28.4
+                "size_mb": 12.01
             },
-            "version": "v0.0.1-pre-alpha",
+            "version": "0.0.2",
             "latest_changelog": [
-                "Adaptação gráfica em alta definição com suporte a 120 FPS.",
-                "Mapeamento de controles Xbox/PlayStation nativo em cooperação com Pixel Studio."
+                "v0.0.2: Correcao do loop de tempo (11 FPS -> 20 FPS fluidos): timestep da classe b corrigido de 95ms para 50ms, eliminando a camera lenta.",
+                "v0.0.2: Patch de bytecode Multi-Key / Anti-Ghosting: trava condicional no keyPressed removida, permitindo correr e chutar/passar simultaneamente.",
+                "v0.0.2: Compilacao nativa em GUI Subsystem 2 (WinMain), sem qualquer janela de terminal/console.",
+                "v0.0.2: Screenshots autenticos de gameplay em campo e menus taticos pelo Creative Studio (Pixel)."
             ],
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/real_football_2006/banner_card.png",
