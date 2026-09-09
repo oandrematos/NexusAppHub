@@ -44,10 +44,30 @@ class DownloadService {
       for (final dir in localCandidates) {
         final localFile = File('${dir.path}/$filename');
         if (localFile.existsSync() && localFile.lengthSync() > 0) {
+          final totalBytes = localFile.lengthSync();
           onStatus('Obtendo do repositório local (${dir.path})...');
-          onProgress(0.5);
           try {
-            await localFile.copy(targetFile.path);
+            int copiedBytes = 0;
+            final reader = localFile.openRead();
+            final sink = targetFile.openWrite();
+            int lastEmit = 0;
+
+            await for (final chunk in reader) {
+              sink.add(chunk);
+              copiedBytes += chunk.length;
+              final now = DateTime.now().millisecondsSinceEpoch;
+              if (now - lastEmit >= 32 || copiedBytes == totalBytes) {
+                lastEmit = now;
+                final prog = totalBytes > 0 ? (copiedBytes / totalBytes) : 0.5;
+                onProgress(prog);
+                final mbCopied = (copiedBytes / (1024 * 1024)).toStringAsFixed(1);
+                final mbTotal = (totalBytes / (1024 * 1024)).toStringAsFixed(1);
+                onStatus('Copiando: $mbCopied MB / $mbTotal MB (${(prog * 100).toInt()}%)');
+              }
+            }
+            await sink.flush();
+            await sink.close();
+
             onProgress(1.0);
             success = true;
             break;
@@ -92,18 +112,23 @@ class DownloadService {
             int receivedBytes = 0;
             final sink = targetFile.openWrite();
 
+            int lastEmitTime = 0;
             await for (final chunk in response.stream) {
               sink.add(chunk);
               receivedBytes += chunk.length;
-              if (totalBytes > 0) {
-                final prog = receivedBytes / totalBytes;
-                onProgress(prog);
-                final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
-                final mbTot = (totalBytes / (1024 * 1024)).toStringAsFixed(1);
-                onStatus('Baixando: $mbRec MB / $mbTot MB (${(prog * 100).toInt()}%)');
-              } else {
-                final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
-                onStatus('Baixando: $mbRec MB...');
+              final now = DateTime.now().millisecondsSinceEpoch;
+              if (now - lastEmitTime >= 32 || receivedBytes == totalBytes) {
+                lastEmitTime = now;
+                if (totalBytes > 0) {
+                  final prog = receivedBytes / totalBytes;
+                  onProgress(prog);
+                  final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
+                  final mbTot = (totalBytes / (1024 * 1024)).toStringAsFixed(1);
+                  onStatus('Baixando: $mbRec MB / $mbTot MB (${(prog * 100).toInt()}%)');
+                } else {
+                  final mbRec = (receivedBytes / (1024 * 1024)).toStringAsFixed(1);
+                  onStatus('Baixando: $mbRec MB...');
+                }
               }
             }
 

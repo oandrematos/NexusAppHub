@@ -2,7 +2,7 @@
 !include "LogicLib.nsh"
 
 Name "Nexus App Hub"
-OutFile "NexusAppHub_v0.3.30_Installer.exe"
+OutFile "NexusAppHub_v0.3.31_Installer.exe"
 InstallDir "$LOCALAPPDATA\Programs\NexusAppHub"
 InstallDirRegKey HKCU "Software\NexusAppHub" "Install_Dir"
 RequestExecutionLevel user

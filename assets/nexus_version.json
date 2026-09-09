@@ -1,13 +1,11 @@
 {
-    "changelog":  [
-                      "Blindagem de auto-atualização assíncrona da loja (notificação reativa imediata na UI).",
-                      "Sincronização ponta-a-ponta com verificação manual resiliente na tela de Configurações.",
-                      "Cover Flow 3D no Hero Carousel com rotação tridimensional e profundidade espacial Z.",
-                      "Tilt3DWidget com iluminação holográfica interativa no toque e mouse a 120 FPS.",
-                      "Ativação nativa de alta taxa de atualização (120Hz/144Hz) no Android (Galaxy S25 FE).",
-                      "Ingestão do clássico Real Football 2005 e 2006 RetroRecomp no catálogo oficial."
-                  ],
-    "build":  33,
-    "version":  "0.3.30",
-    "release_date":  "2026-09-09"
+    "changelog": [
+        "Universalização 3D em todos os cards da loja (Detalhes, Gerenciadores de Pacotes, Configurações e Vitrine).",
+        "Barra de progresso de alta fidelidade interpolada a 120 FPS via lerp inercial com streaming granular.",
+        "Novas micro-animações táteis 3D com física elástica nos botões de ação e estados interativos de download.",
+        "Ingestão das capas oficiais de vitrine (Cover Cards) para Real Football 2005 e 2006 (Pixel Studio)."
+    ],
+    "build": 34,
+    "version": "0.3.31",
+    "release_date": "2026-09-09"
 }

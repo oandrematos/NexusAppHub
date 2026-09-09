@@ -40,27 +40,73 @@ class AnimatedActionButton extends StatefulWidget {
 }
 
 class _AnimatedActionButtonState extends State<AnimatedActionButton>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   bool _isPressed = false;
+  bool _isHovered = false;
+
   late final AnimationController _pulseController;
   late final Animation<double> _pulseAnimation;
+
+  late final AnimationController _shimmerController;
+
+  late final AnimationController _progressController;
+  late Animation<double> _progressAnimation;
+  double _currentProgress = 0.0;
 
   @override
   void initState() {
     super.initState();
     _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 1400),
     )..repeat(reverse: true);
 
-    _pulseAnimation = Tween<double>(begin: 0.2, end: 0.65).animate(
+    _pulseAnimation = Tween<double>(begin: 0.25, end: 0.70).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
+
+    _shimmerController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    )..repeat();
+
+    final initialProgress = (widget.downloadProgress ?? 0.0).clamp(0.0, 1.0);
+    _currentProgress = initialProgress;
+    _progressController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _progressAnimation = Tween<double>(begin: initialProgress, end: initialProgress).animate(
+      CurvedAnimation(parent: _progressController, curve: Curves.easeOutCubic),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant AnimatedActionButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final isInst = widget.isInstalling ||
+        (widget.downloadStatus != null &&
+            widget.downloadStatus!.toLowerCase().contains('instalando'));
+    final target = isInst ? 1.0 : (widget.downloadProgress ?? 0.0).clamp(0.0, 1.0);
+
+    if (target != _currentProgress) {
+      _progressAnimation = Tween<double>(
+        begin: _progressAnimation.value,
+        end: target,
+      ).animate(CurvedAnimation(
+        parent: _progressController,
+        curve: Curves.easeOutCubic,
+      ));
+      _progressController.forward(from: 0.0);
+      _currentProgress = target;
+    }
   }
 
   @override
   void dispose() {
     _pulseController.dispose();
+    _shimmerController.dispose();
+    _progressController.dispose();
     super.dispose();
   }
 
@@ -73,35 +119,44 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
         (widget.downloadStatus != null &&
             widget.downloadStatus!.toLowerCase().contains('instalando'));
 
-    final double clampedProgress =
-        installing ? 1.0 : (progress != null ? progress.clamp(0.02, 1.0) : 0.0);
-
-    // Estado 1: Em Progresso (Baixando ou Instalando) -> Transforma no botão barra de progresso!
-    if (inProgress || installing) {
-      return _buildProgressPill(clampedProgress, installing);
-    }
-
-    // Estado 2: Botão Normal Interativo com micro-animação de toque
-    return _buildInteractiveButton(isAndroid);
+    return RepaintBoundary(
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        switchInCurve: Curves.easeOutCubic,
+        switchOutCurve: Curves.easeInCubic,
+        child: (inProgress || installing)
+            ? _buildProgressPill(installing)
+            : _buildInteractiveButton(isAndroid),
+      ),
+    );
   }
 
-  Widget _buildProgressPill(double progress, bool isInstalling) {
+  Widget _buildProgressPill(bool isInstalling) {
     final radius = BorderRadius.circular(widget.isCompact ? 18 : 14);
     final accentColor = widget.hasUpdate ? Colors.orangeAccent : AppColors.accentCyan;
 
     return AnimatedBuilder(
-      animation: _pulseAnimation,
-      builder: (context, child) {
+      animation: Listenable.merge([_pulseAnimation, _shimmerController, _progressAnimation]),
+      builder: (context, _) {
+        final animProgress = isInstalling ? 1.0 : _progressAnimation.value.clamp(0.02, 1.0);
+        final shimmerPos = _shimmerController.value;
+
         return Container(
+          key: const ValueKey('progress_pill'),
           height: widget.height,
           width: widget.width,
           decoration: BoxDecoration(
             borderRadius: radius,
             boxShadow: [
               BoxShadow(
-                color: accentColor.withValues(alpha: _pulseAnimation.value * 0.4),
-                blurRadius: 10,
+                color: accentColor.withValues(alpha: _pulseAnimation.value * 0.40),
+                blurRadius: 14,
                 spreadRadius: 1,
+              ),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.6),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -109,36 +164,43 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
             borderRadius: radius,
             child: Stack(
               children: [
-                // 1. Fundo Trilho Escuro
+                // 1. Trilho Escuro com Profundidade
                 Positioned.fill(
                   child: Container(
-                    color: const Color(0xFF0F172A),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFF070B14),
+                          Color(0xFF0F172A),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
 
-                // 2. Barra de Progresso Fluida com Gradiente
+                // 2. Barra de Progresso Fluida Interpolada a 120 FPS
                 Positioned.fill(
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
-                    widthFactor: isInstalling ? 1.0 : progress,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeOutCubic,
+                    widthFactor: animProgress,
+                    child: Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: isInstalling
                               ? [
-                                  AppColors.accentPurple.withValues(alpha: 0.8),
-                                  AppColors.accentCyan.withValues(alpha: 0.8),
+                                  const Color(0xFF7C3AED),
+                                  const Color(0xFF06B6D4),
                                 ]
                               : (widget.hasUpdate
                                   ? [
-                                      const Color(0xFFD97706),
+                                      const Color(0xFFB45309),
                                       const Color(0xFFF59E0B),
                                     ]
                                   : [
-                                      const Color(0xFF0891B2),
-                                      const Color(0xFF06B6D4),
+                                      const Color(0xFF0369A1),
+                                      const Color(0xFF00FFCC),
                                     ]),
                         ),
                       ),
@@ -146,38 +208,68 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
                   ),
                 ),
 
-                // 3. Efeito de Shimmer / Linha de Brilho Superior
+                // 3. Feixe Shimmer de Luz Contínuo (Wave a 120 FPS)
+                Positioned.fill(
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: animProgress,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment(-2.0 + (shimmerPos * 4.0), -1.0),
+                          end: Alignment(-1.0 + (shimmerPos * 4.0), 1.0),
+                          colors: [
+                            Colors.transparent,
+                            Colors.white.withValues(alpha: isInstalling ? 0.35 : 0.30),
+                            Colors.transparent,
+                          ],
+                          stops: const [0.0, 0.5, 1.0],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // 4. Friso de Luz Especular Superior 3D
                 Positioned(
                   top: 0,
                   left: 0,
                   right: 0,
                   height: 1.5,
                   child: Container(
-                    color: Colors.white.withValues(alpha: 0.25),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white.withValues(alpha: 0.1),
+                          Colors.white.withValues(alpha: 0.6),
+                          Colors.white.withValues(alpha: 0.1),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
 
-                // 4. Borda Tecnológica
+                // 5. Borda Neon 3D
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: radius,
                       border: Border.all(
-                        color: accentColor.withValues(alpha: 0.5),
+                        color: accentColor.withValues(alpha: 0.65),
                         width: 1.2,
                       ),
                     ),
                   ),
                 ),
 
-                // 5. Conteúdo e Tipografia Central
+                // 6. Tipografia e Telemetria Centralizada
                 Positioned.fill(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Center(
                       child: widget.isCompact
-                          ? _buildCompactProgressContent(progress, isInstalling, accentColor)
-                          : _buildExpandedProgressContent(progress, isInstalling),
+                          ? _buildCompactProgressContent(animProgress, isInstalling, accentColor)
+                          : _buildExpandedProgressContent(animProgress, isInstalling),
                     ),
                   ),
                 ),
@@ -202,9 +294,9 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
               color: Colors.white,
             ),
           ),
-          SizedBox(width: 5),
+          SizedBox(width: 6),
           Text(
-            'Instalando',
+            'Instalando...',
             style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ],
@@ -219,15 +311,21 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
           width: 12,
           height: 12,
           child: CircularProgressIndicator(
-            value: progress > 0 ? progress : null,
             strokeWidth: 2,
+            value: progress,
             color: Colors.white,
+            backgroundColor: Colors.white24,
           ),
         ),
-        const SizedBox(width: 5),
+        const SizedBox(width: 6),
         Text(
           '$pct%',
-          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 0.3,
+          ),
         ),
       ],
     );
@@ -235,10 +333,10 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
 
   Widget _buildExpandedProgressContent(double progress, bool isInstalling) {
     if (isInstalling) {
-      return const Row(
-        mainAxisSize: MainAxisSize.min,
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             width: 16,
             height: 16,
             child: CircularProgressIndicator(
@@ -246,11 +344,11 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
               color: Colors.white,
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
-            'Instalando aplicativo...',
-            style: TextStyle(
-              fontSize: 14,
+            widget.downloadStatus ?? 'Instalando aplicativo...',
+            style: const TextStyle(
+              fontSize: 13,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               letterSpacing: 0.3,
@@ -262,14 +360,23 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
 
     final pct = (progress * 100).toInt();
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.arrow_downward_rounded, size: 16, color: Colors.white),
-        const SizedBox(width: 6),
+        SizedBox(
+          width: 16,
+          height: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2.2,
+            value: progress,
+            color: Colors.white,
+            backgroundColor: Colors.white24,
+          ),
+        ),
+        const SizedBox(width: 10),
         Text(
           'Baixando... $pct%',
           style: const TextStyle(
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: FontWeight.bold,
             color: Colors.white,
             letterSpacing: 0.3,
@@ -292,106 +399,194 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
     final bool hasUpdate = widget.hasUpdate;
     final text = widget.app.getActionText(isAndroid, isInstalled, hasUpdate: hasUpdate);
 
-    // Cores e Estilo
+    // Paleta Neon 3D
     Color bg;
     Color fg;
     IconData icon;
+    Color glowColor;
     BorderSide border = BorderSide.none;
 
     if (hasUpdate) {
       bg = const Color(0xFFF59E0B);
       fg = Colors.black;
+      glowColor = const Color(0xFFF59E0B);
       icon = Icons.system_update_alt_rounded;
     } else if (isInstalled) {
       bg = AppColors.surface;
       fg = AppColors.accentCyan;
+      glowColor = AppColors.accentCyan;
       icon = Icons.play_arrow_rounded;
-      border = const BorderSide(color: AppColors.accentCyan, width: 1.2);
+      border = const BorderSide(color: AppColors.accentCyan, width: 1.4);
     } else {
       bg = AppColors.accentCyan;
       fg = Colors.black;
+      glowColor = AppColors.accentCyan;
       icon = Icons.download_rounded;
     }
 
     final radius = BorderRadius.circular(widget.isCompact ? 18 : 14);
 
-    return AnimatedScale(
-      scale: _isPressed ? 0.94 : 1.0,
-      duration: const Duration(milliseconds: 120),
-      curve: Curves.easeOutCubic,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: widget.onAction,
-          onTapDown: (_) => setState(() => _isPressed = true),
-          onTapUp: (_) => setState(() => _isPressed = false),
-          onTapCancel: () => setState(() => _isPressed = false),
-          borderRadius: radius,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height: widget.height,
-            width: widget.width,
-            padding: EdgeInsets.symmetric(
-              horizontal: widget.isCompact ? 14 : 20,
-              vertical: widget.isCompact ? 6 : 10,
-            ),
-            decoration: BoxDecoration(
-              color: bg,
-              borderRadius: radius,
-              border: border != BorderSide.none ? Border.fromBorderSide(border) : null,
-              boxShadow: [
-                if (!isInstalled || hasUpdate)
-                  BoxShadow(
-                    color: bg.withValues(alpha: 0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onAction,
+        onTapDown: (_) => setState(() => _isPressed = true),
+        onTapUp: (_) => setState(() => _isPressed = false),
+        onTapCancel: () => setState(() => _isPressed = false),
+        child: AnimatedBuilder(
+          animation: Listenable.merge([_pulseAnimation, _shimmerController]),
+          builder: (context, child) {
+            final shimmerPos = _shimmerController.value;
+
+            // Matriz 3D com perspectiva tátil realista
+            final matrix = Matrix4.identity()
+              ..setEntry(3, 2, 0.0014)
+              ..translateByDouble(0.0, _isPressed ? 3.0 : (_isHovered ? -3.0 : 0.0), 0.0, 1.0);
+
+            return AnimatedScale(
+              scale: _isPressed ? 0.92 : (_isHovered ? 1.05 : 1.0),
+              duration: const Duration(milliseconds: 140),
+              curve: Curves.easeOutBack,
+              child: Transform(
+                transform: matrix,
+                alignment: Alignment.center,
+                child: Container(
+                  key: const ValueKey('interactive_btn'),
+                  height: widget.height,
+                  width: widget.width,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: widget.isCompact ? 14 : 20,
+                    vertical: widget.isCompact ? 6 : 10,
                   ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon, size: widget.isCompact ? 16 : 20, color: fg),
-                const SizedBox(width: 6),
-                Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: widget.isCompact ? 12 : 15,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.3,
-                    color: fg,
+                  decoration: BoxDecoration(
+                    color: bg,
+                    borderRadius: radius,
+                    border: border != BorderSide.none ? Border.fromBorderSide(border) : null,
+                    boxShadow: [
+                      BoxShadow(
+                        color: glowColor.withValues(
+                          alpha: _isHovered
+                              ? 0.55
+                              : ((!isInstalled || hasUpdate) ? _pulseAnimation.value * 0.45 : 0.18),
+                        ),
+                        blurRadius: _isHovered ? 16 : 8,
+                        spreadRadius: _isHovered ? 2 : 0,
+                        offset: Offset(0, _isPressed ? 1 : (_isHovered ? 6 : 3)),
+                      ),
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.35),
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: radius,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Feixe Holográfico Diagonal contínuo no Hover
+                        if (_isHovered)
+                          Positioned.fill(
+                            child: IgnorePointer(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment(-2.0 + (shimmerPos * 4.0), -1.0),
+                                    end: Alignment(-1.0 + (shimmerPos * 4.0), 1.0),
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.white.withValues(alpha: 0.30),
+                                      Colors.transparent,
+                                    ],
+                                    stops: const [0.0, 0.5, 1.0],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        // Brilho Especular Superior 3D
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: 1.5,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.white.withValues(alpha: 0.1),
+                                  Colors.white.withValues(alpha: _isHovered ? 0.9 : 0.4),
+                                  Colors.white.withValues(alpha: 0.1),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Center(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(icon, size: widget.isCompact ? 16 : 20, color: fg),
+                              const SizedBox(width: 6),
+                              Text(
+                                text,
+                                style: TextStyle(
+                                  fontSize: widget.isCompact ? 12 : 15,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.3,
+                                  color: fg,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
   Widget _buildLinuxButton() {
-    return InkWell(
-      onTap: widget.onAction,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: const Color(0xFF0F172A),
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: AppColors.accentCyan, width: 0.8),
-        ),
-        child: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.terminal_rounded, size: 14, color: AppColors.accentCyan),
-            SizedBox(width: 4),
-            Text(
-              'Linux',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.accentCyan),
-            ),
-          ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onAction,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: const Color(0xFF0F172A),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: AppColors.accentCyan, width: 0.8),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.accentCyan.withValues(alpha: 0.15),
+                blurRadius: 6,
+              ),
+            ],
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.terminal_rounded, size: 14, color: AppColors.accentCyan),
+              SizedBox(width: 4),
+              Text(
+                'Linux',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.accentCyan),
+              ),
+            ],
+          ),
         ),
       ),
     );

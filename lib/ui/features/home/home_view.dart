@@ -8,6 +8,7 @@ import '../../widgets/app_list_tile_widget.dart';
 import '../../widgets/hero_carousel_widget.dart';
 import '../../widgets/store_shelf_widget.dart';
 import '../../widgets/game_card_widget.dart';
+import '../../widgets/tilt_3d_widget.dart';
 import '../details/app_detail_view.dart';
 import '../../core/spatial_route.dart';
 import 'package:nexus_app_hub/data/models/app_item.dart';
@@ -78,53 +79,61 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                     ),
                     const SizedBox(height: 16),
 
-                    // Alerta de Atualização da Loja
+                    // Alerta de Atualização da Loja 3D
                     if (vm.hasStoreUpdate) ...[
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Tilt3DWidget(
+                          borderRadius: 16,
+                          maxTilt: 0.05,
+                          scaleOnHover: 1.02,
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF6366F1).withValues(alpha: 0.4),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.system_update_rounded, color: Colors.white, size: 32),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Nova versão da Loja Disponível!',
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                                      ),
+                                      Text(
+                                        'Versão ${vm.storeUpdateVersion} pronta para atualização.',
+                                        style: const TextStyle(fontSize: 12, color: Colors.white70),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () => vm.updateStore(context),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: const Color(0xFF6366F1),
+                                    elevation: 4,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  ),
+                                  child: const Text('Atualizar', style: TextStyle(fontWeight: FontWeight.bold)),
+                                ),
+                              ],
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF6366F1).withValues(alpha: 0.3),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.system_update_rounded, color: Colors.white, size: 32),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Nova versão da Loja Disponível!',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-                                  ),
-                                  Text(
-                                    'Versão ${vm.storeUpdateVersion} pronta para atualização.',
-                                    style: const TextStyle(fontSize: 12, color: Colors.white70),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () => vm.updateStore(context),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                foregroundColor: const Color(0xFF6366F1),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              ),
-                              child: const Text('Atualizar', style: TextStyle(fontWeight: FontWeight.bold)),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -237,7 +246,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           StoreShelfWidget(
             title: '🎮 Jogos & Arcade',
             subtitle: 'Títulos originais do ecossistema Antigravity',
-            height: 190,
+            height: 195,
             itemCount: gameApps.length,
             itemBuilder: (context, index) {
               final game = gameApps[index];
@@ -245,6 +254,10 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                 app: game,
                 isInstalled: vm.isInstalled(game.id),
                 hasUpdate: vm.hasUpdate(game.id),
+                downloadProgress: vm.getProgress(game.id),
+                downloadStatus: vm.getStatus(game.id),
+                isActionInProgress: vm.isActionInProgress(game.id),
+                isInstalling: vm.isInstalling(game.id),
                 onTap: () => _openDetails(context, game, vm),
                 onAction: () => vm.handleAction(game, context),
               );

@@ -20,6 +20,7 @@ class AppItem {
   final List<String>? screenshots;
   final String? banner;
   final String? bannerCard;
+  final String? coverCard;
   final String? iconUrl;
   final bool gamepad;
   final List<String> controllers;
@@ -43,6 +44,7 @@ class AppItem {
     this.screenshots,
     this.banner,
     this.bannerCard,
+    this.coverCard,
     this.iconUrl,
     this.gamepad = false,
     this.controllers = const [],
@@ -125,6 +127,7 @@ class AppItem {
           : null,
       banner: json['banner'],
       bannerCard: json['banner_card'],
+      coverCard: json['cover_card'],
       iconUrl: json['icon_url'],
       gamepad: json['gamepad'] ?? false,
       controllers: json['controllers'] != null

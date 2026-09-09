@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../data/services/app_version_service.dart';
 import '../../core/app_colors.dart';
+import '../../widgets/tilt_3d_widget.dart';
 import '../home/home_view_model.dart';
 
 class SettingsView extends StatefulWidget {
@@ -117,86 +118,92 @@ class _SettingsViewState extends State<SettingsView> {
           // Seção: Atualizações do Sistema
           _buildSectionHeader('ATUALIZAÇÃO DO SISTEMA'),
           const SizedBox(height: 10),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        vm.hasStoreUpdate ? Icons.system_update_rounded : Icons.check_circle_outline,
-                        color: vm.hasStoreUpdate ? Colors.orangeAccent : Colors.greenAccent,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              vm.hasStoreUpdate
-                                  ? 'Atualização Disponível (v${vm.storeUpdateVersion})'
-                                  : 'Nexus App Hub está atualizado',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              _checkStatus ?? (vm.hasStoreUpdate
-                                  ? 'Toque para instalar a nova versão oficial.'
-                                  : 'Canal estável conectado aos servidores do cluster.'),
-                              style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                            ),
-                          ],
+          Tilt3DWidget(
+            borderRadius: 16,
+            maxTilt: 0.04,
+            scaleOnHover: 1.015,
+            child: Card(
+              margin: EdgeInsets.zero,
+              clipBehavior: Clip.antiAlias,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          vm.hasStoreUpdate ? Icons.system_update_rounded : Icons.check_circle_outline,
+                          color: vm.hasStoreUpdate ? Colors.orangeAccent : Colors.greenAccent,
+                          size: 24,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: _isCheckingUpdate
-                              ? null
-                              : () => _manualCheckUpdate(vm),
-                          icon: _isCheckingUpdate
-                              ? const SizedBox(
-                                  width: 16,
-                                  height: 16,
-                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                                )
-                              : const Icon(Icons.refresh, size: 18),
-                          label: Text(_isCheckingUpdate ? 'Verificando...' : 'Buscar Atualizações'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.surface,
-                            foregroundColor: AppColors.textPrimary,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                        ),
-                      ),
-                      if (vm.hasStoreUpdate) ...[
                         const SizedBox(width: 12),
                         Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                vm.hasStoreUpdate
+                                    ? 'Atualização Disponível (v${vm.storeUpdateVersion})'
+                                    : 'Nexus App Hub está atualizado',
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                _checkStatus ?? (vm.hasStoreUpdate
+                                    ? 'Toque para instalar a nova versão oficial.'
+                                    : 'Canal estável conectado aos servidores do cluster.'),
+                                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () => vm.updateStore(context),
-                            icon: const Icon(Icons.download, size: 18),
-                            label: const Text('Atualizar Agora'),
+                            onPressed: _isCheckingUpdate
+                                ? null
+                                : () => _manualCheckUpdate(vm),
+                            icon: _isCheckingUpdate
+                                ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                                  )
+                                : const Icon(Icons.refresh, size: 18),
+                            label: Text(_isCheckingUpdate ? 'Verificando...' : 'Buscar Atualizações'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orangeAccent,
-                              foregroundColor: Colors.black,
+                              backgroundColor: AppColors.surface,
+                              foregroundColor: AppColors.textPrimary,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               padding: const EdgeInsets.symmetric(vertical: 12),
                             ),
                           ),
                         ),
+                        if (vm.hasStoreUpdate) ...[
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () => vm.updateStore(context),
+                              icon: const Icon(Icons.download, size: 18),
+                              label: const Text('Atualizar Agora'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orangeAccent,
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -205,31 +212,37 @@ class _SettingsViewState extends State<SettingsView> {
           // Seção: Rede & Servidores
           _buildSectionHeader('CONECTIVIDADE DO CLUSTER'),
           const SizedBox(height: 10),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _buildInfoTile(
-                  icon: Icons.cloud_outlined,
-                  title: 'CDN Global GitHub',
-                  subtitle: 'raw.githubusercontent.com (Ativo / Primário)',
-                  trailing: const Icon(Icons.wifi, color: Colors.greenAccent, size: 20),
-                ),
-                const Divider(height: 1, color: AppColors.border),
-                _buildInfoTile(
-                  icon: Icons.dns_outlined,
-                  title: 'Cluster S1 (Escritório / Nuvem)',
-                  subtitle: '192.168.196.101 (ZeroTier) / 100.84.133.101',
-                  trailing: const Icon(Icons.check, color: AppColors.textSecondary, size: 20),
-                ),
-                const Divider(height: 1, color: AppColors.border),
-                _buildInfoTile(
-                  icon: Icons.home_outlined,
-                  title: 'Cluster S2 (Casa Real)',
-                  subtitle: '192.168.0.246 (Wi-Fi Local)',
-                  trailing: const Icon(Icons.check, color: AppColors.textSecondary, size: 20),
-                ),
-              ],
+          Tilt3DWidget(
+            borderRadius: 16,
+            maxTilt: 0.04,
+            scaleOnHover: 1.015,
+            child: Card(
+              margin: EdgeInsets.zero,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: [
+                  _buildInfoTile(
+                    icon: Icons.cloud_outlined,
+                    title: 'CDN Global GitHub',
+                    subtitle: 'raw.githubusercontent.com (Ativo / Primário)',
+                    trailing: const Icon(Icons.wifi, color: Colors.greenAccent, size: 20),
+                  ),
+                  const Divider(height: 1, color: AppColors.border),
+                  _buildInfoTile(
+                    icon: Icons.dns_outlined,
+                    title: 'Cluster S1 (Escritório / Nuvem)',
+                    subtitle: '192.168.196.101 (ZeroTier) / 100.84.133.101',
+                    trailing: const Icon(Icons.check, color: AppColors.textSecondary, size: 20),
+                  ),
+                  const Divider(height: 1, color: AppColors.border),
+                  _buildInfoTile(
+                    icon: Icons.home_outlined,
+                    title: 'Cluster S2 (Casa Real)',
+                    subtitle: '192.168.0.246 (Wi-Fi Local)',
+                    trailing: const Icon(Icons.check, color: AppColors.textSecondary, size: 20),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 24),
@@ -237,28 +250,34 @@ class _SettingsViewState extends State<SettingsView> {
           // Seção: Dispositivo & Ambiente
           _buildSectionHeader('INFORMAÇÕES DO AMBIENTE'),
           const SizedBox(height: 10),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _buildInfoTile(
-                  icon: isAndroid ? Icons.phone_android : Icons.computer,
-                  title: 'Plataforma',
-                  subtitle: isAndroid ? 'Android (ARM64)' : 'Windows (x64 Desktop)',
-                ),
-                const Divider(height: 1, color: AppColors.border),
-                _buildInfoTile(
-                  icon: Icons.badge_outlined,
-                  title: 'Identificador do Pacote',
-                  subtitle: isAndroid ? 'com.antigravity.nexus_app_hub' : 'NexusAppHub.exe',
-                ),
-                const Divider(height: 1, color: AppColors.border),
-                _buildInfoTile(
-                  icon: Icons.shield_outlined,
-                  title: 'Divisão de Engenharia',
-                  subtitle: 'Agente Citadel (NexusAppHub Core Engine)',
-                ),
-              ],
+          Tilt3DWidget(
+            borderRadius: 16,
+            maxTilt: 0.04,
+            scaleOnHover: 1.015,
+            child: Card(
+              margin: EdgeInsets.zero,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: [
+                  _buildInfoTile(
+                    icon: isAndroid ? Icons.phone_android : Icons.computer,
+                    title: 'Plataforma',
+                    subtitle: isAndroid ? 'Android (ARM64)' : 'Windows (x64 Desktop)',
+                  ),
+                  const Divider(height: 1, color: AppColors.border),
+                  _buildInfoTile(
+                    icon: Icons.badge_outlined,
+                    title: 'Identificador do Pacote',
+                    subtitle: isAndroid ? 'com.antigravity.nexus_app_hub' : 'NexusAppHub.exe',
+                  ),
+                  const Divider(height: 1, color: AppColors.border),
+                  _buildInfoTile(
+                    icon: Icons.shield_outlined,
+                    title: 'Divisão de Engenharia',
+                    subtitle: 'Agente Citadel (NexusAppHub Core Engine)',
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 32),

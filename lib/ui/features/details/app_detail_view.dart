@@ -273,26 +273,8 @@ class AppDetailView extends StatelessWidget {
                               ),
                               if (isInstalled && !app.id.contains('nexus_app_hub') && !isActionInProgress) ...[
                                 const SizedBox(width: 12),
-                                SizedBox(
-                                  height: 52,
-                                  child: OutlinedButton.icon(
-                                    onPressed: () => _confirmUninstall(context, vm),
-                                    icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 22),
-                                    label: const Text(
-                                      'Desinstalar',
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      side: const BorderSide(color: Colors.redAccent, width: 1.2),
-                                      backgroundColor: Colors.redAccent.withValues(alpha: 0.08),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    ),
-                                  ),
+                                _AnimatedUninstallButton(
+                                  onPressed: () => _confirmUninstall(context, vm),
                                 ),
                               ],
                             ],
@@ -301,13 +283,17 @@ class AppDetailView extends StatelessWidget {
 
                           // Bloco de Instalação no Linux (Terminal / Kitty)
                           if (app.linux != null || app.platformsSupported.contains('linux')) ...[
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF0F172A),
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.4), width: 1.2),
-                              ),
+                            Tilt3DWidget(
+                              borderRadius: 14,
+                              maxTilt: 0.04,
+                              scaleOnHover: 1.015,
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0F172A),
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(color: AppColors.accentCyan.withValues(alpha: 0.4), width: 1.2),
+                                ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -381,145 +367,156 @@ class AppDetailView extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            ),
                             const SizedBox(height: 16),
                           ],
 
                           // Gestão de Fonte de Instalação e Atualizações
                           if (!isAndroid && app.windows != null) ...[
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.source_outlined, size: 20, color: AppColors.accentCyan),
-                                      const SizedBox(width: 10),
-                                      const Expanded(
-                                        child: Text(
-                                          'Fonte de Instalação:',
-                                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
-                                        ),
-                                      ),
-                                      DropdownButton<String>(
-                                        value: vm.getAppSource(app.id),
-                                        dropdownColor: AppColors.surface,
-                                        underline: const SizedBox(),
-                                        style: const TextStyle(fontSize: 12, color: AppColors.textPrimary, fontWeight: FontWeight.bold),
-                                        items: [
-                                          const DropdownMenuItem(
-                                            value: 'nexus',
-                                            child: Text('Cluster Nexus (Oficial)'),
+                            Tilt3DWidget(
+                              borderRadius: 14,
+                              maxTilt: 0.04,
+                              scaleOnHover: 1.015,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: AppColors.surface,
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(color: AppColors.border),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.source_outlined, size: 20, color: AppColors.accentCyan),
+                                        const SizedBox(width: 10),
+                                        const Expanded(
+                                          child: Text(
+                                            'Fonte de Instalação:',
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                                           ),
-                                          if (app.windows?.wingetId != null)
-                                            DropdownMenuItem(
-                                              value: 'winget',
-                                              child: Text('Winget (${app.windows!.wingetId})'),
-                                            ),
-                                          if (app.windows?.chocoId != null)
-                                            DropdownMenuItem(
-                                              value: 'choco',
-                                              child: Text('Chocolatey (${app.windows!.chocoId})'),
-                                            ),
-                                        ],
-                                        onChanged: (val) {
-                                          if (val != null) vm.setAppSource(app.id, val);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(height: 16, color: AppColors.border),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              vm.isUpdateIgnored(app.id) ? Icons.do_not_disturb_on_rounded : Icons.system_update_alt_rounded,
-                                              size: 20,
-                                              color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textSecondary,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Ignorar atualizações deste app',
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textPrimary,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    vm.isUpdateIgnored(app.id)
-                                                        ? 'Atualizações estão ignoradas (não serão mostradas)'
-                                                        : 'Exibir avisos quando houver nova versão',
-                                                    style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
                                         ),
-                                      ),
-                                      Switch.adaptive(
-                                        value: vm.isUpdateIgnored(app.id),
-                                        activeThumbColor: AppColors.accentCyan,
-                                        onChanged: (_) => vm.toggleIgnoreUpdate(app.id),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        DropdownButton<String>(
+                                          value: vm.getAppSource(app.id),
+                                          dropdownColor: AppColors.surface,
+                                          underline: const SizedBox(),
+                                          style: const TextStyle(fontSize: 12, color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+                                          items: [
+                                            const DropdownMenuItem(
+                                              value: 'nexus',
+                                              child: Text('Cluster Nexus (Oficial)'),
+                                            ),
+                                            if (app.windows?.wingetId != null)
+                                              DropdownMenuItem(
+                                                value: 'winget',
+                                                child: Text('Winget (${app.windows!.wingetId})'),
+                                              ),
+                                            if (app.windows?.chocoId != null)
+                                              DropdownMenuItem(
+                                                value: 'choco',
+                                                child: Text('Chocolatey (${app.windows!.chocoId})'),
+                                              ),
+                                          ],
+                                          onChanged: (val) {
+                                            if (val != null) vm.setAppSource(app.id, val);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    const Divider(height: 16, color: AppColors.border),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                vm.isUpdateIgnored(app.id) ? Icons.do_not_disturb_on_rounded : Icons.system_update_alt_rounded,
+                                                size: 20,
+                                                color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textSecondary,
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Ignorar atualizações deste app',
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: vm.isUpdateIgnored(app.id) ? AppColors.accentCyan : AppColors.textPrimary,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      vm.isUpdateIgnored(app.id)
+                                                          ? 'Atualizações estão ignoradas (não serão mostradas)'
+                                                          : 'Exibir avisos quando houver nova versão',
+                                                      style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Switch.adaptive(
+                                          value: vm.isUpdateIgnored(app.id),
+                                          activeThumbColor: AppColors.accentCyan,
+                                          onChanged: (_) => vm.toggleIgnoreUpdate(app.id),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
                           ],
 
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: AppColors.surface,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: AppColors.border),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                _buildSpecItem(
-                                  label: 'TAMANHO',
-                                  value: isAvailable && sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'N/A',
-                                  icon: Icons.data_usage_outlined,
-                                ),
-                                _buildDivider(),
-                                _buildSpecItem(
-                                  label: 'VERSÃO ATUAL',
-                                  value: _formatVersion(isInstalled ? (installedVersion ?? version) : version),
-                                  subValue: hasUpdate ? 'Nova: ${_formatVersion(version)}' : null,
-                                  icon: Icons.info_outline,
-                                  isHighlight: hasUpdate,
-                                ),
-                                _buildDivider(),
-                                _buildSpecItem(
-                                  label: 'PLATAFORMA',
-                                  value: isAndroid
-                                      ? 'Android'
-                                      : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
-                                          ? 'Linux (Nós/HUD)'
-                                          : 'Windows x64'),
-                                  icon: isAndroid
-                                      ? Icons.android
-                                      : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
-                                          ? Icons.terminal_rounded
-                                          : Icons.desktop_windows),
-                                ),
-                              ],
+                          Tilt3DWidget(
+                            borderRadius: 16,
+                            maxTilt: 0.04,
+                            scaleOnHover: 1.015,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                              decoration: BoxDecoration(
+                                color: AppColors.surface,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  _buildSpecItem(
+                                    label: 'TAMANHO',
+                                    value: isAvailable && sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'N/A',
+                                    icon: Icons.data_usage_outlined,
+                                  ),
+                                  _buildDivider(),
+                                  _buildSpecItem(
+                                    label: 'VERSÃO ATUAL',
+                                    value: _formatVersion(isInstalled ? (installedVersion ?? version) : version),
+                                    subValue: hasUpdate ? 'Nova: ${_formatVersion(version)}' : null,
+                                    icon: Icons.info_outline,
+                                    isHighlight: hasUpdate,
+                                  ),
+                                  _buildDivider(),
+                                  _buildSpecItem(
+                                    label: 'PLATAFORMA',
+                                    value: isAndroid
+                                        ? 'Android'
+                                        : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
+                                            ? 'Linux (Nós/HUD)'
+                                            : 'Windows x64'),
+                                    icon: isAndroid
+                                        ? Icons.android
+                                        : (app.platformsSupported.contains('linux') && !app.platformsSupported.contains('windows')
+                                            ? Icons.terminal_rounded
+                                            : Icons.desktop_windows),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(height: 32),
@@ -534,20 +531,25 @@ class AppDetailView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 12),
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: AppColors.cardBg,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: AppColors.border),
-                            ),
-                            child: Text(
-                              app.description.isNotEmpty ? app.description : app.shortDescription,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                color: AppColors.textSecondary,
-                                height: 1.6,
+                          Tilt3DWidget(
+                            borderRadius: 16,
+                            maxTilt: 0.03,
+                            scaleOnHover: 1.01,
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: AppColors.cardBg,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: AppColors.border),
+                              ),
+                              child: Text(
+                                app.description.isNotEmpty ? app.description : app.shortDescription,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: AppColors.textSecondary,
+                                  height: 1.6,
+                                ),
                               ),
                             ),
                           ),
@@ -570,37 +572,42 @@ class AppDetailView extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 12),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: AppColors.cardBg,
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: app.latestChangelog!.map((item) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        const Text('• ', style: TextStyle(color: AppColors.accentCyan, fontSize: 16)),
-                                        Expanded(
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: AppColors.textSecondary,
-                                              height: 1.4,
+                            Tilt3DWidget(
+                              borderRadius: 16,
+                              maxTilt: 0.03,
+                              scaleOnHover: 1.01,
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  color: AppColors.cardBg,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(color: AppColors.border),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: app.latestChangelog!.map((item) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(bottom: 8.0),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('• ', style: TextStyle(color: AppColors.accentCyan, fontSize: 16)),
+                                          Expanded(
+                                            child: Text(
+                                              item,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: AppColors.textSecondary,
+                                                height: 1.4,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 32),
@@ -625,21 +632,26 @@ class AppDetailView extends StatelessWidget {
                                 separatorBuilder: (_, __) => const SizedBox(width: 16),
                                 itemBuilder: (context, idx) {
                                   final imgUrl = app.screenshots![idx];
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.border),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: ClusterImage(
-                                        url: imgUrl,
-                                        fit: BoxFit.cover,
-                                        fallback: Container(
-                                          width: 320,
-                                          color: AppColors.surface,
-                                          child: const Center(
-                                            child: Icon(Icons.image_not_supported_outlined, color: AppColors.textSecondary),
+                                  return Tilt3DWidget(
+                                    borderRadius: 12,
+                                    maxTilt: 0.08,
+                                    scaleOnHover: 1.03,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.border),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: ClusterImage(
+                                          url: imgUrl,
+                                          fit: BoxFit.cover,
+                                          fallback: Container(
+                                            width: 320,
+                                            color: AppColors.surface,
+                                            child: const Center(
+                                              child: Icon(Icons.image_not_supported_outlined, color: AppColors.textSecondary),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -761,6 +773,85 @@ class AppDetailView extends StatelessWidget {
             child: const Text('Desinstalar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _AnimatedUninstallButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  const _AnimatedUninstallButton({required this.onPressed});
+
+  @override
+  State<_AnimatedUninstallButton> createState() => _AnimatedUninstallButtonState();
+}
+
+class _AnimatedUninstallButtonState extends State<_AnimatedUninstallButton> {
+  bool _isHovered = false;
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final matrix = Matrix4.identity()
+      ..setEntry(3, 2, 0.0014)
+      ..translateByDouble(0.0, _isPressed ? 2.0 : (_isHovered ? -2.0 : 0.0), 0.0, 1.0);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onPressed,
+        onTapDown: (_) => setState(() => _isPressed = true),
+        onTapUp: (_) => setState(() => _isPressed = false),
+        onTapCancel: () => setState(() => _isPressed = false),
+        child: AnimatedScale(
+          scale: _isPressed ? 0.93 : (_isHovered ? 1.04 : 1.0),
+          duration: const Duration(milliseconds: 140),
+          curve: Curves.easeOutBack,
+          child: Transform(
+            transform: matrix,
+            alignment: Alignment.center,
+            child: Container(
+              height: 52,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: _isHovered
+                    ? Colors.redAccent.withValues(alpha: 0.18)
+                    : Colors.redAccent.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: Colors.redAccent.withValues(alpha: _isHovered ? 0.9 : 0.6),
+                  width: 1.2,
+                ),
+                boxShadow: _isHovered
+                    ? [
+                        BoxShadow(
+                          color: Colors.redAccent.withValues(alpha: 0.35),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : [],
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.delete_outline, color: Colors.redAccent, size: 22),
+                  SizedBox(width: 8),
+                  Text(
+                    'Desinstalar',
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../core/app_colors.dart';
+import '../../widgets/tilt_3d_widget.dart';
 import '../../../data/services/package_manager_service.dart';
 
 class PackageManagersView extends StatefulWidget {
@@ -289,95 +290,91 @@ class _PackageManagersViewState extends State<PackageManagersView> {
                             final pkg = _results[index];
                             final isBusy = _installing[pkg.id] ?? false;
 
-                            return Container(
-                              padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(
-                                color: AppColors.cardBg,
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: AppColors.border.withValues(alpha: 0.6)),
-                              ),
-                              child: Row(
-                                children: [
-                                  // Badge de Fonte
-                                  Container(
-                                    width: 44,
-                                    height: 44,
-                                    decoration: BoxDecoration(
-                                      color: pkg.source == 'winget'
-                                          ? AppColors.accentCyan.withValues(alpha: 0.15)
-                                          : Colors.orangeAccent.withValues(alpha: 0.15),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Icon(
-                                      pkg.source == 'winget' ? Icons.window : Icons.cookie_outlined,
-                                      color: pkg.source == 'winget' ? AppColors.accentCyan : Colors.orangeAccent,
-                                      size: 22,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 14),
-
-                                  // Detalhes do Pacote
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          pkg.name,
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.textPrimary,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 2),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              pkg.id,
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                color: AppColors.textSecondary,
-                                                fontFamily: 'monospace',
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            const Text(' • ', style: TextStyle(color: AppColors.textSecondary)),
-                                            Text(
-                                              pkg.version,
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                color: pkg.source == 'winget' ? AppColors.accentCyan : Colors.orangeAccent,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-
-                                  // Botão de Instalação
-                                  if (isBusy)
-                                    const SizedBox(
-                                      width: 28,
-                                      height: 28,
-                                      child: CircularProgressIndicator(strokeWidth: 2.5, color: AppColors.accentCyan),
-                                    )
-                                  else
-                                    FilledButton.tonal(
-                                      onPressed: () => _install(pkg),
-                                      style: FilledButton.styleFrom(
-                                        backgroundColor: AppColors.surface,
-                                        foregroundColor: AppColors.textPrimary,
-                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            return Tilt3DWidget(
+                              borderRadius: 14,
+                              maxTilt: 0.04,
+                              scaleOnHover: 1.015,
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: AppColors.cardBg,
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(color: AppColors.border.withValues(alpha: 0.6)),
+                                ),
+                                child: Row(
+                                  children: [
+                                    // Badge de Fonte
+                                    Container(
+                                      width: 44,
+                                      height: 44,
+                                      decoration: BoxDecoration(
+                                        color: pkg.source == 'winget'
+                                            ? AppColors.accentCyan.withValues(alpha: 0.15)
+                                            : Colors.orangeAccent.withValues(alpha: 0.15),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: const Text('Instalar', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      child: Icon(
+                                        pkg.source == 'winget' ? Icons.window : Icons.cookie_outlined,
+                                        color: pkg.source == 'winget' ? AppColors.accentCyan : Colors.orangeAccent,
+                                        size: 22,
+                                      ),
                                     ),
-                                ],
+                                    const SizedBox(width: 14),
+
+                                    // Detalhes do Pacote
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            pkg.name,
+                                            style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.textPrimary,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 2),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                pkg.id,
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: AppColors.textSecondary,
+                                                  fontFamily: 'monospace',
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const Text(' • ', style: TextStyle(color: AppColors.textSecondary)),
+                                              Text(
+                                                pkg.version,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: pkg.source == 'winget' ? AppColors.accentCyan : Colors.orangeAccent,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+
+                                    // Botão de Instalação 3D com Micro-Animações
+                                    if (isBusy)
+                                      const SizedBox(
+                                        width: 28,
+                                        height: 28,
+                                        child: CircularProgressIndicator(strokeWidth: 2.5, color: AppColors.accentCyan),
+                                      )
+                                    else
+                                      _buildPackageInstallButton(pkg),
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -441,6 +438,91 @@ class _PackageManagersViewState extends State<PackageManagersView> {
             fontSize: 12,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             color: isSelected ? Colors.black : AppColors.textPrimary,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPackageInstallButton(PackageItem pkg) {
+    return _AnimatedPackageButton(
+      onPressed: () => _install(pkg),
+    );
+  }
+}
+
+class _AnimatedPackageButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  const _AnimatedPackageButton({required this.onPressed});
+
+  @override
+  State<_AnimatedPackageButton> createState() => _AnimatedPackageButtonState();
+}
+
+class _AnimatedPackageButtonState extends State<_AnimatedPackageButton> {
+  bool _isHovered = false;
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final matrix = Matrix4.identity()
+      ..setEntry(3, 2, 0.0014)
+      ..translateByDouble(0.0, _isPressed ? 2.0 : (_isHovered ? -2.0 : 0.0), 0.0, 1.0);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onPressed,
+        onTapDown: (_) => setState(() => _isPressed = true),
+        onTapUp: (_) => setState(() => _isPressed = false),
+        onTapCancel: () => setState(() => _isPressed = false),
+        child: AnimatedScale(
+          scale: _isPressed ? 0.93 : (_isHovered ? 1.05 : 1.0),
+          duration: const Duration(milliseconds: 140),
+          curve: Curves.easeOutBack,
+          child: Transform(
+            transform: matrix,
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: _isHovered ? AppColors.accentCyan : AppColors.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: _isHovered ? AppColors.accentCyan : AppColors.border,
+                ),
+                boxShadow: _isHovered
+                    ? [
+                        BoxShadow(
+                          color: AppColors.accentCyan.withValues(alpha: 0.4),
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
+                        ),
+                      ]
+                    : [],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.download_rounded,
+                    size: 16,
+                    color: _isHovered ? Colors.black : AppColors.accentCyan,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Instalar',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: _isHovered ? Colors.black : AppColors.textPrimary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
