@@ -255,38 +255,28 @@ class DownloadService {
 
             if (isSelfUpdate) {
               // Atualização da própria loja: dispara o instalador silencioso desacoplado no Shell do Windows
+              final winPath = targetFile.path.replaceAll('/', '\\');
               await Process.start(
-                'cmd.exe',
-                ['/c', 'start', '""', targetFile.path, '/S'],
+                'powershell.exe',
+                ['-NoProfile', '-NonInteractive', '-Command', 'Start-Process -FilePath "$winPath" -ArgumentList "/S"'],
                 mode: ProcessStartMode.detached,
               );
               await Future.delayed(const Duration(milliseconds: 600));
               exit(0);
             } else {
-              // Flags otimizadas e limpas para cada tipo de instalador
-              List<String> silentArgs = ['/S'];
-              try {
-                final bytes = targetFile.readAsBytesSync();
-                final header = String.fromCharCodes(bytes.take(1000000));
-                if (header.contains('Inno Setup')) {
-                  silentArgs = ['/VERYSILENT', '/NORESTART', '/SUPPRESSMSGBOXES', '/SP-'];
-                } else if (header.contains('Nullsoft')) {
-                  silentArgs = ['/S'];
-                }
-              } catch (_) {}
-
+              final winPath = targetFile.path.replaceAll('/', '\\');
               onStatus('Iniciando instalador de ${filename.replaceAll('.exe', '')}...');
-              // Dispara de forma desacoplada com ShellExecute (start) para permitir UAC normal do Windows sem congelar a loja
+              // Dispara de forma desacoplada com ShellExecute (Start-Process) para permitir UAC e exibição normal sem congelar a loja
               try {
                 await Process.start(
-                  'cmd.exe',
-                  ['/c', 'start', '""', targetFile.path, ...silentArgs],
+                  'powershell.exe',
+                  ['-NoProfile', '-NonInteractive', '-Command', 'Start-Process -FilePath "$winPath"'],
                   mode: ProcessStartMode.detached,
                 );
               } catch (_) {
                 await Process.start(
                   'cmd.exe',
-                  ['/c', 'start', '""', targetFile.path],
+                  ['/c', 'start', '""', winPath],
                   mode: ProcessStartMode.detached,
                 );
               }

@@ -517,16 +517,16 @@
         "web"
       ],
       "windows": {
-        "filename": "NexusDashboard_v1.4.0_Installer.exe",
-        "size_mb": 0.69,
-        "version": "v1.4.0",
-        "executable": "AntigravityDashboard.exe",
+        "filename": "NexusDashboard_Native_v1.5.0_Installer.exe",
+        "size_mb": 8.76,
+        "version": "v1.5.0-native",
+        "executable": "nexus_dashboard.exe",
         "latest_changelog": [
-          "Operação Panóptico: monitoramento dinâmico em tempo real de miniaturas das estações (Danillo-PC, Miguel-PC, Dell-PC, etc.)",
-          "Modo Tela Cheia em Resolução Total (HD 1080p Nativo sob demanda) com suporte à Fullscreen API",
-          "Toggle Rápido Stealth para corte instantâneo de 100% do tráfego de imagens (Regra de Ouro)",
-          "Renderização atômica in-place e double-buffering preloading (zero flicker)",
-          "Cronômetro de uso em tempo real e extrato financeiro da Lanhouse com baixa de pagamentos"
+          "Motor 100% C++ Nativo com renderização gráfica direta via Direct3D 11 / Skia (Flutter Desktop)",
+          "Eliminação total de qualquer vestígio de navegadores, Chromium, WebKit ou Edge",
+          "Telemetria do cluster Server 1 (RV411) em tempo real com gauges circulares nativos a 60 FPS",
+          "Painel Panóptico da Lanhouse com double-buffer contínuo e sem piscar de tela",
+          "Visualização de miniaturas e ampliação em modo HD com streaming direto de imagem"
         ],
         "screenshots": [
           "http://192.168.196.101:8080/assets/dashboard_overview.png",
