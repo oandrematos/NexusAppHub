@@ -14,7 +14,7 @@ class StoreShelfWidget extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.trailing,
-    this.height = 200,
+    this.height = 235,
     required this.itemCount,
     required this.itemBuilder,
   });
@@ -26,44 +26,47 @@ class StoreShelfWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -0.3,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  if (subtitle != null) ...[
-                    const SizedBox(height: 2),
+        if (title.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      subtitle!,
+                      title,
                       style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textSecondary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.3,
+                        color: AppColors.textPrimary,
                       ),
                     ),
+                    if (subtitle != null) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle!,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
-              ),
-              if (trailing != null) trailing!,
-            ],
+                ),
+                if (trailing != null) trailing!,
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 14),
+          const SizedBox(height: 14),
+        ],
         SizedBox(
           height: height,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            clipBehavior: Clip.none,
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemCount: itemCount,

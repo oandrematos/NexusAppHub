@@ -38,8 +38,9 @@ class GameCardWidget extends StatelessWidget {
 
     return Tilt3DWidget(
       borderRadius: 18,
-      maxTilt: 0.08,
-      scaleOnHover: 1.03,
+      maxTilt: 0.18,
+      scaleOnHover: 1.10,
+      liftOnHover: -16.0,
       onTap: onTap,
       child: Container(
         width: 255,

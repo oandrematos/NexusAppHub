@@ -69,13 +69,14 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
     if (widget.apps.isEmpty) return const SizedBox.shrink();
 
     final isDesktop = MediaQuery.of(context).size.width >= 800 && !Platform.isAndroid;
-    final carouselHeight = isDesktop ? 280.0 : 200.0;
+    final carouselHeight = isDesktop ? 300.0 : 210.0;
 
     return Column(
       children: [
         SizedBox(
           height: carouselHeight,
           child: PageView.builder(
+            clipBehavior: Clip.none,
             controller: _pageController,
             onPageChanged: (idx) => setState(() => _currentPage = idx),
             itemCount: widget.apps.length,
@@ -116,6 +117,9 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
                         alignment: pageOffset > 0 ? Alignment.centerRight : Alignment.centerLeft,
                         child: Tilt3DWidget(
                           borderRadius: 20,
+                          maxTilt: 0.16,
+                          scaleOnHover: 1.07,
+                          liftOnHover: -16.0,
                           onTap: () => widget.onTap(app),
                           child: cardChild!,
                         ),
@@ -124,7 +128,7 @@ class _HeroCarouselWidgetState extends State<HeroCarouselWidget> {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Stack(

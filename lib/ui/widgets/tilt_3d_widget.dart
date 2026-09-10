@@ -15,6 +15,7 @@ class Tilt3DWidget extends StatefulWidget {
   final double borderRadius;
   final VoidCallback? onTap;
   final double scaleOnHover;
+  final double liftOnHover;
   final Color? glareColor;
   final FocusNode? focusNode;
   final bool autofocus;
@@ -22,12 +23,13 @@ class Tilt3DWidget extends StatefulWidget {
   const Tilt3DWidget({
     super.key,
     required this.child,
-    this.maxTilt = 0.08,
-    this.perspective = 0.0012,
+    this.maxTilt = 0.18,
+    this.perspective = 0.0014,
     this.enableGlare = false,
     this.borderRadius = 18.0,
     this.onTap,
-    this.scaleOnHover = 1.03,
+    this.scaleOnHover = 1.09,
+    this.liftOnHover = -16.0,
     this.glareColor,
     this.focusNode,
     this.autofocus = false,
@@ -43,11 +45,29 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
   bool _isFocused = false;
   FocusNode? _internalFocusNode;
 
+  late final AnimationController _animController;
+  late final Animation<double> _anim;
+
   FocusNode get _effectiveFocusNode =>
       widget.focusNode ?? (_internalFocusNode ??= FocusNode());
 
   @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 180),
+    );
+    _anim = CurvedAnimation(
+      parent: _animController,
+      curve: Curves.easeOutCubic,
+      reverseCurve: Curves.easeInCubic,
+    );
+  }
+
+  @override
   void dispose() {
+    _animController.dispose();
     _internalFocusNode?.dispose();
     super.dispose();
   }
@@ -59,7 +79,10 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
     final dy = ((e.localPosition.dy / size.height) - 0.5) * 2.0;
     setState(() {
       _tilt = Offset(dx.clamp(-1.0, 1.0), dy.clamp(-1.0, 1.0));
-      _isHovered = true;
+      if (!_isHovered) {
+        _isHovered = true;
+        _animController.forward();
+      }
     });
   }
 
@@ -68,6 +91,7 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
       setState(() {
         _tilt = Offset.zero;
         _isHovered = false;
+        _animController.reverse();
       });
     }
   }
@@ -76,7 +100,12 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
     if (_isFocused != hasFocus) {
       setState(() {
         _isFocused = hasFocus;
-        _tilt = hasFocus ? const Offset(0.0, -0.15) : Offset.zero;
+        _tilt = hasFocus ? const Offset(0.0, -0.20) : Offset.zero;
+        if (hasFocus) {
+          _animController.forward();
+        } else if (!_isHovered) {
+          _animController.reverse();
+        }
       });
     }
   }
@@ -99,36 +128,6 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    final active = _isHovered || _isFocused;
-
-    // Se estiver em repouso e sem foco, renderiza o container padrão com zero custo de animação
-    if (!active && _tilt == Offset.zero) {
-      return Focus(
-        focusNode: _effectiveFocusNode,
-        autofocus: widget.autofocus,
-        onFocusChange: _handleFocusChange,
-        onKeyEvent: _handleKeyEvent,
-        child: MouseRegion(
-          onHover: _onHover,
-          cursor: widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
-          child: GestureDetector(
-            onTap: widget.onTap,
-            child: widget.child,
-          ),
-        ),
-      );
-    }
-
-    // Quando ativo, aplica a projeção 3D acelerada por hardware
-    final tiltX = _tilt.dx;
-    final tiltY = _tilt.dy;
-
-    final matrix = Matrix4.identity()
-      ..setEntry(3, 2, widget.perspective)
-      ..rotateX(-tiltY * widget.maxTilt)
-      ..rotateY(tiltX * widget.maxTilt)
-      ..scaleByDouble(widget.scaleOnHover, widget.scaleOnHover, 1.0, 1.0);
-
     return Focus(
       focusNode: _effectiveFocusNode,
       autofocus: widget.autofocus,
@@ -143,49 +142,80 @@ class _Tilt3DWidgetState extends State<Tilt3DWidget> with SingleTickerProviderSt
             _effectiveFocusNode.requestFocus();
             widget.onTap?.call();
           },
-          child: Transform(
-            transform: matrix,
-            alignment: FractionalOffset.center,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.borderRadius),
-                boxShadow: [
-                  BoxShadow(
-                    color: _isFocused
-                        ? AppColors.accentCyan.withValues(alpha: 0.5)
-                        : Colors.cyanAccent.withValues(alpha: 0.18),
-                    blurRadius: _isFocused ? 24 : 16,
-                    spreadRadius: _isFocused ? 3 : 1,
-                    offset: Offset(tiltX * 6, tiltY * 6 + 4),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(widget.borderRadius),
-                child: Stack(
-                  fit: StackFit.passthrough,
-                  children: [
-                    widget.child,
+          child: AnimatedBuilder(
+            animation: _anim,
+            builder: (context, _) {
+              final progress = _anim.value;
 
-                    // Gamepad Focus Ring Neon
-                    if (_isFocused)
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(widget.borderRadius),
-                              border: Border.all(
-                                color: AppColors.accentCyan,
-                                width: 2.2,
+              // Em repouso total, renderiza com zero matrizes
+              if (progress == 0.0 && !_isFocused) {
+                return widget.child;
+              }
+
+              final tiltX = _tilt.dx * progress;
+              final tiltY = _tilt.dy * progress;
+              final currentScale = 1.0 + ((widget.scaleOnHover - 1.0) * progress);
+              final currentLift = widget.liftOnHover * progress;
+
+              final matrix = Matrix4.identity()
+                ..setEntry(3, 2, widget.perspective)
+                ..translateByDouble(tiltX * 12.0, currentLift + (tiltY * 8.0), 0.0, 1.0)
+                ..rotateX(-tiltY * widget.maxTilt)
+                ..rotateY(tiltX * widget.maxTilt)
+                ..scaleByDouble(currentScale, currentScale, 1.0, 1.0);
+
+              return Transform(
+                transform: matrix,
+                alignment: FractionalOffset.center,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                    boxShadow: [
+                      // Brilho Neon Ciano de Profundidade
+                      BoxShadow(
+                        color: _isFocused
+                            ? AppColors.accentCyan.withValues(alpha: 0.65)
+                            : AppColors.accentCyan.withValues(alpha: 0.38 * progress),
+                        blurRadius: 16.0 + (24.0 * progress),
+                        spreadRadius: 1.0 + (3.0 * progress),
+                        offset: Offset(tiltX * 12, 6.0 + (14.0 * progress) + (tiltY * 10)),
+                      ),
+                      // Sombra Oclusiva Escura Volumétrica
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.35 + (0.35 * progress)),
+                        blurRadius: 12.0 + (22.0 * progress),
+                        offset: Offset(0, 6.0 + (18.0 * progress)),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                    child: Stack(
+                      fit: StackFit.passthrough,
+                      children: [
+                        widget.child,
+
+                        // Gamepad Focus Ring Neon
+                        if (_isFocused)
+                          Positioned.fill(
+                            child: IgnorePointer(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                                  border: Border.all(
+                                    color: AppColors.accentCyan,
+                                    width: 2.4,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                  ],
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ),
       ),

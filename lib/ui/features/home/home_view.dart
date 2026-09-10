@@ -56,6 +56,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
       body: RefreshIndicator(
         onRefresh: () => vm.loadData(),
         child: CustomScrollView(
+          clipBehavior: Clip.none,
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             // Cabeçalho de Busca e Categorias
@@ -330,7 +331,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           StoreShelfWidget(
             title: '',
             subtitle: '',
-            height: 195,
+            height: 235,
             itemCount: vm.appsWithUpdates.length,
             itemBuilder: (context, index) {
               final app = vm.appsWithUpdates[index];
@@ -355,7 +356,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           StoreShelfWidget(
             title: '✨ Recém-Atualizados no Ecossistema',
             subtitle: 'Últimas novidades entregues pela frota com changelogs oficiais',
-            height: 195,
+            height: 235,
             itemCount: vm.recentlyUpdatedApps.length,
             itemBuilder: (context, index) {
               final item = vm.recentlyUpdatedApps[index];
@@ -380,7 +381,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
           StoreShelfWidget(
             title: '🎮 Jogos & Arcade',
             subtitle: 'Títulos originais do ecossistema Antigravity',
-            height: 195,
+            height: 235,
             itemCount: gameApps.length,
             itemBuilder: (context, index) {
               final game = gameApps[index];
