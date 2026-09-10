@@ -59,7 +59,7 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1400),
-    )..repeat(reverse: true);
+    );
 
     _pulseAnimation = Tween<double>(begin: 0.25, end: 0.70).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
@@ -68,7 +68,7 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
     _shimmerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
-    )..repeat();
+    );
 
     final initialProgress = (widget.downloadProgress ?? 0.0).clamp(0.0, 1.0);
     _currentProgress = initialProgress;
@@ -79,6 +79,17 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
     _progressAnimation = Tween<double>(begin: initialProgress, end: initialProgress).animate(
       CurvedAnimation(parent: _progressController, curve: Curves.easeOutCubic),
     );
+
+    final inProgress = widget.isActionInProgress || (initialProgress > 0);
+    final isInst = widget.isInstalling ||
+        (widget.downloadStatus != null &&
+            widget.downloadStatus!.toLowerCase().contains('instalando'));
+    if (inProgress || isInst) {
+      _shimmerController.repeat();
+      _pulseController.repeat(reverse: true);
+    } else if (widget.hasUpdate) {
+      _pulseController.repeat(reverse: true);
+    }
   }
 
   @override
@@ -99,6 +110,16 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
       ));
       _progressController.forward(from: 0.0);
       _currentProgress = target;
+    }
+
+    final inProg = widget.isActionInProgress || ((widget.downloadProgress ?? 0) > 0);
+    if (inProg || isInst) {
+      if (!_shimmerController.isAnimating) _shimmerController.repeat();
+      if (!_pulseController.isAnimating) _pulseController.repeat(reverse: true);
+    } else if (!_isHovered) {
+      if (_shimmerController.isAnimating) _shimmerController.stop();
+      if (!widget.hasUpdate && _pulseController.isAnimating) _pulseController.stop();
+      if (widget.hasUpdate && !_pulseController.isAnimating) _pulseController.repeat(reverse: true);
     }
   }
 
@@ -134,6 +155,7 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
   Widget _buildProgressPill(bool isInstalling) {
     final radius = BorderRadius.circular(widget.isCompact ? 18 : 14);
     final accentColor = widget.hasUpdate ? Colors.orangeAccent : AppColors.accentCyan;
+    final pillWidth = widget.width ?? (widget.isCompact ? 96.0 : 160.0);
 
     return AnimatedBuilder(
       animation: Listenable.merge([_pulseAnimation, _shimmerController, _progressAnimation]),
@@ -144,7 +166,7 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
         return Container(
           key: const ValueKey('progress_pill'),
           height: widget.height,
-          width: widget.width,
+          width: pillWidth,
           decoration: BoxDecoration(
             borderRadius: radius,
             boxShadow: [
@@ -427,8 +449,22 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
     final radius = BorderRadius.circular(widget.isCompact ? 18 : 14);
 
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) {
+        setState(() => _isHovered = true);
+        if (!_shimmerController.isAnimating) _shimmerController.repeat();
+        if (!_pulseController.isAnimating) _pulseController.repeat(reverse: true);
+      },
+      onExit: (_) {
+        setState(() => _isHovered = false);
+        final inProgress = widget.isActionInProgress || ((widget.downloadProgress ?? 0) > 0);
+        final isInst = widget.isInstalling ||
+            (widget.downloadStatus != null &&
+                widget.downloadStatus!.toLowerCase().contains('instalando'));
+        if (!inProgress && !isInst) {
+          if (_shimmerController.isAnimating) _shimmerController.stop();
+          if (!widget.hasUpdate && _pulseController.isAnimating) _pulseController.stop();
+        }
+      },
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: widget.onAction,
@@ -455,9 +491,9 @@ class _AnimatedActionButtonState extends State<AnimatedActionButton>
                 child: Container(
                   key: const ValueKey('interactive_btn'),
                   height: widget.height,
-                  width: widget.width,
+                  width: widget.width ?? (widget.isCompact ? 96.0 : null),
                   padding: EdgeInsets.symmetric(
-                    horizontal: widget.isCompact ? 14 : 20,
+                    horizontal: widget.isCompact ? 10 : 20,
                     vertical: widget.isCompact ? 6 : 10,
                   ),
                   decoration: BoxDecoration(

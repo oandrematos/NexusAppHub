@@ -42,7 +42,7 @@ class GameCardWidget extends StatelessWidget {
       scaleOnHover: 1.03,
       onTap: onTap,
       child: Container(
-        width: 230,
+        width: 255,
         decoration: BoxDecoration(
           color: AppColors.cardBg,
           borderRadius: BorderRadius.circular(18),
@@ -147,6 +147,7 @@ class GameCardWidget extends StatelessWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             app.name,
@@ -158,15 +159,18 @@ class GameCardWidget extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 1),
+                          const SizedBox(height: 2),
                           Text(
-                            sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'Jogo',
+                            sizeMb != null ? '${sizeMb.toStringAsFixed(1)} MB' : 'App',
                             style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: false,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 8),
                     AnimatedActionButton(
                       app: app,
                       isInstalled: isInstalled,
@@ -178,6 +182,7 @@ class GameCardWidget extends StatelessWidget {
                       isInstalling: isInstalling,
                       isCompact: true,
                       height: 32,
+                      width: 96,
                       onAction: onAction,
                     ),
                   ],

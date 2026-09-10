@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../models/app_item.dart';
@@ -6,7 +7,6 @@ import '../models/app_item.dart';
 class CatalogService {
   static const List<String> clusterCatalogUrls = [
     'https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/software_catalog.json', // Global CDN (Universal e sempre atualizado)
-    'http://192.168.0.246/installers/software_catalog.json',   // S2 (Wi-Fi Doméstico Casa Real)
     'http://192.168.196.101/installers/software_catalog.json', // S1 (ZeroTier)
     'http://100.84.133.101/installers/software_catalog.json',  // S1 (Tailscale)
   ];
@@ -22,8 +22,27 @@ class CatalogService {
     }
   }
 
-  // Sincronização remota em background com timeout resiliente
+  // Sincronização em background com prioridade de cache local zero-latência
   Future<List<AppItem>?> fetchRemoteCatalog() async {
+    // 1. Prioridade Desktop: repositório local de alta fidelidade
+    if (!Platform.isAndroid) {
+      final localCandidates = [
+        File(r'D:\OneDrive\Antigravity Projects\Installers\software_catalog.json'),
+        File(r'W:\Antigravity Projects\Installers\software_catalog.json'),
+      ];
+      for (final f in localCandidates) {
+        if (f.existsSync() && f.lengthSync() > 0) {
+          try {
+            final content = f.readAsStringSync();
+            final data = json.decode(content);
+            if (data['apps'] != null) {
+              return (data['apps'] as List).map((i) => AppItem.fromJson(i)).toList();
+            }
+          } catch (_) {}
+        }
+      }
+    }
+
     for (final url in clusterCatalogUrls) {
       try {
         final cacheBusterUrl = '$url?t=${DateTime.now().millisecondsSinceEpoch}';

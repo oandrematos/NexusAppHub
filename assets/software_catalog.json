@@ -589,25 +589,17 @@
             "description": "Edição experimental do Nexus Dashboard equipada com o motor holográfico Bifrost 3D acelerado por hardware via DirectX 11/12 (Windows) e Vulkan (Linux/Android). Apresenta a topologia neural tridimensional dos nós do cluster e estações da Lanhouse com feixes de dados a 120 FPS e renderização 100% no cliente com impacto zero nos servidores.",
             "short_description": "Central holográfica 3D experimental acelerada por hardware via DirectX e Vulkan.",
             "platforms_supported": [
-                "windows",
-                "linux",
                 "web"
             ],
             "web": {
                 "url": "http://192.168.196.101:8080/?engine=3d",
                 "version": "v1.4.0-beta.1"
             },
-            "windows": {
-                "filename": "NexusDashboard_v1.2.0_Installer.exe",
-                "size_mb": 0.69,
-                "version": "v1.2.0",
-                "executable": "AntigravityDashboard.exe",
-                "latest_changelog": [
-                    "Motor de renderização Bifrost 3D acelerado por hardware (DirectX 11/12 e WebGL)",
-                    "Visualização holográfica tridimensional do cluster e computadores da Lanhouse",
-                    "Taxa de quadros de 120 FPS cravados e transições de câmera orbitais dinâmicas"
-                ]
-            }
+            "latest_changelog": [
+                "Motor de renderização Bifrost 3D acelerado por hardware (DirectX 11/12 e WebGL)",
+                "Visualização holográfica tridimensional do cluster e computadores da Lanhouse",
+                "Taxa de quadros de 120 FPS cravados e transições de câmera orbitais dinâmicas"
+            ]
         },
         {
             "id": "wappchat",
