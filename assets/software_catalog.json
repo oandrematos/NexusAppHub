@@ -578,44 +578,6 @@
       }
     },
     {
-      "id": "nexus_dashboard_beta",
-      "name": "Nexus Dashboard Native (Direct3D 11)",
-      "title": "Nexus Dashboard Native — Central Holográfica 100% C++",
-      "category": "system",
-      "category_name": "Sistema & Utilitários",
-      "icon": "🌌",
-      "badge": "BETA 3D",
-      "featured": true,
-      "description": "Edição experimental do Nexus Dashboard equipada com o motor holográfico Bifrost 3D acelerado por hardware via DirectX 11/12 (Windows) e Vulkan (Linux/Android). Apresenta a topologia neural tridimensional dos nós do cluster e estações da Lanhouse com feixes de dados a 120 FPS e renderização 100% no cliente com impacto zero nos servidores.",
-      "short_description": "Central holográfica 3D experimental acelerada por hardware via DirectX e Vulkan.",
-      "platforms_supported": [
-        "windows",
-        "web"
-      ],
-      "web": {
-        "url": "http://192.168.196.101:8080/?engine=3d",
-        "version": "v1.4.0-beta.1"
-      },
-      "latest_changelog": [
-        "Motor de renderização Bifrost 3D acelerado por hardware (DirectX 11/12 e WebGL)",
-        "Visualização holográfica tridimensional do cluster e computadores da Lanhouse",
-        "Taxa de quadros de 120 FPS cravados e transições de câmera orbitais dinâmicas"
-      ],
-      "windows": {
-        "filename": "NexusDashboard_Native_v1.5.0_Installer.exe",
-        "size_mb": 8.76,
-        "version": "v1.5.0-native",
-        "executable": "nexus_dashboard.exe",
-        "latest_changelog": [
-          "Motor 100% C++ Nativo com renderização gráfica direta via Direct3D 11 / Skia (Flutter Desktop)",
-          "Eliminação total de qualquer vestígio de navegadores, Chromium, WebKit ou Edge",
-          "Telemetria do cluster Server 1 (RV411) em tempo real com gauges circulares nativos a 60 FPS",
-          "Painel Panóptico da Lanhouse com double-buffer contínuo e sem piscar de tela",
-          "Visualização de miniaturas e ampliação em modo HD com streaming direto de imagem"
-        ]
-      }
-    },
-    {
       "id": "wappchat",
       "name": "WappChat",
       "title": "WappChat — WhatsApp Desktop Anti-Banner & Stealth",
