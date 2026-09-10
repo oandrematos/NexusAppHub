@@ -633,22 +633,35 @@
             "description": "WhatsApp Web Desktop corporativo ultra-rápido com Suíte Stealth integrada: Anti-Revoke (mensagens apagadas), Ghost Read (sem ticks azuis), Ghost Typing/Audio, Modo Escritório (blur), bloqueio nativo de anúncios e tema escuro.",
             "short_description": "WhatsApp Desktop rápido com bloqueio de anúncios e Suíte Stealth.",
             "platforms_supported": [
-                "windows"
+                "windows",
+                "linux"
             ],
             "windows": {
-                "filename": "WappChat_v0.5.2_Installer.exe",
-                "size_mb": 14.42,
-                "version": "0.5.2",
+                "filename": "WappChat_v0.5.3_Installer.exe",
+                "size_mb": 14.55,
+                "version": "0.5.3",
                 "executable": "WappChat.exe"
             },
+            "linux": {
+                "filename": "wappchat_0.5.3_amd64.deb",
+                "package_deb": "wappchat_0.5.3_amd64.deb",
+                "size_mb": 15.2,
+                "version": "0.5.3",
+                "executable": "wappchat",
+                "latest_changelog": [
+                    "Exposição nativa de porta CDP 9222 (Chrome DevTools Protocol) para automação por IA",
+                    "Script de automação CLI control_wappchat.py integrado",
+                    "Pacote Debian nativo homologado para o cluster Linux"
+                ]
+            },
             "latest_changelog": [
-                "Novo ícone oficial com cantos suavemente arredondados no padrão Squircle M3E (forjado pelo Agente Pixel).",
-                "Sanitização de segurança: remoção de chamadas ocultas que acionavam o falso positivo de heurística no Windows Defender.",
-                "Correção definitiva do layout de 2 colunas: expansão contínua em 100% de largura e altura sem barras pretas laterais ou inferiores.",
-                "Erradicação total do card promocional 'Baixar o WhatsApp para Windows' da tela inicial.",
+                "Exposição nativa de porta CDP 9222 (Chrome DevTools Protocol) para controle externo por IA e scripts.",
+                "Script de automação CLI control_wappchat.py com comandos de status, contatos, mensagens e QR Code.",
+                "Correção de import tempfile e compatibilidade multiplataforma nativa (Windows e Linux DEB).",
+                "Layout de 2 colunas contínuo em 100% de largura e altura sem barras pretas laterais ou inferiores.",
                 "Suíte Stealth completa ativa (Anti-Revoke, Ghost Read, Ghost Presence, Ghost Audio e Office Blur)."
             ],
-            "version": "0.5.2",
+            "version": "0.5.3",
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/banner_card.png",
             "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/wappchat/icon.png",
