@@ -42,16 +42,16 @@
             ],
             "windows": {
                 "filename": "NexusAI_v0.2.0_Alpha_Setup.exe",
-                "size_mb": 144.0,
+                "size_mb": 154.4,
                 "version": "v0.2.0-alpha",
                 "executable": "NexusAI.exe"
             },
             "latest_changelog": [
+                "Build 100% Standalone & Universal: Micro-gateway nativo embutido (zero dependência de Python).",
+                "Auto-provisionamento automático do ecossistema (%USERPROFILE%\\.nexus) com 10 plugins e 55 skills.",
                 "Bypass nativo de autenticação/login Google (acesso direto e soberano).",
                 "Gateway Multi-Brain com pool de chaves saneado, failover e contingência de emergência Groq LPU.",
-                "Despacho dinâmico para Gemini 3.8 Flash, DeepSeek V3/R1 e Claude Sonnet.",
-                "Badges visuais com telemetria neural e latência.",
-                "Sincronização completa de 10 plugins e 55 skills da frota."
+                "Despacho dinâmico para Gemini 3.8 Flash, DeepSeek V3/R1 e Claude Sonnet com telemetria neural."
             ],
             "version": "v0.2.0-alpha",
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner.png",
