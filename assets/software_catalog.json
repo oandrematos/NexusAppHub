@@ -29,29 +29,29 @@
         {
             "id": "nexus_ai",
             "name": "Nexus AI",
-            "title": "Nexus AI — Sovereign Agentic Desktop Environment & Multi-Brain Hub",
+            "title": "Nexus AI — Sovereign Agentic Desktop Environment & Multi-Brain Hub (Master Suite)",
             "category": "productivity",
             "category_name": "Produtividade & IA",
             "icon": "🤖",
             "badge": "OFICIAL",
             "featured": true,
-            "description": "Plataforma desktop oficial da Frota Nexus para desenvolvimento agêntico e pair programming. Integração com Multi-Brain Gateway (Gemini 3.8 Flash, DeepSeek V3, Claude Sonnet, Groq LPU 120B), bypass total de login Google/OAuth, suporte a 55 skills, telemetria de tokens em tempo real e orquestração de subagentes.",
-            "short_description": "Ambiente desktop soberano de engenharia agêntica e pair programming com gateway Multi-Brain e bypass total de nuvem.",
+            "description": "Master Suite Oficial da Frota Nexus para desenvolvimento agêntico e pair programming. Pacote Tudo-em-Um pronto para Windows To Go e novos PCs, embutindo instaladores sequenciais com seleção de componentes: Nexus AI Core v0.2.0 (com gateway standalone e pool consolidado de chaves), VC++ 2015-2022 Redist, Python 3.12.8 Oficial (com PATH automático) e Git for Windows 2.47.1. Suporte a 55 skills e bypass total de login Google/OAuth.",
+            "short_description": "Master Suite Tudo-em-Um: Nexus AI Core v0.2.0 + VC++ Redist + Python 3.12 + Git com gateway Multi-Brain e pool consolidado de chaves.",
             "platforms_supported": [
                 "windows"
             ],
             "windows": {
                 "filename": "NexusAI_v0.2.0_Alpha_Setup.exe",
-                "size_mb": 154.4,
+                "size_mb": 269.5,
                 "version": "v0.2.0-alpha",
                 "executable": "NexusAI.exe"
             },
             "latest_changelog": [
-                "Build 100% Standalone & Universal: Micro-gateway nativo embutido (zero dependência de Python).",
+                "Master Suite Tudo-em-Um: Instalador sequencial por etapas com seleção de componentes para Windows To Go e novos PCs.",
+                "Ambiente de Desenvolvimento Embutido: Microsoft VC++ 2015-2022 Redistributable, Python 3.12.8 (com PATH) e Git for Windows 2.47.1.",
+                "Gateway Multi-Brain Standalone: Compilado com pool consolidado de chaves, failover dinâmico e contingência Groq LPU.",
                 "Auto-provisionamento automático do ecossistema (%USERPROFILE%\\.nexus) com 10 plugins e 55 skills.",
-                "Bypass nativo de autenticação/login Google (acesso direto e soberano).",
-                "Gateway Multi-Brain com pool de chaves saneado, failover e contingência de emergência Groq LPU.",
-                "Despacho dinâmico para Gemini 3.8 Flash, DeepSeek V3/R1 e Claude Sonnet com telemetria neural."
+                "Bypass soberano de autenticação/OAuth Google e telemetria neural de latência e consumo em tempo real."
             ],
             "version": "v0.2.0-alpha",
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner.png",
