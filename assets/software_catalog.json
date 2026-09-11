@@ -27,6 +27,42 @@
     ],
     "apps": [
         {
+            "id": "nexus_ai",
+            "name": "Nexus AI",
+            "title": "Nexus AI — Sovereign Agentic Desktop Environment & Multi-Brain Hub",
+            "category": "productivity",
+            "category_name": "Produtividade & IA",
+            "icon": "🤖",
+            "badge": "OFICIAL",
+            "featured": true,
+            "description": "Plataforma desktop oficial da Frota Nexus para desenvolvimento agêntico e pair programming. Integração com Multi-Brain Gateway (Gemini 3.8 Flash, DeepSeek V3, Claude Sonnet, Groq LPU 120B), bypass total de login Google/OAuth, suporte a 55 skills, telemetria de tokens em tempo real e orquestração de subagentes.",
+            "short_description": "Ambiente desktop soberano de engenharia agêntica e pair programming com gateway Multi-Brain e bypass total de nuvem.",
+            "platforms_supported": [
+                "windows"
+            ],
+            "windows": {
+                "filename": "NexusAI_v0.2.0_Alpha_Setup.exe",
+                "size_mb": 144.0,
+                "version": "v0.2.0-alpha",
+                "executable": "NexusAI.exe"
+            },
+            "latest_changelog": [
+                "Bypass nativo de autenticação/login Google (acesso direto e soberano).",
+                "Gateway Multi-Brain com pool de chaves saneado, failover e contingência de emergência Groq LPU.",
+                "Despacho dinâmico para Gemini 3.8 Flash, DeepSeek V3/R1 e Claude Sonnet.",
+                "Badges visuais com telemetria neural e latência.",
+                "Sincronização completa de 10 plugins e 55 skills da frota."
+            ],
+            "version": "v0.2.0-alpha",
+            "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner.png",
+            "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner_card.png",
+            "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/icon.png",
+            "screenshots": [
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/splash.png",
+                "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/screenshot.png"
+            ]
+        },
+        {
             "id": "neo_blocks",
             "name": "Neo-Blocks",
             "title": "Neo-Blocks — Cyberpunk Tetris Arcade",

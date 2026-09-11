@@ -483,6 +483,15 @@ class AppDetector {
     final path = await getInstalledExecutablePath(exec);
     if (path != null) {
       final dir = File(path).parent.path;
+      final vbsLauncher = '$dir/launch_nexus_ai.vbs';
+      if (File(vbsLauncher).existsSync()) {
+        await Process.start('wscript.exe', [vbsLauncher], workingDirectory: dir, mode: ProcessStartMode.detached);
+        return true;
+      }
+      if (path.toLowerCase().endsWith('.vbs')) {
+        await Process.start('wscript.exe', [path], workingDirectory: dir, mode: ProcessStartMode.detached);
+        return true;
+      }
       await Process.start(path, [], workingDirectory: dir, mode: ProcessStartMode.detached);
       return true;
     }
