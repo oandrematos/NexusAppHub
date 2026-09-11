@@ -29,31 +29,31 @@
         {
             "id": "nexus_ai",
             "name": "Nexus AI",
-            "title": "Nexus AI — Sovereign Agentic Desktop Environment & Multi-Brain Hub (Master Suite)",
+            "title": "Nexus AI — Sovereign Agentic Desktop Environment (Multi-Brain Omniverse Suite)",
             "category": "productivity",
             "category_name": "Produtividade & IA",
             "icon": "🤖",
             "badge": "OFICIAL",
             "featured": true,
-            "description": "Master Suite Oficial da Frota Nexus para desenvolvimento agêntico e pair programming. Pacote Tudo-em-Um pronto para Windows To Go e novos PCs, embutindo instaladores sequenciais com seleção de componentes: Nexus AI Core v0.2.0 (com gateway standalone e pool consolidado de chaves), VC++ 2015-2022 Redist, Python 3.12.8 Oficial (com PATH automático) e Git for Windows 2.47.1. Suporte a 55 skills e bypass total de login Google/OAuth.",
-            "short_description": "Master Suite Tudo-em-Um: Nexus AI Core v0.2.0 + VC++ Redist + Python 3.12 + Git com gateway Multi-Brain e pool consolidado de chaves.",
+            "description": "Multi-Brain Omniverse Suite Oficial da Frota Nexus para desenvolvimento agêntico e pair programming. Integração com 8 provedores (Gemini, Groq, NVIDIA, SambaNova, Cerebras, GitHub Models, DeepSeek, Hugging Face) com cascata de failover soberano contínuo. Embutidos: Nexus AI Core v0.3.0, VC++ 2015-2022 Redist, Python 3.12.8 Oficial com PATH e Git for Windows 2.47.1. Suporte a 55 skills e telemetria neural.",
+            "short_description": "Multi-Brain Omniverse Suite: 8 provedores com failover dinâmico, VC++ Redist, Python 3.12, Git e 55 skills em instalador sequencial.",
             "platforms_supported": [
                 "windows"
             ],
             "windows": {
-                "filename": "NexusAI_v0.2.0_Alpha_Setup.exe",
-                "size_mb": 269.5,
-                "version": "v0.2.0-alpha",
+                "filename": "NexusAI_v0.3.0_Alpha_Setup.exe",
+                "size_mb": 269.4,
+                "version": "v0.3.0-alpha",
                 "executable": "NexusAI.exe"
             },
             "latest_changelog": [
-                "Master Suite Tudo-em-Um: Instalador sequencial por etapas com seleção de componentes para Windows To Go e novos PCs.",
-                "Ambiente de Desenvolvimento Embutido: Microsoft VC++ 2015-2022 Redistributable, Python 3.12.8 (com PATH) e Git for Windows 2.47.1.",
-                "Gateway Multi-Brain Standalone: Compilado com pool consolidado de chaves, failover dinâmico e contingência Groq LPU.",
-                "Auto-provisionamento automático do ecossistema (%USERPROFILE%\\.nexus) com 10 plugins e 55 skills.",
-                "Bypass soberano de autenticação/OAuth Google e telemetria neural de latência e consumo em tempo real."
+                "Multi-Brain Omniverse Gateway: 8 provedores integrados (Gemini, Groq, NVIDIA, SambaNova, Cerebras, GitHub Models, DeepSeek, HuggingFace).",
+                "Seletor Soberano Inteligente: Cascata contínua '⚡ Automático Soberano' com failover dinâmico sem perda de contexto.",
+                "Rodapé de Telemetria Obrigatório em 100% das mensagens identificando modelo e provedor gerador.",
+                "Master Suite Tudo-em-Um: Componentes embutidos Microsoft VC++ Redist, Python 3.12.8 (com PATH) e Git for Windows 2.47.1.",
+                "Auto-provisionamento automático do ecossistema (%USERPROFILE%\\.nexus) com 10 plugins e 55 skills."
             ],
-            "version": "v0.2.0-alpha",
+            "version": "v0.3.0-alpha",
             "banner": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner.png",
             "banner_card": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/banner_card.png",
             "icon_url": "https://raw.githubusercontent.com/oandrematos/NexusAppHub/main/assets/showcase/nexus_ai/icon.png",
